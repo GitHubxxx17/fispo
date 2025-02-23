@@ -4,7 +4,8 @@
   "description": "The framework of building blog based on SSG",
   "main": "index.js",
   "scripts": {
-    "start": "tsc -w"
+    "start": "tsup --watch",
+    "build": "tsup"
   },
   "keywords": [
     "vite",
@@ -21,6 +22,7 @@
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "tsup": "^8.3.6",
     "typescript": "^5.7.3"
   },
   "dependencies": {
