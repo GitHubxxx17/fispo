@@ -68,7 +68,7 @@ export async function renderPage(
 export async function build(root: string = process.cwd()) {
   const [clientBundle] = await bundle(root);
   // 引入 ssr 入口模块
-  const serverEntryPath = join(root, ".temp", "ssr-entry.js");
+  const serverEntryPath = join(root, ".temp", "ssr-entry.cjs");
   const { render } = await import(pathToFileURL(serverEntryPath).toString());
   await renderPage(render, root, clientBundle);
 }

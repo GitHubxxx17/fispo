@@ -1,37 +1,48 @@
 {
-  "name": "fsipo",
+  "name": "fispo-monorepo",
   "version": "1.0.0",
   "description": "The framework of building blog based on SSG",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "tsup --watch",
-    "build": "tsup"
+    "prepare": "husky install",
+    "lint": "eslint . --ext .js,.cjs,.mjs,.ts,.cts,.mts --fix",
+    "prettier": "prettier src --write",
+    "dev:docs": "fispo dev docs",
+    "build:docs": "fispo build docs"
   },
   "keywords": [
     "vite",
     "ssg",
-    "fsipo"
+    "fispo"
   ],
   "author": "xxx17",
   "license": "MIT",
   "bin": {
-    "fsipo": "bin/fsipo.js"
+    "fispo": "bin/fispo.js"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts}": [
+      "eslint --fix"
+    ]
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^19.7.1",
+    "@eslint/js": "^9.21.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.13.5",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
+    "commitlint": "^19.7.1",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.2",
     "tsup": "^8.3.6",
-    "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "cac": "^6.7.14",
-    "fs-extra": "^11.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "rollup": "^4.34.8",
-    "vite": "^6.1.1"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
   }
 }

@@ -5,7 +5,7 @@ import { build } from "./build";
 
 const version = require("../../package.json").version;
 
-const cli = cac("fsipo").version(version).help();
+const cli = cac("fispo").version(version).help();
 
 cli
   .command("[root]", "start dev server")
