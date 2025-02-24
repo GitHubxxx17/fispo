@@ -8,7 +8,9 @@
   "scripts": {
     "prepare": "husky install",
     "start": "tsup --watch",
-    "build": "tsup"
+    "build": "tsup",
+    "prepare:e2e": "tsx scripts/prepare-e2e.ts",
+    "test:e2e": "playwright test"
   },
   "keywords": [
     "vite",

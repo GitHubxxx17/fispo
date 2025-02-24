@@ -1,0 +1,20 @@
+{
+  "name": "basic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "fispo dev docs",
+    "build": "fispo build docs",
+    "preview": "fispo start docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fispo": "../../.."
+  }
+}
