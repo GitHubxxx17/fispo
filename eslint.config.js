@@ -47,6 +47,8 @@ export default [
       "bin",
       "esm-cjs",
       "docs",
+      "build",
+      "packages/fispo/docs",
     ],
   },
   {

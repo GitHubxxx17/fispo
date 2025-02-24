@@ -10,7 +10,9 @@
     "start": "tsup --watch",
     "build": "tsup",
     "prepare:e2e": "tsx scripts/prepare-e2e.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:init": "vitest run",
+    "test:ui": "vitest --ui"
   },
   "keywords": [
     "vite",
@@ -25,14 +27,18 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "cac": "^6.7.14",
+    "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.2.0",
     "rollup": "^4.34.8",
     "vite": "^6.1.1"
   },
   "devDependencies": {
+    "@loadable/component": "^5.16.4",
     "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4"
+    "@types/react-dom": "^19.0.4",
+    "@types/react-router-dom": "^5.3.3"
   }
 }
