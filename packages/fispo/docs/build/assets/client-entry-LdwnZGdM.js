@@ -12494,11 +12494,13 @@ var loadable$2 = loadable;
 loadable$2.lib = loadable$1;
 var lazy$2 = lazy;
 lazy$2.lib = lazy$1;
-const Route0 = loadable$2(() => __vitePreload(() => import("./b-D41XIiYr.js"), true ? [] : void 0));
-const Route1 = loadable$2(() => __vitePreload(() => import("./a-jNKdspec.js"), true ? [] : void 0));
+const Route0 = loadable$2(() => __vitePreload(() => import("./b-LXmSxOB8.js"), true ? [] : void 0));
+const Route1 = loadable$2(() => __vitePreload(() => import("./a-Co_Lw_PH.js"), true ? [] : void 0));
+const Route2 = loadable$2(() => __vitePreload(() => import("./index-D038v2Yz.js"), true ? [] : void 0));
 const routes = [
-  { path: "/b", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./b-D41XIiYr.js"), true ? [] : void 0) },
-  { path: "/guide/a", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./a-jNKdspec.js"), true ? [] : void 0) }
+  { path: "/b", element: React.createElement(Route0) },
+  { path: "/guide/a", element: React.createElement(Route1) },
+  { path: "/", element: React.createElement(Route2) }
 ];
 var dist = {};
 var hasRequiredDist;
