@@ -2,6 +2,8 @@ import { join, relative } from "path";
 import { Plugin } from "vite";
 import { SiteConfig } from "shared/types/index";
 import { PACKAGE_ROOT } from "node/constants";
+import fs from "fs-extra";
+import sirv from "sirv";
 
 const SITE_DATA_ID = "fispo:site-data";
 
@@ -43,6 +45,12 @@ export function pluginConfig(
           },
         },
       };
+    },
+    configureServer(server) {
+      const publicDir = join(config.root, "public");
+      if (fs.pathExistsSync(publicDir)) {
+        server.middlewares.use(sirv(publicDir));
+      }
     },
   };
 }

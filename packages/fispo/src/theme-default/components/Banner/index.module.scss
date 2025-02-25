@@ -1,0 +1,33 @@
+.banner {
+  width: 100%;
+  height: 100%;
+  background-image: url(./banner.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  color: #eee;
+
+  &::before {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    content: "";
+  }
+
+  &-site-info {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+  }
+
+  &-site-title {
+    font-size: 2.85rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    line-height: 1.5;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,60 @@
+.nav {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  padding: 0 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: #ffffffcc;
+  transition: all 0.5s ease-in-out;
+
+  .blog-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 60px;
+  }
+
+  a {
+    // color: #eee;
+    color: #4c4948;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #49b1f5;
+    }
+  }
+
+  .menus {
+    ul {
+      display: flex;
+
+      li {
+        font-size: 1.06rem;
+      }
+      li:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+.hide {
+  transform: translateY(-60px);
+}
+
+.top {
+  background-color: transparent;
+  a {
+    color: #eee;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .blog-name,
+  li {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}

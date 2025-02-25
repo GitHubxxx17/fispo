@@ -28,6 +28,7 @@ export interface ThemeConfig {
   nav?: NavItemWithLink[];
   articleList?: ArticleList;
   footer?: Footer;
+  navMenus?: navMenuItem[];
 }
 
 export interface UserConfig {
@@ -71,4 +72,16 @@ export interface PageModule {
   default: ComponentType;
   frontmatter?: FrontMatter;
   [key: string]: unknown;
+}
+
+// 导航栏菜单项
+export interface navMenuItem {
+  /** 菜单项名称 */
+  title: string;
+  /** 路径 */
+  path: string;
+  /** 图标 */
+  icon?: string;
+  /** 子菜单项 */
+  children?: navMenuItem[];
 }
