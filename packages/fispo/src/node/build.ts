@@ -1,11 +1,12 @@
 import { InlineConfig, build as viteBuild } from "vite";
 import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from "./constants";
 import type { RollupOutput } from "rollup";
-import { join } from "path";
+import { dirname, join } from "path";
 import fs from "fs-extra";
 import { pathToFileURL } from "url";
 import { SiteConfig } from "shared/types";
 import { createVitePlugins } from "./plugins/vitePlugins";
+import { Route } from "./plugins/plugin-routes";
 
 export async function bundle(root: string, config: SiteConfig) {
   const resolveViteConfig = async (
@@ -40,6 +41,11 @@ export async function bundle(root: string, config: SiteConfig) {
       // server build
       viteBuild(await resolveViteConfig(true)),
     ]);
+    // 复制图片到打包目录
+    const publicDir = join(root, "public");
+    if (fs.pathExistsSync(publicDir)) {
+      await fs.copy(publicDir, join(root, "build"));
+    }
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
   } catch (e) {
     console.log(e);
@@ -47,7 +53,8 @@ export async function bundle(root: string, config: SiteConfig) {
 }
 
 export async function renderPage(
-  render: () => string,
+  render: (routePath: string) => Promise<string>,
+  routes: Route[],
   root: string,
   clientBundle: RollupOutput
 ) {
@@ -55,8 +62,14 @@ export async function renderPage(
     (chunk) => chunk.type === "chunk" && chunk.isEntry
   );
   console.log(`Rendering page in server side...`);
-  const appHtml = render();
-  const html = `
+  return Promise.all(
+    [{ path: "/" }, ...routes].map(async (route) => {
+      const routePath = route.path;
+      const appHtml = await render(routePath);
+      const styleAssets = clientBundle.output.filter(
+        (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
+      );
+      const html = `
 <!DOCTYPE html>
 <html>
   <head>
@@ -64,15 +77,22 @@ export async function renderPage(
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>title</title>
     <meta name="description" content="xxx">
+    ${styleAssets
+      .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+      .join("\n")}
   </head>
   <body>
     <div id="root">${appHtml}</div>
     <script type="module" src="/${clientChunk?.fileName}"></script>
   </body>
 </html>`.trim();
-  await fs.ensureDir(join(root, "build"));
-  await fs.writeFile(join(root, "build/index.html"), html);
-  await fs.remove(join(root, ".temp"));
+      const fileName = routePath.endsWith("/")
+        ? `${routePath}index.html`
+        : `${routePath}.html`;
+      await fs.ensureDir(join(root, "build", dirname(fileName)));
+      await fs.writeFile(join(root, "build", fileName), html);
+    })
+  );
 }
 
 // 新增入参
@@ -80,9 +100,11 @@ export async function build(root: string = process.cwd(), config: SiteConfig) {
   // bundle 方法也新增入参
   const [clientBundle] = await bundle(root, config);
   const serverEntryPath = join(root, ".temp", "ssr-entry.cjs");
-  const { render } = await import(pathToFileURL(serverEntryPath).toString());
+  const { render, routes } = await import(
+    pathToFileURL(serverEntryPath).toString()
+  );
   try {
-    await renderPage(render, root, clientBundle);
+    await renderPage(render, routes, root, clientBundle);
   } catch (e) {
     console.log("Render page error.\n", e);
   }

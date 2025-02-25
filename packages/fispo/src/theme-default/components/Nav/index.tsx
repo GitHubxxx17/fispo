@@ -3,12 +3,24 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 import { navMenuItem } from "shared/types";
-import { debounce } from "lodash-es";
 
 interface NavProps {
   title?: string;
   menus?: navMenuItem[];
   children?: React.ReactNode;
+}
+
+function debounce(func: () => void, delay: number) {
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  return function () {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      // eslint-disable-next-line prefer-spread, prefer-rest-params
+      func.apply(null, arguments);
+    }, delay);
+  };
 }
 
 function Nav(props: NavProps) {
