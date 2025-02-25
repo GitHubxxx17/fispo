@@ -1,0 +1,7 @@
+.sidebar {
+  width: 100%;
+
+  & > div:not(:first-child) {
+    margin-top: 20px;
+  }
+}

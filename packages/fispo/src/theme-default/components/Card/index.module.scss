@@ -1,0 +1,143 @@
+.card {
+  padding: 20px 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
+  color: #4c4948;
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &-name {
+      font-weight: 500;
+      font-style: 1.5rem;
+      margin-top: 8px;
+    }
+
+    &-description {
+      margin-top: 8px;
+    }
+
+    &-data {
+      display: flex;
+      margin-top: 16px;
+      width: 100%;
+      height: 56px;
+
+      a {
+        height: 100%;
+        font-size: 1.2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s;
+
+        &:hover {
+          color: #49b1f5;
+        }
+      }
+    }
+  }
+
+  .follow-btn {
+    margin: 20px 0 10px;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    background-color: #49b1f5;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+  }
+
+  .header {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    line-height: 2;
+  }
+
+  &-article {
+    li {
+      height: 68px;
+      &:not(:last-child) {
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  &-list {
+    li {
+      padding: 3px 10px;
+      height: 38px;
+      cursor: pointer;
+      &:hover {
+        padding: 3px 16px;
+        background-color: #49b1f5;
+        color: #fff;
+      }
+    }
+  }
+
+  .list {
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s;
+    }
+  }
+
+  .left {
+    width: 68px;
+    height: 68px;
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+      transition: all 0.8s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    .title {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      transition: all 0.3s;
+      cursor: pointer;
+      &:hover {
+        color: #49b1f5;
+      }
+    }
+
+    .time {
+      font-size: 0.85rem;
+      color: #858585;
+      line-height: 2;
+    }
+  }
+}

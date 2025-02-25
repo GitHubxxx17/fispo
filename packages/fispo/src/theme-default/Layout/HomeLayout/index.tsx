@@ -1,5 +1,5 @@
-import Banner from "../../components/Banner";
+import ArticleList from "../../components/ArticleList";
 
 export function HomeLayout() {
-  return <Banner></Banner>;
+  return <ArticleList></ArticleList>;
 }

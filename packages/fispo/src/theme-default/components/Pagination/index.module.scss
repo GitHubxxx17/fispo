@@ -1,0 +1,40 @@
+.pagination {
+  margin-top: 20px;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .block {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 1.5rem;
+    color: #99a9bf;
+    box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
+    cursor: pointer;
+    user-select: none;
+
+    &:not(.active):hover {
+      background-color: #ff7242;
+      color: #fff;
+    }
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  .number {
+    font-size: 1rem;
+    line-height: 40px;
+  }
+
+  .active {
+    transition: all 0.4s;
+    background-color: #00c4b6;
+    color: #fff;
+  }
+}

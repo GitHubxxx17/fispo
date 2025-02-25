@@ -3,6 +3,9 @@ import { usePageData } from "../../runtime";
 import "../style/base.css";
 import { HomeLayout } from "./HomeLayout";
 import styles from "./index.module.scss";
+import Banner from "../components/Banner";
+import Footer from "../components/Footer";
+import Sidebar from "../components/Sidebar";
 
 export function Layout() {
   const pageData = usePageData();
@@ -10,7 +13,7 @@ export function Layout() {
   const { pageType, siteData } = pageData;
   const { title, themeConfig } = siteData;
   // 根据 pageType 分发不同的页面内容
-  const getContent = () => {
+  const getCurrentLayout = () => {
     if (pageType === "home") {
       return <HomeLayout></HomeLayout>;
     } else if (pageType === "article") {
@@ -23,15 +26,15 @@ export function Layout() {
     <div className={styles.layout}>
       <header className={styles.header}>
         <Nav title={title} menus={themeConfig.navMenus}></Nav>
-        {getContent()}
+        <Banner></Banner>
       </header>
-      {/* <main className={styles.main}>
-        <div className={styles.mainLeft}>{getCurrentLayout(type)}</div>
+      <main className={styles.main}>
+        <div className={styles.mainLeft}>{getCurrentLayout()}</div>
         <div className={styles.mainRight}>
-          <Sidebar>{props.sidebar}</Sidebar>
+          <Sidebar></Sidebar>
         </div>
       </main>
-      <Footer>{props.footer}</Footer> */}
+      <Footer></Footer>
     </div>
   );
 }
