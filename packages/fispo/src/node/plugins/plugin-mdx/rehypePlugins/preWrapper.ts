@@ -41,14 +41,23 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         node.children = [
           {
             type: "element",
-            tagName: "span",
+            tagName: "div",
             properties: {
-              className: "lang",
+              className: "highlight-tools",
             },
             children: [
               {
-                type: "text",
-                value: lang,
+                type: "element",
+                tagName: "span",
+                properties: {
+                  className: "lang",
+                },
+                children: [
+                  {
+                    type: "text",
+                    value: lang,
+                  },
+                ],
               },
             ],
           },

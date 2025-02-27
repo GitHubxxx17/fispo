@@ -49,6 +49,7 @@ export default [
       "docs",
       "build",
       "packages/fispo/docs",
+      "packages/fispo/source",
     ],
   },
   {

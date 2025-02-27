@@ -31,3 +31,12 @@
     font-weight: bold;
   }
 }
+
+.not-home-page {
+  height: 400px !important;
+  background-attachment: initial;
+  background-position: center;
+  &::before {
+    height: 400px !important;
+  }
+}

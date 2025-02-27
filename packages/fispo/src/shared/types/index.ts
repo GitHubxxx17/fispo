@@ -1,23 +1,9 @@
 import { UserConfig as ViteConfiguration } from "vite";
 import { ComponentType } from "react";
 
-export type NavItemWithLink = {
-  text: string;
-  link: string;
-};
-
 export interface ArticleList {
-  [path: string]: Article[];
+  [path: string]: FrontMatter;
 }
-
-export type Article = {
-  title: string;
-  link: string;
-  createTime: string;
-  updateTime: string;
-  tag: string[];
-  sort: string;
-};
 
 export interface Footer {
   message?: string;
@@ -25,8 +11,6 @@ export interface Footer {
 }
 
 export interface ThemeConfig {
-  nav?: NavItemWithLink[];
-  articleList?: ArticleList;
   footer?: Footer;
   navMenus?: navMenuItem[];
 }
@@ -36,6 +20,7 @@ export interface UserConfig {
   description?: string;
   themeConfig?: ThemeConfig;
   vite?: ViteConfiguration;
+  articleList?: ArticleList;
 }
 
 export interface SiteConfig {
@@ -44,7 +29,7 @@ export interface SiteConfig {
   siteData: UserConfig;
 }
 
-export type PageType = "home" | "article" | "tag" | "404";
+export type PageType = "home" | "article" | "custom" | "404";
 
 export interface Header {
   id: string;
@@ -55,9 +40,10 @@ export interface Header {
 export interface FrontMatter {
   title?: string;
   description?: string;
-  pageType?: PageType;
-  sidebar?: boolean;
-  outline?: boolean;
+  categories?: string;
+  date?: string;
+  tags?: string[];
+  cover?: string;
 }
 
 export interface PageData {

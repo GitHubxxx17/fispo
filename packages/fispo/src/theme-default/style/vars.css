@@ -1,0 +1,47 @@
+/**
+ * Colors Base
+ *
+ * These are the pure base color presets. Most of the time, you should not be
+ * using these colors directly in the theme but rather use "Colors Theme"
+ * instead because those are "Theme (light or dark)" dependant.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --fispo-c-white: #ffffff;
+  --fispo-c-white-1: #ffffffcc;
+  --fispo-c-white-2: #eee;
+
+  --fispo-c-gray: #4c4948;
+  --fispo-c-gray-2: #6a737d;
+
+  --fispo-c-blue: #49b1f5;
+  --fispo-c-blue-2: rgba(73, 177, 245, 0.1);
+  --fispo-text-highlight-color: #1f2d3d;
+
+  --fispo-c-orange: #ff7242;
+
+  --fispo-c-dark: #1c1c1c;
+  --fispo-c-dark-2: #212121;
+}
+
+/**
+ * Colors Theme
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --fispo-c-bg: var(--fispo-c-white);
+  --fispo-c-nav-bg: var(--fispo-c-white-1);
+  --fispo-hltools-bg: var(--fispo-c-dark);
+  --fispo-code-bg: var(--fispo-c-dark-2);
+
+  --fispo-c-footer-text: var(--fispo-c-white-1);
+
+  --fispo-c-text: var(--fispo-c-gray);
+  --fispo-c-text-hover: var(--fispo-c-blue);
+  --fispo-c-text-light: var(--fispo-c-white-2);
+
+  --fispo-blockquote-bg: var(--fispo-c-blue-2);
+  --fispo-blockquote-color: var(--fispo-c-gray-2);
+
+  --fispo-li-hover-color: var(--fispo-c-orange);
+}

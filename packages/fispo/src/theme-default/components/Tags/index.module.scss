@@ -1,0 +1,24 @@
+.tag {
+  background-color: #fff;
+  border-radius: var(--default-border-radius);
+  padding: 50px 40px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-wrap: wrap;
+
+  .tagItem {
+    margin: 2px 2px;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+    padding: 4px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+
+    &:hover {
+      scale: 1.1;
+      color: #fff !important;
+      background-color: var(--default-bg-color);
+      box-shadow: var(--box-shadow);
+    }
+  }
+}

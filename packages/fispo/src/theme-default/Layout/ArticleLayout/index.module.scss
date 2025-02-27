@@ -1,0 +1,61 @@
+.article-layout {
+  background-color: #fff;
+  border-radius: var(--default-border-radius);
+  padding: 50px 40px;
+  box-shadow: var(--box-shadow);
+  line-height: 2;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+    margin: 20px 0 14px;
+    color: var(--fispo-text-highlight-color);
+    font-weight: bold;
+  }
+
+  h1 a,
+  h2 a,
+  h3 a,
+  h4 a,
+  h5 a,
+  h6 a {
+    margin-right: 5px;
+  }
+
+  blockquote {
+    margin: 0 0 20px;
+    padding: 12px 15px;
+    border-left: 3px solid var(--fispo-c-blue);
+    background-color: var(--fispo-blockquote-bg);
+    color: var(--fispo-blockquote-color);
+
+    & > :last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  p {
+    margin: 0 0 16px;
+  }
+
+  ol {
+    padding-left: 40px;
+    margin-top: 16px;
+    list-style-type: decimal;
+    li {
+      margin: 4px 0;
+
+      &::marker {
+        color: var(--fispo-c-blue);
+      }
+
+      &:hover::marker {
+        color: var(--fispo-li-hover-color);
+      }
+    }
+  }
+}

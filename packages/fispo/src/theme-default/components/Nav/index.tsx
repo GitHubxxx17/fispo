@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 import { navMenuItem } from "shared/types";
 
@@ -66,9 +65,9 @@ function Nav(props: NavProps) {
           {menus.map((items) => {
             return (
               <li key={items.title}>
-                <Link to={items.path}>
+                <a href={items.path}>
                   <span>{items.title}</span>
-                </Link>
+                </a>
               </li>
             );
           })}

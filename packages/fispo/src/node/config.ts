@@ -60,6 +60,7 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
     description: userConfig.description || "SSG Framework",
     themeConfig: userConfig.themeConfig || {},
     vite: userConfig.vite || {},
+    articleList: {},
   };
 }
 

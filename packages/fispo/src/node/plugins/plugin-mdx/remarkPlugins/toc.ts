@@ -23,6 +23,7 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
   return (tree) => {
     const toc: TocItem[] = [];
     visit(tree, "heading", (node) => {
+      console.log(node);
       if (!node.depth || !node.children) {
         return;
       }

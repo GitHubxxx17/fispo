@@ -8,6 +8,7 @@ const version = require("../../package.json").version;
 const cli = cac("fispo").version(version).help();
 
 cli.command("dev [root]", "start dev server").action(async (root: string) => {
+  root = resolve(root) || "source";
   const createServer = async () => {
     const { createDevServer } = await import("./dev.js");
     const server = await createDevServer(root, async () => {

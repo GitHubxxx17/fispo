@@ -87,11 +87,11 @@ function requireScheduler_production() {
       if (last !== first) {
         heap[0] = last;
         a: for (var index = 0, length = heap.length, halfLength = length >>> 1; index < halfLength; ) {
-          var leftIndex = 2 * (index + 1) - 1, left = heap[leftIndex], rightIndex = leftIndex + 1, right = heap[rightIndex];
-          if (0 > compare(left, last))
-            rightIndex < length && 0 > compare(right, left) ? (heap[index] = right, heap[rightIndex] = last, index = rightIndex) : (heap[index] = left, heap[leftIndex] = last, index = leftIndex);
-          else if (rightIndex < length && 0 > compare(right, last))
-            heap[index] = right, heap[rightIndex] = last, index = rightIndex;
+          var leftIndex = 2 * (index + 1) - 1, left2 = heap[leftIndex], rightIndex = leftIndex + 1, right2 = heap[rightIndex];
+          if (0 > compare(left2, last))
+            rightIndex < length && 0 > compare(right2, left2) ? (heap[index] = right2, heap[rightIndex] = last, index = rightIndex) : (heap[index] = left2, heap[leftIndex] = last, index = leftIndex);
+          else if (rightIndex < length && 0 > compare(right2, last))
+            heap[index] = right2, heap[rightIndex] = last, index = rightIndex;
           else break a;
         }
       }
@@ -1161,11 +1161,11 @@ function requireReactDomClient_production() {
   }
   function getStackByFiberInDevAndProd(workInProgress2) {
     try {
-      var info = "";
+      var info2 = "";
       do
-        info += describeFiber(workInProgress2), workInProgress2 = workInProgress2.return;
+        info2 += describeFiber(workInProgress2), workInProgress2 = workInProgress2.return;
       while (workInProgress2);
-      return info;
+      return info2;
     } catch (x) {
       return "\nError generating stack: " + x.message + "\n" + x.stack;
     }
@@ -1262,11 +1262,11 @@ function requireReactDomClient_production() {
     return a.stateNode.current === a ? fiber : alternate;
   }
   function findCurrentHostFiberImpl(node) {
-    var tag = node.tag;
-    if (5 === tag || 26 === tag || 27 === tag || 6 === tag) return node;
+    var tag2 = node.tag;
+    if (5 === tag2 || 26 === tag2 || 27 === tag2 || 6 === tag2) return node;
     for (node = node.child; null !== node; ) {
-      tag = findCurrentHostFiberImpl(node);
-      if (null !== tag) return tag;
+      tag2 = findCurrentHostFiberImpl(node);
+      if (null !== tag2) return tag2;
       node = node.sibling;
     }
     return null;
@@ -1572,15 +1572,15 @@ function requireReactDomClient_production() {
   }
   function getInstanceFromNode(node) {
     if (node = node[internalInstanceKey] || node[internalContainerInstanceKey]) {
-      var tag = node.tag;
-      if (5 === tag || 6 === tag || 13 === tag || 26 === tag || 27 === tag || 3 === tag)
+      var tag2 = node.tag;
+      if (5 === tag2 || 6 === tag2 || 13 === tag2 || 26 === tag2 || 27 === tag2 || 3 === tag2)
         return node;
     }
     return null;
   }
   function getNodeFromInstance(inst) {
-    var tag = inst.tag;
-    if (5 === tag || 26 === tag || 27 === tag || 6 === tag) return inst.stateNode;
+    var tag2 = inst.tag;
+    if (5 === tag2 || 26 === tag2 || 27 === tag2 || 6 === tag2) return inst.stateNode;
     throw Error(formatProdErrorMessage(33));
   }
   function getResourcesFromRoot(root2) {
@@ -4075,13 +4075,13 @@ function requireReactDomClient_production() {
     currentStateHook.memoizedState = action;
     return [stateHook, dispatch, false];
   }
-  function pushEffect(tag, create, inst, deps) {
-    tag = { tag, create, inst, deps, next: null };
+  function pushEffect(tag2, create, inst, deps) {
+    tag2 = { tag: tag2, create, inst, deps, next: null };
     create = currentlyRenderingFiber$1.updateQueue;
     null === create && (create = createFunctionComponentUpdateQueue(), currentlyRenderingFiber$1.updateQueue = create);
     inst = create.lastEffect;
-    null === inst ? create.lastEffect = tag.next = tag : (deps = inst.next, inst.next = tag, tag.next = deps, create.lastEffect = tag);
-    return tag;
+    null === inst ? create.lastEffect = tag2.next = tag2 : (deps = inst.next, inst.next = tag2, tag2.next = deps, create.lastEffect = tag2);
+    return tag2;
   }
   function updateRef() {
     return updateWorkInProgressHook().memoizedState;
@@ -5964,34 +5964,34 @@ function requireReactDomClient_production() {
     var fiber = workInProgress2.child;
     null !== fiber && (fiber.return = workInProgress2);
     for (; null !== fiber; ) {
-      var list = fiber.dependencies;
-      if (null !== list) {
+      var list2 = fiber.dependencies;
+      if (null !== list2) {
         var nextFiber = fiber.child;
-        list = list.firstContext;
-        a: for (; null !== list; ) {
-          var dependency = list;
-          list = fiber;
+        list2 = list2.firstContext;
+        a: for (; null !== list2; ) {
+          var dependency = list2;
+          list2 = fiber;
           for (var i = 0; i < contexts.length; i++)
             if (dependency.context === contexts[i]) {
-              list.lanes |= renderLanes2;
-              dependency = list.alternate;
+              list2.lanes |= renderLanes2;
+              dependency = list2.alternate;
               null !== dependency && (dependency.lanes |= renderLanes2);
               scheduleContextWorkOnParentPath(
-                list.return,
+                list2.return,
                 renderLanes2,
                 workInProgress2
               );
               forcePropagateEntireTree || (nextFiber = null);
               break a;
             }
-          list = dependency.next;
+          list2 = dependency.next;
         }
       } else if (18 === fiber.tag) {
         nextFiber = fiber.return;
         if (null === nextFiber) throw Error(formatProdErrorMessage(341));
         nextFiber.lanes |= renderLanes2;
-        list = nextFiber.alternate;
-        null !== list && (list.lanes |= renderLanes2);
+        list2 = nextFiber.alternate;
+        null !== list2 && (list2.lanes |= renderLanes2);
         scheduleContextWorkOnParentPath(nextFiber, renderLanes2, workInProgress2);
         nextFiber = null;
       } else nextFiber = fiber.child;
@@ -6417,18 +6417,18 @@ function requireReactDomClient_production() {
     }
   }
   function insertOrAppendPlacementNodeIntoContainer(node, before, parent) {
-    var tag = node.tag;
-    if (5 === tag || 6 === tag)
+    var tag2 = node.tag;
+    if (5 === tag2 || 6 === tag2)
       node = node.stateNode, before ? 8 === parent.nodeType ? parent.parentNode.insertBefore(node, before) : parent.insertBefore(node, before) : (8 === parent.nodeType ? (before = parent.parentNode, before.insertBefore(node, parent)) : (before = parent, before.appendChild(node)), parent = parent._reactRootContainer, null !== parent && void 0 !== parent || null !== before.onclick || (before.onclick = noop$1));
-    else if (4 !== tag && 27 !== tag && (node = node.child, null !== node))
+    else if (4 !== tag2 && 27 !== tag2 && (node = node.child, null !== node))
       for (insertOrAppendPlacementNodeIntoContainer(node, before, parent), node = node.sibling; null !== node; )
         insertOrAppendPlacementNodeIntoContainer(node, before, parent), node = node.sibling;
   }
   function insertOrAppendPlacementNode(node, before, parent) {
-    var tag = node.tag;
-    if (5 === tag || 6 === tag)
+    var tag2 = node.tag;
+    if (5 === tag2 || 6 === tag2)
       node = node.stateNode, before ? parent.insertBefore(node, before) : parent.appendChild(node);
-    else if (4 !== tag && 27 !== tag && (node = node.child, null !== node))
+    else if (4 !== tag2 && 27 !== tag2 && (node = node.child, null !== node))
       for (insertOrAppendPlacementNode(node, before, parent), node = node.sibling; null !== node; )
         insertOrAppendPlacementNode(node, before, parent), node = node.sibling;
   }
@@ -7701,8 +7701,8 @@ function requireReactDomClient_production() {
         }
     }
   }
-  function FiberNode(tag, pendingProps, key, mode) {
-    this.tag = tag;
+  function FiberNode(tag2, pendingProps, key, mode) {
+    this.tag = tag2;
     this.key = key;
     this.sibling = this.child = this.return = this.stateNode = this.type = this.elementType = null;
     this.index = 0;
@@ -7715,8 +7715,8 @@ function requireReactDomClient_production() {
     this.childLanes = this.lanes = 0;
     this.alternate = null;
   }
-  function createFiberImplClass(tag, pendingProps, key, mode) {
-    return new FiberNode(tag, pendingProps, key, mode);
+  function createFiberImplClass(tag2, pendingProps, key, mode) {
+    return new FiberNode(tag2, pendingProps, key, mode);
   }
   function shouldConstruct(Component) {
     Component = Component.prototype;
@@ -7849,10 +7849,10 @@ function requireReactDomClient_production() {
     pendingProps.stateNode = primaryChildInstance;
     return pendingProps;
   }
-  function createFiberFromText(content, mode, lanes) {
-    content = createFiberImplClass(6, content, null, mode);
-    content.lanes = lanes;
-    return content;
+  function createFiberFromText(content2, mode, lanes) {
+    content2 = createFiberImplClass(6, content2, null, mode);
+    content2.lanes = lanes;
+    return content2;
   }
   function createFiberFromPortal(portal, mode, lanes) {
     mode = createFiberImplClass(
@@ -8482,10 +8482,10 @@ function requireReactDomClient_production() {
   }
   function isRenderConsistentWithExternalStores(finishedWork) {
     for (var node = finishedWork; ; ) {
-      var tag = node.tag;
-      if ((0 === tag || 11 === tag || 15 === tag) && node.flags & 16384 && (tag = node.updateQueue, null !== tag && (tag = tag.stores, null !== tag)))
-        for (var i = 0; i < tag.length; i++) {
-          var check = tag[i], getSnapshot = check.getSnapshot;
+      var tag2 = node.tag;
+      if ((0 === tag2 || 11 === tag2 || 15 === tag2) && node.flags & 16384 && (tag2 = node.updateQueue, null !== tag2 && (tag2 = tag2.stores, null !== tag2)))
+        for (var i = 0; i < tag2.length; i++) {
+          var check = tag2[i], getSnapshot = check.getSnapshot;
           check = check.value;
           try {
             if (!objectIs(getSnapshot(), check)) return false;
@@ -8493,9 +8493,9 @@ function requireReactDomClient_production() {
             return false;
           }
         }
-      tag = node.child;
-      if (node.subtreeFlags & 16384 && null !== tag)
-        tag.return = node, node = tag;
+      tag2 = node.child;
+      if (node.subtreeFlags & 16384 && null !== tag2)
+        tag2.return = node, node = tag2;
       else {
         if (node === finishedWork) break;
         for (; null === node.sibling; ) {
@@ -9774,10 +9774,10 @@ function requireReactDomClient_production() {
   }
   function noop$1() {
   }
-  function setProp(domElement, tag, key, value, props, prevValue) {
+  function setProp(domElement, tag2, key, value, props, prevValue) {
     switch (key) {
       case "children":
-        "string" === typeof value ? "body" === tag || "textarea" === tag && "" === value || setTextContent(domElement, value) : ("number" === typeof value || "bigint" === typeof value) && "body" !== tag && setTextContent(domElement, "" + value);
+        "string" === typeof value ? "body" === tag2 || "textarea" === tag2 && "" === value || setTextContent(domElement, value) : ("number" === typeof value || "bigint" === typeof value) && "body" !== tag2 && setTextContent(domElement, "" + value);
         break;
       case "className":
         setValueForKnownAttribute(domElement, "class", value);
@@ -9796,13 +9796,13 @@ function requireReactDomClient_production() {
         setValueForStyles(domElement, value, prevValue);
         break;
       case "data":
-        if ("object" !== tag) {
+        if ("object" !== tag2) {
           setValueForKnownAttribute(domElement, "data", value);
           break;
         }
       case "src":
       case "href":
-        if ("" === value && ("a" !== tag || "href" !== key)) {
+        if ("" === value && ("a" !== tag2 || "href" !== key)) {
           domElement.removeAttribute(key);
           break;
         }
@@ -9822,28 +9822,28 @@ function requireReactDomClient_production() {
           );
           break;
         } else
-          "function" === typeof prevValue && ("formAction" === key ? ("input" !== tag && setProp(domElement, tag, "name", props.name, props, null), setProp(
+          "function" === typeof prevValue && ("formAction" === key ? ("input" !== tag2 && setProp(domElement, tag2, "name", props.name, props, null), setProp(
             domElement,
-            tag,
+            tag2,
             "formEncType",
             props.formEncType,
             props,
             null
           ), setProp(
             domElement,
-            tag,
+            tag2,
             "formMethod",
             props.formMethod,
             props,
             null
           ), setProp(
             domElement,
-            tag,
+            tag2,
             "formTarget",
             props.formTarget,
             props,
             null
-          )) : (setProp(domElement, tag, "encType", props.encType, props, null), setProp(domElement, tag, "method", props.method, props, null), setProp(domElement, tag, "target", props.target, props, null)));
+          )) : (setProp(domElement, tag2, "encType", props.encType, props, null), setProp(domElement, tag2, "method", props.method, props, null), setProp(domElement, tag2, "target", props.target, props, null)));
         if (null == value || "symbol" === typeof value || "boolean" === typeof value) {
           domElement.removeAttribute(key);
           break;
@@ -10035,7 +10035,7 @@ function requireReactDomClient_production() {
           key = aliases.get(key) || key, setValueForAttribute(domElement, key, value);
     }
   }
-  function setPropOnCustomElement(domElement, tag, key, value, props, prevValue) {
+  function setPropOnCustomElement(domElement, tag2, key, value, props, prevValue) {
     switch (key) {
       case "style":
         setValueForStyles(domElement, value, prevValue);
@@ -10074,17 +10074,17 @@ function requireReactDomClient_production() {
       default:
         if (!registrationNameDependencies.hasOwnProperty(key))
           a: {
-            if ("o" === key[0] && "n" === key[1] && (props = key.endsWith("Capture"), tag = key.slice(2, props ? key.length - 7 : void 0), prevValue = domElement[internalPropsKey] || null, prevValue = null != prevValue ? prevValue[key] : null, "function" === typeof prevValue && domElement.removeEventListener(tag, prevValue, props), "function" === typeof value)) {
+            if ("o" === key[0] && "n" === key[1] && (props = key.endsWith("Capture"), tag2 = key.slice(2, props ? key.length - 7 : void 0), prevValue = domElement[internalPropsKey] || null, prevValue = null != prevValue ? prevValue[key] : null, "function" === typeof prevValue && domElement.removeEventListener(tag2, prevValue, props), "function" === typeof value)) {
               "function" !== typeof prevValue && null !== prevValue && (key in domElement ? domElement[key] = null : domElement.hasAttribute(key) && domElement.removeAttribute(key));
-              domElement.addEventListener(tag, value, props);
+              domElement.addEventListener(tag2, value, props);
               break a;
             }
             key in domElement ? domElement[key] = value : true === value ? domElement.setAttribute(key, "") : setValueForAttribute(domElement, key, value);
           }
     }
   }
-  function setInitialProperties(domElement, tag, props) {
-    switch (tag) {
+  function setInitialProperties(domElement, tag2, props) {
+    switch (tag2) {
       case "div":
       case "span":
       case "svg":
@@ -10111,13 +10111,13 @@ function requireReactDomClient_production() {
                   break;
                 case "children":
                 case "dangerouslySetInnerHTML":
-                  throw Error(formatProdErrorMessage(137, tag));
+                  throw Error(formatProdErrorMessage(137, tag2));
                 default:
-                  setProp(domElement, tag, propKey, propValue, props, null);
+                  setProp(domElement, tag2, propKey, propValue, props, null);
               }
           }
-        hasSrcSet && setProp(domElement, tag, "srcSet", props.srcSet, props, null);
-        hasSrc && setProp(domElement, tag, "src", props.src, props, null);
+        hasSrcSet && setProp(domElement, tag2, "srcSet", props.srcSet, props, null);
+        hasSrc && setProp(domElement, tag2, "src", props.src, props, null);
         return;
       case "input":
         listenToNonDelegatedEvent("invalid", domElement);
@@ -10148,10 +10148,10 @@ function requireReactDomClient_production() {
                 case "children":
                 case "dangerouslySetInnerHTML":
                   if (null != propValue$186)
-                    throw Error(formatProdErrorMessage(137, tag));
+                    throw Error(formatProdErrorMessage(137, tag2));
                   break;
                 default:
-                  setProp(domElement, tag, hasSrc, propValue$186, props, null);
+                  setProp(domElement, tag2, hasSrc, propValue$186, props, null);
               }
           }
         initInput(
@@ -10181,12 +10181,12 @@ function requireReactDomClient_production() {
               case "multiple":
                 hasSrc = defaultValue;
               default:
-                setProp(domElement, tag, hasSrcSet, defaultValue, props, null);
+                setProp(domElement, tag2, hasSrcSet, defaultValue, props, null);
             }
-        tag = propKey;
+        tag2 = propKey;
         props = propValue;
         domElement.multiple = !!hasSrc;
-        null != tag ? updateOptions(domElement, !!hasSrc, tag, false) : null != props && updateOptions(domElement, !!hasSrc, props, true);
+        null != tag2 ? updateOptions(domElement, !!hasSrc, tag2, false) : null != props && updateOptions(domElement, !!hasSrc, props, true);
         return;
       case "textarea":
         listenToNonDelegatedEvent("invalid", domElement);
@@ -10207,7 +10207,7 @@ function requireReactDomClient_production() {
                 if (null != defaultValue) throw Error(formatProdErrorMessage(91));
                 break;
               default:
-                setProp(domElement, tag, propValue, defaultValue, props, null);
+                setProp(domElement, tag2, propValue, defaultValue, props, null);
             }
         initTextarea(domElement, hasSrc, hasSrcSet, propKey);
         track(domElement);
@@ -10220,7 +10220,7 @@ function requireReactDomClient_production() {
                 domElement.selected = hasSrc && "function" !== typeof hasSrc && "symbol" !== typeof hasSrc;
                 break;
               default:
-                setProp(domElement, tag, checked, hasSrc, props, null);
+                setProp(domElement, tag2, checked, hasSrc, props, null);
             }
         return;
       case "dialog":
@@ -10263,17 +10263,17 @@ function requireReactDomClient_production() {
             switch (defaultChecked) {
               case "children":
               case "dangerouslySetInnerHTML":
-                throw Error(formatProdErrorMessage(137, tag));
+                throw Error(formatProdErrorMessage(137, tag2));
               default:
-                setProp(domElement, tag, defaultChecked, hasSrc, props, null);
+                setProp(domElement, tag2, defaultChecked, hasSrc, props, null);
             }
         return;
       default:
-        if (isCustomElement(tag)) {
+        if (isCustomElement(tag2)) {
           for (propValue$186 in props)
             props.hasOwnProperty(propValue$186) && (hasSrc = props[propValue$186], void 0 !== hasSrc && setPropOnCustomElement(
               domElement,
-              tag,
+              tag2,
               propValue$186,
               hasSrc,
               props,
@@ -10283,10 +10283,10 @@ function requireReactDomClient_production() {
         }
     }
     for (defaultValue in props)
-      props.hasOwnProperty(defaultValue) && (hasSrc = props[defaultValue], null != hasSrc && setProp(domElement, tag, defaultValue, hasSrc, props, null));
+      props.hasOwnProperty(defaultValue) && (hasSrc = props[defaultValue], null != hasSrc && setProp(domElement, tag2, defaultValue, hasSrc, props, null));
   }
-  function updateProperties(domElement, tag, lastProps, nextProps) {
-    switch (tag) {
+  function updateProperties(domElement, tag2, lastProps, nextProps) {
+    switch (tag2) {
       case "div":
       case "span":
       case "svg":
@@ -10309,7 +10309,7 @@ function requireReactDomClient_production() {
               case "defaultValue":
                 lastDefaultValue = lastProp;
               default:
-                nextProps.hasOwnProperty(propKey) || setProp(domElement, tag, propKey, null, nextProps, lastProp);
+                nextProps.hasOwnProperty(propKey) || setProp(domElement, tag2, propKey, null, nextProps, lastProp);
             }
         }
         for (var propKey$203 in nextProps) {
@@ -10338,12 +10338,12 @@ function requireReactDomClient_production() {
               case "children":
               case "dangerouslySetInnerHTML":
                 if (null != propKey)
-                  throw Error(formatProdErrorMessage(137, tag));
+                  throw Error(formatProdErrorMessage(137, tag2));
                 break;
               default:
                 propKey !== lastProp && setProp(
                   domElement,
-                  tag,
+                  tag2,
                   propKey$203,
                   propKey,
                   nextProps,
@@ -10374,7 +10374,7 @@ function requireReactDomClient_production() {
               default:
                 nextProps.hasOwnProperty(type) || setProp(
                   domElement,
-                  tag,
+                  tag2,
                   type,
                   null,
                   nextProps,
@@ -10395,17 +10395,17 @@ function requireReactDomClient_production() {
               default:
                 type !== lastDefaultValue && setProp(
                   domElement,
-                  tag,
+                  tag2,
                   name,
                   type,
                   nextProps,
                   lastDefaultValue
                 );
             }
-        tag = defaultValue;
+        tag2 = defaultValue;
         lastProps = value;
         nextProps = propKey;
-        null != propKey$203 ? updateOptions(domElement, !!lastProps, propKey$203, false) : !!nextProps !== !!lastProps && (null != tag ? updateOptions(domElement, !!lastProps, tag, true) : updateOptions(domElement, !!lastProps, lastProps ? [] : "", false));
+        null != propKey$203 ? updateOptions(domElement, !!lastProps, propKey$203, false) : !!nextProps !== !!lastProps && (null != tag2 ? updateOptions(domElement, !!lastProps, tag2, true) : updateOptions(domElement, !!lastProps, lastProps ? [] : "", false));
         return;
       case "textarea":
         propKey = propKey$203 = null;
@@ -10417,7 +10417,7 @@ function requireReactDomClient_production() {
               case "children":
                 break;
               default:
-                setProp(domElement, tag, defaultValue, null, nextProps, name);
+                setProp(domElement, tag2, defaultValue, null, nextProps, name);
             }
         for (value in nextProps)
           if (name = nextProps[value], type = lastProps[value], nextProps.hasOwnProperty(value) && (null != name || null != type))
@@ -10434,7 +10434,7 @@ function requireReactDomClient_production() {
                 if (null != name) throw Error(formatProdErrorMessage(91));
                 break;
               default:
-                name !== type && setProp(domElement, tag, value, name, nextProps, type);
+                name !== type && setProp(domElement, tag2, value, name, nextProps, type);
             }
         updateTextarea(domElement, propKey$203, propKey);
         return;
@@ -10448,7 +10448,7 @@ function requireReactDomClient_production() {
               default:
                 setProp(
                   domElement,
-                  tag,
+                  tag2,
                   propKey$219,
                   null,
                   nextProps,
@@ -10464,7 +10464,7 @@ function requireReactDomClient_production() {
               default:
                 setProp(
                   domElement,
-                  tag,
+                  tag2,
                   lastDefaultValue,
                   propKey$203,
                   nextProps,
@@ -10488,19 +10488,19 @@ function requireReactDomClient_production() {
       case "wbr":
       case "menuitem":
         for (var propKey$224 in lastProps)
-          propKey$203 = lastProps[propKey$224], lastProps.hasOwnProperty(propKey$224) && null != propKey$203 && !nextProps.hasOwnProperty(propKey$224) && setProp(domElement, tag, propKey$224, null, nextProps, propKey$203);
+          propKey$203 = lastProps[propKey$224], lastProps.hasOwnProperty(propKey$224) && null != propKey$203 && !nextProps.hasOwnProperty(propKey$224) && setProp(domElement, tag2, propKey$224, null, nextProps, propKey$203);
         for (checked in nextProps)
           if (propKey$203 = nextProps[checked], propKey = lastProps[checked], nextProps.hasOwnProperty(checked) && propKey$203 !== propKey && (null != propKey$203 || null != propKey))
             switch (checked) {
               case "children":
               case "dangerouslySetInnerHTML":
                 if (null != propKey$203)
-                  throw Error(formatProdErrorMessage(137, tag));
+                  throw Error(formatProdErrorMessage(137, tag2));
                 break;
               default:
                 setProp(
                   domElement,
-                  tag,
+                  tag2,
                   checked,
                   propKey$203,
                   nextProps,
@@ -10509,11 +10509,11 @@ function requireReactDomClient_production() {
             }
         return;
       default:
-        if (isCustomElement(tag)) {
+        if (isCustomElement(tag2)) {
           for (var propKey$229 in lastProps)
             propKey$203 = lastProps[propKey$229], lastProps.hasOwnProperty(propKey$229) && void 0 !== propKey$203 && !nextProps.hasOwnProperty(propKey$229) && setPropOnCustomElement(
               domElement,
-              tag,
+              tag2,
               propKey$229,
               void 0,
               nextProps,
@@ -10522,7 +10522,7 @@ function requireReactDomClient_production() {
           for (defaultChecked in nextProps)
             propKey$203 = nextProps[defaultChecked], propKey = lastProps[defaultChecked], !nextProps.hasOwnProperty(defaultChecked) || propKey$203 === propKey || void 0 === propKey$203 && void 0 === propKey || setPropOnCustomElement(
               domElement,
-              tag,
+              tag2,
               defaultChecked,
               propKey$203,
               nextProps,
@@ -10532,9 +10532,9 @@ function requireReactDomClient_production() {
         }
     }
     for (var propKey$234 in lastProps)
-      propKey$203 = lastProps[propKey$234], lastProps.hasOwnProperty(propKey$234) && null != propKey$203 && !nextProps.hasOwnProperty(propKey$234) && setProp(domElement, tag, propKey$234, null, nextProps, propKey$203);
+      propKey$203 = lastProps[propKey$234], lastProps.hasOwnProperty(propKey$234) && null != propKey$203 && !nextProps.hasOwnProperty(propKey$234) && setProp(domElement, tag2, propKey$234, null, nextProps, propKey$203);
     for (lastProp in nextProps)
-      propKey$203 = nextProps[lastProp], propKey = lastProps[lastProp], !nextProps.hasOwnProperty(lastProp) || propKey$203 === propKey || null == propKey$203 && null == propKey || setProp(domElement, tag, lastProp, propKey$203, nextProps, propKey);
+      propKey$203 = nextProps[lastProp], propKey = lastProps[lastProp], !nextProps.hasOwnProperty(lastProp) || propKey$203 === propKey || null == propKey$203 && null == propKey || setProp(domElement, tag2, lastProp, propKey$203, nextProps, propKey);
   }
   var eventsEnabled = null, selectionInformation = null;
   function getOwnerDocumentFromRootContainer(rootContainerElement) {
@@ -11236,7 +11236,7 @@ function requireReactDomClient_production() {
     _currentValue2: sharedNotPendingObject,
     _threadCount: 0
   };
-  function FiberRootNode(containerInfo, tag, hydrate, identifierPrefix, onUncaughtError, onCaughtError, onRecoverableError, formState) {
+  function FiberRootNode(containerInfo, tag2, hydrate, identifierPrefix, onUncaughtError, onCaughtError, onRecoverableError, formState) {
     this.tag = 1;
     this.containerInfo = containerInfo;
     this.finishedWork = this.pingCache = this.current = this.pendingChildren = null;
@@ -11256,10 +11256,10 @@ function requireReactDomClient_production() {
     this.formState = formState;
     this.incompleteTransitions = /* @__PURE__ */ new Map();
   }
-  function createFiberRoot(containerInfo, tag, hydrate, initialChildren, hydrationCallbacks, isStrictMode, identifierPrefix, onUncaughtError, onCaughtError, onRecoverableError, transitionCallbacks, formState) {
+  function createFiberRoot(containerInfo, tag2, hydrate, initialChildren, hydrationCallbacks, isStrictMode, identifierPrefix, onUncaughtError, onCaughtError, onRecoverableError, transitionCallbacks, formState) {
     containerInfo = new FiberRootNode(
       containerInfo,
-      tag,
+      tag2,
       hydrate,
       identifierPrefix,
       onUncaughtError,
@@ -11267,19 +11267,19 @@ function requireReactDomClient_production() {
       onRecoverableError,
       formState
     );
-    tag = 1;
-    true === isStrictMode && (tag |= 24);
-    isStrictMode = createFiberImplClass(3, null, null, tag);
+    tag2 = 1;
+    true === isStrictMode && (tag2 |= 24);
+    isStrictMode = createFiberImplClass(3, null, null, tag2);
     containerInfo.current = isStrictMode;
     isStrictMode.stateNode = containerInfo;
-    tag = createCache();
-    tag.refCount++;
-    containerInfo.pooledCache = tag;
-    tag.refCount++;
+    tag2 = createCache();
+    tag2.refCount++;
+    containerInfo.pooledCache = tag2;
+    tag2.refCount++;
     isStrictMode.memoizedState = {
       element: initialChildren,
       isDehydrated: hydrate,
-      cache: tag
+      cache: tag2
     };
     initializeUpdateQueue(isStrictMode);
     return containerInfo;
@@ -11416,12 +11416,12 @@ function requireReactDomClient_production() {
       var nearestMounted = getNearestMountedFiber(targetNode);
       if (null === nearestMounted) targetNode = null;
       else {
-        var tag = nearestMounted.tag;
-        if (13 === tag) {
+        var tag2 = nearestMounted.tag;
+        if (13 === tag2) {
           targetNode = getSuspenseInstanceFromFiber(nearestMounted);
           if (null !== targetNode) return targetNode;
           targetNode = null;
-        } else if (3 === tag) {
+        } else if (3 === tag2) {
           if (nearestMounted.stateNode.current.memoizedState.isDehydrated)
             return 3 === nearestMounted.tag ? nearestMounted.stateNode.containerInfo : null;
           targetNode = null;
@@ -12284,21 +12284,21 @@ function matchRoutesImpl(routes2, locationArg, basename, allowPartial) {
 }
 function flattenRoutes(routes2, branches = [], parentsMeta = [], parentPath = "") {
   let flattenRoute = (route, index, relativePath) => {
-    let meta = {
+    let meta2 = {
       relativePath: relativePath === void 0 ? route.path || "" : relativePath,
       caseSensitive: route.caseSensitive === true,
       childrenIndex: index,
       route
     };
-    if (meta.relativePath.startsWith("/")) {
+    if (meta2.relativePath.startsWith("/")) {
       invariant$1(
-        meta.relativePath.startsWith(parentPath),
-        `Absolute route path "${meta.relativePath}" nested under path "${parentPath}" is not valid. An absolute child route path must start with the combined path of all its parent routes.`
+        meta2.relativePath.startsWith(parentPath),
+        `Absolute route path "${meta2.relativePath}" nested under path "${parentPath}" is not valid. An absolute child route path must start with the combined path of all its parent routes.`
       );
-      meta.relativePath = meta.relativePath.slice(parentPath.length);
+      meta2.relativePath = meta2.relativePath.slice(parentPath.length);
     }
-    let path = joinPaths([parentPath, meta.relativePath]);
-    let routesMeta = parentsMeta.concat(meta);
+    let path = joinPaths([parentPath, meta2.relativePath]);
+    let routesMeta = parentsMeta.concat(meta2);
     if (route.children && route.children.length > 0) {
       invariant$1(
         // Our types know better, but runtime JS may not!
@@ -12355,8 +12355,8 @@ function explodeOptionalSegments(path) {
 function rankRouteBranches(branches) {
   branches.sort(
     (a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(
-      a.routesMeta.map((meta) => meta.childrenIndex),
-      b.routesMeta.map((meta) => meta.childrenIndex)
+      a.routesMeta.map((meta2) => meta2.childrenIndex),
+      b.routesMeta.map((meta2) => meta2.childrenIndex)
     )
   );
 }
@@ -12401,19 +12401,19 @@ function matchRouteBranch(branch, pathname, allowPartial = false) {
   let matchedPathname = "/";
   let matches = [];
   for (let i = 0; i < routesMeta.length; ++i) {
-    let meta = routesMeta[i];
+    let meta2 = routesMeta[i];
     let end = i === routesMeta.length - 1;
     let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
     let match = matchPath(
-      { path: meta.relativePath, caseSensitive: meta.caseSensitive, end },
+      { path: meta2.relativePath, caseSensitive: meta2.caseSensitive, end },
       remainingPathname
     );
-    let route = meta.route;
+    let route = meta2.route;
     if (!match && end && allowPartial && !routesMeta[routesMeta.length - 1].route.index) {
       match = matchPath(
         {
-          path: meta.relativePath,
-          caseSensitive: meta.caseSensitive,
+          path: meta2.relativePath,
+          caseSensitive: meta2.caseSensitive,
           end: false
         },
         remainingPathname
@@ -12759,6 +12759,9 @@ function useResolvedPath(to, { relative } = {}) {
     ),
     [to, routePathnamesJson, locationPathname, relative]
   );
+}
+function useRoutes(routes2, locationArg) {
+  return useRoutesImpl(routes2);
 }
 function useRoutesImpl(routes2, locationArg, dataRouterState, future) {
   invariant$1(
@@ -14079,13 +14082,13 @@ function requireClassnames() {
 }
 var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
-const nav = "_nav_1qw60_1";
-const menus = "_menus_1qw60_25";
-const hide = "_hide_1qw60_35";
-const top = "_top_1qw60_39";
-const styles$2 = {
+const nav = "_nav_1gu3c_1";
+const menus = "_menus_1gu3c_25";
+const hide = "_hide_1gu3c_35";
+const top = "_top_1gu3c_39";
+const styles$9 = {
   nav,
-  "blog-name": "_blog-name_1qw60_13",
+  "blog-name": "_blog-name_1gu3c_13",
   menus,
   hide,
   top
@@ -14102,7 +14105,7 @@ function debounce(func, delay) {
   };
 }
 function Nav(props) {
-  const { title = "", menus: menus2 = [], children } = props;
+  const { title: title2 = "", menus: menus2 = [], children } = props;
   if (children) return children;
   const [isHide, setIsHide] = reactExports.useState(false);
   const lastScrollTop = reactExports.useRef(0);
@@ -14127,14 +14130,14 @@ function Nav(props) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "nav",
     {
-      className: classNames(styles$2.nav, {
-        [styles$2.hide]: isHide,
-        [styles$2.top]: isTop
+      className: classNames(styles$9.nav, {
+        [styles$9.hide]: isHide,
+        [styles$9.top]: isTop
       }),
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: title }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: items.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: items.title }) }) }, items.title);
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$9["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: title2 }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$9.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: items.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: items.title }) }) }, items.title);
         }) }) })
       ]
     }
@@ -14197,9 +14200,9 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   }
   return promise.then((res) => {
-    for (const item of res || []) {
-      if (item.status !== "rejected") continue;
-      handlePreloadError(item.reason);
+    for (const item2 of res || []) {
+      if (item2.status !== "rejected") continue;
+      handlePreloadError(item2.reason);
     }
     return baseModule().catch(handlePreloadError);
   });
@@ -14735,75 +14738,491 @@ var loadable$2 = loadable;
 loadable$2.lib = loadable$1;
 var lazy$2 = lazy;
 lazy$2.lib = lazy$1;
-const Route0 = loadable$2(() => __vitePreload(() => import("./Counter-BfexkYV_.js"), true ? [] : void 0));
-const Route1 = loadable$2(() => __vitePreload(() => import("./b-D5WKhi-V.js"), true ? [] : void 0));
-const Route2 = loadable$2(() => __vitePreload(() => import("./a-CsyHszPW.js"), true ? [] : void 0));
+const Route0 = loadable$2(() => __vitePreload(() => import("./数组sort()详解-C78Xflbi.js"), true ? [] : void 0));
 const routes = [
-  { path: "/Counter", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./Counter-BfexkYV_.js"), true ? [] : void 0) },
-  { path: "/b", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./b-D5WKhi-V.js"), true ? [] : void 0) },
-  { path: "/guide/a", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./a-CsyHszPW.js"), true ? [] : void 0) }
+  { path: "/数组sort()详解", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./数组sort()详解-C78Xflbi.js"), true ? [] : void 0) }
 ];
+const Content = () => {
+  console.log(routes);
+  const routeElement = useRoutes(routes);
+  return routeElement;
+};
 const DataContext = reactExports.createContext({});
 const usePageData = () => {
   return reactExports.useContext(DataContext);
 };
-const banner = "_banner_1he32_1";
-const styles$1 = {
-  banner,
-  "banner-site-info": "_banner-site-info_1he32_19",
-  "banner-site-title": "_banner-site-title_1he32_24"
+const articleList = "_articleList_1a6g8_1";
+const item = "_item_1a6g8_1";
+const left$1 = "_left_1a6g8_15";
+const right$1 = "_right_1a6g8_24";
+const content = "_content_1a6g8_30";
+const meta = "_meta_1a6g8_39";
+const info = "_info_1a6g8_51";
+const styles$8 = {
+  articleList,
+  item,
+  left: left$1,
+  right: right$1,
+  content,
+  meta,
+  info,
+  "multiline-ellipsis": "_multiline-ellipsis_1a6g8_56"
 };
-function Banner(props) {
-  const { children } = props;
-  const { siteData: siteData2 } = usePageData();
+const pagination = "_pagination_1yq6s_1";
+const block = "_block_1yq6s_8";
+const active = "_active_1yq6s_21";
+const number = "_number_1yq6s_28";
+const styles$7 = {
+  pagination,
+  block,
+  active,
+  number
+};
+function Pagination(props) {
+  const { currentPage = 1, pageCount = 1, onChange } = props;
+  const [selectPage, setSelectPage] = reactExports.useState(currentPage);
+  const renderPages = reactExports.useMemo(() => {
+    if (pageCount < 8) {
+      return Array.from({ length: pageCount }).map((_, i) => i + 1);
+    } else {
+      const pages = [];
+      let min = Math.max(selectPage - 2, 1);
+      let max = Math.min(selectPage + 2, pageCount);
+      if (selectPage - 2 <= 0) {
+        max = 5;
+      }
+      if (selectPage + 2 >= pageCount) {
+        min = pageCount - 4;
+      }
+      for (let i = min; i <= max; i++) {
+        pages.push(i);
+      }
+      if (pages[0] != 1) {
+        if (pages[0] > 2) {
+          pages.unshift(0);
+        }
+        pages.unshift(1);
+      }
+      if (pages.at(-1) != pageCount) {
+        if (pages.at(-1) < pageCount - 1) {
+          pages.push(0);
+        }
+        pages.push(pageCount);
+      }
+      return pages;
+    }
+  }, [pageCount, selectPage]);
+  const setPage = reactExports.useCallback(
+    (val) => {
+      if (val < 1) val = 1;
+      if (val > pageCount) val = pageCount;
+      setSelectPage(val);
+      onChange == null ? void 0 : onChange(val);
+    },
+    [onChange]
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$7.pagination, children: [
+    selectPage !== 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: classNames(styles$7.block),
+        onClick: () => setPage(selectPage - 1),
+        children: "<"
+      }
+    ),
+    renderPages.map((val, index) => {
+      if (val === 0) {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: classNames(styles$7.block),
+            onClick: () => setPage(selectPage + (index == 1 ? -5 : 5)),
+            title: `${index == 1 ? "后退 5 页" : "前进 5 页"}`,
+            children: "···"
+          },
+          `${val}-${index}`
+        );
+      } else {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: classNames(styles$7.block, styles$7.number, {
+              [styles$7.active]: val === selectPage
+            }),
+            onClick: () => {
+              setPage(val);
+            },
+            children: val
+          },
+          `page-${val}`
+        );
+      }
+    }),
+    selectPage !== pageCount && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: classNames(styles$7.block),
+        onClick: () => setPage(selectPage + 1),
+        children: ">"
+      }
+    )
+  ] });
+}
+function ArticleList(props) {
+  const { step = 5, children } = props;
   if (children) return children;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1.banner, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1["banner-site-info"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1["banner-site-title"], children: siteData2.title }) }) });
+  const [currentPage, setCurrentPage] = reactExports.useState(1);
+  const { siteData: siteData2 } = usePageData();
+  const articleList2 = Object.entries(siteData2.articleList).map(
+    ([path, aritcle]) => {
+      return {
+        path,
+        title: aritcle.title,
+        info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
+        time: aritcle.date,
+        tag: aritcle.tags.join(" "),
+        cover: aritcle.cover
+      };
+    }
+  );
+  const currentArtcleList = reactExports.useMemo(() => {
+    return articleList2.slice((currentPage - 1) * step, currentPage * step);
+  }, [currentPage]);
+  const paginationOptions = {
+    pageCount: Math.ceil(articleList2.length / step),
+    currentPage,
+    onChange: (page) => {
+      setCurrentPage(page);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8.articleList, children: currentArtcleList.map((item2, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8.item, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8.left, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: item2.cover, alt: "" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8.right, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8.content, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item2.title }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: styles$8.meta, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              "发表于 ",
+              item2.time
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              "更新于 ",
+              item2.time
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2.tag })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "p",
+            {
+              className: classNames(
+                styles$8.info,
+                styles$8["multiline-ellipsis"]
+              ),
+              children: item2.info
+            }
+          )
+        ] }) })
+      ] }, `${item2.title}-${index}`);
+    }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: articleList2.length && /* @__PURE__ */ jsxRuntimeExports.jsx(Pagination, { ...paginationOptions }) })
+  ] });
 }
 function HomeLayout() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Banner, {});
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleList, {});
 }
-const layout = "_layout_1mkj6_1";
-const header = "_header_1mkj6_8";
-const styles = {
+const layout = "_layout_1mazi_1";
+const header$1 = "_header_1mazi_8";
+const main = "_main_1mazi_15";
+const mainLeft = "_mainLeft_1mazi_24";
+const mainRight = "_mainRight_1mazi_28";
+const styles$6 = {
   layout,
-  header
+  header: header$1,
+  "not-home-page": "_not-home-page_1mazi_12",
+  main,
+  mainLeft,
+  mainRight
 };
+const banner = "_banner_14ic9_1";
+const styles$5 = {
+  banner,
+  "banner-site-info": "_banner-site-info_14ic9_19",
+  "banner-site-title": "_banner-site-title_14ic9_24",
+  "not-home-page": "_not-home-page_14ic9_32"
+};
+function Banner(props) {
+  const { children, isHome } = props;
+  const { siteData: siteData2 } = usePageData();
+  if (children) return children;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      className: classNames(styles$5.banner, {
+        [styles$5["not-home-page"]]: !isHome
+      }),
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["banner-site-info"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["banner-site-title"], children: siteData2.title }) })
+    }
+  );
+}
+const footer = "_footer_ch4kz_1";
+const styles$4 = {
+  footer,
+  "framework-info": "_framework-info_ch4kz_25"
+};
+function Footer(props) {
+  const { children } = props;
+  if (children) return children;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: styles$4.footer, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "©2020 - 2023 By XXX17" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: styles$4["framework-info"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "框架" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "Fitp" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "|" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "主题" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "fish-in-pool" })
+    ] })
+  ] });
+}
+const sidebar = "_sidebar_7dehu_1";
+const styles$3 = {
+  sidebar
+};
+const card = "_card_1eyl9_1";
+const avatar = "_avatar_1eyl9_8";
+const author = "_author_1eyl9_17";
+const header = "_header_1eyl9_61";
+const list = "_list_1eyl9_83";
+const left = "_left_1eyl9_89";
+const right = "_right_1eyl9_102";
+const title = "_title_1eyl9_108";
+const time = "_time_1eyl9_117";
+const styles$2 = {
+  card,
+  avatar,
+  author,
+  "author-name": "_author-name_1eyl9_22",
+  "author-description": "_author-description_1eyl9_27",
+  "author-data": "_author-data_1eyl9_30",
+  "follow-btn": "_follow-btn_1eyl9_49",
+  header,
+  "card-article": "_card-article_1eyl9_67",
+  "card-list": "_card-list_1eyl9_73",
+  list,
+  left,
+  right,
+  title,
+  time
+};
+function Card(props) {
+  const { type } = props;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.card, children: [
+    type === "user" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.author, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.avatar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "../hx.jpg" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: styles$2["author-name"], children: "XXX17" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: styles$2["author-description"], children: "学无止境" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2["author-data"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "文章" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "15" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "标签" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "3" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "分类" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "3" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: styles$2["follow-btn"], children: "Follow Me" })
+    ] }),
+    type == "list" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2["card-article"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.header, children: "最新文章" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: styles$2.list, children: [
+        {
+          title: "搭建云服务器",
+          time: "2023-7-14",
+          cover: "../hx.jpg"
+        },
+        {
+          title: "搭建云服务器",
+          time: "2023-7-14",
+          cover: "../hx.jpg"
+        },
+        {
+          title: "搭建云服务器",
+          time: "2023-7-14",
+          cover: "../hx.jpg"
+        },
+        {
+          title: "搭建云服务器",
+          time: "2023-7-14",
+          cover: "../hx.jpg"
+        }
+      ].map((item2, index) => {
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.left, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: item2.cover, alt: "" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.right, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$2.title, children: item2.title }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$2.time, children: item2.time })
+          ] })
+        ] }, `${item2.title}-${index}`);
+      }) })
+    ] }),
+    type == "article" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2["card-list"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.header, children: "分类" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: styles$2.list, children: [
+        ["插件", 1],
+        ["笔记", 1],
+        ["项目部署", 1]
+      ].map((item2, index) => {
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2[0] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2[1] })
+        ] }, `${item2[0]}-${index}`);
+      }) })
+    ] })
+  ] });
+}
+function Sidebar(props) {
+  const { children } = props;
+  if (children) return children;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.sidebar, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { type: "user" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { type: "article" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { type: "list" })
+  ] });
+}
+const styles$1 = {
+  "article-layout": "_article-layout_1bq5r_1"
+};
+function ArticleLayout() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1["article-layout"], children: /* @__PURE__ */ jsxRuntimeExports.jsx(Content, {}) });
+}
+const tag = "_tag_5jppg_1";
+const tagItem = "_tagItem_5jppg_9";
+const styles = {
+  tag,
+  tagItem
+};
+function Tags(props) {
+  console.log(props);
+  const tagItem2 = [
+    {
+      name: "教程"
+    },
+    {
+      name: "Hexo"
+    },
+    {
+      name: "更新日誌"
+    },
+    {
+      name: "教程"
+    },
+    {
+      name: "Hexo"
+    },
+    {
+      name: "更新日誌"
+    },
+    {
+      name: "教程"
+    },
+    {
+      name: "Hexo"
+    },
+    {
+      name: "更新日誌"
+    }
+  ];
+  function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.tag, children: tagItem2.map(({ name }, index) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "a",
+      {
+        className: styles.tagItem,
+        style: { color: getRandomColor() },
+        href: name,
+        children: name
+      },
+      `${name}-${index}`
+    );
+  }) });
+}
+function CustomLayout() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Tags, {});
+}
 function Layout() {
   const pageData = usePageData();
   const { pageType, siteData: siteData2 } = pageData;
-  const { title, themeConfig } = siteData2;
-  const getContent = () => {
+  const { title: title2, themeConfig } = siteData2;
+  const isHome = pageType === "home";
+  const getCurrentLayout = () => {
     if (pageType === "home") {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, {});
     } else if (pageType === "article") {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "正文页面" });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleLayout, {});
+    } else if (pageType === "custom") {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CustomLayout, {});
     } else {
       return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "404 页面" });
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.layout, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: styles.header, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title, menus: themeConfig.navMenus }),
-    getContent()
-  ] }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.layout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "header",
+      {
+        className: classNames(styles$6.header, {
+          [styles$6["not-home-page"]]: !isHome
+        }),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: title2, menus: themeConfig.navMenus }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Banner, { isHome, title: title2 })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: styles$6.main, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.mainLeft, children: getCurrentLayout() }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.mainRight, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Sidebar, {}) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] });
 }
-const siteData = { "title": "xxx的个人博客", "description": "SSG Framework", "themeConfig": { "navMenus": [{ "title": "首页", "path": "/" }, { "title": "标签", "path": "/tag" }, { "title": "分类", "path": "/sort" }, { "title": "关于", "path": "/about" }] }, "vite": {} };
+const siteData = { "title": "xxx的个人博客", "description": "SSG Framework", "themeConfig": { "navMenus": [{ "title": "首页", "path": "/" }, { "title": "标签", "path": "/tag" }, { "title": "分类", "path": "/sort" }, { "title": "关于", "path": "/about" }] }, "vite": {}, "articleList": {} };
 async function initPageData(routePath) {
   var _a;
-  if (routePath === "/") {
+  console.log("跳转:", routePath);
+  const isNavPath = (_a = siteData == null ? void 0 : siteData.themeConfig) == null ? void 0 : _a.navMenus.find((item2) => {
+    return item2.path === routePath;
+  });
+  if (isNavPath) {
+    for await (const route of routes) {
+      const moduleInfo = await route.preload();
+      siteData.articleList[route.path] = moduleInfo.frontmatter;
+    }
+    console.log(routes, siteData);
     return {
-      pageType: "home",
+      pageType: routePath === "/" ? "home" : "custom",
       siteData,
       frontmatter: {},
       pagePath: routePath
     };
   }
-  console.log(routePath);
   const matched = matchRoutes(routes, routePath);
   if (matched) {
     const moduleInfo = await matched[0].route.preload();
     console.log(moduleInfo);
     return {
-      pageType: ((_a = moduleInfo == null ? void 0 : moduleInfo.frontmatter) == null ? void 0 : _a.pageType) || "home",
+      pageType: "article",
       siteData,
       frontmatter: moduleInfo.frontmatter,
       pagePath: routePath
@@ -14831,6 +15250,5 @@ async function renderInBrowser() {
 }
 renderInBrowser();
 export {
-  jsxRuntimeExports as j,
-  reactExports as r
+  jsxRuntimeExports as j
 };

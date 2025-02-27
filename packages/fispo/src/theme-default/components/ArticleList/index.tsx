@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
+import { usePageData } from "@runtime";
 
 interface ArticleListProps {
   articleList?: ArticleItem[];
@@ -15,6 +16,7 @@ interface ArticleItem {
   time: string;
   tag: string;
   cover: string;
+  path: string;
 }
 
 function ArticleList(props: ArticleListProps) {
@@ -22,15 +24,20 @@ function ArticleList(props: ArticleListProps) {
   if (children) return children;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const articleList: ArticleItem[] = Array.from({ length: 100 }).map((_, i) => {
-    return {
-      title: `搭建云服务器${i + 1}`,
-      info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
-      time: "2023-7-14",
-      tag: "项目部署",
-      cover: "../hx.jpg",
-    };
-  });
+  const { siteData } = usePageData();
+
+  const articleList: ArticleItem[] = Object.entries(siteData.articleList).map(
+    ([path, aritcle]) => {
+      return {
+        path: path,
+        title: aritcle.title,
+        info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
+        time: aritcle.date,
+        tag: aritcle.tags.join(" "),
+        cover: aritcle.cover,
+      };
+    }
+  );
 
   const currentArtcleList = useMemo(() => {
     return articleList.slice((currentPage - 1) * step, currentPage * step);
@@ -55,7 +62,9 @@ function ArticleList(props: ArticleListProps) {
               </div>
               <div className={styles.right}>
                 <div className={styles.content}>
-                  <h2>{item.title}</h2>
+                  <a href={item.path}>
+                    <h2>{item.title}</h2>
+                  </a>
                   <p className={styles.meta}>
                     <span>发表于 {item.time}</span>
                     <span>更新于 {item.time}</span>
