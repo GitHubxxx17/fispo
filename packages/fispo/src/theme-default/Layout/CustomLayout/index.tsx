@@ -1,13 +1,14 @@
 import { PageData } from "shared/types";
 import Tags from "../../components/Tags";
 import ArticleList from "../../components/ArticleList";
+import Categories from "../../components/Categories";
 
 interface CustomLayoutProps {
   pageData: PageData;
 }
 
 export function CustomLayout(props: CustomLayoutProps) {
-  const { pagePath, tags, articlesList } = props.pageData;
+  const { pagePath, tags, articlesList, categories } = props.pageData;
   const pathList = pagePath.split("/").filter(Boolean);
   console.log(pathList);
   const type = pathList[0];
@@ -22,7 +23,17 @@ export function CustomLayout(props: CustomLayoutProps) {
       />
     );
   } else if (type === "category") {
-    return <Tags></Tags>;
+    return pathList.length == 1 ? (
+      <Categories categories={categories} />
+    ) : (
+      <ArticleList
+        articleList={articlesList}
+        filter={{
+          type: "category",
+          keyword: decodeURIComponent(pathList.at(-1)),
+        }}
+      />
+    );
   } else {
     return <div></div>;
   }

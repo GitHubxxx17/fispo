@@ -1,0 +1,45 @@
+.category {
+  background-color: #fff;
+  border-radius: var(--default-border-radius);
+  padding: 50px 40px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    font-size: 14px;
+    position: relative;
+    margin: 6px 0;
+    padding: 0.12em 0.4em 0.12em 1.4em;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      a {
+        transition: all 0.3s ease-out;
+        color: var(--fispo-c-text-hover);
+      }
+
+      &::before {
+        border: 0.215em solid var(--fispo-c-orange);
+      }
+    }
+
+    &::before {
+      margin-right: 8px;
+      width: 0.43em;
+      height: 0.43em;
+      border: 0.215em solid var(--fispo-c-blue);
+      border-radius: 0.43em;
+      background: 0 0;
+      content: "";
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+    }
+
+    span {
+      margin-left: 8px;
+      color: var(--fispo-c-gray-3);
+    }
+  }
+}

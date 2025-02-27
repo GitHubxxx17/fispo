@@ -87,8 +87,10 @@ function Card(props: CardProps) {
             {Object.entries(listData?.data).map(([name, value], index) => {
               return (
                 <li key={`${name}-${index}`}>
-                  <span>{name}</span>
-                  <span>{Array.isArray(value) ? value.length : value}</span>
+                  <a href={`/category/${name}`}>
+                    <span>{name}</span>
+                    <span>{Array.isArray(value) ? value.length : value}</span>
+                  </a>
                 </li>
               );
             })}

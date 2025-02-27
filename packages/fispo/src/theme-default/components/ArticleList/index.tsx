@@ -42,7 +42,7 @@ function ArticleList(props: ArticleListProps) {
           // 过滤类别
           if (
             filter?.type == "category" &&
-            aritcle.categories === filter?.keyword
+            aritcle.categories !== filter?.keyword
           ) {
             return;
           }
