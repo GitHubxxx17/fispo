@@ -2,10 +2,11 @@ import classNames from "classnames";
 import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
+import { ArticlesList } from "shared/types";
 import { usePageData } from "@runtime";
 
 interface ArticleListProps {
-  articleList?: ArticleItem[];
+  articleList?: ArticlesList;
   step?: number;
   children?: React.ReactNode;
 }
@@ -24,9 +25,9 @@ function ArticleList(props: ArticleListProps) {
   if (children) return children;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { siteData } = usePageData();
+  const pageData = usePageData();
 
-  const articleList: ArticleItem[] = Object.entries(siteData.articleList).map(
+  const articleList: ArticleItem[] = Object.entries(pageData.articlesList).map(
     ([path, aritcle]) => {
       return {
         path: path,

@@ -1,54 +1,26 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styles from "./index.module.scss";
 
 interface TagsProps {
-  tagItem?: { name: string; path?: string }[];
+  tags?: { name: string; path?: string }[];
   children?: React.ReactNode;
 }
 
 function Tags(props: TagsProps) {
-  console.log(props);
-  const tagItem = [
-    {
-      name: "教程",
-    },
-    {
-      name: "Hexo",
-    },
-    {
-      name: "更新日誌",
-    },
-    {
-      name: "教程",
-    },
-    {
-      name: "Hexo",
-    },
-    {
-      name: "更新日誌",
-    },
-    {
-      name: "教程",
-    },
-    {
-      name: "Hexo",
-    },
-    {
-      name: "更新日誌",
-    },
-  ];
-  function getRandomColor() {
+  const { tags } = props;
+
+  const getRandomColor = useCallback(() => {
     const letters = "0123456789ABCDEF";
     let color = "#";
     for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+  }, []);
 
   return (
     <div className={styles.tag}>
-      {tagItem.map(({ name }, index) => {
+      {tags.map(({ name }, index) => {
         return (
           <a
             className={styles.tagItem}

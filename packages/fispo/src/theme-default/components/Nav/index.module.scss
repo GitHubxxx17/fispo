@@ -9,6 +9,7 @@
   z-index: 1000;
   background-color: var(--fispo-c-nav-bg);
   transition: all 0.5s ease-in-out;
+  box-shadow: 0 5px 6px -5px rgba(133, 133, 133, 0.6);
 
   .blog-name {
     font-size: 1.3rem;
@@ -46,6 +47,7 @@
 
 .top {
   background-color: transparent;
+  box-shadow: none;
   a {
     color: var(--fispo-c-text-light);
     &:hover {

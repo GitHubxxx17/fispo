@@ -15,8 +15,8 @@ import classNames from "classnames";
 export function Layout() {
   const pageData = usePageData();
   // 获取 pageType
-  const { pageType, siteData } = pageData;
-  const { title, themeConfig } = siteData;
+  const { pageType, title, siteData } = pageData;
+  const { title: siteTitle, themeConfig } = siteData;
   const isHome = pageType === "home";
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
@@ -31,19 +31,28 @@ export function Layout() {
     }
   };
   return (
-    <div className={styles.layout}>
+    <div
+      className={styles.layout}
+      style={{
+        backgroundImage: `url(${siteData.backgroundImg})`,
+      }}
+    >
       <header
         className={classNames(styles.header, {
           [styles["not-home-page"]]: !isHome,
         })}
       >
-        <Nav title={title} menus={themeConfig.navMenus}></Nav>
-        <Banner isHome={isHome} title={title}></Banner>
+        <Nav title={siteTitle} menus={themeConfig.navMenus}></Nav>
+        <Banner
+          isHome={isHome}
+          title={title}
+          bannerData={themeConfig.banner}
+        ></Banner>
       </header>
       <main className={styles.main}>
         <div className={styles.mainLeft}>{getCurrentLayout()}</div>
         <div className={styles.mainRight}>
-          <Sidebar></Sidebar>
+          <Sidebar pageData={pageData}></Sidebar>
         </div>
       </main>
       <Footer></Footer>

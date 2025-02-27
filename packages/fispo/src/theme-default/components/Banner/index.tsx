@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { usePageData } from "@runtime";
 import classNames from "classnames";
+import { BannerData } from "shared/types";
 interface BannerProps {
   isHome?: boolean;
+  bannerData?: BannerData;
   title?: string;
   children?: React.ReactNode;
 }
 
 function Banner(props: BannerProps) {
-  const { children, isHome } = props;
-  const { siteData } = usePageData();
+  const { children, isHome, title, bannerData = { img: "" } } = props;
 
   if (children) return children;
   return (
@@ -18,9 +18,12 @@ function Banner(props: BannerProps) {
       className={classNames(styles.banner, {
         [styles["not-home-page"]]: !isHome,
       })}
+      style={{
+        backgroundImage: `url(${bannerData.img})`,
+      }}
     >
       <div className={styles["banner-site-info"]}>
-        <div className={styles["banner-site-title"]}>{siteData.title}</div>
+        <div className={styles["banner-site-title"]}>{title}</div>
       </div>
     </div>
   );

@@ -12,40 +12,76 @@ export async function initPageData(routePath: string): Promise<PageData> {
     return item.path === routePath;
   });
 
-  if (isNavPath) {
-    // 处理文章frontmatter数据
-    for await (const route of routes) {
-      const moduleInfo = await route.preload();
-      siteData.articleList[route.path] = moduleInfo.frontmatter;
+  // 处理文章frontmatter数据
+  const articlesList = {};
+  // 标签
+  const tags = {};
+  // 分类
+  const categories = {};
+  for await (const route of routes) {
+    const moduleInfo = await route.preload();
+    articlesList[route.path] = moduleInfo.frontmatter;
+    moduleInfo.frontmatter.tags.forEach((tag) => {
+      if (tags[tag]) {
+        tags[tag].push(route.path);
+      } else {
+        tags[tag] = [route.path];
+      }
+    });
+    const category = moduleInfo.frontmatter.categories;
+    if (category) {
+      if (categories[category]) {
+        categories[category].push(route.path);
+      } else {
+        categories[category] = [route.path];
+      }
     }
-    console.log(routes, siteData);
-    return {
-      pageType: routePath === "/" ? "home" : "custom",
-      siteData,
-      frontmatter: {},
-      pagePath: routePath,
-    };
   }
-  // 获取路由组件编译后的模块内容
-  const matched = matchRoutes(routes, routePath);
 
+  // 封装页面数据
+  const getPageData = (
+    pageType: PageData["pageType"],
+    frontmatter: PageData["frontmatter"],
+    title: string
+  ): PageData => {
+    return {
+      pageType,
+      siteData,
+      frontmatter,
+      pagePath: routePath,
+      title,
+      articlesList,
+      tags,
+      categories,
+    };
+  };
+
+  // 导航栏页面
+  if (isNavPath) {
+    console.log(routes, siteData);
+    const customTitle = siteData.themeConfig.navMenus.find(
+      (item) => item.path == routePath
+    ).title;
+
+    return getPageData(
+      routePath === "/" ? "home" : "custom",
+      {},
+      routePath === "/" ? siteData.title : customTitle
+    );
+  }
+
+  // 文章：获取路由组件编译后的模块内容
+  const matched = matchRoutes(routes, routePath);
   if (matched) {
-    // Preload route component
     const moduleInfo = await matched[0].route.preload();
     console.log(moduleInfo);
-    return {
-      pageType: "article",
-      siteData,
-      frontmatter: moduleInfo.frontmatter,
-      pagePath: routePath,
-    };
+    return getPageData(
+      "article",
+      moduleInfo.frontmatter,
+      moduleInfo.frontmatter.title || ""
+    );
   }
-  return {
-    pageType: "404",
-    siteData,
-    pagePath: routePath,
-    frontmatter: {},
-  };
+  return getPageData("404", {}, "404");
 }
 
 export function App() {

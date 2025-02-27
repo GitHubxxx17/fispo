@@ -1,18 +1,27 @@
 import { UserConfig as ViteConfiguration } from "vite";
 import { ComponentType } from "react";
 
-export interface ArticleList {
+// 文章列表
+export interface ArticlesList {
   [path: string]: FrontMatter;
 }
 
-export interface Footer {
+// 底部数据
+export interface FooterData {
   message?: string;
   copyright?: string;
 }
 
+// 首页横幅数据
+export interface BannerData {
+  img?: string;
+  subtitle?: string;
+}
+
 export interface ThemeConfig {
-  footer?: Footer;
+  footer?: FooterData;
   navMenus?: navMenuItem[];
+  banner?: BannerData;
 }
 
 export interface UserConfig {
@@ -20,7 +29,9 @@ export interface UserConfig {
   description?: string;
   themeConfig?: ThemeConfig;
   vite?: ViteConfiguration;
-  articleList?: ArticleList;
+  author?: string;
+  avatar?: string;
+  backgroundImg?: string;
 }
 
 export interface SiteConfig {
@@ -46,12 +57,26 @@ export interface FrontMatter {
   cover?: string;
 }
 
+// 标签
+export interface Tags {
+  [tag: string]: string[];
+}
+
+// 目录
+export interface Categories {
+  [category: string]: string[];
+}
+
 export interface PageData {
   siteData: UserConfig;
   pagePath: string;
   frontmatter: FrontMatter;
   pageType: PageType;
   toc?: Header[];
+  title: string;
+  articlesList?: ArticlesList;
+  tags?: Tags;
+  categories?: Categories;
 }
 
 export interface PageModule {
