@@ -21,11 +21,11 @@ export function Layout() {
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
     if (pageType === "home") {
-      return <HomeLayout></HomeLayout>;
+      return <HomeLayout pageData={pageData}></HomeLayout>;
     } else if (pageType === "article") {
       return <ArticleLayout></ArticleLayout>;
     } else if (pageType === "custom") {
-      return <CustomLayout></CustomLayout>;
+      return <CustomLayout pageData={pageData}></CustomLayout>;
     } else {
       return <div>404 页面</div>;
     }

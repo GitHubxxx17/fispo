@@ -3,12 +3,15 @@ import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
 import { ArticlesList } from "shared/types";
-import { usePageData } from "@runtime";
 
 interface ArticleListProps {
   articleList?: ArticlesList;
   step?: number;
   children?: React.ReactNode;
+  filter?: {
+    type?: "tag" | "category" | "search";
+    keyword?: string;
+  };
 }
 
 interface ArticleItem {
@@ -21,23 +24,39 @@ interface ArticleItem {
 }
 
 function ArticleList(props: ArticleListProps) {
-  const { step = 5, children } = props;
+  const { step = 5, children, filter } = props;
   if (children) return children;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pageData = usePageData();
-
-  const articleList: ArticleItem[] = Object.entries(pageData.articlesList).map(
-    ([path, aritcle]) => {
-      return {
-        path: path,
-        title: aritcle.title,
-        info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
-        time: aritcle.date,
-        tag: aritcle.tags.join(" "),
-        cover: aritcle.cover,
-      };
-    }
+  const articleList: Partial<ArticleItem[]> = useMemo(
+    () =>
+      Object.entries(props.articleList)
+        .map(([path, aritcle]) => {
+          // 过滤标签
+          if (
+            filter?.type == "tag" &&
+            !aritcle.tags.includes(filter?.keyword)
+          ) {
+            return;
+          }
+          // 过滤类别
+          if (
+            filter?.type == "category" &&
+            aritcle.categories === filter?.keyword
+          ) {
+            return;
+          }
+          return {
+            path: path,
+            title: aritcle.title,
+            info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
+            time: aritcle.date,
+            tag: aritcle.tags.join(" "),
+            cover: aritcle.cover,
+          };
+        })
+        .filter(Boolean),
+    [props.articleList, filter]
   );
 
   const currentArtcleList = useMemo(() => {

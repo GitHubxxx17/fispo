@@ -40,15 +40,15 @@ function Card(props: CardProps) {
             {userData?.description}
           </p>
           <div className={styles["author-data"]}>
-            <a href="#">
+            <a href="/">
               <span>文章</span>
               <span>{userData?.articleNums}</span>
             </a>
-            <a href="#">
+            <a href="/tag">
               <span>标签</span>
               <span>{userData?.tagsNums}</span>
             </a>
-            <a href="#">
+            <a href="/category">
               <span>分类</span>
               <span>{userData?.categorizeNums}</span>
             </a>
@@ -64,10 +64,14 @@ function Card(props: CardProps) {
               return (
                 <li key={`${item.title}-${index}`}>
                   <div className={styles.left}>
-                    <img src={item.cover} alt="" />
+                    <a href={`/post/${item.title}`}>
+                      <img src={item.cover} alt="" />
+                    </a>
                   </div>
                   <div className={styles.right}>
-                    <span className={styles.title}>{item.title}</span>
+                    <a href={`/post/${item.title}`}>
+                      <span className={styles.title}>{item.title}</span>
+                    </a>
                     <span className={styles.time}>{item.date}</span>
                   </div>
                 </li>

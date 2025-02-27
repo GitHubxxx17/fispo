@@ -21,7 +21,7 @@ export default defineConfig({
       },
       {
         title: "分类",
-        path: "/sort",
+        path: "/category",
       },
       {
         title: "关于",

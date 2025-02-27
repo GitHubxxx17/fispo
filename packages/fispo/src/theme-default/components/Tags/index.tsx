@@ -1,13 +1,14 @@
 import React, { useCallback } from "react";
 import styles from "./index.module.scss";
+import { Tags as TagsType } from "shared/types";
 
 interface TagsProps {
-  tags?: { name: string; path?: string }[];
+  tags?: TagsType;
   children?: React.ReactNode;
 }
 
 function Tags(props: TagsProps) {
-  const { tags } = props;
+  const { tags = [] } = props;
 
   const getRandomColor = useCallback(() => {
     const letters = "0123456789ABCDEF";
@@ -20,13 +21,13 @@ function Tags(props: TagsProps) {
 
   return (
     <div className={styles.tag}>
-      {tags.map(({ name }, index) => {
+      {Object.keys(tags).map((name, index) => {
         return (
           <a
             className={styles.tagItem}
             key={`${name}-${index}`}
             style={{ color: getRandomColor() }}
-            href={name}
+            href={`tag/${name}`}
           >
             {name}
           </a>
