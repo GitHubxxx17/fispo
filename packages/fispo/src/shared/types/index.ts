@@ -42,7 +42,7 @@ export interface SiteConfig {
 
 export type PageType = "home" | "article" | "custom" | "404";
 
-export interface Header {
+export interface Toc {
   id: string;
   text: string;
   depth: number;
@@ -72,7 +72,7 @@ export interface PageData {
   pagePath: string;
   frontmatter: FrontMatter;
   pageType: PageType;
-  toc?: Header[];
+  toc?: Toc[];
   title: string;
   articlesList?: ArticlesList;
   tags?: Tags;
@@ -82,6 +82,7 @@ export interface PageData {
 export interface PageModule {
   default: ComponentType;
   frontmatter?: FrontMatter;
+  toc: Toc[];
   [key: string]: unknown;
 }
 

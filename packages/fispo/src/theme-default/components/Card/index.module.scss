@@ -150,4 +150,47 @@
       line-height: 2;
     }
   }
+
+  &-toc {
+    .header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress {
+      float: right;
+      margin-top: -9px;
+      color: #a9a9a9;
+      font-style: italic;
+      font-size: 140%;
+    }
+
+    .content {
+      margin: 0 10px;
+
+      li {
+        margin: 4px 0;
+        padding: 1px 6px;
+        line-height: 2;
+
+        a {
+          display: inline-block;
+          width: 100%;
+          transition: all 0.3s ease-out;
+        }
+
+        &:hover:not(.active) {
+          a {
+            color: var(--fispo-c-text-hover);
+          }
+        }
+      }
+
+      .active {
+        background-color: var(--fispo-toc-active-color);
+        a {
+          color: var(--fispo-c-white);
+        }
+      }
+    }
+  }
 }

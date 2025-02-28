@@ -11,18 +11,21 @@ import Sidebar from "../components/Sidebar";
 import { ArticleLayout } from "./ArticleLayout";
 import { CustomLayout } from "./CustomLayout";
 import classNames from "classnames";
+import scrollManager from "../helper/scroll";
+import { useEffect } from "react";
 
 export function Layout() {
   const pageData = usePageData();
   // 获取 pageType
   const { pageType, title, siteData } = pageData;
   const { title: siteTitle, themeConfig } = siteData;
-  const isHome = pageType === "home";
+  const isHomePage = pageType === "home";
+  const isArticlePage = pageType === "article";
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
-    if (pageType === "home") {
+    if (isHomePage) {
       return <HomeLayout pageData={pageData}></HomeLayout>;
-    } else if (pageType === "article") {
+    } else if (isArticlePage) {
       return <ArticleLayout></ArticleLayout>;
     } else if (pageType === "custom") {
       return <CustomLayout pageData={pageData}></CustomLayout>;
@@ -30,6 +33,14 @@ export function Layout() {
       return <div>404 页面</div>;
     }
   };
+
+  useEffect(() => {
+    scrollManager.init();
+    return () => {
+      scrollManager.destory();
+    };
+  }, []);
+
   return (
     <div
       className={styles.layout}
@@ -39,12 +50,12 @@ export function Layout() {
     >
       <header
         className={classNames(styles.header, {
-          [styles["not-home-page"]]: !isHome,
+          [styles["not-home-page"]]: !isHomePage,
         })}
       >
         <Nav title={siteTitle} menus={themeConfig.navMenus}></Nav>
         <Banner
-          isHome={isHome}
+          isHomePage={isHomePage}
           title={title}
           bannerData={themeConfig.banner}
         ></Banner>
@@ -52,7 +63,7 @@ export function Layout() {
       <main className={styles.main}>
         <div className={styles.mainLeft}>{getCurrentLayout()}</div>
         <div className={styles.mainRight}>
-          <Sidebar pageData={pageData}></Sidebar>
+          <Sidebar pageData={pageData} isArticlePage={isArticlePage}></Sidebar>
         </div>
       </main>
       <Footer></Footer>

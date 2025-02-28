@@ -3,20 +3,20 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 import { BannerData } from "shared/types";
 interface BannerProps {
-  isHome?: boolean;
+  isHomePage?: boolean;
   bannerData?: BannerData;
   title?: string;
   children?: React.ReactNode;
 }
 
 function Banner(props: BannerProps) {
-  const { children, isHome, title, bannerData = { img: "" } } = props;
+  const { children, isHomePage, title, bannerData = { img: "" } } = props;
 
   if (children) return children;
   return (
     <div
       className={classNames(styles.banner, {
-        [styles["not-home-page"]]: !isHome,
+        [styles["not-home-page"]]: !isHomePage,
       })}
       style={{
         backgroundImage: `url(${bannerData.img})`,

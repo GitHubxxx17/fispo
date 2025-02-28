@@ -46,7 +46,8 @@ export async function initPageData(routePath: string): Promise<PageData> {
   const getPageData = (
     pageType: PageData["pageType"],
     frontmatter: PageData["frontmatter"],
-    title: string
+    title: string,
+    toc?: PageData["toc"]
   ): PageData => {
     return {
       pageType,
@@ -57,6 +58,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
       articlesList,
       tags,
       categories,
+      toc,
     };
   };
 
@@ -84,7 +86,8 @@ export async function initPageData(routePath: string): Promise<PageData> {
     return getPageData(
       "article",
       moduleInfo.frontmatter,
-      moduleInfo.frontmatter.title || ""
+      moduleInfo.frontmatter.title || "",
+      moduleInfo.toc
     );
   }
   return getPageData("404", {}, "404");
