@@ -2,8 +2,8 @@ import { UserConfig as ViteConfiguration } from "vite";
 import { ComponentType } from "react";
 
 // 文章列表
-export interface ArticlesList {
-  [path: string]: FrontMatter;
+export interface ArticleData extends FrontMatter {
+  path: string;
 }
 
 // 底部数据
@@ -74,7 +74,7 @@ export interface PageData {
   pageType: PageType;
   toc?: Toc[];
   title: string;
-  articlesList?: ArticlesList;
+  articlesList?: ArticleData[];
   tags?: Tags;
   categories?: Categories;
 }

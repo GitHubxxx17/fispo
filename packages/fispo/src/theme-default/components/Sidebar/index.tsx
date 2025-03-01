@@ -35,7 +35,7 @@ function Sidebar(props: SidebarProps) {
           author: siteData.author,
           avatar: siteData.avatar,
           description: siteData.description,
-          articleNums: Object.keys(pageData.articlesList).length,
+          articleNums: pageData.articlesList.length,
           tagsNums: Object.keys(pageData.tags).length,
           categorizeNums: Object.keys(pageData.categories).length,
         }}
@@ -67,7 +67,7 @@ function Sidebar(props: SidebarProps) {
           type="article"
           articleData={{
             title: "最新文章",
-            data: Object.values(pageData.articlesList).slice(0, 5),
+            data: pageData.articlesList.slice(0, 5),
           }}
         ></Card>
       </div>

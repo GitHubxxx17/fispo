@@ -1,7 +1,16 @@
 import { Content } from "@runtime";
 import styles from "./index.module.scss";
+import { PageData } from "shared/types";
+import { useEffect, useState } from "react";
 
-export function ArticleLayout() {
+interface ArticleLayoutProps {
+  pageData: PageData;
+}
+
+export function ArticleLayout(props: ArticleLayoutProps) {
+  const { articlesList, pagePath } = props.pageData;
+  const [currIndex, setCurrIndex] = useState(0);
+
   const copyrightText = [
     { meta: "文章作者：", value: <a href="">xxx17</a> },
     {
@@ -30,6 +39,14 @@ export function ArticleLayout() {
     },
   ];
 
+  useEffect(() => {
+    setCurrIndex(
+      articlesList.findIndex(
+        (article) => article.path === decodeURIComponent(pagePath)
+      )
+    );
+  }, [articlesList]);
+
   return (
     <div className={styles["article-layout"]}>
       <div className={styles["article-content"]}>
@@ -56,6 +73,30 @@ export function ArticleLayout() {
             </span>
           );
         })}
+      </div>
+      <div className={styles["article-pagination"]}>
+        {currIndex > 0 && (
+          <div className={styles["pagination-left"]}>
+            <a href={articlesList[currIndex - 1].path}>
+              <img src={articlesList[currIndex - 1].cover} alt="" />
+              <div className={styles["pagination-info"]}>
+                <span>上一篇</span>
+                <span>{articlesList[currIndex - 1].title}</span>
+              </div>
+            </a>
+          </div>
+        )}
+        {currIndex < articlesList.length - 1 && (
+          <div className={styles["pagination-right"]}>
+            <a href={articlesList[currIndex + 1].path}>
+              <img src={articlesList[currIndex + 1].cover} alt="" />
+              <div className={styles["pagination-info"]}>
+                <span>下一篇</span>
+                <span>{articlesList[currIndex + 1].title}</span>
+              </div>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

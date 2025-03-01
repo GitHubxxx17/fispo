@@ -26,7 +26,7 @@ export function Layout() {
     if (isHomePage) {
       return <HomeLayout pageData={pageData}></HomeLayout>;
     } else if (isArticlePage) {
-      return <ArticleLayout></ArticleLayout>;
+      return <ArticleLayout pageData={pageData}></ArticleLayout>;
     } else if (pageType === "custom") {
       return <CustomLayout pageData={pageData}></CustomLayout>;
     } else {

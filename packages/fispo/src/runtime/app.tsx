@@ -4,6 +4,17 @@ import { routes } from "fispo:routes";
 import { PageData } from "shared/types";
 import siteData from "fispo:site-data";
 
+function sortByDate(arr: Array<any>) {
+  return arr.sort((a, b) => {
+    // 将日期字符串转换为 Date 对象
+    const dateA = new Date(a.date.replace(/-/g, "/"));
+    const dateB = new Date(b.date.replace(/-/g, "/"));
+
+    // 比较两个日期的时间戳
+    return Number(dateB) - Number(dateA);
+  });
+}
+
 export async function initPageData(routePath: string): Promise<PageData> {
   console.log("跳转:", routePath.split("/").filter(Boolean));
 
@@ -17,14 +28,17 @@ export async function initPageData(routePath: string): Promise<PageData> {
     );
 
   // 处理文章frontmatter数据
-  const articlesList = {};
+  const articlesList = [];
   // 标签
   const tags = {};
   // 分类
   const categories = {};
   for await (const route of routes) {
     const moduleInfo = await route.preload();
-    articlesList[route.path] = moduleInfo.frontmatter;
+    articlesList.push({
+      ...moduleInfo.frontmatter,
+      path: route.path,
+    });
     moduleInfo.frontmatter.tags.forEach((tag) => {
       if (tags[tag]) {
         tags[tag].push(route.path);
@@ -41,6 +55,8 @@ export async function initPageData(routePath: string): Promise<PageData> {
       }
     }
   }
+
+  sortByDate(articlesList);
 
   // 封装页面数据
   const getPageData = (

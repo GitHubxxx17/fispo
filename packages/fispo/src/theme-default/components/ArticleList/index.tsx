@@ -2,10 +2,11 @@ import classNames from "classnames";
 import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
-import { ArticlesList } from "shared/types";
+import { ArticleData } from "shared/types";
+import formatDateToYYYYMMDD from "../../helper/date";
 
 interface ArticleListProps {
-  articleList?: ArticlesList;
+  articleList?: ArticleData[];
   step?: number;
   children?: React.ReactNode;
   filter?: {
@@ -30,8 +31,8 @@ function ArticleList(props: ArticleListProps) {
 
   const articleList: Partial<ArticleItem[]> = useMemo(
     () =>
-      Object.entries(props.articleList)
-        .map(([path, aritcle]) => {
+      props.articleList
+        .map((aritcle) => {
           // 过滤标签
           if (
             filter?.type == "tag" &&
@@ -47,10 +48,10 @@ function ArticleList(props: ArticleListProps) {
             return;
           }
           return {
-            path: path,
+            path: aritcle.path,
             title: aritcle.title,
             info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
-            time: aritcle.date,
+            time: formatDateToYYYYMMDD(aritcle.date),
             tag: aritcle.tags.join(" "),
             cover: aritcle.cover,
           };
