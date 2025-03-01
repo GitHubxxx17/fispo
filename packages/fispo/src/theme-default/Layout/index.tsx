@@ -17,7 +17,7 @@ import { useEffect } from "react";
 export function Layout() {
   const pageData = usePageData();
   // 获取 pageType
-  const { pageType, title, siteData } = pageData;
+  const { pageType, title, siteData, frontmatter } = pageData;
   const { title: siteTitle, themeConfig } = siteData;
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
@@ -56,8 +56,10 @@ export function Layout() {
         <Nav title={siteTitle} menus={themeConfig.navMenus}></Nav>
         <Banner
           isHomePage={isHomePage}
+          isArticlePage={isArticlePage}
           title={title}
           bannerData={themeConfig.banner}
+          articleData={frontmatter}
         ></Banner>
       </header>
       <main className={styles.main}>

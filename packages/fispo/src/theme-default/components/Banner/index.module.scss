@@ -29,6 +29,26 @@
     line-height: 1.5;
     font-weight: bold;
   }
+
+  .meta {
+    margin: 6px 0;
+    font-size: 0.9rem;
+    color: var(--fispo-c-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      line-height: 2;
+    }
+
+    span:not(:last-child) {
+      &::after {
+        content: "|";
+        margin: 0 4px;
+      }
+    }
+  }
 }
 
 .not-home-page {
