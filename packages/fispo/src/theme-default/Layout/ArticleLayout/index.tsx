@@ -1,25 +1,24 @@
 import { Content } from "@runtime";
 import styles from "./index.module.scss";
 import { PageData } from "shared/types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import classNames from "classnames";
 
 interface ArticleLayoutProps {
   pageData: PageData;
 }
 
 export function ArticleLayout(props: ArticleLayoutProps) {
-  const { articlesList, pagePath } = props.pageData;
+  const { articlesList, pagePath, frontmatter, categories, siteData } =
+    props.pageData;
+  const { title, author } = siteData;
   const [currIndex, setCurrIndex] = useState(0);
 
   const copyrightText = [
-    { meta: "文章作者：", value: <a href="">xxx17</a> },
+    { meta: "文章作者：", value: <a href="">{author}</a> },
     {
       meta: "文章链接：",
-      value: (
-        <a href="">
-          http://example.com/2023/04/15/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3/
-        </a>
-      ),
+      value: <a href={location.href}>{location.href}</a>,
     },
     {
       meta: "版权声明：",
@@ -30,14 +29,22 @@ export function ArticleLayout(props: ArticleLayoutProps) {
             CC BY-NC-SA 4.0
           </a>
           许可协议。转载请注明来自
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-            XXX17的个人博客
-          </a>
-          ！
+          <a href={location.origin}>{title}</a>！
         </>
       ),
     },
   ];
+
+  // 推荐列表
+  const recmmendList = useMemo(() => {
+    const category = frontmatter.categories;
+    return articlesList.filter((article) => {
+      return (
+        categories[category].includes(article.path) &&
+        article.path !== decodeURIComponent(pagePath)
+      );
+    });
+  }, [frontmatter, articlesList]);
 
   useEffect(() => {
     setCurrIndex(
@@ -66,17 +73,22 @@ export function ArticleLayout(props: ArticleLayoutProps) {
         })}
       </div>
       <div className={styles["article-tag"]}>
-        {["笔记", "笔记"].map((item, index) => {
+        {frontmatter.tags.map((item, index) => {
           return (
             <span key={`${item}-${index}`}>
-              <a href="">笔记</a>
+              <a href={`/tag/${item}`}>{item}</a>
             </span>
           );
         })}
       </div>
       <div className={styles["article-pagination"]}>
         {currIndex > 0 && (
-          <div className={styles["pagination-left"]}>
+          <div
+            className={classNames(
+              styles["pagination-left"],
+              styles["article-img-hover"]
+            )}
+          >
             <a href={articlesList[currIndex - 1].path}>
               <img src={articlesList[currIndex - 1].cover} alt="" />
               <div className={styles["pagination-info"]}>
@@ -87,7 +99,12 @@ export function ArticleLayout(props: ArticleLayoutProps) {
           </div>
         )}
         {currIndex < articlesList.length - 1 && (
-          <div className={styles["pagination-right"]}>
+          <div
+            className={classNames(
+              styles["pagination-right"],
+              styles["article-img-hover"]
+            )}
+          >
             <a href={articlesList[currIndex + 1].path}>
               <img src={articlesList[currIndex + 1].cover} alt="" />
               <div className={styles["pagination-info"]}>
@@ -98,6 +115,29 @@ export function ArticleLayout(props: ArticleLayoutProps) {
           </div>
         )}
       </div>
+      {recmmendList.length !== 0 && (
+        <div className={styles["article-recommend"]}>
+          <div className={styles["recommend-title"]}>相关推荐</div>
+          <div className={styles["recommend-list"]}>
+            {recmmendList.map((recmmend, index) => {
+              return (
+                <div
+                  className={styles["article-img-hover"]}
+                  key={`${recmmend.title}-${index}`}
+                >
+                  <a href={recmmend.path}>
+                    <img src={recmmend.cover} alt="" />
+                    <div className={styles["recommend-info"]}>
+                      <span>{recmmend.date}</span>
+                      <span>{recmmend.title}</span>
+                    </div>
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

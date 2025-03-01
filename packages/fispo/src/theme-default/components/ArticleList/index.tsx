@@ -3,7 +3,6 @@ import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
 import { ArticleData } from "shared/types";
-import formatDateToYYYYMMDD from "../../helper/date";
 
 interface ArticleListProps {
   articleList?: ArticleData[];
@@ -51,7 +50,7 @@ function ArticleList(props: ArticleListProps) {
             path: aritcle.path,
             title: aritcle.title,
             info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
-            time: formatDateToYYYYMMDD(aritcle.date),
+            time: aritcle.date,
             tag: aritcle.tags.join(" "),
             cover: aritcle.cover,
           };

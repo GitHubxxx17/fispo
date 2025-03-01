@@ -3,6 +3,7 @@ import { Layout } from "../theme-default";
 import { routes } from "fispo:routes";
 import { PageData } from "shared/types";
 import siteData from "fispo:site-data";
+import formatDateToYYYYMMDD from "../theme-default/helper/date";
 
 function sortByDate(arr: Array<any>) {
   return arr.sort((a, b) => {
@@ -37,6 +38,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
     const moduleInfo = await route.preload();
     articlesList.push({
       ...moduleInfo.frontmatter,
+      date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
       path: route.path,
     });
     moduleInfo.frontmatter.tags.forEach((tag) => {
