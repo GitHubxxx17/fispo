@@ -9,11 +9,13 @@ import type { Highlighter } from "shiki";
 import { remarkPluginToc } from "./remarkPlugins/toc";
 import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
+import { remarkPluginInfo } from "./remarkPlugins/info";
 
 export function createPluginMdx(highlighter: Highlighter) {
   return {
     remarkPlugins: [
       remarkPluginGFM,
+      remarkPluginInfo,
       remarkBreaks,
       remarkPluginFrontmatter,
       [remarkPluginMDXFrontMatter, { name: "frontmatter" }],

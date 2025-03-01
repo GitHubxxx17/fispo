@@ -49,7 +49,7 @@ function ArticleList(props: ArticleListProps) {
           return {
             path: aritcle.path,
             title: aritcle.title,
-            info: "1.注册阿里云账号 阿里云官网在高校计划进行学生认证，可以免费领取最高7个月的服务器 修改以下两项购最高7个月的服务器 修改以下两项购",
+            info: aritcle.info,
             time: aritcle.date,
             tag: aritcle.tags.join(" "),
             cover: aritcle.cover,

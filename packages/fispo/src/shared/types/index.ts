@@ -4,6 +4,7 @@ import { ComponentType } from "react";
 // 文章列表
 export interface ArticleData extends FrontMatter {
   path: string;
+  info: string;
 }
 
 // 底部数据
@@ -83,6 +84,7 @@ export interface PageModule {
   default: ComponentType;
   frontmatter?: FrontMatter;
   toc: Toc[];
+  mdInfo: string;
   [key: string]: unknown;
 }
 

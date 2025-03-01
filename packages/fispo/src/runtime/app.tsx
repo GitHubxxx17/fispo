@@ -36,10 +36,13 @@ export async function initPageData(routePath: string): Promise<PageData> {
   const categories = {};
   for await (const route of routes) {
     const moduleInfo = await route.preload();
+    console.log(moduleInfo);
+
     articlesList.push({
       ...moduleInfo.frontmatter,
       date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
       path: route.path,
+      info: moduleInfo.mdInfo,
     });
     moduleInfo.frontmatter.tags.forEach((tag) => {
       if (tags[tag]) {
