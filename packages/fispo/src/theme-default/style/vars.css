@@ -9,11 +9,11 @@
 :root {
   --fispo-c-white: #ffffff;
   --fispo-c-white-1: #ffffffcc;
-  --fispo-c-white-2: #eee;
 
   --fispo-c-gray: #4c4948;
   --fispo-c-gray-2: #6a737d;
   --fispo-c-gray-3: #858585;
+  --fispo-c-gray-4: #eee;
 
   --fispo-c-blue: #49b1f5;
   --fispo-c-blue-2: rgba(73, 177, 245, 0.1);
@@ -41,7 +41,7 @@
 
   --fispo-c-text: var(--fispo-c-gray);
   --fispo-c-text-hover: var(--fispo-c-blue);
-  --fispo-c-text-light: var(--fispo-c-white-2);
+  --fispo-c-text-light: var(--fispo-c-gray-4);
 
   --fispo-blockquote-bg: var(--fispo-c-blue-2);
   --fispo-blockquote-color: var(--fispo-c-gray-2);

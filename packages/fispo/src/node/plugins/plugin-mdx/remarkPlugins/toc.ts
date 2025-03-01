@@ -28,7 +28,7 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
         return;
       }
       // h1 ~ h4
-      if (node.depth > 0 && node.depth < 5) {
+      if (node.depth > 0 && node.depth <= 5) {
         // node.children 是一个数组，包含几种情况:
         // 1. 文本节点，如 '## title'
         // 结构如下:

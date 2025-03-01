@@ -8,11 +8,13 @@ import { rehypePluginShiki } from "./rehypePlugins/shiki";
 import type { Highlighter } from "shiki";
 import { remarkPluginToc } from "./remarkPlugins/toc";
 import { PluggableList } from "unified";
+import remarkBreaks from "remark-breaks";
 
 export function createPluginMdx(highlighter: Highlighter) {
   return {
     remarkPlugins: [
       remarkPluginGFM,
+      remarkBreaks,
       remarkPluginFrontmatter,
       [remarkPluginMDXFrontMatter, { name: "frontmatter" }],
       remarkPluginToc,

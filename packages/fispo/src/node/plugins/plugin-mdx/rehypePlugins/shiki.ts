@@ -3,6 +3,7 @@ import type { Plugin } from "unified";
 import type { Text, Root } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import type { Highlighter } from "shiki";
+import { isLang } from "./lang";
 
 interface Options {
   highlighter: Highlighter;
@@ -26,7 +27,7 @@ export const rehypePluginShiki: Plugin<[Options], Root> = ({ highlighter }) => {
           return;
         }
         const highlightedCode = highlighter.codeToHtml(codeContent, {
-          lang,
+          lang: isLang(lang) ? lang : "js",
         });
         const fragmentAst = fromHtml(highlightedCode, { fragment: true });
         parent.children.splice(index, 1, ...fragmentAst.children);

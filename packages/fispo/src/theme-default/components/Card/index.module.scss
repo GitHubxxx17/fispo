@@ -165,7 +165,10 @@
     }
 
     .content {
+      position: relative;
       margin: 0 10px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
 
       li {
         margin: 4px 0;

@@ -1,7 +1,7 @@
 import { Toc } from "shared/types";
 import styles from "./index.module.scss";
 import classNames from "classnames";
-import { useCallback, useLayoutEffect, useMemo, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 
 interface CardProps {
@@ -38,6 +38,8 @@ function Card(props: CardProps) {
   const { type, userData, listData, articleData, tocData } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const tocList = useRef<HTMLAnchorElement[]>([]);
+  const tocScroller = useRef<HTMLDivElement>(null);
 
   // 处理toc目录序号
   const newTocData = useMemo(() => {
@@ -61,9 +63,33 @@ function Card(props: CardProps) {
     });
   }, [tocData?.data]);
 
-  const tocActive = useCallback((index: number) => {
-    setActiveIndex(index);
-  }, []);
+  const tocActive = useCallback(
+    (index: number, isScrollIntoView: boolean = true) => {
+      setActiveIndex(index);
+      const targetItem = tocList.current[index];
+      if (
+        !isScrollIntoView &&
+        !targetItem &&
+        tocScroller.current.scrollHeight === tocScroller.current.offsetHeight
+      )
+        return;
+      // 获取目标元素相对于容器的顶部和底部位置
+      const itemTop = targetItem.offsetTop;
+      const itemBottom = itemTop + targetItem.offsetHeight;
+      // 获取容器的滚动位置和高度
+      const containerTop = tocScroller.current.scrollTop;
+      const containerBottom = containerTop + tocScroller.current.offsetHeight;
+      // 判断元素是否在可视区域内
+      if (itemTop < containerTop || itemBottom > containerBottom) {
+        // 使用 scrollIntoView 方法滚动到元素
+        targetItem.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    },
+    []
+  );
 
   useLayoutEffect(() => {
     if (type === "toc") {
@@ -206,7 +232,7 @@ function Card(props: CardProps) {
             <span>{tocData?.title}</span>
             <span className={styles.progress}>{progress}</span>
           </div>
-          <div className={styles.content}>
+          <div className={styles.content} ref={tocScroller}>
             <ul>
               {newTocData?.map(({ id, text, depth, serialNumber }, index) => {
                 return (
@@ -220,6 +246,11 @@ function Card(props: CardProps) {
                     }}
                   >
                     <a
+                      ref={(el) => {
+                        if (el) {
+                          tocList.current.push(el);
+                        }
+                      }}
                       href={`#${id}`}
                       onClick={(e) => {
                         e.preventDefault();
@@ -227,7 +258,7 @@ function Card(props: CardProps) {
                         if (target) {
                           scrollManager.scrollToTarget(target, true);
                         }
-                        tocActive(index);
+                        tocActive(index, false);
                       }}
                     >
                       <span>{`${serialNumber}. `}</span>

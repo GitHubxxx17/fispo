@@ -15,7 +15,7 @@ Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进
 1. 在<a href="https://v2.cn.vuejs.org/v2/guide/installation.html">官方文档</a>中下载`开发版本`和`生产版本`;
 
 2. 在html中引入Vue
-``` js
+``` html
 <script type="text/javascript" src="本地vue.js的路径"></script>
 
 <!-- 例如 -->
