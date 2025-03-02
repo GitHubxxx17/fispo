@@ -41,7 +41,7 @@
         cursor: pointer;
 
         &:hover {
-          color: #49b1f5;
+          color: var(--fispo-c-text-hover);
         }
       }
 
@@ -49,6 +49,10 @@
         margin: 6px 0;
         font-size: 0.9rem;
         color: #858585;
+
+        svg {
+          margin-right: 4px;
+        }
 
         span {
           line-height: 2;
@@ -60,12 +64,28 @@
             margin: 0 4px;
           }
         }
+
+        a {
+          color: #858585;
+          transition: all 0.3s;
+          cursor: pointer;
+          &:hover {
+            color: var(--fispo-c-text-hover);
+            text-decoration: underline;
+          }
+        }
       }
 
       .info {
         line-height: 2;
         color: #4c4948;
         word-break: break-all;
+      }
+
+      .content-tag {
+        a:not(:last-child) {
+          margin-right: 4px;
+        }
       }
     }
   }

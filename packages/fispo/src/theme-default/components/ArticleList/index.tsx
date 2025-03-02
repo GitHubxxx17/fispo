@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
 import { ArticleData } from "shared/types";
+import Icon from "../Icon";
 
 interface ArticleListProps {
   articleList?: ArticleData[];
@@ -14,21 +15,12 @@ interface ArticleListProps {
   };
 }
 
-interface ArticleItem {
-  title: string;
-  info: string;
-  time: string;
-  tag: string;
-  cover: string;
-  path: string;
-}
-
 function ArticleList(props: ArticleListProps) {
   const { step = 5, children, filter } = props;
   if (children) return children;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const articleList: Partial<ArticleItem[]> = useMemo(
+  const articleList: Partial<ArticleData[]> = useMemo(
     () =>
       props.articleList
         .map((aritcle) => {
@@ -46,14 +38,7 @@ function ArticleList(props: ArticleListProps) {
           ) {
             return;
           }
-          return {
-            path: aritcle.path,
-            title: aritcle.title,
-            info: aritcle.info,
-            time: aritcle.date,
-            tag: aritcle.tags.join(" "),
-            cover: aritcle.cover,
-          };
+          return aritcle;
         })
         .filter(Boolean),
     [props.articleList, filter]
@@ -86,9 +71,26 @@ function ArticleList(props: ArticleListProps) {
                     <h2>{item.title}</h2>
                   </a>
                   <p className={styles.meta}>
-                    <span>发表于 {item.time}</span>
-                    <span>更新于 {item.time}</span>
-                    <span>{item.tag}</span>
+                    <span>
+                      <Icon icon="calendar-alt" />
+                      发表于 {item.date}
+                    </span>
+                    <span>
+                      <Icon icon="inbox" />
+                      <a href={`/category/${item.categories}`}>
+                        {item.categories}
+                      </a>
+                    </span>
+                    <span className={styles["content-tag"]}>
+                      <Icon icon="tag" />
+                      {item.tags.map((tag, index) => {
+                        return (
+                          <a href={`/tag/${tag}`} key={`${tag}-${index}`}>
+                            {tag}
+                          </a>
+                        );
+                      })}
+                    </span>
                   </p>
                   <p
                     className={classNames(

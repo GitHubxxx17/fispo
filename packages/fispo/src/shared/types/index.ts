@@ -1,5 +1,6 @@
 import { UserConfig as ViteConfiguration } from "vite";
 import { ComponentType } from "react";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 // 文章列表
 export interface ArticleData extends FrontMatter {
@@ -95,7 +96,7 @@ export interface navMenuItem {
   /** 路径 */
   path: string;
   /** 图标 */
-  icon?: string;
+  icon?: IconName;
   /** 子菜单项 */
   children?: navMenuItem[];
 }

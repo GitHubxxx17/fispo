@@ -14,18 +14,22 @@ export default defineConfig({
       {
         title: "首页",
         path: "/",
+        icon: 'home'
       },
       {
         title: "标签",
         path: "/tag",
+        icon: 'tag'
       },
       {
         title: "分类",
         path: "/category",
+        icon: 'folder-open'
       },
       {
         title: "关于",
         path: "/about",
+        icon: 'heart'
       },
     ],
   }

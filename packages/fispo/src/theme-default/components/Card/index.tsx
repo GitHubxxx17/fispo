@@ -3,6 +3,8 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import Icon from "../Icon";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 interface CardProps {
   type: "user" | "list" | "article" | "toc";
@@ -15,12 +17,14 @@ interface CardProps {
     categorizeNums?: number;
   };
   listData?: {
+    icon?: IconName;
     title?: string;
     data?: {
       [key: string]: string[] | number;
     };
   };
   articleData?: {
+    icon?: IconName;
     title?: string;
     data?: {
       title?: string;
@@ -29,6 +33,7 @@ interface CardProps {
     }[];
   };
   tocData?: {
+    icon?: IconName;
     title?: string;
     data?: Toc[];
   };
@@ -187,7 +192,10 @@ function Card(props: CardProps) {
       )}
       {type == "article" && (
         <div className={styles["card-article"]}>
-          <div className={styles.header}>{articleData?.title}</div>
+          <div className={styles.header}>
+            <Icon icon={articleData?.icon || "history"} />
+            {articleData?.title}
+          </div>
           <ul className={styles.list}>
             {articleData?.data.map((item, index) => {
               return (
@@ -211,7 +219,10 @@ function Card(props: CardProps) {
       )}
       {type == "list" && (
         <div className={styles["card-list"]}>
-          <div className={styles.header}>{listData?.title}</div>
+          <div className={styles.header}>
+            <Icon icon={listData?.icon || "folder-open"} />
+            {listData?.title}
+          </div>
           <ul className={styles.list}>
             {Object.entries(listData?.data).map(([name, value], index) => {
               return (
@@ -229,7 +240,10 @@ function Card(props: CardProps) {
       {type == "toc" && (
         <div className={styles["card-toc"]}>
           <div className={styles.header}>
-            <span>{tocData?.title}</span>
+            <span>
+              <Icon icon={tocData?.icon || "stream"} />
+              {tocData?.title}
+            </span>
             <span className={styles.progress}>{progress}</span>
           </div>
           <div className={styles.content} ref={tocScroller}>

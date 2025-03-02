@@ -38,6 +38,10 @@
     align-items: center;
     justify-content: center;
 
+    svg {
+      margin-right: 6px;
+    }
+
     span {
       line-height: 2;
     }
@@ -46,6 +50,22 @@
       &::after {
         content: "|";
         margin: 0 4px;
+      }
+    }
+
+    a {
+      color: var(--fispo-c-white);
+      transition: all 0.3s;
+      cursor: pointer;
+      &:hover {
+        color: var(--fispo-c-text-hover);
+        text-decoration: underline;
+      }
+    }
+
+    .content-tag {
+      a:not(:last-child) {
+        margin-right: 4px;
       }
     }
   }

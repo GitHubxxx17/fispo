@@ -29,10 +29,6 @@ export function createPluginMdx(highlighter: Highlighter) {
           properties: {
             class: "header-anchor",
           },
-          content: {
-            type: "text",
-            value: "#",
-          },
         },
       ],
       rehypePluginPreWrapper,

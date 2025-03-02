@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { navMenuItem } from "shared/types";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import Icon from "../Icon";
 
 interface NavProps {
   title?: string;
@@ -43,6 +44,7 @@ function Nav(props: NavProps) {
             return (
               <li key={items.title}>
                 <a href={items.path}>
+                  <Icon icon={items.icon}></Icon>
                   <span>{items.title}</span>
                 </a>
               </li>
