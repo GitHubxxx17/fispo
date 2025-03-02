@@ -13,6 +13,7 @@ import { CustomLayout } from "./CustomLayout";
 import classNames from "classnames";
 import scrollManager from "../helper/scroll";
 import { useEffect } from "react";
+import RightSide from "../components/rightSide";
 
 export function Layout() {
   const pageData = usePageData();
@@ -68,6 +69,7 @@ export function Layout() {
           <Sidebar pageData={pageData} isArticlePage={isArticlePage}></Sidebar>
         </div>
       </main>
+      <RightSide />
       <Footer></Footer>
     </div>
   );

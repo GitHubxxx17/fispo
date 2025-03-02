@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 interface IconProps {
   icon: IconName;
+  classNames?: string;
+  isSpin?: boolean;
 }
 
 function toCamelCase(str: string) {
@@ -31,7 +33,14 @@ const Icon = (props: IconProps) => {
     });
   }, [iconName]);
 
-  return icon && <FontAwesomeIcon icon={icon} />;
+  return (
+    icon && (
+      <FontAwesomeIcon
+        icon={icon}
+        className={props.isSpin ? "fa-solid fa-spinner fa-spin" : ""}
+      />
+    )
+  );
 };
 
 export default Icon;
