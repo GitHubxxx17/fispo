@@ -36,7 +36,6 @@ export async function initPageData(routePath: string): Promise<PageData> {
   const categories = {};
   for await (const route of routes) {
     const moduleInfo = await route.preload();
-    console.log(moduleInfo);
 
     articlesList.push({
       ...moduleInfo.frontmatter,
@@ -103,7 +102,6 @@ export async function initPageData(routePath: string): Promise<PageData> {
   const matched = matchRoutes(routes, routePath);
   if (matched) {
     const moduleInfo = await matched[0].route.preload();
-    console.log(moduleInfo);
     return getPageData(
       "article",
       moduleInfo.frontmatter,

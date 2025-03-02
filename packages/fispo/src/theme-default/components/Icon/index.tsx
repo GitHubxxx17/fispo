@@ -27,7 +27,6 @@ const Icon = (props: IconProps) => {
       /* @vite-ignore */
       `@fortawesome/free-solid-svg-icons`
     ).then((module) => {
-      console.log(module[iconName]);
       setIcon(module[iconName]);
     });
   }, [iconName]);

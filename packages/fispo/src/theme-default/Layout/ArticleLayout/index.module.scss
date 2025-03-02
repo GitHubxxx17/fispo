@@ -103,6 +103,18 @@
         vertical-align: middle;
       }
     }
+
+    a {
+      color: #99a9bf;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    img {
+      cursor: zoom-in;
+    }
   }
 
   .post-copyright {

@@ -10,6 +10,9 @@ import { remarkPluginToc } from "./remarkPlugins/toc";
 import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
 import { remarkPluginInfo } from "./remarkPlugins/info";
+import rehypeRaw from "rehype-raw";
+import rehypeReact from "rehype-react";
+import React from "react";
 
 export function createPluginMdx(highlighter: Highlighter) {
   return {
@@ -22,6 +25,13 @@ export function createPluginMdx(highlighter: Highlighter) {
       remarkPluginToc,
     ] as PluggableList,
     rehypePlugins: [
+      [
+        rehypeRaw,
+        {
+          // 配置 passThrough 选项，忽略 mdxjsEsm 节点
+          passThrough: ["mdxjsEsm"],
+        },
+      ],
       rehypePluginSlug,
       [
         rehypePluginAutolinkHeadings,
@@ -33,6 +43,12 @@ export function createPluginMdx(highlighter: Highlighter) {
       ],
       rehypePluginPreWrapper,
       [rehypePluginShiki, { highlighter }],
+      [
+        rehypeReact,
+        {
+          createElement: React.createElement,
+        },
+      ],
     ] as PluggableList,
   };
 }

@@ -110,3 +110,8 @@ div[class*="language-"] + div[class*="language-"] > div[class*="language-"] {
 [class*="language-"] > .highlight-tools .lang {
   margin-left: 75px;
 }
+
+.medium-zoom-overlay,
+.medium-zoom-image {
+  z-index: 10000;
+}
