@@ -12,7 +12,7 @@ import { ArticleLayout } from "./ArticleLayout";
 import { CustomLayout } from "./CustomLayout";
 import classNames from "classnames";
 import scrollManager from "../helper/scroll";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import RightSide from "../components/rightSide";
 
 export function Layout() {
@@ -23,6 +23,7 @@ export function Layout() {
   const { sidebar, navMenus, banner } = themeConfig;
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
+  const [sideBarHide, setSideBarHide] = useState(sidebar.hide);
 
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
@@ -66,11 +67,19 @@ export function Layout() {
         ></Banner>
       </header>
       <main className={styles.main}>
-        <div className={styles.mainLeft}>{getCurrentLayout()}</div>
+        <div
+          className={styles.mainLeft}
+          style={{
+            width: sideBarHide ? "80%" : "",
+          }}
+        >
+          {getCurrentLayout()}
+        </div>
         {sidebar.enable && (
           <div
             className={classNames(styles.mainRight, {
               [styles.sidebarLeft]: sidebar.position === "left",
+              [styles.sidebarHide]: sideBarHide,
             })}
           >
             <Sidebar
@@ -80,7 +89,10 @@ export function Layout() {
           </div>
         )}
       </main>
-      <RightSide />
+      <RightSide
+        pageData={pageData}
+        setSideBarHide={() => setSideBarHide((pre) => !pre)}
+      />
       <Footer></Footer>
     </div>
   );

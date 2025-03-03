@@ -16,7 +16,7 @@
   .main {
     padding: 40px 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
     margin: 0 auto;
     width: 100%;
@@ -26,6 +26,7 @@
   .mainLeft {
     width: 75%;
     order: 2;
+    transition: all 0.3s ease-in-out;
   }
 
   .mainRight {
@@ -37,5 +38,9 @@
   .sidebarLeft {
     order: 1 !important;
     margin-right: 15px !important;
+  }
+
+  .sidebarHide {
+    display: none;
   }
 }

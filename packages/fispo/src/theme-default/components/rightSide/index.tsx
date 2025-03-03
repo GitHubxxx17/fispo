@@ -4,9 +4,12 @@ import styles from "./index.module.scss";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
+import { PageData } from "shared/types";
 
 interface RightSideProps {
   children?: React.ReactNode;
+  pageData?: PageData;
+  setSideBarHide?: () => void;
 }
 
 interface rightSideItem {
@@ -17,14 +20,20 @@ interface rightSideItem {
 }
 
 export default function RightSide(props: RightSideProps) {
-  console.log(props);
+  const { setSideBarHide } = props;
   const [isTop, setIsTop] = useState(true);
   const [settingsIsHide, setSettingsIsHide] = useState(true);
 
   const rightSideSettings: rightSideItem[] = useMemo(
     () => [
       { icon: "adjust", text: "深色和浅色模式切换" },
-      { icon: "arrows-alt-h", text: "单栏和双栏的切换" },
+      {
+        icon: "arrows-alt-h",
+        text: "单栏和双栏的切换",
+        click: () => {
+          setSideBarHide();
+        },
+      },
     ],
     []
   );
