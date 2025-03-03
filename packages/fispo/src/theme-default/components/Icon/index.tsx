@@ -1,11 +1,13 @@
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 
 interface IconProps {
   icon: IconName;
   classNames?: string;
   isSpin?: boolean;
+  shake?: boolean;
 }
 
 function toCamelCase(str: string) {
@@ -47,7 +49,10 @@ const Icon = (props: IconProps) => {
     icon && (
       <FontAwesomeIcon
         icon={icon}
-        className={props.isSpin ? "fa-solid fa-spinner fa-spin" : ""}
+        className={classNames({
+          ["fa-solid fa-spinner fa-spin"]: props.isSpin,
+          ["fa-shake"]: props.shake,
+        })}
       />
     )
   );

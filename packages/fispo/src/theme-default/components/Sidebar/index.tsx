@@ -14,7 +14,8 @@ function Sidebar(props: SidebarProps) {
   const { children, pageData, isArticlePage = false } = props;
   const { siteData } = pageData;
   const { sidebar } = siteData.themeConfig;
-  const { card_author, card_categories, card_recent_post } = sidebar;
+  const { card_author, card_categories, card_recent_post, card_announcement } =
+    sidebar;
 
   if (children) return children;
   const [isUp, setIsUp] = useState(false);
@@ -44,6 +45,17 @@ function Sidebar(props: SidebarProps) {
             tagsNums: Object.keys(pageData.tags).length,
             categorizeNums: Object.keys(pageData.categories).length,
             button: card_author.button,
+          }}
+        ></Card>
+      )}
+
+      {card_announcement.enable && (
+        <Card
+          type="announcement"
+          announcementData={{
+            title: "公告",
+            icon: "bullhorn",
+            content: card_announcement.content,
           }}
         ></Card>
       )}

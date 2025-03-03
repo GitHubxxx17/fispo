@@ -82,7 +82,13 @@
     line-height: 2;
 
     svg {
-      margin-right: 4px;
+      margin-right: 6px;
+    }
+  }
+
+  &-announcement {
+    svg {
+      color: red;
     }
   }
 

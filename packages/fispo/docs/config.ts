@@ -43,6 +43,10 @@ export default defineConfig({
       },
       card_recent_post: {
         sort: 'date'
+      },
+      card_announcement: {
+        enable: true,
+        content: '网站正在更新中······'
       }
     }
   }

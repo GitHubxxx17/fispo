@@ -7,7 +7,7 @@ import Icon from "../Icon";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 interface CardProps {
-  type: "user" | "list" | "article" | "toc";
+  type: "user" | "announcement" | "list" | "article" | "toc";
   userData?: {
     author?: string;
     description?: string;
@@ -21,6 +21,11 @@ interface CardProps {
       text?: string;
       link?: string;
     };
+  };
+  announcementData?: {
+    icon?: IconName;
+    title?: string;
+    content?: string;
   };
   listData?: {
     icon?: IconName;
@@ -47,7 +52,8 @@ interface CardProps {
 }
 
 function Card(props: CardProps) {
-  const { type, userData, listData, articleData, tocData } = props;
+  const { type, userData, listData, articleData, tocData, announcementData } =
+    props;
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const tocList = useRef<HTMLAnchorElement[]>([]);
@@ -204,6 +210,17 @@ function Card(props: CardProps) {
           )}
         </div>
       )}
+
+      {type === "announcement" && (
+        <div className={styles["card-announcement"]}>
+          <div className={styles.header}>
+            <Icon icon={announcementData?.icon || "history"} shake />
+            {announcementData?.title}
+          </div>
+          <p>{announcementData.content}</p>
+        </div>
+      )}
+
       {type == "article" && (
         <div className={styles["card-article"]}>
           <div className={styles.header}>
