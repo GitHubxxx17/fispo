@@ -8,8 +8,9 @@ export interface ListCardProps {
   title?: string;
   limit?: number;
   data?: {
-    [key: string]: string[] | number;
+    [key: string]: string[] | number | string;
   };
+  hover?: boolean;
 }
 
 const ListCard = (props: ListCardProps) => {
@@ -25,10 +26,17 @@ const ListCard = (props: ListCardProps) => {
           .map(([name, value], index) => {
             return (
               <li key={`${name}-${index}`}>
-                <a href={`/category/${name}`}>
-                  <span>{name}</span>
-                  <span>{Array.isArray(value) ? value.length : value}</span>
-                </a>
+                {props.hover ? (
+                  <a href={`/category/${name}`}>
+                    <span>{name}</span>
+                    <span>{Array.isArray(value) ? value.length : value}</span>
+                  </a>
+                ) : (
+                  <>
+                    <span>{name}</span>
+                    <span>{Array.isArray(value) ? value.length : value}</span>
+                  </>
+                )}
               </li>
             );
           })}

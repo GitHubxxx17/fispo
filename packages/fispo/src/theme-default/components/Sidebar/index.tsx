@@ -20,6 +20,7 @@ function Sidebar(props: SidebarProps) {
     card_recent_post,
     card_announcement,
     card_tags,
+    card_webinfo,
   } = sidebar;
 
   if (children) return children;
@@ -72,6 +73,7 @@ function Sidebar(props: SidebarProps) {
             title: "分类",
             data: pageData.categories,
             limit: card_categories.limit,
+            hover: true,
           }}
         ></Card>
       )}
@@ -109,6 +111,21 @@ function Sidebar(props: SidebarProps) {
           ></Card>
         )}
       </div>
+
+      {!isArticlePage && card_webinfo.enable && (
+        <Card
+          type="list"
+          listData={{
+            title: "网站资讯",
+            icon: "chart-line",
+            data: {
+              "文章数目：": pageData.articlesList.length,
+              "已运行时间 :": `1 天`,
+              "最后更新时间 :": `2025-03-${new Date().getDay()}`,
+            },
+          }}
+        ></Card>
+      )}
     </div>
   );
 }
