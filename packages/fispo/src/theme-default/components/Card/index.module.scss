@@ -216,4 +216,22 @@
       }
     }
   }
+
+  &-tag {
+    &-cloud {
+      display: flex;
+      flex-wrap: wrap;
+
+      span {
+        padding: 0 4px;
+
+        a {
+          transition: all 0.3s;
+          &:hover {
+            color: var(--fispo-c-text-hover) !important;
+          }
+        }
+      }
+    }
+  }
 }

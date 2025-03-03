@@ -14,6 +14,7 @@ import classNames from "classnames";
 import scrollManager from "../helper/scroll";
 import { useEffect, useState } from "react";
 import RightSide from "../components/rightSide";
+import { localGetData, localSaveData } from "../helper/storage";
 
 export function Layout() {
   const pageData = usePageData();
@@ -40,6 +41,8 @@ export function Layout() {
 
   useEffect(() => {
     scrollManager.init();
+    const hide = localGetData("sidebarHide");
+    if (hide !== null) setSideBarHide(hide);
     return () => {
       scrollManager.destory();
     };
@@ -91,7 +94,12 @@ export function Layout() {
       </main>
       <RightSide
         pageData={pageData}
-        setSideBarHide={() => setSideBarHide((pre) => !pre)}
+        setSideBarHide={() => {
+          setSideBarHide((pre: boolean) => {
+            localSaveData("sidebarHide", !pre);
+            return !pre;
+          });
+        }}
       />
       <Footer></Footer>
     </div>

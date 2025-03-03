@@ -14,8 +14,13 @@ function Sidebar(props: SidebarProps) {
   const { children, pageData, isArticlePage = false } = props;
   const { siteData } = pageData;
   const { sidebar } = siteData.themeConfig;
-  const { card_author, card_categories, card_recent_post, card_announcement } =
-    sidebar;
+  const {
+    card_author,
+    card_categories,
+    card_recent_post,
+    card_announcement,
+    card_tags,
+  } = sidebar;
 
   if (children) return children;
   const [isUp, setIsUp] = useState(false);
@@ -36,8 +41,8 @@ function Sidebar(props: SidebarProps) {
     <div className={styles.sidebar}>
       {card_author.enable && (
         <Card
-          type="user"
-          userData={{
+          type="author"
+          authorData={{
             author: siteData.author,
             avatar: siteData.avatar,
             description: card_author?.description || siteData.description,
@@ -67,6 +72,16 @@ function Sidebar(props: SidebarProps) {
             title: "分类",
             data: pageData.categories,
             limit: card_categories.limit,
+          }}
+        ></Card>
+      )}
+
+      {!isArticlePage && card_tags.enable && (
+        <Card
+          type="tag"
+          tagData={{
+            title: "标签",
+            data: pageData.tags,
           }}
         ></Card>
       )}

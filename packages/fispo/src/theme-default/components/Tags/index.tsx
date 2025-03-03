@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styles from "./index.module.scss";
 import { Tags as TagsType } from "shared/types";
+import { getRandomColor } from "../../helper/tag";
 
 interface TagsProps {
   tags?: TagsType;
@@ -9,15 +10,6 @@ interface TagsProps {
 
 function Tags(props: TagsProps) {
   const { tags = [] } = props;
-
-  const getRandomColor = useCallback(() => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }, []);
 
   return (
     <div className={styles.tag}>
