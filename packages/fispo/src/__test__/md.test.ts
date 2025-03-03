@@ -84,6 +84,11 @@ describe("Markdown compile cases", async () => {
           "id": "h4",
           "text": "h4",
           "depth": 4
+        },
+        {
+          "id": "h5",
+          "text": "h5",
+          "depth": 5
         }
       ];
       "

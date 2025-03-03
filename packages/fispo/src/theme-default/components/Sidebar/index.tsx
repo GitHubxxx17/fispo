@@ -13,10 +13,14 @@ type SidebarProps = {
 function Sidebar(props: SidebarProps) {
   const { children, pageData, isArticlePage = false } = props;
   const { siteData } = pageData;
+  const { sidebar } = siteData.themeConfig;
+  const { card_author, card_categories, card_recent_post } = sidebar;
+
   if (children) return children;
   const [isUp, setIsUp] = useState(false);
 
   useEffect(() => {
+    console.log(sidebar);
     const scroll: ScrollCallback = (direction) => {
       setIsUp(direction == "up");
     };
@@ -29,23 +33,28 @@ function Sidebar(props: SidebarProps) {
 
   return (
     <div className={styles.sidebar}>
-      <Card
-        type="user"
-        userData={{
-          author: siteData.author,
-          avatar: siteData.avatar,
-          description: siteData.description,
-          articleNums: pageData.articlesList.length,
-          tagsNums: Object.keys(pageData.tags).length,
-          categorizeNums: Object.keys(pageData.categories).length,
-        }}
-      ></Card>
-      {!isArticlePage && (
+      {card_author.enable && (
+        <Card
+          type="user"
+          userData={{
+            author: siteData.author,
+            avatar: siteData.avatar,
+            description: card_author?.description || siteData.description,
+            articleNums: pageData.articlesList.length,
+            tagsNums: Object.keys(pageData.tags).length,
+            categorizeNums: Object.keys(pageData.categories).length,
+            button: card_author.button,
+          }}
+        ></Card>
+      )}
+
+      {!isArticlePage && card_categories.enable && (
         <Card
           type="list"
           listData={{
             title: "分类",
             data: pageData.categories,
+            limit: card_categories.limit,
           }}
         ></Card>
       )}
@@ -63,13 +72,15 @@ function Sidebar(props: SidebarProps) {
             }}
           ></Card>
         )}
-        <Card
-          type="article"
-          articleData={{
-            title: "最新文章",
-            data: pageData.articlesList.slice(0, 5),
-          }}
-        ></Card>
+        {card_recent_post.enable && (
+          <Card
+            type="article"
+            articleData={{
+              title: "最新文章",
+              data: pageData.articlesList.slice(0, card_recent_post.limit),
+            }}
+          ></Card>
+        )}
       </div>
     </div>
   );

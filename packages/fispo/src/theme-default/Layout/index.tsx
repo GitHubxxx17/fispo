@@ -20,8 +20,10 @@ export function Layout() {
   // 获取 pageType
   const { pageType, title, siteData, frontmatter } = pageData;
   const { title: siteTitle, themeConfig } = siteData;
+  const { sidebar, navMenus, banner } = themeConfig;
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
+
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
     if (isHomePage) {
@@ -54,20 +56,29 @@ export function Layout() {
           [styles["not-home-page"]]: !isHomePage,
         })}
       >
-        <Nav title={siteTitle} menus={themeConfig.navMenus}></Nav>
+        <Nav title={siteTitle} menus={navMenus}></Nav>
         <Banner
           isHomePage={isHomePage}
           isArticlePage={isArticlePage}
           title={title}
-          bannerData={themeConfig.banner}
+          bannerData={banner}
           articleData={frontmatter}
         ></Banner>
       </header>
       <main className={styles.main}>
         <div className={styles.mainLeft}>{getCurrentLayout()}</div>
-        <div className={styles.mainRight}>
-          <Sidebar pageData={pageData} isArticlePage={isArticlePage}></Sidebar>
-        </div>
+        {sidebar.enable && (
+          <div
+            className={classNames(styles.mainRight, {
+              [styles.sidebarLeft]: sidebar.position === "left",
+            })}
+          >
+            <Sidebar
+              pageData={pageData}
+              isArticlePage={isArticlePage}
+            ></Sidebar>
+          </div>
+        )}
       </main>
       <RightSide />
       <Footer></Footer>

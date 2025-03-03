@@ -2,6 +2,7 @@ import { resolve } from "path";
 import { loadConfigFromFile } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "../shared/types/index";
+import { mergeConfig, defaultConfig } from "shared/utils/defaultConfig";
 
 type RawConfig =
   | UserConfig
@@ -58,7 +59,7 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
   return {
     title: userConfig.title || "fispo",
     description: userConfig.description || "SSG Framework",
-    themeConfig: userConfig.themeConfig || {},
+    themeConfig: mergeConfig(defaultConfig, userConfig.themeConfig),
     vite: userConfig.vite || {},
     author: userConfig.author || "xxx",
     avatar: userConfig.avatar || "",

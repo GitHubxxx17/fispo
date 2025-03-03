@@ -25,10 +25,17 @@
 
   .mainLeft {
     width: 75%;
-    margin-right: 15px;
+    order: 2;
   }
 
   .mainRight {
+    margin-left: 15px;
     width: 25%;
+    order: 3;
+  }
+
+  .sidebarLeft {
+    order: 1 !important;
+    margin-right: 15px !important;
   }
 }

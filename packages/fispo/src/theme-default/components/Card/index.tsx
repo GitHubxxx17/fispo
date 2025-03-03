@@ -15,10 +15,17 @@ interface CardProps {
     articleNums?: number;
     tagsNums?: number;
     categorizeNums?: number;
+    button?: {
+      enable?: boolean;
+      icon?: IconName;
+      text?: string;
+      link?: string;
+    };
   };
   listData?: {
     icon?: IconName;
     title?: string;
+    limit?: number;
     data?: {
       [key: string]: string[] | number;
     };
@@ -187,7 +194,14 @@ function Card(props: CardProps) {
               <span>{userData?.categorizeNums}</span>
             </a>
           </div>
-          <button className={styles["follow-btn"]}>Follow Me</button>
+          {userData?.button?.enable && (
+            <button className={styles["follow-btn"]}>
+              <a href={userData?.button?.link} target="_blank" rel="noreferrer">
+                <Icon icon={userData?.button?.icon}></Icon>
+                {userData?.button?.text}
+              </a>
+            </button>
+          )}
         </div>
       )}
       {type == "article" && (
@@ -224,16 +238,18 @@ function Card(props: CardProps) {
             {listData?.title}
           </div>
           <ul className={styles.list}>
-            {Object.entries(listData?.data).map(([name, value], index) => {
-              return (
-                <li key={`${name}-${index}`}>
-                  <a href={`/category/${name}`}>
-                    <span>{name}</span>
-                    <span>{Array.isArray(value) ? value.length : value}</span>
-                  </a>
-                </li>
-              );
-            })}
+            {Object.entries(listData?.data)
+              .slice(0, listData?.limit)
+              .map(([name, value], index) => {
+                return (
+                  <li key={`${name}-${index}`}>
+                    <a href={`/category/${name}`}>
+                      <span>{name}</span>
+                      <span>{Array.isArray(value) ? value.length : value}</span>
+                    </a>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       )}

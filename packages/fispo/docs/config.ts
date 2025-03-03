@@ -32,5 +32,18 @@ export default defineConfig({
         icon: 'heart'
       },
     ],
+    sidebar: {
+      card_author: {
+        button: {
+          link: "https://github.com/GitHubxxx17/fispo"
+        }
+      },
+      card_categories: {
+        limit: 1
+      },
+      card_recent_post: {
+        sort: 'date'
+      }
+    }
   }
 });

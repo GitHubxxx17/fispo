@@ -25,12 +25,22 @@ const Icon = (props: IconProps) => {
   const [icon, setIcon] = useState(null);
 
   useEffect(() => {
-    import(
-      /* @vite-ignore */
-      `@fortawesome/free-solid-svg-icons`
-    ).then((module) => {
-      setIcon(module[iconName]);
-    });
+    try {
+      import(
+        /* @vite-ignore */
+        "@fortawesome/free-solid-svg-icons"
+      ).then((module) => {
+        if (module[iconName]) setIcon(module[iconName]);
+      });
+      import(
+        /* @vite-ignore */
+        "@fortawesome/free-brands-svg-icons"
+      ).then((module) => {
+        if (module[iconName]) setIcon(module[iconName]);
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }, [iconName]);
 
   return (

@@ -59,10 +59,20 @@
     line-height: 38px;
     text-align: center;
     background-color: #49b1f5;
-    color: #fff;
     font-size: 1rem;
     outline: none;
     border: none;
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+
+      svg {
+        margin-right: 5px;
+      }
+    }
   }
 
   .header {
