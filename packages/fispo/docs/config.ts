@@ -33,7 +33,6 @@ export default defineConfig({
       },
     ],
     sidebar: {
-      hide: true,
       card_author: {
         button: {
           link: "https://github.com/GitHubxxx17/fispo"

@@ -8,7 +8,7 @@ export const defaultConfig: Required<ThemeConfig> = {
   },
   sidebar: {
     enable: true,
-    hide: true,
+    hide: false,
     position: "right",
     card_author: {
       enable: true,

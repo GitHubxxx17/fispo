@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   color: #eee;
+  animation: bannerStart 1s;
 
   &::before {
     position: absolute;
@@ -29,6 +30,7 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
     line-height: 1.5;
     font-weight: bold;
+    animation: titleScale 1s;
   }
 
   .meta {
@@ -78,5 +80,25 @@
   background-position: center;
   &::before {
     height: 400px !important;
+  }
+}
+
+@keyframes bannerStart {
+  0% {
+    transform: translateY(-70px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes titleScale {
+  0% {
+    scale: 0.8;
+  }
+  100% {
+    scale: 1;
   }
 }

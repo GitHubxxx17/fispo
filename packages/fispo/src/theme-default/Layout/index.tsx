@@ -15,6 +15,7 @@ import scrollManager from "../helper/scroll";
 import { useEffect, useState } from "react";
 import RightSide from "../components/rightSide";
 import { localGetData, localSaveData } from "../helper/storage";
+import { Helmet } from "react-helmet-async";
 
 export function Layout() {
   const pageData = usePageData();
@@ -24,6 +25,13 @@ export function Layout() {
   const { sidebar, navMenus, banner } = themeConfig;
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
+  const [sidebarEnable, setSidebarEnable] = useState(() => {
+    const hide = localGetData("sidebarHide");
+    if (hide !== null) {
+      return !hide;
+    }
+    return sidebar.enable;
+  });
   const [sideBarHide, setSideBarHide] = useState(sidebar.hide);
 
   // 根据 pageType 分发不同的页面内容
@@ -42,7 +50,9 @@ export function Layout() {
   useEffect(() => {
     scrollManager.init();
     const hide = localGetData("sidebarHide");
-    if (hide !== null) setSideBarHide(hide);
+    if (hide !== null) {
+      setSideBarHide(hide);
+    }
     return () => {
       scrollManager.destory();
     };
@@ -55,6 +65,9 @@ export function Layout() {
         backgroundImage: `url(${siteData.backgroundImg})`,
       }}
     >
+      <Helmet>
+        <title>{isHomePage ? title : `${title} | ${siteData.title}`}</title>
+      </Helmet>
       <header
         className={classNames(styles.header, {
           [styles["not-home-page"]]: !isHomePage,
@@ -79,7 +92,7 @@ export function Layout() {
           >
             {getCurrentLayout()}
           </div>
-          {sidebar.enable && (
+          {sidebarEnable && (
             <div
               className={classNames(styles.mainRight, {
                 [styles.sidebarLeft]: sidebar.position === "left",
@@ -98,6 +111,9 @@ export function Layout() {
         pageData={pageData}
         setSideBarHide={() => {
           setSideBarHide((pre: boolean) => {
+            if (sidebarEnable === false) {
+              setSidebarEnable(true);
+            }
             localSaveData("sidebarHide", !pre);
             return !pre;
           });
