@@ -19,7 +19,7 @@
 
   a {
     // color: #eee;
-    color: var(--fispo-c-text);
+    color: var(--fispo-c-nav-text);
     transition: all 0.3s;
 
     &:hover {
@@ -67,9 +67,9 @@
   background-color: transparent;
   box-shadow: none;
   a {
-    color: var(--fispo-c-text-light);
+    color: var(--fispo-c-nav-text-top);
     &:hover {
-      color: var(--fispo-c-bg);
+      color: var(--fispo-c-white);
     }
   }
 

@@ -16,13 +16,13 @@
     cursor: pointer;
     width: 35px;
     height: 35px;
-    background-color: #49b1f5;
+    background-color: var(--fispo-c-btn-bg);
     margin-bottom: 5px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--fispo-c-white);
+    color: var(--fispo-c-btn-text);
     transition: all 0.3s;
 
     &:hover {

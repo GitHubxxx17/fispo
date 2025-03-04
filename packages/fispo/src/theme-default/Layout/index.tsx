@@ -70,27 +70,29 @@ export function Layout() {
         ></Banner>
       </header>
       <main className={styles.main}>
-        <div
-          className={styles.mainLeft}
-          style={{
-            width: sideBarHide ? "80%" : "",
-          }}
-        >
-          {getCurrentLayout()}
-        </div>
-        {sidebar.enable && (
+        <div className={styles.mainInner}>
           <div
-            className={classNames(styles.mainRight, {
-              [styles.sidebarLeft]: sidebar.position === "left",
-              [styles.sidebarHide]: sideBarHide,
-            })}
+            className={styles.mainLeft}
+            style={{
+              width: sideBarHide ? "80%" : "",
+            }}
           >
-            <Sidebar
-              pageData={pageData}
-              isArticlePage={isArticlePage}
-            ></Sidebar>
+            {getCurrentLayout()}
           </div>
-        )}
+          {sidebar.enable && (
+            <div
+              className={classNames(styles.mainRight, {
+                [styles.sidebarLeft]: sidebar.position === "left",
+                [styles.sidebarHide]: sideBarHide,
+              })}
+            >
+              <Sidebar
+                pageData={pageData}
+                isArticlePage={isArticlePage}
+              ></Sidebar>
+            </div>
+          )}
+        </div>
       </main>
       <RightSide
         pageData={pageData}

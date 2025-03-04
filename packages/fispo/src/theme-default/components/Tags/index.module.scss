@@ -1,10 +1,11 @@
 .tag {
-  background-color: #fff;
+  background-color: var(--fispo-c-card-bg);
   border-radius: var(--default-border-radius);
   padding: 50px 40px;
   box-shadow: var(--box-shadow);
   display: flex;
   flex-wrap: wrap;
+  transition: all 0.3s;
 
   .tagItem {
     margin: 2px 2px;

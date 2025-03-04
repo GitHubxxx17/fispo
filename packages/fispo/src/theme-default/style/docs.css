@@ -115,3 +115,11 @@ div[class*="language-"] + div[class*="language-"] > div[class*="language-"] {
 .medium-zoom-image {
   z-index: 10000;
 }
+
+.dark img {
+  filter: brightness(0.8);
+}
+
+.dark .medium-zoom-overlay {
+  background: black !important;
+}

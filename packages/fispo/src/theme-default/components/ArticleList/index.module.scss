@@ -1,11 +1,12 @@
 .articleList {
   .item {
     height: 288px;
-    background-color: #fff;
+    background-color: var(--fispo-c-articleList-bg);
     border-radius: 8px;
     display: flex;
     overflow: hidden;
     box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
+    transition: all 0.3s;
 
     &:not(:first-child) {
       margin-top: 20px;
@@ -39,6 +40,7 @@
         font-weight: normal;
         transition: all 0.3s;
         cursor: pointer;
+        color: var(--fispo-c-articleList-text);
 
         &:hover {
           color: var(--fispo-c-text-hover);
@@ -48,7 +50,8 @@
       .meta {
         margin: 6px 0;
         font-size: 0.9rem;
-        color: #858585;
+        color: var(--fispo-c-articleList-meta);
+        transition: all 0.3s;
 
         svg {
           margin-right: 4px;
@@ -66,7 +69,7 @@
         }
 
         a {
-          color: #858585;
+          color: var(--fispo-c-articleList-meta);
           transition: all 0.3s;
           cursor: pointer;
           &:hover {
@@ -78,7 +81,7 @@
 
       .info {
         line-height: 2;
-        color: #4c4948;
+        color: var(--fispo-c-articleList-text);
         word-break: break-all;
       }
 

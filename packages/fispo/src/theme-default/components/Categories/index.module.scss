@@ -1,10 +1,11 @@
 .category {
-  background-color: #fff;
+  background-color: var(--fispo-c-card-bg);
   border-radius: var(--default-border-radius);
   padding: 50px 40px;
   box-shadow: var(--box-shadow);
   display: flex;
   flex-wrap: wrap;
+  transition: all 0.3s;
 
   li {
     font-size: 14px;
@@ -13,6 +14,10 @@
     padding: 0.12em 0.4em 0.12em 1.4em;
     display: flex;
     align-items: center;
+
+    a {
+      color: var(--fispo-c-card-text);
+    }
 
     &:hover {
       a {

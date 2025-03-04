@@ -9,6 +9,8 @@
 :root {
   --fispo-c-white: #ffffff;
   --fispo-c-white-1: #ffffffcc;
+  --fispo-c-white-2: rgba(255, 255, 255, 0.7);
+  --fispo-c-white-3: #ffffffe6;
 
   --fispo-c-gray: #4c4948;
   --fispo-c-gray-2: #6a737d;
@@ -23,6 +25,12 @@
 
   --fispo-c-dark: #1c1c1c;
   --fispo-c-dark-2: #212121;
+  --fispo-c-dark-3: rgba(18, 18, 18, 0.8);
+  --fispo-c-dark-4: rgba(0, 0, 0, 0.7);
+  --fispo-c-dark-5: #121212;
+  --fispo-c-dark-6: rgba(0, 0, 0, 0.3);
+  --fispo-c-dark-7: #2c2c2c;
+  --fispo-c-dark-8: #1f1f1f;
 
   --fispo-c-green-1: #00c4b6;
 }
@@ -32,21 +40,59 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --fispo-c-bg: var(--fispo-c-white);
+  --fispo-c-bg: transparent;
+  --fispo-scrollbar-color: var(--fispo-c-blue);
+  --fispo-scrollbar-bg: transparent;
   --fispo-c-nav-bg: var(--fispo-c-white-1);
-  --fispo-hltools-bg: var(--fispo-c-dark);
-  --fispo-code-bg: var(--fispo-c-dark-2);
+  --fispo-c-nav-text: var(--fispo-c-gray);
+  --fispo-c-nav-text-top: var(--fispo-c-text-light);
+
+  --fispo-c-banner-bg: var(--fispo-c-dark-6);
+
+  --fispo-c-articleList-bg: var(--fispo-c-white);
+  --fispo-c-articleList-meta: var(--fispo-c-gray-3);
+  --fispo-c-articleList-text: var(--fispo-c-gray);
+
+  --fispo-c-card-bg: var(--fispo-c-white);
+  --fispo-c-card-text: var(--fispo-c-gray);
+
+  --fispo-c-btn-bg: var(--fispo-c-blue);
+  --fispo-c-btn-text: var(--fispo-c-white);
 
   --fispo-c-footer-text: var(--fispo-c-white-1);
 
-  --fispo-c-text: var(--fispo-c-gray);
   --fispo-c-text-hover: var(--fispo-c-blue);
   --fispo-c-text-light: var(--fispo-c-gray-4);
 
+  --fispo-c-article-title: var(--fispo-text-highlight-color);
+  --fispo-hltools-bg: var(--fispo-c-dark);
+  --fispo-code-bg: var(--fispo-c-dark-2);
   --fispo-blockquote-bg: var(--fispo-c-blue-2);
   --fispo-blockquote-color: var(--fispo-c-gray-2);
-
   --fispo-li-hover-color: var(--fispo-c-orange);
-
   --fispo-toc-active-color: var(--fispo-c-green-1);
+}
+
+.dark {
+  --fispo-c-bg: var(--fispo-c-dark-4);
+  --fispo-scrollbar-color: var(--fispo-c-dark-5);
+  --fispo-scrollbar-bg: var(--fispo-c-dark-7);
+  --fispo-c-nav-bg: var(--fispo-c-dark-3);
+  --fispo-c-nav-text: var(--fispo-c-white-2);
+  --fispo-c-nav-text-top: var(--fispo-c-white-2);
+
+  --fispo-c-banner-bg: var(--fispo-c-dark-4);
+
+  --fispo-c-articleList-bg: var(--fispo-c-dark-5);
+  --fispo-c-articleList-text: var(--fispo-c-white-3);
+
+  --fispo-c-card-bg: var(--fispo-c-dark-5);
+  --fispo-c-card-text: var(--fispo-c-white-2);
+
+  --fispo-c-btn-bg: var(--fispo-c-dark-8);
+  --fispo-c-btn-text: var(--fispo-c-white-2);
+
+  --fispo-c-article-title: var(--fispo-c-white-3);
+  --fispo-blockquote-bg: var(--fispo-c-dark-7);
+  --fispo-blockquote-color: var(--fispo-c-white-2);
 }

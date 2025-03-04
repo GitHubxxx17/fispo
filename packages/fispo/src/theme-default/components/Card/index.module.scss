@@ -1,9 +1,14 @@
 .card {
   padding: 20px 24px;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--fispo-c-card-bg);
   box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
-  color: #4c4948;
+  color: var(--fispo-c-card-text);
+  transition: all 0.3s;
+
+  a {
+    color: var(--fispo-c-card-text);
+  }
 
   .avatar {
     width: 110px;
@@ -58,7 +63,8 @@
     height: 38px;
     line-height: 38px;
     text-align: center;
-    background-color: #49b1f5;
+    background-color: var(--fispo-c-btn-bg);
+    transition: all 0.3s;
     font-size: 1rem;
     outline: none;
     border: none;
@@ -67,7 +73,8 @@
       display: inline-block;
       width: 100%;
       height: 100%;
-      color: #fff;
+      transition: all 0.3s;
+      color: var(--fispo-c-btn-text);
 
       svg {
         margin-right: 5px;

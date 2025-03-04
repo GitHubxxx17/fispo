@@ -1,9 +1,11 @@
 .article-layout {
-  background-color: #fff;
+  background-color: var(--fispo-c-card-bg);
   border-radius: var(--default-border-radius);
   padding: 50px 40px;
   box-shadow: var(--box-shadow);
   line-height: 2;
+  transition: all 0.3s;
+  color: var(--fispo-c-card-text);
 
   .article-content {
     h1,
@@ -14,8 +16,9 @@
     h6 {
       position: relative;
       margin: 20px 0 14px;
-      color: var(--fispo-text-highlight-color);
+      color: var(--fispo-c-article-title);
       font-weight: bold;
+      transition: all 0.3s;
     }
 
     h1 a,
@@ -33,6 +36,7 @@
       border-left: 3px solid var(--fispo-c-blue);
       background-color: var(--fispo-blockquote-bg);
       color: var(--fispo-blockquote-color);
+      transition: all 0.3s;
 
       & > :last-child {
         margin-bottom: 0 !important;
@@ -91,6 +95,7 @@
       border-spacing: 0;
       border-collapse: collapse;
       empty-cells: show;
+      margin-bottom: 20px;
 
       thead {
         background: rgba(153, 169, 191, 0.1);
