@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports } from "./client-entry-BQFzQZoy.js";
+import { j as jsxRuntimeExports } from "./client-entry-BS-K5Iax.js";
 const frontmatter = {
   "title": "MYSQL",
   "categories": "笔记",

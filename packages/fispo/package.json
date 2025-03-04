@@ -3,8 +3,26 @@
   "version": "1.0.0",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json",
+    "./theme": {
+      "types": "./theme.d.ts",
+      "default": "./src/theme-default/index.ts"
+    },
+    "./runtime": {
+      "type": "./runtime.d.ts",
+      "default": "./src/runtime/index.ts"
+    }
+  },
   "scripts": {
     "prepare": "husky install",
     "start": "tsup --watch",
@@ -77,5 +95,17 @@
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
     "unist-util-visit": "^5.0.0"
-  }
+  },
+  "files": [
+    "bin",
+    "src/runtime",
+    "src/theme-default",
+    "dist",
+    "vendors",
+    "template.html",
+    "src/shared/utils",
+    "src/shared/types",
+    "runtime.d.ts",
+    "theme.d.ts"
+  ]
 }

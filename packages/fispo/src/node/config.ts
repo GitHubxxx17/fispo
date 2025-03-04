@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import { loadConfigFromFile } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "../shared/types/index";
@@ -10,12 +9,10 @@ type RawConfig =
   | (() => UserConfig | Promise<UserConfig>);
 
 // 获取用户配置的路径
-function getUserConfigPath(root: string) {
+function getUserConfigPath() {
   try {
-    const supportConfigFiles = ["config.ts", "config.js"];
-    const configPath = supportConfigFiles
-      .map((file) => resolve(root, file))
-      .find(fs.pathExistsSync);
+    const supportConfigFiles = ["fispo.config.ts", "fispo.config.js"];
+    const configPath = supportConfigFiles.find(fs.pathExistsSync);
     return configPath;
   } catch (e) {
     console.error(`Failed to load user config: ${e}`);
@@ -24,20 +21,18 @@ function getUserConfigPath(root: string) {
 }
 
 export async function resolveUserConfig(
-  root: string,
   command: "serve" | "build",
   mode: "development" | "production"
 ) {
   // 1. 获取配置文件路径
-  const configPath = getUserConfigPath(root);
+  const configPath = getUserConfigPath();
   // 2. 读取配置文件的内容
   const result = await loadConfigFromFile(
     {
       command,
       mode,
     },
-    configPath,
-    root
+    configPath
   );
 
   if (result) {
@@ -64,19 +59,24 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
     author: userConfig.author || "xxx",
     avatar: userConfig.avatar || "",
     backgroundImg: userConfig.backgroundImg || "",
+    root: userConfig.root || "docs",
+    postDir: userConfig.postDir || "post",
+    public: userConfig.public || "public",
   };
 }
 
 export async function resolveConfig(
-  root: string,
   command: "serve" | "build",
   mode: "development" | "production"
 ): Promise<SiteConfig> {
-  const [configPath, userConfig] = await resolveUserConfig(root, command, mode);
+  const [configPath, userConfig] = await resolveUserConfig(command, mode);
+  const siteData = resolveSiteData(userConfig as UserConfig);
   const siteConfig: SiteConfig = {
-    root,
+    root: siteData.root,
+    postDir: siteData.postDir,
+    public: siteData.public,
     configPath: configPath,
-    siteData: resolveSiteData(userConfig as UserConfig),
+    siteData: siteData,
   };
   return siteConfig;
 }

@@ -13,10 +13,22 @@ function Footer(props: FooterProps) {
       <p>©2020 - 2023 By XXX17</p>
       <p className={styles["framework-info"]}>
         <span>框架</span>
-        <a>Fitp</a>
+        <a
+          href="https://github.com/GitHubxxx17/fispo"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Fispo
+        </a>
         <span>|</span>
         <span>主题</span>
-        <a>fish-in-pool</a>
+        <a
+          href="https://github.com/GitHubxxx17/fispo"
+          target="_blank"
+          rel="noreferrer"
+        >
+          fish-in-pool
+        </a>
       </p>
     </footer>
   );

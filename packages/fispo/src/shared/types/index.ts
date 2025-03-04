@@ -99,12 +99,17 @@ export interface UserConfig {
   author?: string;
   avatar?: string;
   backgroundImg?: string;
+  root?: string;
+  postDir?: string;
+  public?: string;
 }
 
 export interface SiteConfig {
   root: string;
   configPath: string;
   siteData: UserConfig;
+  postDir: string;
+  public: string;
 }
 
 export type PageType = "home" | "article" | "custom" | "404";

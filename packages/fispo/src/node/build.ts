@@ -43,7 +43,7 @@ export async function bundle(root: string, config: SiteConfig) {
       viteBuild(await resolveViteConfig(true)),
     ]);
     // 复制图片到打包目录
-    const publicDir = join(root, "public");
+    const publicDir = join(root, config.public);
     if (fs.pathExistsSync(publicDir)) {
       await fs.copy(publicDir, join(root, "build"));
     }

@@ -63,7 +63,9 @@ function ArticleList(props: ArticleListProps) {
           return (
             <div className={styles.item} key={`${item.title}-${index}`}>
               <div className={styles.left}>
-                <img src={item.cover} alt="" />
+                <a href={item.path}>
+                  <img src={item.cover} alt="" />
+                </a>
               </div>
               <div className={styles.right}>
                 <div className={styles.content}>
