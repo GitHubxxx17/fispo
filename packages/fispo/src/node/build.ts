@@ -4,9 +4,10 @@ import type { RollupOutput } from "rollup";
 import { dirname, join } from "path";
 import fs from "fs-extra";
 import { pathToFileURL } from "url";
-import { SiteConfig } from "shared/types";
+import { Route, SiteConfig } from "shared/types";
 import { createVitePlugins } from "./plugins/vitePlugins";
-import { Route } from "./plugins/plugin-routes";
+import { HelmetData } from "react-helmet-async";
+import { getTagsAndCategoriesRoutes } from "shared/utils/handleRoutes";
 
 export async function bundle(root: string, config: SiteConfig) {
   const resolveViteConfig = async (
@@ -53,7 +54,7 @@ export async function bundle(root: string, config: SiteConfig) {
 }
 
 export async function renderPage(
-  render: (routePath: string) => Promise<string>,
+  render: (url: string, helmetContext: object) => Promise<string>,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput
@@ -63,9 +64,13 @@ export async function renderPage(
   );
   console.log(`Rendering page in server side...`);
   return Promise.all(
-    [{ path: "/" }, ...routes].map(async (route) => {
+    routes.map(async (route) => {
+      const helmetContext = {
+        context: {},
+      } as HelmetData;
       const routePath = route.path;
-      const appHtml = await render(routePath);
+      const appHtml = await render(routePath, helmetContext.context);
+      const { helmet } = helmetContext.context;
       const styleAssets = clientBundle.output.filter(
         (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
       );
@@ -75,7 +80,10 @@ export async function renderPage(
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>title</title>
+    ${helmet?.title?.toString() || ""}
+    ${helmet?.meta?.toString() || ""}
+    ${helmet?.link?.toString() || ""}
+    ${helmet?.style?.toString() || ""}
     <meta name="description" content="xxx">
     ${styleAssets
       .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
@@ -103,8 +111,15 @@ export async function build(root: string = process.cwd(), config: SiteConfig) {
   const { render, routes } = await import(
     pathToFileURL(serverEntryPath).toString()
   );
+  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(routes);
+  const newRoutes = [
+    ...routes,
+    ...config.siteData.themeConfig.navMenus,
+    ...tagsAndCategoriesRoutes,
+  ];
+
   try {
-    await renderPage(render, routes, root, clientBundle);
+    await renderPage(render, newRoutes, root, clientBundle);
   } catch (e) {
     console.log("Render page error.\n", e);
   }

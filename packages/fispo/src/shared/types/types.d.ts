@@ -7,6 +7,6 @@ declare module "fispo:site-data" {
 }
 
 declare module "fispo:routes" {
-  import type { Route } from "node/plugins/plugin-routes";
+  import type { Route } from "shared/types";
   export const routes: Route[];
 }

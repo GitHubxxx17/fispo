@@ -15,26 +15,35 @@ export function ArticleLayout(props: ArticleLayoutProps) {
   const { title, author } = siteData;
   const [currIndex, setCurrIndex] = useState(0);
 
-  const copyrightText = [
-    { meta: "文章作者：", value: <a href="">{author}</a> },
-    {
-      meta: "文章链接：",
-      value: <a href={location.href}>{location.href}</a>,
-    },
-    {
-      meta: "版权声明：",
-      value: (
-        <>
-          本博客所有文章除特别声明外，均采用
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-            CC BY-NC-SA 4.0
-          </a>
-          许可协议。转载请注明来自
-          <a href={location.origin}>{title}</a>！
-        </>
-      ),
-    },
-  ];
+  const copyrightText = useMemo(() => {
+    const locationObj =
+      typeof location === "undefined"
+        ? {
+            href: "",
+            origin: "",
+          }
+        : location;
+    return [
+      { meta: "文章作者：", value: <a href="">{author}</a> },
+      {
+        meta: "文章链接：",
+        value: <a href={locationObj.href}>{locationObj.href}</a>,
+      },
+      {
+        meta: "版权声明：",
+        value: (
+          <>
+            本博客所有文章除特别声明外，均采用
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              CC BY-NC-SA 4.0
+            </a>
+            许可协议。转载请注明来自
+            <a href={locationObj.origin}>{title}</a>！
+          </>
+        ),
+      },
+    ];
+  }, []);
 
   // 推荐列表
   const recmmendList = useMemo(() => {

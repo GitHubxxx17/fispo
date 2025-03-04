@@ -1,5 +1,8 @@
 //读取本地存储数据
 export function localGetData(name: string) {
+  if (typeof localStorage === "undefined") {
+    return null;
+  }
   const data = localStorage.getItem(name);
   if (data !== null) {
     //把字符串转换成对象
@@ -11,6 +14,9 @@ export function localGetData(name: string) {
 
 //读取session中的数据
 export function sessionGetData(name: string) {
+  if (typeof sessionStorage === "undefined") {
+    return null;
+  }
   const data = sessionStorage.getItem(name);
   if (data !== null) {
     //把字符串转换成对象

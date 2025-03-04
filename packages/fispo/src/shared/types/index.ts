@@ -153,3 +153,10 @@ export interface PageModule {
   mdInfo: string;
   [key: string]: unknown;
 }
+
+export interface Route {
+  path: string;
+  element: React.ReactElement;
+  filePath: string;
+  preload: () => Promise<PageModule>;
+}

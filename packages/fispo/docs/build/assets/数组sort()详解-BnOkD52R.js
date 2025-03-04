@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports } from "./client-entry-ByrpuH8a.js";
+import { j as jsxRuntimeExports } from "./client-entry-BQFzQZoy.js";
 const frontmatter = {
   "title": "数组sort()详解",
   "categories": "笔记",
@@ -6,6 +6,7 @@ const frontmatter = {
   "tags": ["笔记"],
   "cover": "http://GitHubxxx17.github.io/img/post_cover/19.jpg"
 };
+const mdInfo = "数组sort()语法：arr.sort([compareFunction])compareFunction这个参数是可填可不填的语法：arr.sort([compareFunction])compareFunction这个参数是可填可不填的compareFunction 是一个函数,用来指定按某种顺";
 const toc = [{
   "id": "数组sort-1",
   "text": "数组sort()",
@@ -43,6 +44,7 @@ function _createMdxContent(props) {
   const _components = {
     a: "a",
     blockquote: "blockquote",
+    br: "br",
     code: "code",
     div: "div",
     h1: "h1",
@@ -61,8 +63,16 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#数组sort",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "数组sort()"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.blockquote, {
+      children: ["\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "语法：arr.sort([compareFunction])"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsx(_components.p, {
+      children: "compareFunction这个参数是可填可不填的"
     }), "\n", jsxRuntimeExports.jsxs(_components.blockquote, {
       children: ["\n", jsxRuntimeExports.jsx(_components.p, {
         children: "语法：arr.sort([compareFunction])"
@@ -82,13 +92,18 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#默认排序",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "默认排序"]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-javascript",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "lang",
-        children: "javascript"
+      children: [jsxRuntimeExports.jsx(_components.div, {
+        className: "highlight-tools",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "javascript"
+        })
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki nord",
         style: {
@@ -519,7 +534,7 @@ function _createMdxContent(props) {
               style: {
                 color: "#616E88"
               },
-              children: "//[ 1, 2, 3, 40, 5, 6 ] [ '1', '2', '3', '40', '5', '6' ]"
+              children: "//[ 1, 2, 3, 40, 5, 6 ] [ '1', '2', '3', '40', '5', '6' ][ '1', '2', 3', '40', '5', '6' ]//[ 1, 2, 3, 40, 5, 6 ] [ '1', '2', '3', '40', '5', '6' ][ '1', '2', 3', '40', '5', '6' ]"
             })]
           }), "\n", jsxRuntimeExports.jsx(_components.span, {
             className: "line"
@@ -531,19 +546,24 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#升序",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "升序"]
     }), "\n", jsxRuntimeExports.jsxs(_components.blockquote, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.p, {
         children: [jsxRuntimeExports.jsx(_components.strong, {
           children: "原理"
-        }), ":sort()里面的函数返回值如果大于0，则a、b交换位置；（数组原本位置为a在b的前面）\r\n如果返回值小于0，则a、b不交换位置；\r\n如果返回值等于0，则a、b的位置不变。"]
+        }), ":sort()里面的函数返回值如果大于0，则a、b交换位置；（数组原本位置为a在b的前面）", jsxRuntimeExports.jsx(_components.br, {}), "\n如果返回值小于0，则a、b不交换位置；", jsxRuntimeExports.jsx(_components.br, {}), "\n如果返回值等于0，则a、b的位置不变。"]
       }), "\n"]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-javascript",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "lang",
-        children: "javascript"
+      children: [jsxRuntimeExports.jsx(_components.div, {
+        className: "highlight-tools",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "javascript"
+        })
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki nord",
         style: {
@@ -1237,15 +1257,20 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#降序",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "降序"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {
       children: "原理和升序同理"
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-javascript",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "lang",
-        children: "javascript"
+      children: [jsxRuntimeExports.jsx(_components.div, {
+        className: "highlight-tools",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "javascript"
+        })
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki nord",
         style: {
@@ -1939,7 +1964,9 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#sort源码原理",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "sort源码原理"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {
       children: "在v8源码sort部分中，对于需要排序的元素个数n，具体排序策略有几下中情形："
@@ -1958,20 +1985,27 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#sort的其他语法",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "sort的其他语法"]
     }), "\n", jsxRuntimeExports.jsxs(_components.h2, {
       id: "将数组的奇数和偶数分离",
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#将数组的奇数和偶数分离",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "将数组的奇数和偶数分离"]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-javascript",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "lang",
-        children: "javascript"
+      children: [jsxRuntimeExports.jsx(_components.div, {
+        className: "highlight-tools",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "javascript"
+        })
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki nord",
         style: {
@@ -2359,13 +2393,18 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
         href: "#打乱数组",
-        children: "#"
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
       }), "打乱数组"]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-javascript",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "lang",
-        children: "javascript"
+      children: [jsxRuntimeExports.jsx(_components.div, {
+        className: "highlight-tools",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "javascript"
+        })
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki nord",
         style: {
@@ -2738,5 +2777,6 @@ function MDXContent(props = {}) {
 export {
   MDXContent as default,
   frontmatter,
+  mdInfo,
   toc
 };

@@ -42,6 +42,7 @@ export function pluginConfig(
         resolve: {
           alias: {
             "@runtime": join(PACKAGE_ROOT, "src", "runtime", "index.ts"),
+            shared: join(PACKAGE_ROOT, "src", "shared"),
           },
         },
       };

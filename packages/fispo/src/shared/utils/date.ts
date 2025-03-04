@@ -1,4 +1,4 @@
-export default function formatDateToYYYYMMDD(dateStr: string): string {
+export function formatDateToYYYYMMDD(dateStr: string): string {
   // 创建 Date 对象
   const date = new Date(dateStr);
   // 获取年份
@@ -14,4 +14,15 @@ export default function formatDateToYYYYMMDD(dateStr: string): string {
 
   // 拼接成 YYYY-MM-DD 格式的字符串
   return `${year}-${formattedMonth}-${formattedDay}`;
+}
+
+export function sortByDate(arr: Array<any>) {
+  return arr.sort((a, b) => {
+    // 将日期字符串转换为 Date 对象
+    const dateA = new Date(a.date.replace(/-/g, "/"));
+    const dateB = new Date(b.date.replace(/-/g, "/"));
+
+    // 比较两个日期的时间戳
+    return Number(dateB) - Number(dateA);
+  });
 }

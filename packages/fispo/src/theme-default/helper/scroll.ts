@@ -7,7 +7,7 @@ const NAV_HEIGHT = 60;
 
 function UseScroll() {
   let callbackList: Array<ScrollCallback> = [];
-  let lastScrollTop = Math.ceil(window.scrollY);
+  let lastScrollTop = Math.ceil(0);
   let direction: Direction = "down";
 
   function bind() {

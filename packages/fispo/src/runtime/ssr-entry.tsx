@@ -2,17 +2,18 @@ import { App, initPageData } from "./app";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { DataContext } from "./hooks";
+import { HelmetProvider } from "react-helmet-async";
 
-// For ssr component render
-// 增加路由传参
-export async function render(pagePath: string) {
+export async function render(pagePath: string, helmetContext: object) {
   const pageData = await initPageData(pagePath);
   return renderToString(
-    <DataContext.Provider value={pageData}>
-      <StaticRouter location={pagePath}>
-        <App />
-      </StaticRouter>
-    </DataContext.Provider>
+    <HelmetProvider context={helmetContext}>
+      <DataContext.Provider value={pageData}>
+        <StaticRouter location={pagePath}>
+          <App />
+        </StaticRouter>
+      </DataContext.Provider>
+    </HelmetProvider>
   );
 }
 
