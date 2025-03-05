@@ -10,26 +10,28 @@ function Footer(props: FooterProps) {
 
   return (
     <footer className={styles.footer}>
-      <p>©2020 - 2023 By XXX17</p>
-      <p className={styles["framework-info"]}>
-        <span>框架</span>
-        <a
-          href="https://github.com/GitHubxxx17/fispo"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Fispo
-        </a>
-        <span>|</span>
-        <span>主题</span>
-        <a
-          href="https://github.com/GitHubxxx17/fispo"
-          target="_blank"
-          rel="noreferrer"
-        >
-          fish-in-pool
-        </a>
-      </p>
+      <div className={styles.footerInner}>
+        <p>©2020 - 2023 By XXX17</p>
+        <p className={styles["framework-info"]}>
+          <span>框架</span>
+          <a
+            href="https://github.com/GitHubxxx17/fispo"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Fispo
+          </a>
+          <span>|</span>
+          <span>主题</span>
+          <a
+            href="https://github.com/GitHubxxx17/fispo"
+            target="_blank"
+            rel="noreferrer"
+          >
+            fish-in-pool
+          </a>
+        </p>
+      </div>
     </footer>
   );
 }

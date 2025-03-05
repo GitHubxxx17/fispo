@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import RightSide from "../components/rightSide";
 import { localGetData, localSaveData } from "../helper/storage";
 import { Helmet } from "react-helmet-async";
+import NotFoundLayout from "./NotFoundLayout";
 
 export function Layout() {
   const pageData = usePageData();
@@ -25,7 +26,9 @@ export function Layout() {
   const { sidebar, navMenus, banner } = themeConfig;
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
+  const is404 = pageType === "404";
   const [sidebarEnable, setSidebarEnable] = useState(() => {
+    if (is404) return false;
     const hide = localGetData("sidebarHide");
     if (hide !== null) {
       return !hide;
@@ -43,7 +46,7 @@ export function Layout() {
     } else if (pageType === "custom") {
       return <CustomLayout pageData={pageData}></CustomLayout>;
     } else {
-      return <div>404 页面</div>;
+      return <NotFoundLayout notFoundImg={siteData.notFoundImg} />;
     }
   };
 

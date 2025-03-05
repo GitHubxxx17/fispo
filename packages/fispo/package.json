@@ -101,7 +101,6 @@
     "src/runtime",
     "src/theme-default",
     "dist",
-    "vendors",
     "template.html",
     "src/shared/utils",
     "src/shared/types",

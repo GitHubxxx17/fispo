@@ -62,6 +62,7 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
     root: userConfig.root || "docs",
     postDir: userConfig.postDir || "post",
     public: userConfig.public || "public",
+    notFoundImg: userConfig.notFoundImg || "/404.png",
   };
 }
 

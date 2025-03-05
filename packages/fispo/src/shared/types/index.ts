@@ -102,6 +102,7 @@ export interface UserConfig {
   root?: string;
   postDir?: string;
   public?: string;
+  notFoundImg?: string;
 }
 
 export interface SiteConfig {
