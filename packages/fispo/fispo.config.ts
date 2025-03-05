@@ -2,15 +2,10 @@ import { defineConfig } from "fispo";
 
 export default defineConfig({
   title: "XXX17的个人博客",
-  backgroundImg: "/2.webp",
   author: "XXX17",
   description: "学无止境",
-  avatar: "/banner.jpg",
   notFoundImg: "/404.png",
   themeConfig: {
-    banner: {
-      img: "/banner.jpg",
-    },
     navMenus: [
       {
         title: "首页",

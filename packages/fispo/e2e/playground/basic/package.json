@@ -7,9 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "fispo dev docs",
-    "build": "fispo build docs",
-    "preview": "fispo start docs"
+    "dev": "fispo dev",
+    "build": "fispo build",
+    "preview": "fispo start"
   },
   "keywords": [],
   "author": "",

@@ -57,12 +57,13 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
     themeConfig: mergeConfig(defaultConfig, userConfig.themeConfig),
     vite: userConfig.vite || {},
     author: userConfig.author || "xxx",
-    avatar: userConfig.avatar || "",
-    backgroundImg: userConfig.backgroundImg || "",
+    avatar: userConfig.avatar || "/avatar.jpg",
+    backgroundImg: userConfig.backgroundImg || "/bg.png",
     root: userConfig.root || "docs",
     postDir: userConfig.postDir || "post",
     public: userConfig.public || "public",
     notFoundImg: userConfig.notFoundImg || "/404.png",
+    logo: userConfig.logo || "/logo.png",
   };
 }
 
@@ -78,6 +79,7 @@ export async function resolveConfig(
     public: siteData.public,
     configPath: configPath,
     siteData: siteData,
+    logo: siteData.logo,
   };
   return siteConfig;
 }

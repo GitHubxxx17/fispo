@@ -1,8 +1,9 @@
 import { readFile } from "fs/promises";
 import { Plugin } from "vite";
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from "../constants";
+import { SiteConfig } from "shared/types";
 
-export function pluginIndexHtml(): Plugin {
+export function pluginIndexHtml(config: SiteConfig): Plugin {
   return {
     name: "fispo:index-html",
     apply: "serve",
@@ -11,6 +12,15 @@ export function pluginIndexHtml(): Plugin {
       return {
         html,
         tags: [
+          {
+            tag: "link",
+            attrs: {
+              rel: "icon",
+              href: `${config.logo}`,
+              type: "image/png",
+            },
+            injectTo: "head",
+          },
           {
             tag: "script",
             attrs: {

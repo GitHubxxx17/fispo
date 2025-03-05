@@ -103,6 +103,7 @@ export interface UserConfig {
   postDir?: string;
   public?: string;
   notFoundImg?: string;
+  logo?: string;
 }
 
 export interface SiteConfig {
@@ -111,6 +112,7 @@ export interface SiteConfig {
   siteData: UserConfig;
   postDir: string;
   public: string;
+  logo: string;
 }
 
 export type PageType = "home" | "article" | "custom" | "404";

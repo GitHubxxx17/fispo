@@ -125,7 +125,7 @@ export function Layout() {
         />
       )}
 
-      <Footer></Footer>
+      <Footer footerImg={banner.img}></Footer>
     </div>
   );
 }

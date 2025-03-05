@@ -3,7 +3,7 @@ import { ThemeConfig } from "shared/types";
 export const defaultConfig: Required<ThemeConfig> = {
   navMenus: [],
   banner: {
-    img: "",
+    img: "/banner.png",
     subtitle: "",
   },
   sidebar: {
@@ -68,11 +68,12 @@ export function deepcopy(obj: any, hash = new WeakMap()) {
 
 // 合并用户和默认配置
 export const mergeConfig = <T extends object>(target: T, source: T): T => {
+  if (!source) return target;
   const result = {} as T;
   for (const key in target) {
     if (Object.prototype.hasOwnProperty.call(target, key)) {
       if (Array.isArray(target[key])) {
-        result[key] = source[key] || target[key];
+        result[key] = source?.[key] || target[key];
       } else if (typeof target[key] === "object") {
         if (key in source) {
           result[key] = mergeConfig(

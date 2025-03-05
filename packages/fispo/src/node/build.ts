@@ -57,7 +57,8 @@ export async function renderPage(
   render: (url: string, helmetContext: object) => Promise<string>,
   routes: Route[],
   root: string,
-  clientBundle: RollupOutput
+  clientBundle: RollupOutput,
+  config: SiteConfig
 ) {
   const clientChunk = clientBundle.output.find(
     (chunk) => chunk.type === "chunk" && chunk.isEntry
@@ -84,6 +85,7 @@ export async function renderPage(
     ${helmet?.meta?.toString() || ""}
     ${helmet?.link?.toString() || ""}
     ${helmet?.style?.toString() || ""}
+    <link rel="icon" href="${config.logo}" type="image/png">
     <meta name="description" content="xxx">
     ${styleAssets
       .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
@@ -122,7 +124,7 @@ export async function build(root: string = process.cwd(), config: SiteConfig) {
   ];
 
   try {
-    await renderPage(render, newRoutes, root, clientBundle);
+    await renderPage(render, newRoutes, root, clientBundle, config);
   } catch (e) {
     console.log("Render page error.\n", e);
   }

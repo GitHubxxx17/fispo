@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 interface FooterProps {
   children?: React.ReactNode;
+  footerImg: string;
 }
 
 function Footer(props: FooterProps) {
@@ -10,7 +11,12 @@ function Footer(props: FooterProps) {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerInner}>
+      <div
+        className={styles.footerInner}
+        style={{
+          backgroundImage: `url(${props.footerImg})`,
+        }}
+      >
         <p>©2020 - 2023 By XXX17</p>
         <p className={styles["framework-info"]}>
           <span>框架</span>

@@ -17,7 +17,7 @@ export async function createVitePlugins(
   const highlighter = await shiki.getHighlighter({ theme: "nord" });
   const { rehypePlugins, remarkPlugins } = createPluginMdx(highlighter);
   return [
-    pluginIndexHtml(),
+    pluginIndexHtml(config),
     {
       enforce: "pre" as enforceType,
       ...pluginMdx({ remarkPlugins, rehypePlugins }),
