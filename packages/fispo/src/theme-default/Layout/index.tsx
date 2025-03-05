@@ -110,18 +110,21 @@ export function Layout() {
           )}
         </div>
       </main>
-      <RightSide
-        pageData={pageData}
-        setSideBarHide={() => {
-          setSideBarHide((pre: boolean) => {
-            if (sidebarEnable === false) {
-              setSidebarEnable(true);
-            }
-            localSaveData("sidebarHide", !pre);
-            return !pre;
-          });
-        }}
-      />
+      {!is404 && (
+        <RightSide
+          pageData={pageData}
+          setSideBarHide={() => {
+            setSideBarHide((pre: boolean) => {
+              if (sidebarEnable === false) {
+                setSidebarEnable(true);
+              }
+              localSaveData("sidebarHide", !pre);
+              return !pre;
+            });
+          }}
+        />
+      )}
+
       <Footer></Footer>
     </div>
   );

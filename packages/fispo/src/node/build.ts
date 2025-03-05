@@ -116,6 +116,9 @@ export async function build(root: string = process.cwd(), config: SiteConfig) {
     ...routes,
     ...config.siteData.themeConfig.navMenus,
     ...tagsAndCategoriesRoutes,
+    {
+      path: "404",
+    },
   ];
 
   try {
