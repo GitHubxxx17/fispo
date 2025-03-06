@@ -74,7 +74,7 @@ describe("test", () => {
         "sidebar": {
           "card_announcement": {
             "content": "",
-            "enable": false,
+            "enable": true,
           },
           "card_author": {
             "button": {
@@ -88,30 +88,25 @@ describe("test", () => {
           },
           "card_categories": {
             "enable": true,
-            "expand": false,
-            "limit": 0,
-            "sort_order": undefined,
+            "limit": 10,
           },
           "card_recent_post": {
             "enable": true,
-            "limit": 0,
+            "limit": 5,
             "sort": "date",
-            "sort_order": undefined,
           },
           "card_tags": {
-            "color": false,
-            "enable": false,
-            "limit": 0,
-            "sort_order": undefined,
+            "enable": true,
+            "limit": 10,
           },
           "card_webinfo": {
-            "enable": false,
-            "last_push_date": false,
-            "post_count": false,
-            "sort_order": undefined,
+            "enable": true,
+            "last_push_date": true,
+            "post_count": true,
+            "run_time": true,
           },
           "enable": true,
-          "hide": true,
+          "hide": false,
           "position": "left",
         },
       }

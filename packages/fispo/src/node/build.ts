@@ -10,11 +10,12 @@ import { HelmetData } from "react-helmet-async";
 import { getTagsAndCategoriesRoutes } from "shared/utils/handleRoutes";
 
 export async function bundle(root: string, config: SiteConfig) {
+  root = join(process.cwd(), root);
   const resolveViteConfig = async (
     isServer: boolean
   ): Promise<InlineConfig> => ({
     mode: "production",
-    root,
+    root: join(process.cwd(), root),
     plugins: await createVitePlugins(config, undefined, isServer),
     ssr: {
       // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，因为 react-router-dom 的产物为 ESM 格式
@@ -106,7 +107,7 @@ export async function renderPage(
 }
 
 // 新增入参
-export async function build(root: string = process.cwd(), config: SiteConfig) {
+export async function build(root: string, config: SiteConfig) {
   // bundle 方法也新增入参
   const [clientBundle] = await bundle(root, config);
   const serverEntryPath = join(root, ".temp", "ssr-entry.cjs");

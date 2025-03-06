@@ -1,6 +1,6 @@
 {
   "name": "fispo",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -24,7 +24,6 @@
     }
   },
   "scripts": {
-    "prepare": "husky install",
     "start": "tsup --watch",
     "build": "tsup",
     "prepare:e2e": "tsx scripts/prepare-e2e.ts",

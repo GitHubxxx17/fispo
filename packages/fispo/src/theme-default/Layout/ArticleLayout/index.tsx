@@ -97,40 +97,44 @@ export function ArticleLayout(props: ArticleLayoutProps) {
           );
         })}
       </div>
-      <div className={styles["article-pagination"]}>
-        {currIndex > 0 && (
-          <div
-            className={classNames(
-              styles["pagination-left"],
-              styles["article-img-hover"]
-            )}
-          >
-            <a href={articlesList[currIndex - 1].path}>
-              <img src={articlesList[currIndex - 1].cover} alt="" />
-              <div className={styles["pagination-info"]}>
-                <span>上一篇</span>
-                <span>{articlesList[currIndex - 1].title}</span>
-              </div>
-            </a>
-          </div>
-        )}
-        {currIndex < articlesList.length - 1 && (
-          <div
-            className={classNames(
-              styles["pagination-right"],
-              styles["article-img-hover"]
-            )}
-          >
-            <a href={articlesList[currIndex + 1].path}>
-              <img src={articlesList[currIndex + 1].cover} alt="" />
-              <div className={styles["pagination-info"]}>
-                <span>下一篇</span>
-                <span>{articlesList[currIndex + 1].title}</span>
-              </div>
-            </a>
-          </div>
-        )}
-      </div>
+
+      {currIndex !== 0 && (
+        <div className={styles["article-pagination"]}>
+          {currIndex > 0 && (
+            <div
+              className={classNames(
+                styles["pagination-left"],
+                styles["article-img-hover"]
+              )}
+            >
+              <a href={articlesList[currIndex - 1].path}>
+                <img src={articlesList[currIndex - 1].cover} alt="" />
+                <div className={styles["pagination-info"]}>
+                  <span>上一篇</span>
+                  <span>{articlesList[currIndex - 1].title}</span>
+                </div>
+              </a>
+            </div>
+          )}
+          {currIndex < articlesList.length - 1 && (
+            <div
+              className={classNames(
+                styles["pagination-right"],
+                styles["article-img-hover"]
+              )}
+            >
+              <a href={articlesList[currIndex + 1].path}>
+                <img src={articlesList[currIndex + 1].cover} alt="" />
+                <div className={styles["pagination-info"]}>
+                  <span>下一篇</span>
+                  <span>{articlesList[currIndex + 1].title}</span>
+                </div>
+              </a>
+            </div>
+          )}
+        </div>
+      )}
+
       {recmmendList.length !== 0 && (
         <div className={styles["article-recommend"]}>
           <div className={styles["recommend-title"]}>相关推荐</div>

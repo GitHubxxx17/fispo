@@ -1,6 +1,6 @@
 import compression from "compression";
 import polka from "polka";
-import path from "path";
+import path, { join } from "path";
 import { resolveConfig } from "./config";
 import fs from "fs-extra";
 import sirv from "sirv";
@@ -10,7 +10,8 @@ const DEFAULT_PORT = 4173;
 export async function preview({ port }: { port?: number }) {
   const config = await resolveConfig("serve", "production");
   const listenPort = port ?? DEFAULT_PORT;
-  const outputDir = path.resolve(config.root, "build");
+  const root = join(process.cwd(), config.root);
+  const outputDir = path.resolve(root, "build");
   const notFoundPage = fs.readFileSync(
     path.resolve(outputDir, "404.html"),
     "utf-8"
@@ -24,7 +25,7 @@ export async function preview({ port }: { port?: number }) {
     immutable: true,
     setHeaders(res, pathname) {
       if (pathname.endsWith(".html")) {
-        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("cache-control", "no-cache");
       }
     },
   });
