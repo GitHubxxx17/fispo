@@ -6,7 +6,7 @@ declare module "fispo:site-data" {
   export default siteData;
 }
 
-declare module "fispo:routes" {
+declare module "virtual:routes" {
   import type { Route } from "shared/types";
   export const routes: Route[];
 }

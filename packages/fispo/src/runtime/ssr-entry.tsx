@@ -18,4 +18,4 @@ export async function render(pagePath: string, helmetContext: object) {
 }
 
 // 导出路由数据
-export { routes } from "fispo:routes";
+export { routes } from "virtual:routes";

@@ -1,6 +1,6 @@
 import { matchRoutes } from "react-router-dom";
 import { Layout } from "../theme-default";
-import { routes } from "fispo:routes";
+import { routes } from "virtual:routes";
 import { PageData } from "shared/types";
 import siteData from "fispo:site-data";
 import { handleRoutes } from "shared/utils/handleRoutes";

@@ -7,12 +7,12 @@ interface PluginOptions {
   isSSR: boolean;
 }
 
-export const CONVENTIONAL_ROUTE_ID = "fispo:routes";
+export const CONVENTIONAL_ROUTE_ID = "virtual:routes";
 
 export function pluginRoutes(options: PluginOptions): Plugin {
   const routeService = new RouteService(options.root);
   return {
-    name: "fispo:routes",
+    name: "virtual:routes",
     async configResolved() {
       // Vite 启动时，对 RouteService 进行初始化
       await routeService.init();

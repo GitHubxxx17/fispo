@@ -1,4 +1,4 @@
-import { routes } from "fispo:routes";
+import { routes } from "virtual:routes";
 import { useRoutes } from "react-router-dom";
 
 export const Content = () => {
