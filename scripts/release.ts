@@ -49,7 +49,10 @@ const run = isDry ? dryRun : directRun;
 const step = (msg) => console.log(chalk.cyan(msg));
 const getPkgRoot = (pkg) => path.resolve(__dirname, "../packages/" + pkg);
 
+let isCommit = false;
+
 async function main() {
+  isCommit = false;
   let targetVersion = args._[0];
   if (!targetVersion) {
     // 1. 确定变动版本级别 `patch | minor | major`，遵循 semver 规范。
@@ -128,6 +131,7 @@ async function main() {
       initial: `release: v${targetVersion}`,
     });
     await run("git", ["commit", "-m", `${commitType}: ${commitMessage}`, "-n"]);
+    isCommit = true;
   } else {
     console.log("No changes to commit.");
   }
@@ -207,11 +211,9 @@ async function publishPackage(pkgName: string, version: string, runIfNotDry) {
     await runIfNotDry(
       // note: use of yarn is intentional here as we rely on its publishing
       // behavior.
-      "yarn",
+      "npm",
       [
         "publish",
-        "--new-version",
-        version,
         ...(releaseTag ? ["--tag", releaseTag] : []),
         "--access",
         "public",
@@ -235,4 +237,7 @@ main().catch((err) => {
   // 错误兜底处理，回退版本
   console.log(err);
   updateVersions(currentVersion);
+  if (isCommit) {
+    run("git", ["reset", "--soft", "HEAD~1"]);
+  }
 });

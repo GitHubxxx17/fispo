@@ -1,5 +1,5 @@
 {
-  "name": "fispo",
+  "name": "fispo-core",
   "version": "0.1.0",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.js",
