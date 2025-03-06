@@ -33,10 +33,12 @@ const commitTypes = [
   "chore",
   "perf",
 ];
+const releaseTags = ["none", "alpha", "beta", "rc"];
 
 const packages = fs
   .readdirSync(path.resolve(__dirname, "../packages"))
   .filter((p) => !p.endsWith(".ts") && !p.startsWith("."));
+const skippedPackages: string[] = [];
 const directRun = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: "inherit", ...opts });
 const dryRun = (bin, args, opts = {}) =>
@@ -114,7 +116,7 @@ async function main() {
     const { commitType } = await prompt<{ commitType: string }>({
       type: "select",
       name: "commitType",
-      message: "Select release type",
+      message: "Select commit type",
       choices: commitTypes.map((type) => type),
     });
 
@@ -132,7 +134,9 @@ async function main() {
 
   // 7. 执行 npm publish
   step("\nPublishing packages...");
-  await run("pnpm", ["publish", "--access", "public"]);
+  for (const pkg of packages) {
+    await publishPackage(pkg, targetVersion, run);
+  }
 
   // 8. git push 并打 tag
   step("\nPushing to GitHub...");
@@ -172,6 +176,59 @@ function updateDeps(pkg, depType, version) {
       deps[dep] = version;
     }
   });
+}
+
+async function publishPackage(pkgName: string, version: string, runIfNotDry) {
+  if (skippedPackages.includes(pkgName)) {
+    return;
+  }
+  const pkgRoot = getPkgRoot(pkgName);
+  const pkgPath = path.resolve(pkgRoot, "package.json");
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+  step(`\nPublishing packages:${pkg.name}`);
+  if (pkg.private) {
+    return;
+  }
+
+  // 选择发布标签
+  let { releaseTag } = await prompt<{ releaseTag: string }>({
+    type: "select",
+    name: "releaseTag",
+    message: "Select release tag",
+    choices: releaseTags.map((type) => type),
+  });
+
+  if (releaseTag == "none") {
+    releaseTag = "";
+  }
+
+  step(`Publishing ${pkgName}...`);
+  try {
+    await runIfNotDry(
+      // note: use of yarn is intentional here as we rely on its publishing
+      // behavior.
+      "yarn",
+      [
+        "publish",
+        "--new-version",
+        version,
+        ...(releaseTag ? ["--tag", releaseTag] : []),
+        "--access",
+        "public",
+      ],
+      {
+        cwd: pkgRoot,
+        stdio: "pipe",
+      }
+    );
+    console.log(chalk.green(`Successfully published ${pkgName}@${version}`));
+  } catch (e) {
+    if (e.stderr.match(/previously published/)) {
+      console.log(chalk.red(`Skipping already published: ${pkgName}`));
+    } else {
+      throw e;
+    }
+  }
 }
 
 main().catch((err) => {

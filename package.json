@@ -1,5 +1,6 @@
 {
   "name": "fispo-monorepo",
+  "private": "true",
   "version": "0.1.0",
   "description": "The framework of building blog based on SSG",
   "packageManager": "pnpm@9.12.0",
