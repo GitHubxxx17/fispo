@@ -35,6 +35,7 @@ export async function createVitePlugins(
           "invariant",
           "shallowequal",
           "history",
+          "react-is",
         ].some((p) => id.includes(p));
       },
     }),
