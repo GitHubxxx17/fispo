@@ -1,4 +1,4 @@
-import { defineConfig } from "./packages/fispo";
+import { defineConfig } from "fispo-core";
 
 export default defineConfig({
   title: "XXX17的个人博客",

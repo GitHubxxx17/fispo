@@ -1,4 +1,4 @@
-import { Content } from "@runtime";
+import { Content } from "../../../runtime";
 import styles from "./index.module.scss";
 import { PageData } from "shared/types";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";

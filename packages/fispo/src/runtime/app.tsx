@@ -3,8 +3,8 @@ import { Layout } from "../theme-default";
 import { routes } from "virtual:routes";
 import { PageData } from "shared/types";
 import siteData from "fispo:site-data";
-import { handleRoutes } from "shared/utils/handleRoutes";
-import { sortByDate } from "shared/utils/date";
+import { handleRoutes } from "../shared/utils/handleRoutes";
+import { sortByDate } from "../shared/utils/date";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   const pathList = routePath.split("/").filter(Boolean);

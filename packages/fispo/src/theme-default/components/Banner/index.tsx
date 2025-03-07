@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import classNames from "classnames";
 import { BannerData, FrontMatter } from "shared/types";
-import { formatDateToYYYYMMDD } from "shared/utils/date";
+import { formatDateToYYYYMMDD } from "../../../shared/utils/date";
 import Icon from "../Icon";
 interface BannerProps {
   isHomePage?: boolean;
