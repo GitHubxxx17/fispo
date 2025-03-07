@@ -32,6 +32,9 @@ export async function createVitePlugins(
           "classnames",
           "react-fast-compare",
           "react-helmet-async",
+          "invariant",
+          "shallowequal",
+          "history",
         ].some((p) => id.includes(p));
       },
     }),
