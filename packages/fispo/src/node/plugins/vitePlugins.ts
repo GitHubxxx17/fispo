@@ -25,8 +25,10 @@ export async function createVitePlugins(
     },
     commonjs({
       filter(id) {
-        // 特别处理 prop-types 和 fontawesome 相关模块
-        return ["prop-types", "@fortawesome"].some((p) => id.includes(p));
+        // 特别处理 prop-types fontawesome classnames相关模块
+        return ["prop-types", "@fortawesome", "classnames"].some((p) =>
+          id.includes(p)
+        );
       },
     }),
     pluginReact({
