@@ -48,6 +48,8 @@ export function pluginConfig(
             "react/jsx-runtime",
             "react-helmet-async",
             "medium-zoom",
+            "@fortawesome/react-fontawesome",
+            "classnames",
           ],
         },
         resolve: {
