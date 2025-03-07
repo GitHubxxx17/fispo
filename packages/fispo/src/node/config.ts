@@ -2,6 +2,7 @@ import { loadConfigFromFile } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "../shared/types/index";
 import { mergeConfig, defaultConfig } from "shared/utils/defaultConfig";
+import { configFiles } from "./constants";
 
 type RawConfig =
   | UserConfig
@@ -11,8 +12,7 @@ type RawConfig =
 // 获取用户配置的路径
 function getUserConfigPath() {
   try {
-    const supportConfigFiles = ["fispo.config.ts", "fispo.config.js"];
-    const configPath = supportConfigFiles.find(fs.pathExistsSync);
+    const configPath = configFiles.find(fs.pathExistsSync);
     return configPath;
   } catch (e) {
     console.error(`Failed to load user config: ${e}`);

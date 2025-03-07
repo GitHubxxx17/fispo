@@ -51,7 +51,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
     return articlesList.filter((article) => {
       return (
         categories[category].includes(article.path) &&
-        article.path !== decodeURIComponent(pagePath)
+        decodeURI(article.path) !== decodeURI(pagePath)
       );
     });
   }, [frontmatter, articlesList]);
@@ -59,7 +59,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
   useEffect(() => {
     setCurrIndex(
       articlesList.findIndex(
-        (article) => article.path === decodeURIComponent(pagePath)
+        (article) => decodeURI(article.path) === decodeURI(pagePath)
       )
     );
   }, [articlesList]);

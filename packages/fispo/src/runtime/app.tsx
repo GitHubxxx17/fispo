@@ -1,7 +1,7 @@
 import { matchRoutes } from "react-router-dom";
 import { Layout } from "../theme-default";
 import { routes } from "virtual:routes";
-import { PageData } from "shared/types";
+import { PageData, Route } from "shared/types";
 import siteData from "fispo:site-data";
 import { handleRoutes } from "../shared/utils/handleRoutes";
 import { sortByDate } from "../shared/utils/date";
@@ -57,7 +57,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
   // 文章：获取路由组件编译后的模块内容
   const matched = matchRoutes(routes, routePath);
   if (matched) {
-    const moduleInfo = await matched[0].route.preload();
+    const moduleInfo = await (matched[0].route as Route).preload();
     return getPageData(
       "article",
       moduleInfo.frontmatter,

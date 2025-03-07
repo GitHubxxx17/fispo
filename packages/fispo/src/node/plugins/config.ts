@@ -1,7 +1,7 @@
 import { join, relative } from "path";
 import { Plugin } from "vite";
 import { SiteConfig } from "shared/types/index";
-import { PACKAGE_ROOT } from "node/constants";
+import { configFiles, PACKAGE_ROOT } from "node/constants";
 import fs from "fs-extra";
 import sirv from "sirv";
 
@@ -65,6 +65,10 @@ export function pluginConfig(
       if (fs.pathExistsSync(publicDir)) {
         server.middlewares.use(sirv(publicDir));
       }
+
+      configFiles.forEach((file) => {
+        server.watcher.add(file);
+      });
     },
   };
 }
