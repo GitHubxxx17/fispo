@@ -12,14 +12,14 @@ export const CONVENTIONAL_ROUTE_ID = "virtual:routes";
 export function pluginRoutes(options: PluginOptions): Plugin {
   const routeService = new RouteService(options.root);
   return {
-    name: "virtual:routes",
+    name: "fispo:vite-plugin-routes",
     async configResolved() {
       // Vite 启动时，对 RouteService 进行初始化
       await routeService.init();
     },
     resolveId(id: string) {
       if (id === CONVENTIONAL_ROUTE_ID) {
-        return "\0" + id;
+        return "\0" + CONVENTIONAL_ROUTE_ID;
       }
     },
 

@@ -1,5 +1,5 @@
 import { createServer as createViteDevServer } from "vite";
-import { PACKAGE_ROOT } from "./constants";
+import { PACKAGE_ROOT, RUNTIME_PATH, SHARED_PATH } from "./constants";
 import { resolveConfig } from "./config";
 import { createVitePlugins } from "./plugins/vitePlugins";
 
@@ -10,7 +10,7 @@ export async function createDevServer(restartServer: () => Promise<void>) {
     plugins: await createVitePlugins(config, restartServer),
     server: {
       fs: {
-        allow: [PACKAGE_ROOT],
+        allow: [PACKAGE_ROOT, RUNTIME_PATH, SHARED_PATH, process.cwd()],
       },
     },
   });
