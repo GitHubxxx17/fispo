@@ -6,7 +6,7 @@ import { SiteConfig } from "shared/types";
 import pluginMdx from "@mdx-js/rollup";
 import shiki from "shiki";
 import { createPluginMdx } from "./plugin-mdx";
-import commonjs from "vite-plugin-commonjs";
+import commonjs from "@rollup/plugin-commonjs";
 
 type enforceType = "pre" | "post";
 
@@ -23,22 +23,7 @@ export async function createVitePlugins(
       enforce: "pre" as enforceType,
       ...pluginMdx({ remarkPlugins, rehypePlugins }),
     },
-    commonjs({
-      filter(id) {
-        // 特别处理 prop-types fontawesome classnames相关模块
-        return [
-          "prop-types",
-          "@fortawesome",
-          "classnames",
-          "react-fast-compare",
-          "react-helmet-async",
-          "invariant",
-          "shallowequal",
-          "history",
-          "react-is",
-        ].some((p) => id.includes(p));
-      },
-    }),
+    commonjs(),
     pluginReact({
       jsxRuntime: "automatic",
       include: /\.(mdx|js|jsx|ts|tsx)$/,
