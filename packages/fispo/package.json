@@ -1,6 +1,6 @@
 {
   "name": "fispo-core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -85,7 +85,8 @@
     "shiki": "^0.14.7",
     "sirv": "^3.0.1",
     "unified": "^11.0.5",
-    "vite": "^6.1.1"
+    "vite": "^6.1.1",
+    "vite-plugin-commonjs": "^0.10.4"
   },
   "devDependencies": {
     "@types/hast": "^3.0.4",
