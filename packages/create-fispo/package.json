@@ -1,0 +1,52 @@
+{
+  "name": "@fispo/create-fispo",
+  "version": "0.2.0",
+  "description": "create template for fipso",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "create-fispo": "bin/index.js"
+  },
+  "scripts": {
+    "dev": "tsup --watch --format=cjs,esm",
+    "build": "tsup --format=cjs,esm"
+  },
+  "keywords": [
+    "vite",
+    "ssg",
+    "fispo",
+    "cli",
+    "template"
+  ],
+  "author": "XXX17",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "cac": "^6.7.14",
+    "figlet": "^1.8.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.7.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,json}": [
+      "eslint --fix"
+    ]
+  },
+  "files": [
+    "template",
+    "bin",
+    "dist"
+  ]
+}

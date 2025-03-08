@@ -1,0 +1,17 @@
+{
+  "name": "fispo-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "fispo dev",
+    "build": "fispo build",
+    "preview": "fispo preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fispo-core": "^0.0.12"
+  }
+}
