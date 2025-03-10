@@ -1,6 +1,7 @@
 import { ArticleData } from "fispo-core/types";
 import styles from "./index.module.scss";
 import { Icon } from "fispo-core/theme";
+import { getRandomColor } from "../../helper/tag";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface PostProps extends ArticleData {}
@@ -32,7 +33,9 @@ const Post = (props: PostProps) => {
         {props.tags.map((tag, index) => {
           return (
             <span key={index}>
-              <a href={`/tag/${tag}`}>{tag}</a>
+              <a href={`/tag/${tag}`} style={{ color: getRandomColor() }}>
+                {tag}
+              </a>
             </span>
           );
         })}
