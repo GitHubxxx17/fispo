@@ -2,13 +2,13 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": ".",
     "baseUrl": "src",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "paths": {
       "@runtime": ["./runtime/index.ts"],
-      "shared/*": ["shared/*"]
+      "shared/*": ["shared/*"],
+      "@fispo": [".."]
     }
   },
   "include": ["e2e/**/*.ts", "src/**/*"]

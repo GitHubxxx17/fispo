@@ -1,5 +1,4 @@
 import Nav from "../components/Nav";
-import { usePageData } from "../../runtime";
 import "../style/base.css";
 import "../style/vars.css";
 import "../style/docs.css";
@@ -17,9 +16,14 @@ import RightSide from "../components/rightSide";
 import { localGetData, localSaveData } from "../helper/storage";
 import { Helmet } from "react-helmet-async";
 import NotFoundLayout from "./NotFoundLayout";
+import { PageData } from "shared/types";
 
-export function Layout() {
-  const pageData = usePageData();
+interface LayoutProps {
+  pageData: PageData;
+}
+
+export function Layout(props: LayoutProps) {
+  const { pageData } = props;
   // 获取 pageType
   const { pageType, title, siteData, frontmatter } = pageData;
   const { title: siteTitle, themeConfig } = siteData;

@@ -1,13 +1,16 @@
 import { loadConfigFromFile } from "vite";
 import fs from "fs-extra";
-import { SiteConfig, UserConfig } from "../shared/types/index";
+import { SiteConfig, UserConfig } from "shared/types";
 import { mergeConfig, defaultConfig } from "shared/utils/defaultConfig";
 import { configFiles } from "./constants";
+import { DefaultThemeConfig } from "shared/types/default-theme";
+import { join } from "path";
+import { pathToFileURL } from "url";
 
-type RawConfig =
-  | UserConfig
-  | Promise<UserConfig>
-  | (() => UserConfig | Promise<UserConfig>);
+type RawConfig<ThemeConfig = unknown> =
+  | UserConfig<ThemeConfig>
+  | Promise<UserConfig<ThemeConfig>>
+  | (() => UserConfig<ThemeConfig> | Promise<UserConfig<ThemeConfig>>);
 
 // 获取用户配置的路径
 function getUserConfigPath() {
@@ -50,11 +53,18 @@ export async function resolveUserConfig(
   }
 }
 
-export function resolveSiteData(userConfig: UserConfig): UserConfig {
+export async function resolveSiteData(
+  userConfig: UserConfig
+): Promise<UserConfig> {
+  const path = join(__dirname, "../..", userConfig.theme, "src/config.js");
+  const { default: themeConfig } = await import(pathToFileURL(path).toString());
+  const deConfig = themeConfig || defaultConfig;
+  const targetConfig = userConfig.themeConfig;
   return {
     title: userConfig.title || "fispo",
     description: userConfig.description || "SSG Framework",
-    themeConfig: mergeConfig(defaultConfig, userConfig.themeConfig),
+    theme: userConfig.theme || "",
+    themeConfig: mergeConfig(deConfig, targetConfig),
     vite: userConfig.vite || {},
     author: userConfig.author || "xxx",
     avatar: userConfig.avatar || "/avatar.jpg",
@@ -72,7 +82,7 @@ export async function resolveConfig(
   mode: "development" | "production"
 ): Promise<SiteConfig> {
   const [configPath, userConfig] = await resolveUserConfig(command, mode);
-  const siteData = resolveSiteData(userConfig as UserConfig);
+  const siteData = await resolveSiteData(userConfig as UserConfig);
   const siteConfig: SiteConfig = {
     root: siteData.root,
     postDir: siteData.postDir,
@@ -84,6 +94,8 @@ export async function resolveConfig(
   return siteConfig;
 }
 
-export function defineConfig(config: UserConfig) {
+export function defineConfig<ThemeConfig = DefaultThemeConfig>(
+  config: UserConfig<ThemeConfig>
+) {
   return config;
 }

@@ -1,6 +1,6 @@
 import { App, initPageData } from "./app";
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
 import { DataContext } from "./hooks";
 import { HelmetProvider } from "react-helmet-async";
 

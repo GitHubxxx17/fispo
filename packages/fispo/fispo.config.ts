@@ -1,10 +1,12 @@
 import { defineConfig } from "fispo-core";
+import { ParticleThemeConfig } from "../particle/src";
 
-export default defineConfig({
+export default defineConfig<ParticleThemeConfig>({
   title: "XXX17的个人博客",
   author: "XXX17",
   description: "学无止境",
   notFoundImg: "/404.png",
+  theme: "particle",
   themeConfig: {
     navMenus: [
       {
@@ -28,22 +30,10 @@ export default defineConfig({
         icon: "heart",
       },
     ],
-    sidebar: {
-      card_author: {
-        button: {
-          link: "https://github.com/GitHubxxx17/fispo",
-        },
-      },
-      card_categories: {
-        limit: 1,
-      },
-      card_recent_post: {
-        sort: "date",
-      },
-      card_announcement: {
-        enable: true,
-        content: "网站正在更新中······",
-      },
+    banner: {
+      title: "Argvchs の小窝",
+      img: "/background.jpg",
+      subTitle: "Here's an argvchs...",
     },
   },
 });

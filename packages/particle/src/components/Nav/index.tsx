@@ -2,24 +2,20 @@ import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
-import Icon from "../Icon";
-import { navMenuItem } from "shared/types/default-theme";
+import { navMenuItem } from "types";
+import { Icon } from "fispo-core/theme";
 
 interface NavProps {
   title?: string;
   menus?: navMenuItem[];
-  children?: React.ReactNode;
 }
 
 function Nav(props: NavProps) {
-  const { title = "", menus = [], children } = props;
-  if (children) return children;
+  const { title = "", menus = [] } = props;
   const [isHide, setIsHide] = useState(false);
-  const [isTop, setIsTop] = useState(true);
   useEffect(() => {
-    const scroll: ScrollCallback = (direction, isTop) => {
+    const scroll: ScrollCallback = (direction) => {
       setIsHide(direction == "down");
-      setIsTop(isTop);
     };
 
     scrollManager.add(scroll);
@@ -32,7 +28,6 @@ function Nav(props: NavProps) {
     <nav
       className={classNames(styles.nav, {
         [styles.hide]: isHide,
-        [styles.top]: isTop,
       })}
     >
       <div className={styles["blog-name"]}>
@@ -44,7 +39,7 @@ function Nav(props: NavProps) {
             return (
               <li key={items.title}>
                 <a href={items.path}>
-                  <Icon icon={items.icon}></Icon>
+                  <Icon icon={items.icon} />
                   <span>{items.title}</span>
                 </a>
               </li>

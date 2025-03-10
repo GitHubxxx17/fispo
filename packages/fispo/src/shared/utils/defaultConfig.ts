@@ -1,6 +1,6 @@
-import { ThemeConfig } from "shared/types";
+import { DefaultThemeConfig } from "shared/types/default-theme";
 
-export const defaultConfig: Required<ThemeConfig> = {
+export const defaultConfig: Required<DefaultThemeConfig> = {
   navMenus: [],
   banner: {
     img: "/banner.png",

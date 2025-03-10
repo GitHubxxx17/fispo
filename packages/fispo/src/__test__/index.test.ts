@@ -1,10 +1,10 @@
-import { ThemeConfig } from "../shared/types";
+import { DefaultThemeConfig } from "../shared/types/default-theme";
 import { defaultConfig, mergeConfig } from "../shared/utils/defaultConfig";
 import { describe, expect, test } from "vitest";
 
 describe("test", () => {
   test("mergeConfig", async () => {
-    const userConfig: ThemeConfig = {
+    const userConfig: DefaultThemeConfig = {
       banner: {
         img: "/banner.jpg",
       },
@@ -38,7 +38,7 @@ describe("test", () => {
         },
       },
     };
-    const result = mergeConfig<ThemeConfig>(defaultConfig, userConfig);
+    const result = mergeConfig<DefaultThemeConfig>(defaultConfig, userConfig);
     expect(result).toMatchInlineSnapshot(`
       {
         "banner": {

@@ -1,0 +1,28 @@
+{
+  "name": "@fispo/particle",
+  "version": "0.0.0",
+  "description": "themes of fispo",
+  "main": "./src/index.js",
+  "types": "./src/types.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "theme",
+    "fispo"
+  ],
+  "author": "XXX17",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sass": "^1.85.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1"
+  }
+}

@@ -1,0 +1,23 @@
+.footer {
+  font-size: 14px;
+  margin-top: 150px;
+  padding-bottom: 20px;
+  text-align: center;
+  width: 100%;
+
+  &-wrap {
+    border-top: 1px solid #aaa;
+    color: #5c6b72;
+    margin: auto;
+    width: 900px;
+
+    & > div {
+      font-weight: 700;
+      margin: 15px;
+    }
+
+    a {
+      margin: 0 5px;
+    }
+  }
+}
