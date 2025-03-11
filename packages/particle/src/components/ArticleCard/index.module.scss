@@ -1,0 +1,31 @@
+.articleCard {
+  background: #fff;
+  border: 1px solid #0002;
+  border-radius: 3px;
+  padding: 24px;
+  transition: box-shadow 0.5s;
+  margin-bottom: 20px;
+
+  .title {
+    color: #1e3e3f;
+    h3 {
+      font-size: 24px;
+    }
+  }
+
+  .time,
+  a,
+  svg {
+    color: #5c6b72;
+  }
+
+  svg {
+    margin-right: 6px;
+  }
+
+  .info {
+    span {
+      margin-right: 10px;
+    }
+  }
+}

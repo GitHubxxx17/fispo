@@ -1,0 +1,37 @@
+.tags {
+  padding: 100px;
+
+  .categories-tags {
+    margin: auto;
+    margin-bottom: 50px;
+    max-width: 900px;
+    text-align: center;
+    width: 100%;
+
+    span {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    a {
+      border: #ffffff80 1px solid;
+      border-radius: 10px;
+      color: #fff;
+      padding: 10px 15px;
+      transition:
+        background 0.25s,
+        border 0.25s,
+        color 0.25s;
+
+      &:hover {
+        background: #fff !important;
+        border: #a5c2f5 1px solid;
+        color: #5c6b72;
+      }
+    }
+
+    svg {
+      margin-right: 8px;
+    }
+  }
+}
