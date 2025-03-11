@@ -1,6 +1,6 @@
 {
   "name": "@fispo/create-fispo",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "create template for fipso",
   "type": "module",
   "main": "dist/index.cjs",
@@ -33,7 +33,11 @@
   },
   "dependencies": {
     "cac": "^6.7.14",
+    "chalk": "^5.4.1",
+    "enquirer": "^2.4.1",
+    "execa": "^9.5.2",
     "figlet": "^1.8.0",
+    "fs-extra": "^11.3.0",
     "ora": "^8.2.0"
   },
   "devDependencies": {
