@@ -1,7 +1,7 @@
 export default {
   navMenus: [],
   banner: {
-    img: "/banner.jpg",
+    img: "/banner.png",
     title: "",
     subTitle: "",
   },
