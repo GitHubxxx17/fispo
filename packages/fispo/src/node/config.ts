@@ -56,10 +56,17 @@ export async function resolveUserConfig(
 export async function resolveSiteData(
   userConfig: UserConfig
 ): Promise<UserConfig> {
+  const isDev = process.env.NODE_ENV === "development";
   const targetConfig = userConfig.themeConfig;
   let deConfig = defaultConfig;
   if (userConfig.theme) {
-    const path = join(__dirname, "../..", userConfig.theme, "src/config.js");
+    const path = join(
+      __dirname,
+      "../..",
+      `${isDev ? "" : "@fispo"}`,
+      userConfig.theme,
+      "src/config.js"
+    );
     const { default: themeConfig } = await import(
       pathToFileURL(path).toString()
     );

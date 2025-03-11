@@ -37,6 +37,7 @@ export function pluginConfig(
       }
     },
     config() {
+      const isDev = process.env.NODE_ENV === "development";
       return {
         root: PACKAGE_ROOT,
         optimizeDeps: {
@@ -56,7 +57,7 @@ export function pluginConfig(
           alias: {
             "@runtime": join(PACKAGE_ROOT, "src", "runtime", "index.ts"),
             shared: join(PACKAGE_ROOT, "src", "shared"),
-            "@fispo": join(PACKAGE_ROOT, ".."),
+            "@fispo": join(PACKAGE_ROOT, `${isDev ? ".." : "../@fispo"}`),
             "@theme-default": join(PACKAGE_ROOT, "src", "theme-default"),
           },
         },
