@@ -1,3 +1,15 @@
+## [0.2.1](https://github.com/GitHubxxx17/fispo/compare/v0.1.13...v0.2.1) (2025-03-11)
+
+
+### Features
+
+* 新增particle主题 ([f2897d2](https://github.com/GitHubxxx17/fispo/commit/f2897d25bd684d0741e2ef7d1e329d889ae042b2))
+* fispo命令行创建模板工具 ([5480d4d](https://github.com/GitHubxxx17/fispo/commit/5480d4dac08841cff0b7c4993c378846e8ff2c61))
+* particle标签页和分类页 ([8d9fec3](https://github.com/GitHubxxx17/fispo/commit/8d9fec362cf96fc91a108085c3e58d670132231a))
+* particle主题文章页 ([df20764](https://github.com/GitHubxxx17/fispo/commit/df20764c559a9a6745c1af24ef1ed349440d15a2))
+
+
+
 # [0.2.0](https://github.com/GitHubxxx17/fispo/compare/v0.1.13...v0.2.0) (2025-03-08)
 
 

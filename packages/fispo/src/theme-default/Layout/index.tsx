@@ -22,7 +22,7 @@ interface LayoutProps {
   pageData: PageData;
 }
 
-export function Layout(props: LayoutProps) {
+export default function Layout(props: LayoutProps) {
   const { pageData } = props;
   // 获取 pageType
   const { pageType, title, siteData, frontmatter } = pageData;
