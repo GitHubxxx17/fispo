@@ -13,8 +13,11 @@ import { remarkPluginInfo } from "./remarkPlugins/info";
 import rehypeRaw from "rehype-raw";
 import rehypeReact from "rehype-react";
 import React from "react";
+import { SiteConfig } from "shared/types";
 
-export function createPluginMdx(highlighter: Highlighter) {
+export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
+  const plugins = config.siteData.plugins || [];
+
   return {
     remarkPlugins: [
       remarkPluginGFM,
@@ -23,6 +26,8 @@ export function createPluginMdx(highlighter: Highlighter) {
       remarkPluginFrontmatter,
       [remarkPluginMDXFrontMatter, { name: "frontmatter" }],
       remarkPluginToc,
+      ...(config.siteData.markdown.remarkPlugins ?? []),
+      ...plugins.map((plugin) => plugin.markdown?.remarkPlugins || []).flat(),
     ] as PluggableList,
     rehypePlugins: [
       [
@@ -43,6 +48,8 @@ export function createPluginMdx(highlighter: Highlighter) {
       ],
       rehypePluginPreWrapper,
       [rehypePluginShiki, { highlighter }],
+      ...(config.siteData.markdown.rehypePlugins ?? []),
+      ...plugins.map((plugin) => plugin.markdown?.rehypePlugins || []).flat(),
       [
         rehypeReact,
         {

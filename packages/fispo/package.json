@@ -25,6 +25,9 @@
     "./runtime": {
       "types": "./runtime.d.ts",
       "default": "./src/runtime/index.ts"
+    },
+    "./plugin": {
+      "types": "./plugin.d.ts"
     }
   },
   "scripts": {

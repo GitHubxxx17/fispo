@@ -80,6 +80,8 @@ export async function resolveSiteData(
     public: userConfig.public || "public",
     notFoundImg: userConfig.notFoundImg || "/404.png",
     logo: userConfig.logo || "/logo.png",
+    markdown: userConfig.markdown || {},
+    plugins: userConfig.plugins || [],
   };
 }
 

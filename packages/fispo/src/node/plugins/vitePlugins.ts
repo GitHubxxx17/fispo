@@ -16,7 +16,14 @@ export async function createVitePlugins(
   isSSR = false
 ) {
   const highlighter = await shiki.getHighlighter({ theme: "nord" });
-  const { rehypePlugins, remarkPlugins } = createPluginMdx(highlighter);
+  const { rehypePlugins, remarkPlugins } = createPluginMdx(config, highlighter);
+
+  const pluginsFromFispoPlugins = config.siteData?.plugins
+    ?.map((item) => item.vite)
+    .filter(Boolean)
+    .map((item) => item?.plugins || [])
+    .flat();
+
   return [
     pluginIndexHtml(config),
     {
@@ -33,5 +40,6 @@ export async function createVitePlugins(
       isSSR,
     }),
     pluginTheme(config),
+    ...(pluginsFromFispoPlugins || []),
   ];
 }
