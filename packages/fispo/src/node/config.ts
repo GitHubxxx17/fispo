@@ -2,7 +2,7 @@ import { loadConfigFromFile } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "shared/types";
 import { mergeConfig, defaultConfig } from "shared/utils/defaultConfig";
-import { configFiles } from "./constants";
+import { configFiles, THEME_PATH } from "./constants";
 import { DefaultThemeConfig } from "shared/types/default-theme";
 import { join } from "path";
 import { pathToFileURL } from "url";
@@ -56,17 +56,10 @@ export async function resolveUserConfig(
 export async function resolveSiteData(
   userConfig: UserConfig
 ): Promise<UserConfig> {
-  const isDev = process.env.NODE_ENV === "development";
   const targetConfig = userConfig.themeConfig;
   let deConfig = defaultConfig;
   if (userConfig.theme) {
-    const path = join(
-      __dirname,
-      "../..",
-      `${isDev ? "" : "@fispo"}`,
-      userConfig.theme,
-      "src/config.js"
-    );
+    const path = join(THEME_PATH, userConfig.theme, "src/config.js");
     const { default: themeConfig } = await import(
       pathToFileURL(path).toString()
     );

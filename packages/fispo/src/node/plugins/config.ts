@@ -1,7 +1,7 @@
 import { join, relative } from "path";
 import { Plugin } from "vite";
 import { SiteConfig } from "shared/types/index";
-import { configFiles, PACKAGE_ROOT } from "node/constants";
+import { configFiles, PACKAGE_ROOT, THEME_PATH } from "node/constants";
 import fs from "fs-extra";
 import sirv from "sirv";
 
@@ -37,7 +37,6 @@ export function pluginConfig(
       }
     },
     config() {
-      const isDev = process.env.NODE_ENV === "development";
       return {
         root: PACKAGE_ROOT,
         optimizeDeps: {
@@ -57,7 +56,7 @@ export function pluginConfig(
           alias: {
             "@runtime": join(PACKAGE_ROOT, "src", "runtime", "index.ts"),
             shared: join(PACKAGE_ROOT, "src", "shared"),
-            "@fispo": join(PACKAGE_ROOT, `${isDev ? ".." : "../@fispo"}`),
+            "@fispo": THEME_PATH,
             "@theme-default": join(PACKAGE_ROOT, "src", "theme-default"),
           },
         },
