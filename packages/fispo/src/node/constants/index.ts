@@ -1,5 +1,7 @@
 import { join } from "path";
 
+export const isTsupWatch = () => process.env.TSUP_MODE === "watch";
+
 export const PACKAGE_ROOT = join(__dirname, "..");
 
 export const RUNTIME_PATH = join(PACKAGE_ROOT, "src", "runtime");
@@ -19,3 +21,8 @@ export const configFiles = [
   join(currentWorkingDirectory, "fispo.config.ts"),
   join(currentWorkingDirectory, "fispo.config.js"),
 ];
+
+export const THEME_PATH = join(
+  PACKAGE_ROOT,
+  isTsupWatch() ? ".." : "../@fispo"
+);

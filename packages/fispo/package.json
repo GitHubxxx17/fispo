@@ -1,6 +1,6 @@
 {
   "name": "fispo-core",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -28,8 +28,8 @@
     }
   },
   "scripts": {
-    "start": "tsup --watch",
-    "build": "tsup",
+    "start": "tsup --watch --format=cjs,esm",
+    "build": "cross-env NODE_ENV=production tsup --format=cjs,esm",
     "prepare:e2e": "tsx scripts/prepare-e2e.ts",
     "test:e2e": "playwright test",
     "test:init": "vitest run",
@@ -58,6 +58,7 @@
     "cac": "^6.7.14",
     "classnames": "^2.5.1",
     "compression": "^1.8.0",
+    "cross-env": "^7.0.3",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "github-slugger": "^2.0.0",
