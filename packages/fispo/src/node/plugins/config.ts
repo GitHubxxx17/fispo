@@ -1,5 +1,5 @@
 import { join, relative } from "path";
-import { Plugin } from "vite";
+import { mergeConfig, Plugin, UserConfig } from "vite";
 import { SiteConfig } from "shared/types/index";
 import { configFiles, PACKAGE_ROOT, THEME_PATH } from "node/constants";
 import fs from "fs-extra";
@@ -11,6 +11,22 @@ export function pluginConfig(
   config: SiteConfig,
   restartServer?: () => Promise<void>
 ): Plugin {
+  const getComposedPluginConfig = (key: "alias" | "define" | "vite") => {
+    return config.siteData.plugins
+      ?.map((plugin) => plugin[key])
+      .filter(Boolean)
+      .reduce((acc, cur) => {
+        return mergeConfig(acc as UserConfig, cur as UserConfig);
+      }, {});
+  };
+  const pluginAlias = getComposedPluginConfig("alias");
+  const pluginDefine = getComposedPluginConfig("define");
+  const pluginViteConfig = getComposedPluginConfig("vite");
+
+  const watchFilesFromPlugins = config.siteData.plugins
+    ?.map((plugin) => plugin.watchFiles)
+    .flat() as string[];
+
   return {
     name: "fispo:config",
     resolveId(id) {
@@ -24,7 +40,11 @@ export function pluginConfig(
       }
     },
     async handleHotUpdate(ctx) {
-      const customWatchedFiles = [config.configPath.replaceAll("\\", "/")];
+      const customWatchedFiles = [
+        config.configPath.replaceAll("\\", "/"),
+        ...(watchFilesFromPlugins || []),
+      ].filter(Boolean) as string[];
+
       const include = (id: string) =>
         customWatchedFiles.some((file) => id.includes(file));
 
@@ -37,30 +57,35 @@ export function pluginConfig(
       }
     },
     config() {
-      return {
-        root: PACKAGE_ROOT,
-        optimizeDeps: {
-          include: [
-            "react",
-            "react-dom",
-            "react-dom/client",
-            "react-router-dom",
-            "react/jsx-runtime",
-            "react-helmet-async",
-            "medium-zoom",
-            "@fortawesome/react-fontawesome",
-            "classnames",
-          ],
-        },
-        resolve: {
-          alias: {
-            "@runtime": join(PACKAGE_ROOT, "src", "runtime", "index.ts"),
-            shared: join(PACKAGE_ROOT, "src", "shared"),
-            "@fispo": THEME_PATH,
-            "@theme-default": join(PACKAGE_ROOT, "src", "theme-default"),
+      return mergeConfig(
+        {
+          root: PACKAGE_ROOT,
+          optimizeDeps: {
+            include: [
+              "react",
+              "react-dom",
+              "react-dom/client",
+              "react-router-dom",
+              "react/jsx-runtime",
+              "react-helmet-async",
+              "medium-zoom",
+              "@fortawesome/react-fontawesome",
+              "classnames",
+            ],
           },
+          resolve: {
+            alias: {
+              "@runtime": join(PACKAGE_ROOT, "src", "runtime", "index.ts"),
+              shared: join(PACKAGE_ROOT, "src", "shared"),
+              "@fispo": THEME_PATH,
+              "@theme-default": join(PACKAGE_ROOT, "src", "theme-default"),
+              ...pluginAlias,
+            },
+          },
+          define: { ...pluginDefine },
         },
-      };
+        mergeConfig(config.siteData?.vite ?? {}, pluginViteConfig ?? {})
+      );
     },
     configureServer(server) {
       const publicDir = join(config.root, config.public);
@@ -68,7 +93,7 @@ export function pluginConfig(
         server.middlewares.use(sirv(publicDir));
       }
 
-      configFiles.forEach((file) => {
+      [...configFiles, ...(watchFilesFromPlugins || [])].forEach((file) => {
         server.watcher.add(file);
       });
     },

@@ -1,6 +1,13 @@
 import { UserConfig as ViteConfiguration } from "vite";
 import { ComponentType } from "react";
 import { DefaultThemeConfig } from "./default-theme";
+import type { PluggableList } from "unified";
+import { FispoPlugin } from "./plugin";
+
+export interface MarkdownOptions {
+  remarkPlugins?: PluggableList;
+  rehypePlugins?: PluggableList;
+}
 
 export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
   title?: string;
@@ -16,6 +23,8 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
   public?: string;
   notFoundImg?: string;
   logo?: string;
+  markdown?: MarkdownOptions;
+  plugins?: FispoPlugin[];
 }
 
 export interface SiteConfig {
