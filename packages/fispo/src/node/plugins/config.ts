@@ -75,7 +75,7 @@ export function pluginConfig(
           },
           resolve: {
             alias: {
-              "@runtime": join(PACKAGE_ROOT, "src", "runtime", "index.ts"),
+              "@runtime": join(PACKAGE_ROOT, "src", "runtime"),
               shared: join(PACKAGE_ROOT, "src", "shared"),
               "@fispo": THEME_PATH,
               "@theme-default": join(PACKAGE_ROOT, "src", "theme-default"),

@@ -1,7 +1,7 @@
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import styles from "./index.module.scss";
 import { memo } from "react";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 
 export interface AnnouncementCardProps {
   icon?: IconName;

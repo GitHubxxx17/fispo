@@ -25,7 +25,12 @@ export async function preview({ port }: { port?: number }) {
     immutable: true,
     setHeaders(res, pathname) {
       if (pathname.endsWith(".html")) {
-        res.setHeader("cache-control", "no-cache");
+        res.setHeader(
+          "cache-control",
+          "no-store, no-cache, must-revalidate, proxy-revalidate"
+        );
+        res.setHeader("pragma", "no-cache");
+        res.setHeader("expires", "0");
       }
     },
   });

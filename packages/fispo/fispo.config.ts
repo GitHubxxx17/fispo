@@ -5,7 +5,6 @@ export default defineConfig({
   author: "XXX17",
   description: "学无止境",
   notFoundImg: "/404.png",
-  theme: "particle",
   themeConfig: {
     navMenus: [
       {
@@ -30,4 +29,5 @@ export default defineConfig({
       },
     ],
   },
+  preloader: true,
 });

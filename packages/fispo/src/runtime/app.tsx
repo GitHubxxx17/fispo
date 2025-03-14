@@ -4,9 +4,11 @@ import { PageData, Route } from "shared/types";
 import siteData from "fispo:site-data";
 import { handleRoutes } from "../shared/utils/handleRoutes";
 import { sortByDate } from "../shared/utils/date";
-import { Suspense } from "react";
 import { usePageData } from "./hooks";
 import ThemeLayout from "fispo:theme";
+import { useEffect, useState } from "react";
+import Preloader from "fispo:preloader";
+import { checkAllAssetsLoaded } from "./util";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   const pathList = routePath.split("/").filter(Boolean);
@@ -72,9 +74,20 @@ export async function initPageData(routePath: string): Promise<PageData> {
 
 export function App() {
   const pageData = usePageData();
+  const [finishLoading, setFinishLoading] = useState(false);
+  useEffect(() => {
+    const unmountLoading = () => {
+      checkAllAssetsLoaded().then(() => {
+        setFinishLoading(true);
+      });
+    };
+    if (siteData.preloader) unmountLoading();
+  }, []);
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
+      {siteData.preloader && <Preloader finishLoading={finishLoading} />}
       <ThemeLayout pageData={pageData} />
-    </Suspense>
+    </>
   );
 }

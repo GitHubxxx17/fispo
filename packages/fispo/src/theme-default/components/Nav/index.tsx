@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 import { navMenuItem } from "shared/types/default-theme";
 
 interface NavProps {

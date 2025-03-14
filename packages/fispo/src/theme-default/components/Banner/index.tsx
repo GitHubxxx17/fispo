@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 import { BannerData, FrontMatter } from "shared/types";
 import { formatDateToYYYYMMDD } from "../../../shared/utils/date";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 interface BannerProps {
   isHomePage?: boolean;
   isArticlePage?: boolean;

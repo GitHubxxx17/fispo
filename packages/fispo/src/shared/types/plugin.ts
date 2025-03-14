@@ -1,5 +1,6 @@
 import { UserConfig } from "vite";
 import type { PluggableList } from "unified";
+import { PageDataContext, PageData } from ".";
 
 export interface FispoPlugin {
   /**
@@ -29,4 +30,7 @@ export interface FispoPlugin {
    * To ensure hmr works properly, we need to watch some files.
    */
   watchFiles?: string[];
+  configResolved?: (config: PageDataContext) => PageData;
+  preloader?: (config?: PageData) => string;
+  golbalComponents?: (config: PageData) => React.ReactNode;
 }

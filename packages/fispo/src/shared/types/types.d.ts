@@ -15,3 +15,8 @@ declare module "fispo:theme" {
   const ThemeLayout: React.ElementType;
   export default ThemeLayout;
 }
+
+declare module "fispo:preloader" {
+  const Preloader: React.ElementType;
+  export default Preloader;
+}

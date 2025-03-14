@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import { memo } from "react";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 import { getRandomColor, getRandomTextSize } from "../../helper/tag";
 
 export interface TagCardProps {
