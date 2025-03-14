@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
 import { ArticleData } from "shared/types";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 
 interface ArticleListProps {
   articleList?: ArticleData[];

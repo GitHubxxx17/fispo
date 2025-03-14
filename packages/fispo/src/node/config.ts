@@ -82,6 +82,7 @@ export async function resolveSiteData(
     logo: userConfig.logo || "/logo.png",
     markdown: userConfig.markdown || {},
     plugins: userConfig.plugins || [],
+    preloader: userConfig.preloader || false,
   };
 }
 

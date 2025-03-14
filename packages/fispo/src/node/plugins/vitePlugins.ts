@@ -7,6 +7,7 @@ import pluginMdx from "@mdx-js/rollup";
 import shiki from "shiki";
 import { createPluginMdx } from "./plugin-mdx";
 import { pluginTheme } from "./theme";
+import { createFispoPlugins } from "./pulgin-fispo";
 
 type enforceType = "pre" | "post";
 
@@ -40,6 +41,7 @@ export async function createVitePlugins(
       isSSR,
     }),
     pluginTheme(config),
+    ...createFispoPlugins(config),
     ...(pluginsFromFispoPlugins || []),
   ];
 }

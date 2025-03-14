@@ -25,6 +25,7 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
   logo?: string;
   markdown?: MarkdownOptions;
   plugins?: FispoPlugin[];
+  preloader?: boolean;
 }
 
 export interface SiteConfig {
@@ -69,7 +70,7 @@ export interface ArticleData extends FrontMatter {
   info: string;
 }
 
-export interface PageData {
+export interface PageDataContext {
   siteData: UserConfig;
   pagePath: string;
   frontmatter: FrontMatter;
@@ -94,4 +95,8 @@ export interface Route {
   element: React.ReactElement;
   filePath: string;
   preload: () => Promise<PageModule>;
+}
+
+export interface PageData extends PageDataContext {
+  [key: string]: unknown;
 }

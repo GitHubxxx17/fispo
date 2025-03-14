@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-var _a;
+var _a, _b;
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
@@ -7023,14 +7023,14 @@ function requireClient() {
 var clientExports = requireClient();
 var reactExports = requireReact();
 const React3 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
-function _extends() {
-  return _extends = Object.assign ? Object.assign.bind() : function(n) {
+function _extends$1() {
+  return _extends$1 = Object.assign ? Object.assign.bind() : function(n) {
     for (var e = 1; e < arguments.length; e++) {
       var t2 = arguments[e];
       for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n[r2] = t2[r2]);
     }
     return n;
-  }, _extends.apply(null, arguments);
+  }, _extends$1.apply(null, arguments);
 }
 var Action;
 (function(Action2) {
@@ -7094,7 +7094,7 @@ function createBrowserHistory(options) {
   var blockers = createEvents();
   if (index == null) {
     index = 0;
-    globalHistory.replaceState(_extends({}, globalHistory.state, {
+    globalHistory.replaceState(_extends$1({}, globalHistory.state, {
       idx: index
     }), "");
   }
@@ -7105,7 +7105,7 @@ function createBrowserHistory(options) {
     if (state === void 0) {
       state = null;
     }
-    return readOnly(_extends({
+    return readOnly(_extends$1({
       pathname: location2.pathname,
       hash: "",
       search: ""
@@ -7189,7 +7189,7 @@ function createBrowserHistory(options) {
     listen: function listen(listener2) {
       return listeners.push(listener2);
     },
-    block: function block(blocker) {
+    block: function block2(blocker) {
       var unblock = blockers.push(blocker);
       if (blockers.length === 1) {
         window2.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
@@ -7273,7 +7273,7 @@ const RouteContext = /* @__PURE__ */ reactExports.createContext({
   outlet: null,
   matches: []
 });
-function invariant(cond, message) {
+function invariant$1(cond, message) {
   throw new Error(message);
 }
 function matchRoutes(routes2, locationArg, basename) {
@@ -7304,20 +7304,20 @@ function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
     parentPath = "";
   }
   routes2.forEach((route, index) => {
-    let meta = {
+    let meta2 = {
       relativePath: route.path || "",
       caseSensitive: route.caseSensitive === true,
       childrenIndex: index,
       route
     };
-    if (meta.relativePath.startsWith("/")) {
-      !meta.relativePath.startsWith(parentPath) ? invariant() : void 0;
-      meta.relativePath = meta.relativePath.slice(parentPath.length);
+    if (meta2.relativePath.startsWith("/")) {
+      !meta2.relativePath.startsWith(parentPath) ? invariant$1() : void 0;
+      meta2.relativePath = meta2.relativePath.slice(parentPath.length);
     }
-    let path = joinPaths([parentPath, meta.relativePath]);
-    let routesMeta = parentsMeta.concat(meta);
+    let path = joinPaths([parentPath, meta2.relativePath]);
+    let routesMeta = parentsMeta.concat(meta2);
     if (route.children && route.children.length > 0) {
-      !(route.index !== true) ? invariant() : void 0;
+      !(route.index !== true) ? invariant$1() : void 0;
       flattenRoutes(route.children, branches, routesMeta, path);
     }
     if (route.path == null && !route.index) {
@@ -7332,7 +7332,7 @@ function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
   return branches;
 }
 function rankRouteBranches(branches) {
-  branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
+  branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta2) => meta2.childrenIndex), b.routesMeta.map((meta2) => meta2.childrenIndex)));
 }
 const paramRe = /^:\w+$/;
 const dynamicSegmentValue = 3;
@@ -7374,17 +7374,17 @@ function matchRouteBranch(branch, pathname) {
   let matchedPathname = "/";
   let matches = [];
   for (let i = 0; i < routesMeta.length; ++i) {
-    let meta = routesMeta[i];
+    let meta2 = routesMeta[i];
     let end2 = i === routesMeta.length - 1;
     let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
     let match = matchPath({
-      path: meta.relativePath,
-      caseSensitive: meta.caseSensitive,
+      path: meta2.relativePath,
+      caseSensitive: meta2.caseSensitive,
       end: end2
     }, remainingPathname);
     if (!match) return null;
     Object.assign(matchedParams, match.params);
-    let route = meta.route;
+    let route = meta2.route;
     matches.push({
       params: matchedParams,
       pathname: joinPaths([matchedPathname, match.pathname]),
@@ -7479,11 +7479,11 @@ function useInRouterContext() {
   return reactExports.useContext(LocationContext) != null;
 }
 function useLocation() {
-  !useInRouterContext() ? invariant() : void 0;
+  !useInRouterContext() ? invariant$1() : void 0;
   return reactExports.useContext(LocationContext).location;
 }
 function useRoutes(routes2, locationArg) {
-  !useInRouterContext() ? invariant() : void 0;
+  !useInRouterContext() ? invariant$1() : void 0;
   let {
     matches: parentMatches
   } = reactExports.useContext(RouteContext);
@@ -7532,7 +7532,7 @@ function Router(_ref3) {
     navigator: navigator2,
     static: staticProp = false
   } = _ref3;
-  !!useInRouterContext() ? invariant() : void 0;
+  !!useInRouterContext() ? invariant$1() : void 0;
   let basename = normalizePathname(basenameProp);
   let navigationContext = reactExports.useMemo(() => ({
     basename,
@@ -7668,39 +7668,39 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   }
   return promise.then((res) => {
-    for (const item of res || []) {
-      if (item.status !== "rejected") continue;
-      handlePreloadError(item.reason);
+    for (const item2 of res || []) {
+      if (item2.status !== "rejected") continue;
+      handlePreloadError(item2.reason);
     }
     return baseModule().catch(handlePreloadError);
   });
 };
-const Route0 = React3.lazy(() => __vitePreload(() => import("./HTTP-BCvRid_a.js"), true ? [] : void 0));
-const Route1 = React3.lazy(() => __vitePreload(() => import("./MySQL--YGcirH1.js"), true ? [] : void 0));
-const Route2 = React3.lazy(() => __vitePreload(() => import("./node.js-B9ySjG4-.js"), true ? [] : void 0));
-const Route3 = React3.lazy(() => __vitePreload(() => import("./vue3笔记（四）-CEx_di8F.js"), true ? [] : void 0));
-const Route4 = React3.lazy(() => __vitePreload(() => import("./vue笔记（一）-Bt_GWtXS.js"), true ? [] : void 0));
-const Route5 = React3.lazy(() => __vitePreload(() => import("./vue笔记（三）-IdOuMqOW.js"), true ? [] : void 0));
-const Route6 = React3.lazy(() => __vitePreload(() => import("./vue笔记（二）-C9lpDLTn.js"), true ? [] : void 0));
-const Route7 = React3.lazy(() => __vitePreload(() => import("./搭建云服务器-DeNsNDar.js"), true ? [] : void 0));
-const Route8 = React3.lazy(() => __vitePreload(() => import("./数组sort()详解-igVIx_uv.js"), true ? [] : void 0));
+const Route0 = React3.lazy(() => __vitePreload(() => import("./HTTP-0A4ewfzI.js"), true ? [] : void 0));
+const Route1 = React3.lazy(() => __vitePreload(() => import("./MySQL-B95OOyVu.js"), true ? [] : void 0));
+const Route2 = React3.lazy(() => __vitePreload(() => import("./node.js-CBp6nk5M.js"), true ? [] : void 0));
+const Route3 = React3.lazy(() => __vitePreload(() => import("./vue3笔记（四）-CnNK5G2D.js"), true ? [] : void 0));
+const Route4 = React3.lazy(() => __vitePreload(() => import("./vue笔记（一）-EngPvNvz.js"), true ? [] : void 0));
+const Route5 = React3.lazy(() => __vitePreload(() => import("./vue笔记（三）-BLOSfGU-.js"), true ? [] : void 0));
+const Route6 = React3.lazy(() => __vitePreload(() => import("./vue笔记（二）-C3abHHNr.js"), true ? [] : void 0));
+const Route7 = React3.lazy(() => __vitePreload(() => import("./搭建云服务器-Ddpsj_jI.js"), true ? [] : void 0));
+const Route8 = React3.lazy(() => __vitePreload(() => import("./数组sort()详解-CYnsijFx.js"), true ? [] : void 0));
 const routes = [
-  { path: "/post/HTTP", element: React3.createElement(Route0), preload: () => __vitePreload(() => import("./HTTP-BCvRid_a.js"), true ? [] : void 0) },
-  { path: "/post/MySQL", element: React3.createElement(Route1), preload: () => __vitePreload(() => import("./MySQL--YGcirH1.js"), true ? [] : void 0) },
-  { path: "/post/node", element: React3.createElement(Route2), preload: () => __vitePreload(() => import("./node.js-B9ySjG4-.js"), true ? [] : void 0) },
-  { path: "/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89", element: React3.createElement(Route3), preload: () => __vitePreload(() => import("./vue3笔记（四）-CEx_di8F.js"), true ? [] : void 0) },
-  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89", element: React3.createElement(Route4), preload: () => __vitePreload(() => import("./vue笔记（一）-Bt_GWtXS.js"), true ? [] : void 0) },
-  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89", element: React3.createElement(Route5), preload: () => __vitePreload(() => import("./vue笔记（三）-IdOuMqOW.js"), true ? [] : void 0) },
-  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89", element: React3.createElement(Route6), preload: () => __vitePreload(() => import("./vue笔记（二）-C9lpDLTn.js"), true ? [] : void 0) },
-  { path: "/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8", element: React3.createElement(Route7), preload: () => __vitePreload(() => import("./搭建云服务器-DeNsNDar.js"), true ? [] : void 0) },
-  { path: "/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3", element: React3.createElement(Route8), preload: () => __vitePreload(() => import("./数组sort()详解-igVIx_uv.js"), true ? [] : void 0) }
+  { path: "/post/HTTP", element: React3.createElement(Route0), preload: () => __vitePreload(() => import("./HTTP-0A4ewfzI.js"), true ? [] : void 0) },
+  { path: "/post/MySQL", element: React3.createElement(Route1), preload: () => __vitePreload(() => import("./MySQL-B95OOyVu.js"), true ? [] : void 0) },
+  { path: "/post/node", element: React3.createElement(Route2), preload: () => __vitePreload(() => import("./node.js-CBp6nk5M.js"), true ? [] : void 0) },
+  { path: "/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89", element: React3.createElement(Route3), preload: () => __vitePreload(() => import("./vue3笔记（四）-CnNK5G2D.js"), true ? [] : void 0) },
+  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89", element: React3.createElement(Route4), preload: () => __vitePreload(() => import("./vue笔记（一）-EngPvNvz.js"), true ? [] : void 0) },
+  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89", element: React3.createElement(Route5), preload: () => __vitePreload(() => import("./vue笔记（三）-BLOSfGU-.js"), true ? [] : void 0) },
+  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89", element: React3.createElement(Route6), preload: () => __vitePreload(() => import("./vue笔记（二）-C3abHHNr.js"), true ? [] : void 0) },
+  { path: "/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8", element: React3.createElement(Route7), preload: () => __vitePreload(() => import("./搭建云服务器-Ddpsj_jI.js"), true ? [] : void 0) },
+  { path: "/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3", element: React3.createElement(Route8), preload: () => __vitePreload(() => import("./数组sort()详解-CYnsijFx.js"), true ? [] : void 0) }
 ];
-const siteData = { "title": "XXX17的个人博客", "description": "学无止境", "theme": "particle", "themeConfig": { "navMenus": [{ "title": "首页", "path": "/", "icon": "home" }, { "title": "标签", "path": "/tag", "icon": "tag" }, { "title": "分类", "path": "/category", "icon": "folder-open" }, { "title": "关于", "path": "/about", "icon": "heart" }], "banner": { "img": "/background.jpg", "title": "Argvchs の小窝", "subTitle": "Here's an argvchs..." } }, "vite": {}, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "post", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png" };
+const siteData = { "title": "XXX17的个人博客", "description": "学无止境", "theme": "", "themeConfig": { "navMenus": [{ "title": "首页", "path": "/", "icon": "home" }, { "title": "标签", "path": "/tag", "icon": "tag" }, { "title": "分类", "path": "/category", "icon": "folder-open" }, { "title": "关于", "path": "/about", "icon": "heart" }], "banner": { "img": "/banner.png", "subtitle": "" }, "sidebar": { "enable": true, "hide": false, "position": "right", "card_author": { "enable": true, "description": "", "button": { "enable": true, "icon": "github", "text": "Follow me", "link": "" } }, "card_announcement": { "enable": true, "content": "" }, "card_recent_post": { "enable": true, "limit": 5, "sort": "date" }, "card_categories": { "enable": true, "limit": 10 }, "card_tags": { "enable": true, "limit": 10 }, "card_webinfo": { "enable": true, "post_count": true, "last_push_date": true, "run_time": true } }, "footer": { "message": "", "copyright": "" } }, "vite": {}, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "post", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [] };
 function formatDateToYYYYMMDD(dateStr) {
-  const date2 = new Date(dateStr);
-  const year = date2.getFullYear();
-  const month = date2.getMonth() + 1;
-  const day = date2.getDate();
+  const date = new Date(dateStr);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
   const formattedMonth = String(month).padStart(2, "0");
   const formattedDay = String(day).padStart(2, "0");
   return `${year}-${formattedMonth}-${formattedDay}`;
@@ -7714,7 +7714,7 @@ function sortByDate(arr) {
 }
 async function handleRoutes(routes2) {
   const articlesList = [];
-  const tags2 = {};
+  const tags = {};
   const categories = {};
   for await (const route of routes2) {
     const moduleInfo = await route.preload();
@@ -7724,11 +7724,11 @@ async function handleRoutes(routes2) {
       path: route.path,
       info: moduleInfo.mdInfo
     });
-    moduleInfo.frontmatter.tags.forEach((tag) => {
-      if (tags2[tag]) {
-        tags2[tag].push(route.path);
+    moduleInfo.frontmatter.tags.forEach((tag2) => {
+      if (tags[tag2]) {
+        tags[tag2].push(route.path);
       } else {
-        tags2[tag] = [route.path];
+        tags[tag2] = [route.path];
       }
     });
     const category2 = moduleInfo.frontmatter.categories;
@@ -7742,17 +7742,13 @@ async function handleRoutes(routes2) {
   }
   return {
     articlesList,
-    tags: tags2,
+    tags,
     categories
   };
 }
 const DataContext = reactExports.createContext({});
 const usePageData = () => {
   return reactExports.useContext(DataContext);
-};
-const layout = "_layout_1obw2_1";
-const styles$9 = {
-  layout
 };
 var classnames = { exports: {} };
 /*!
@@ -7819,15 +7815,16 @@ function requireClassnames() {
 }
 var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
-const nav = "_nav_ixtzq_1";
-const menus = "_menus_ixtzq_27";
-const hide = "_hide_ixtzq_47";
-const styles$8 = {
+const nav = "_nav_14t1j_1";
+const menus = "_menus_14t1j_27";
+const hide = "_hide_14t1j_53";
+const top = "_top_14t1j_57";
+const styles$e = {
   nav,
-  "blog-name": "_blog-name_ixtzq_12",
+  "blog-name": "_blog-name_14t1j_15",
   menus,
-  "nav-blue": "_nav-blue_ixtzq_40",
-  hide
+  hide,
+  top
 };
 function debounce(func, delay) {
   let timer = null;
@@ -8500,7 +8497,7 @@ function transformForCss(_ref2) {
   return val;
 }
 var baseStyles = ':root, :host {\n  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";\n  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";\n  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";\n  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";\n  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";\n  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 6 Sharp Duotone";\n}\n\nsvg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {\n  overflow: visible;\n  box-sizing: content-box;\n}\n\n.svg-inline--fa {\n  display: var(--fa-display, inline-block);\n  height: 1em;\n  overflow: visible;\n  vertical-align: -0.125em;\n}\n.svg-inline--fa.fa-2xs {\n  vertical-align: 0.1em;\n}\n.svg-inline--fa.fa-xs {\n  vertical-align: 0em;\n}\n.svg-inline--fa.fa-sm {\n  vertical-align: -0.0714285705em;\n}\n.svg-inline--fa.fa-lg {\n  vertical-align: -0.2em;\n}\n.svg-inline--fa.fa-xl {\n  vertical-align: -0.25em;\n}\n.svg-inline--fa.fa-2xl {\n  vertical-align: -0.3125em;\n}\n.svg-inline--fa.fa-pull-left {\n  margin-right: var(--fa-pull-margin, 0.3em);\n  width: auto;\n}\n.svg-inline--fa.fa-pull-right {\n  margin-left: var(--fa-pull-margin, 0.3em);\n  width: auto;\n}\n.svg-inline--fa.fa-li {\n  width: var(--fa-li-width, 2em);\n  top: 0.25em;\n}\n.svg-inline--fa.fa-fw {\n  width: var(--fa-fw-width, 1.25em);\n}\n\n.fa-layers svg.svg-inline--fa {\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.fa-layers-counter, .fa-layers-text {\n  display: inline-block;\n  position: absolute;\n  text-align: center;\n}\n\n.fa-layers {\n  display: inline-block;\n  height: 1em;\n  position: relative;\n  text-align: center;\n  vertical-align: -0.125em;\n  width: 1em;\n}\n.fa-layers svg.svg-inline--fa {\n  transform-origin: center center;\n}\n\n.fa-layers-text {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  transform-origin: center center;\n}\n\n.fa-layers-counter {\n  background-color: var(--fa-counter-background-color, #ff253a);\n  border-radius: var(--fa-counter-border-radius, 1em);\n  box-sizing: border-box;\n  color: var(--fa-inverse, #fff);\n  line-height: var(--fa-counter-line-height, 1);\n  max-width: var(--fa-counter-max-width, 5em);\n  min-width: var(--fa-counter-min-width, 1.5em);\n  overflow: hidden;\n  padding: var(--fa-counter-padding, 0.25em 0.5em);\n  right: var(--fa-right, 0);\n  text-overflow: ellipsis;\n  top: var(--fa-top, 0);\n  transform: scale(var(--fa-counter-scale, 0.25));\n  transform-origin: top right;\n}\n\n.fa-layers-bottom-right {\n  bottom: var(--fa-bottom, 0);\n  right: var(--fa-right, 0);\n  top: auto;\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: bottom right;\n}\n\n.fa-layers-bottom-left {\n  bottom: var(--fa-bottom, 0);\n  left: var(--fa-left, 0);\n  right: auto;\n  top: auto;\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: bottom left;\n}\n\n.fa-layers-top-right {\n  top: var(--fa-top, 0);\n  right: var(--fa-right, 0);\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: top right;\n}\n\n.fa-layers-top-left {\n  left: var(--fa-left, 0);\n  right: auto;\n  top: var(--fa-top, 0);\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: top left;\n}\n\n.fa-1x {\n  font-size: 1em;\n}\n\n.fa-2x {\n  font-size: 2em;\n}\n\n.fa-3x {\n  font-size: 3em;\n}\n\n.fa-4x {\n  font-size: 4em;\n}\n\n.fa-5x {\n  font-size: 5em;\n}\n\n.fa-6x {\n  font-size: 6em;\n}\n\n.fa-7x {\n  font-size: 7em;\n}\n\n.fa-8x {\n  font-size: 8em;\n}\n\n.fa-9x {\n  font-size: 9em;\n}\n\n.fa-10x {\n  font-size: 10em;\n}\n\n.fa-2xs {\n  font-size: 0.625em;\n  line-height: 0.1em;\n  vertical-align: 0.225em;\n}\n\n.fa-xs {\n  font-size: 0.75em;\n  line-height: 0.0833333337em;\n  vertical-align: 0.125em;\n}\n\n.fa-sm {\n  font-size: 0.875em;\n  line-height: 0.0714285718em;\n  vertical-align: 0.0535714295em;\n}\n\n.fa-lg {\n  font-size: 1.25em;\n  line-height: 0.05em;\n  vertical-align: -0.075em;\n}\n\n.fa-xl {\n  font-size: 1.5em;\n  line-height: 0.0416666682em;\n  vertical-align: -0.125em;\n}\n\n.fa-2xl {\n  font-size: 2em;\n  line-height: 0.03125em;\n  vertical-align: -0.1875em;\n}\n\n.fa-fw {\n  text-align: center;\n  width: 1.25em;\n}\n\n.fa-ul {\n  list-style-type: none;\n  margin-left: var(--fa-li-margin, 2.5em);\n  padding-left: 0;\n}\n.fa-ul > li {\n  position: relative;\n}\n\n.fa-li {\n  left: calc(-1 * var(--fa-li-width, 2em));\n  position: absolute;\n  text-align: center;\n  width: var(--fa-li-width, 2em);\n  line-height: inherit;\n}\n\n.fa-border {\n  border-color: var(--fa-border-color, #eee);\n  border-radius: var(--fa-border-radius, 0.1em);\n  border-style: var(--fa-border-style, solid);\n  border-width: var(--fa-border-width, 0.08em);\n  padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);\n}\n\n.fa-pull-left {\n  float: left;\n  margin-right: var(--fa-pull-margin, 0.3em);\n}\n\n.fa-pull-right {\n  float: right;\n  margin-left: var(--fa-pull-margin, 0.3em);\n}\n\n.fa-beat {\n  animation-name: fa-beat;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, ease-in-out);\n}\n\n.fa-bounce {\n  animation-name: fa-bounce;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));\n}\n\n.fa-fade {\n  animation-name: fa-fade;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));\n}\n\n.fa-beat-fade {\n  animation-name: fa-beat-fade;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));\n}\n\n.fa-flip {\n  animation-name: fa-flip;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, ease-in-out);\n}\n\n.fa-shake {\n  animation-name: fa-shake;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, linear);\n}\n\n.fa-spin {\n  animation-name: fa-spin;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 2s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, linear);\n}\n\n.fa-spin-reverse {\n  --fa-animation-direction: reverse;\n}\n\n.fa-pulse,\n.fa-spin-pulse {\n  animation-name: fa-spin;\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, steps(8));\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .fa-beat,\n.fa-bounce,\n.fa-fade,\n.fa-beat-fade,\n.fa-flip,\n.fa-pulse,\n.fa-shake,\n.fa-spin,\n.fa-spin-pulse {\n    animation-delay: -1ms;\n    animation-duration: 1ms;\n    animation-iteration-count: 1;\n    transition-delay: 0s;\n    transition-duration: 0s;\n  }\n}\n@keyframes fa-beat {\n  0%, 90% {\n    transform: scale(1);\n  }\n  45% {\n    transform: scale(var(--fa-beat-scale, 1.25));\n  }\n}\n@keyframes fa-bounce {\n  0% {\n    transform: scale(1, 1) translateY(0);\n  }\n  10% {\n    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);\n  }\n  30% {\n    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));\n  }\n  50% {\n    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);\n  }\n  57% {\n    transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));\n  }\n  64% {\n    transform: scale(1, 1) translateY(0);\n  }\n  100% {\n    transform: scale(1, 1) translateY(0);\n  }\n}\n@keyframes fa-fade {\n  50% {\n    opacity: var(--fa-fade-opacity, 0.4);\n  }\n}\n@keyframes fa-beat-fade {\n  0%, 100% {\n    opacity: var(--fa-beat-fade-opacity, 0.4);\n    transform: scale(1);\n  }\n  50% {\n    opacity: 1;\n    transform: scale(var(--fa-beat-fade-scale, 1.125));\n  }\n}\n@keyframes fa-flip {\n  50% {\n    transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));\n  }\n}\n@keyframes fa-shake {\n  0% {\n    transform: rotate(-15deg);\n  }\n  4% {\n    transform: rotate(15deg);\n  }\n  8%, 24% {\n    transform: rotate(-18deg);\n  }\n  12%, 28% {\n    transform: rotate(18deg);\n  }\n  16% {\n    transform: rotate(-22deg);\n  }\n  20% {\n    transform: rotate(22deg);\n  }\n  32% {\n    transform: rotate(-12deg);\n  }\n  36% {\n    transform: rotate(12deg);\n  }\n  40%, 100% {\n    transform: rotate(0deg);\n  }\n}\n@keyframes fa-spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.fa-rotate-90 {\n  transform: rotate(90deg);\n}\n\n.fa-rotate-180 {\n  transform: rotate(180deg);\n}\n\n.fa-rotate-270 {\n  transform: rotate(270deg);\n}\n\n.fa-flip-horizontal {\n  transform: scale(-1, 1);\n}\n\n.fa-flip-vertical {\n  transform: scale(1, -1);\n}\n\n.fa-flip-both,\n.fa-flip-horizontal.fa-flip-vertical {\n  transform: scale(-1, -1);\n}\n\n.fa-rotate-by {\n  transform: rotate(var(--fa-rotate-angle, 0));\n}\n\n.fa-stack {\n  display: inline-block;\n  vertical-align: middle;\n  height: 2em;\n  position: relative;\n  width: 2.5em;\n}\n\n.fa-stack-1x,\n.fa-stack-2x {\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  position: absolute;\n  right: 0;\n  top: 0;\n  z-index: var(--fa-stack-z-index, auto);\n}\n\n.svg-inline--fa.fa-stack-1x {\n  height: 1em;\n  width: 1.25em;\n}\n.svg-inline--fa.fa-stack-2x {\n  height: 2em;\n  width: 2.5em;\n}\n\n.fa-inverse {\n  color: var(--fa-inverse, #fff);\n}\n\n.sr-only,\n.fa-sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.sr-only-focusable:not(:focus),\n.fa-sr-only-focusable:not(:focus) {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.svg-inline--fa .fa-primary {\n  fill: var(--fa-primary-color, currentColor);\n  opacity: var(--fa-primary-opacity, 1);\n}\n\n.svg-inline--fa .fa-secondary {\n  fill: var(--fa-secondary-color, currentColor);\n  opacity: var(--fa-secondary-opacity, 0.4);\n}\n\n.svg-inline--fa.fa-swap-opacity .fa-primary {\n  opacity: var(--fa-secondary-opacity, 0.4);\n}\n\n.svg-inline--fa.fa-swap-opacity .fa-secondary {\n  opacity: var(--fa-primary-opacity, 1);\n}\n\n.svg-inline--fa mask .fa-primary,\n.svg-inline--fa mask .fa-secondary {\n  fill: black;\n}';
-function css() {
+function css$1() {
   const dcp = DEFAULT_CSS_PREFIX;
   const drc = DEFAULT_REPLACEMENT_CLASS;
   const fp = config.cssPrefix;
@@ -8517,7 +8514,7 @@ function css() {
 let _cssInserted = false;
 function ensureCss() {
   if (config.autoAddCss && !_cssInserted) {
-    insertCss(css());
+    insertCss(css$1());
     _cssInserted = true;
   }
 }
@@ -8525,7 +8522,7 @@ var InjectCSS = {
   mixout() {
     return {
       dom: {
-        css,
+        css: css$1,
         insertCss: ensureCss
       }
     };
@@ -8564,14 +8561,14 @@ function domready(fn) {
 }
 function toHtml(abstractNodes) {
   const {
-    tag,
+    tag: tag2,
     attributes = {},
     children = []
   } = abstractNodes;
   if (typeof abstractNodes === "string") {
     return htmlEscape(abstractNodes);
   } else {
-    return "<".concat(tag, " ").concat(joinAttributes(attributes), ">").concat(children.map(toHtml).join(""), "</").concat(tag, ">");
+    return "<".concat(tag2, " ").concat(joinAttributes(attributes), ">").concat(children.map(toHtml).join(""), "</").concat(tag2, ">");
   }
 }
 function iconFromMapping(mapping, prefix, iconName) {
@@ -8662,7 +8659,7 @@ function defineIcons(prefix, icons) {
   }
 }
 const {
-  styles: styles$7,
+  styles: styles$d,
   shims
 } = namespace;
 const FAMILY_NAMES = Object.keys(PREFIX_TO_LONG_STYLE);
@@ -8676,8 +8673,8 @@ let _byLigature = {};
 let _byOldName = {};
 let _byOldUnicode = {};
 let _byAlias = {};
-function isReserved(name2) {
-  return ~RESERVED_CLASSES.indexOf(name2);
+function isReserved(name) {
+  return ~RESERVED_CLASSES.indexOf(name);
 }
 function getIconName(cssPrefix, cls) {
   const parts = cls.split("-");
@@ -8691,7 +8688,7 @@ function getIconName(cssPrefix, cls) {
 }
 const build = () => {
   const lookup = (reducer) => {
-    return reduce(styles$7, (o$$1, style, prefix) => {
+    return reduce(styles$d, (o$$1, style, prefix) => {
       o$$1[prefix] = reduce(style, reducer, {});
       return o$$1;
     }, {});
@@ -8730,7 +8727,7 @@ const build = () => {
     });
     return acc;
   });
-  const hasRegular = "far" in styles$7 || config.autoFetchSvg;
+  const hasRegular = "far" in styles$d || config.autoFetchSvg;
   const shimLookups = reduce(shims, (acc, shim) => {
     const maybeNameMaybeUnicode = shim[0];
     let prefix = shim[1];
@@ -8776,8 +8773,8 @@ function byLigature(prefix, ligature) {
 function byAlias(prefix, alias) {
   return (_byAlias[prefix] || {})[alias];
 }
-function byOldName(name2) {
-  return _byOldName[name2] || {
+function byOldName(name) {
+  return _byOldName[name] || {
     prefix: null,
     iconName: null
   };
@@ -8874,7 +8871,7 @@ function getCanonicalIcon(values) {
   return _objectSpread2$1(_objectSpread2$1(_objectSpread2$1({}, canonical), getDefaultCanonicalPrefix({
     values,
     family,
-    styles: styles$7,
+    styles: styles$d,
     config,
     canonical,
     givenPrefix
@@ -8895,7 +8892,7 @@ function applyShimAndAlias(skipLookups, givenPrefix, canonical) {
   const aliasIconName = byAlias(prefix, iconName);
   iconName = shim.iconName || aliasIconName || iconName;
   prefix = shim.prefix || prefix;
-  if (prefix === "far" && !styles$7["far"] && styles$7["fas"] && !config.autoFetchSvg) {
+  if (prefix === "far" && !styles$d["far"] && styles$d["fas"] && !config.autoFetchSvg) {
     prefix = "fas";
   }
   return {
@@ -9176,17 +9173,17 @@ function domVariants(val, abstractCreator) {
 function asIcon(_ref) {
   let {
     children,
-    main,
+    main: main2,
     mask,
     attributes,
     styles: styles2,
     transform
   } = _ref;
-  if (transformIsMeaningful(transform) && main.found && !mask.found) {
+  if (transformIsMeaningful(transform) && main2.found && !mask.found) {
     const {
       width,
       height
-    } = main;
+    } = main2;
     const offset = {
       x: width / height / 2,
       y: 0.5
@@ -9227,7 +9224,7 @@ function asSymbol(_ref) {
 function makeInlineSvgAbstract(params) {
   const {
     icons: {
-      main,
+      main: main2,
       mask
     },
     prefix,
@@ -9243,10 +9240,10 @@ function makeInlineSvgAbstract(params) {
   const {
     width,
     height
-  } = mask.found ? mask : main;
+  } = mask.found ? mask : main2;
   const isUploadedIcon = Lt.includes(prefix);
   const attrClass = [config.replacementClass, iconName ? "".concat(config.cssPrefix, "-").concat(iconName) : ""].filter((c$$1) => extra.classes.indexOf(c$$1) === -1).filter((c$$1) => c$$1 !== "" || !!c$$1).concat(extra.classes).join(" ");
-  let content = {
+  let content2 = {
     children: [],
     attributes: _objectSpread2$1(_objectSpread2$1({}, extra.attributes), {}, {
       "data-prefix": prefix,
@@ -9261,22 +9258,22 @@ function makeInlineSvgAbstract(params) {
     width: "".concat(width / height * 16 * 0.0625, "em")
   } : {};
   if (watchable) {
-    content.attributes[DATA_FA_I2SVG] = "";
+    content2.attributes[DATA_FA_I2SVG] = "";
   }
   if (title2) {
-    content.children.push({
+    content2.children.push({
       tag: "title",
       attributes: {
-        id: content.attributes["aria-labelledby"] || "title-".concat(titleId || nextUniqueId())
+        id: content2.attributes["aria-labelledby"] || "title-".concat(titleId || nextUniqueId())
       },
       children: [title2]
     });
-    delete content.attributes.title;
+    delete content2.attributes.title;
   }
-  const args = _objectSpread2$1(_objectSpread2$1({}, content), {}, {
+  const args = _objectSpread2$1(_objectSpread2$1({}, content2), {}, {
     prefix,
     iconName,
-    main,
+    main: main2,
     mask,
     maskId,
     transform,
@@ -9286,7 +9283,7 @@ function makeInlineSvgAbstract(params) {
   const {
     children,
     attributes
-  } = mask.found && main.found ? callProvided("generateAbstractMask", args) || {
+  } = mask.found && main2.found ? callProvided("generateAbstractMask", args) || {
     children: [],
     attributes: {}
   } : callProvided("generateAbstractIcon", args) || {
@@ -9303,7 +9300,7 @@ function makeInlineSvgAbstract(params) {
 }
 function makeLayersTextAbstract(params) {
   const {
-    content,
+    content: content2,
     width,
     height,
     transform,
@@ -9337,7 +9334,7 @@ function makeLayersTextAbstract(params) {
   val.push({
     tag: "span",
     attributes,
-    children: [content]
+    children: [content2]
   });
   if (title2) {
     val.push({
@@ -9352,7 +9349,7 @@ function makeLayersTextAbstract(params) {
 }
 function makeLayersCounterAbstract(params) {
   const {
-    content,
+    content: content2,
     title: title2,
     extra
   } = params;
@@ -9369,7 +9366,7 @@ function makeLayersCounterAbstract(params) {
   val.push({
     tag: "span",
     attributes,
-    children: [content]
+    children: [content2]
   });
   if (title2) {
     val.push({
@@ -9466,13 +9463,13 @@ const p$2 = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERF
   measure: noop$1
 };
 const preamble = 'FA "6.7.2"';
-const begin = (name2) => {
-  p$2.mark("".concat(preamble, " ").concat(name2, " begins"));
-  return () => end(name2);
+const begin = (name) => {
+  p$2.mark("".concat(preamble, " ").concat(name, " begins"));
+  return () => end(name);
 };
-const end = (name2) => {
-  p$2.mark("".concat(preamble, " ").concat(name2, " ends"));
-  p$2.measure("".concat(preamble, " ").concat(name2), "".concat(preamble, " ").concat(name2, " begins"), "".concat(preamble, " ").concat(name2, " ends"));
+const end = (name) => {
+  p$2.mark("".concat(preamble, " ").concat(name, " ends"));
+  p$2.measure("".concat(preamble, " ").concat(name), "".concat(preamble, " ").concat(name, " begins"), "".concat(preamble, " ").concat(name, " ends"));
 };
 var perf = {
   begin,
@@ -9499,11 +9496,11 @@ function getMutator() {
   const mutator = mutators[config.autoReplaceSvg];
   return mutator || mutators.replace;
 }
-function createElementNS(tag) {
-  return DOCUMENT.createElementNS("http://www.w3.org/2000/svg", tag);
+function createElementNS(tag2) {
+  return DOCUMENT.createElementNS("http://www.w3.org/2000/svg", tag2);
 }
-function createElement(tag) {
-  return DOCUMENT.createElement(tag);
+function createElement(tag2) {
+  return DOCUMENT.createElement(tag2);
 }
 function convertSVG(abstractObj) {
   let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
@@ -9513,17 +9510,17 @@ function convertSVG(abstractObj) {
   if (typeof abstractObj === "string") {
     return DOCUMENT.createTextNode(abstractObj);
   }
-  const tag = ceFn(abstractObj.tag);
+  const tag2 = ceFn(abstractObj.tag);
   Object.keys(abstractObj.attributes || []).forEach(function(key) {
-    tag.setAttribute(key, abstractObj.attributes[key]);
+    tag2.setAttribute(key, abstractObj.attributes[key]);
   });
   const children = abstractObj.children || [];
   children.forEach(function(child) {
-    tag.appendChild(convertSVG(child, {
+    tag2.appendChild(convertSVG(child, {
       ceFn
     }));
   });
-  return tag;
+  return tag2;
 }
 function nodeAsComment(node) {
   let comment = " ".concat(node.outerHTML, " ");
@@ -9967,10 +9964,10 @@ var ReplaceElements = {
           height: 512,
           icon: {}
         })]).then((_ref) => {
-          let [main, mask2] = _ref;
+          let [main2, mask2] = _ref;
           resolve([node, makeInlineSvgAbstract({
             icons: {
-              main,
+              main: main2,
               mask: mask2
             },
             prefix,
@@ -9990,7 +9987,7 @@ var ReplaceElements = {
       let {
         children,
         attributes,
-        main,
+        main: main2,
         transform,
         styles: styles2
       } = _ref2;
@@ -10001,13 +9998,13 @@ var ReplaceElements = {
       let nextChild;
       if (transformIsMeaningful(transform)) {
         nextChild = callProvided("generateAbstractTransformGrouping", {
-          main,
+          main: main2,
           transform,
-          containerWidth: main.width,
-          iconWidth: main.width
+          containerWidth: main2.width,
+          iconWidth: main2.width
         });
       }
-      children.push(nextChild || main.icon);
+      children.push(nextChild || main2.icon);
       return {
         children,
         attributes
@@ -10051,7 +10048,7 @@ var Layers = {
 var LayersCounter = {
   mixout() {
     return {
-      counter(content) {
+      counter(content2) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           title: title2 = null,
@@ -10061,14 +10058,14 @@ var LayersCounter = {
         } = params;
         return domVariants({
           type: "counter",
-          content
+          content: content2
         }, () => {
           callHooks("beforeDOMElementCreation", {
-            content,
+            content: content2,
             params
           });
           return makeLayersCounterAbstract({
-            content: content.toString(),
+            content: content2.toString(),
             title: title2,
             extra: {
               attributes,
@@ -10084,7 +10081,7 @@ var LayersCounter = {
 var LayersText = {
   mixout() {
     return {
-      text(content) {
+      text(content2) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           transform = meaninglessTransform,
@@ -10095,14 +10092,14 @@ var LayersText = {
         } = params;
         return domVariants({
           type: "text",
-          content
+          content: content2
         }, () => {
           callHooks("beforeDOMElementCreation", {
-            content,
+            content: content2,
             params
           });
           return makeLayersTextAbstract({
-            content,
+            content: content2,
             transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform),
             title: title2,
             extra: {
@@ -10162,8 +10159,8 @@ const FONT_FAMILY_WEIGHT_FALLBACK = Object.keys(FONT_FAMILY_WEIGHT_TO_PREFIX).re
   acc[fontFamily] = weights[900] || [...Object.entries(weights)][0][1];
   return acc;
 }, {});
-function hexValueFromContent(content) {
-  const cleaned = content.replace(CLEAN_CONTENT_PATTERN, "");
+function hexValueFromContent(content2) {
+  const cleaned = content2.replace(CLEAN_CONTENT_PATTERN, "");
   const codePoint = codePointAt(cleaned, 0);
   const isPrependTen = codePoint >= SECONDARY_UNICODE_RANGE[0] && codePoint <= SECONDARY_UNICODE_RANGE[1];
   const isDoubled = cleaned.length === 2 ? cleaned[0] === cleaned[1] : false;
@@ -10190,17 +10187,17 @@ function replaceForPosition(node, position) {
     const fontFamily = styles2.getPropertyValue("font-family");
     const fontFamilyMatch = fontFamily.match(FONT_FAMILY_PATTERN);
     const fontWeight = styles2.getPropertyValue("font-weight");
-    const content = styles2.getPropertyValue("content");
+    const content2 = styles2.getPropertyValue("content");
     if (alreadyProcessedPseudoElement && !fontFamilyMatch) {
       node.removeChild(alreadyProcessedPseudoElement);
       return resolve();
-    } else if (fontFamilyMatch && content !== "none" && content !== "") {
-      const content2 = styles2.getPropertyValue("content");
+    } else if (fontFamilyMatch && content2 !== "none" && content2 !== "") {
+      const content22 = styles2.getPropertyValue("content");
       let prefix = getPrefix(fontFamily, fontWeight);
       const {
         value: hexValue,
         isSecondary
-      } = hexValueFromContent(content2);
+      } = hexValueFromContent(content22);
       const isV4 = fontFamilyMatch[0].startsWith("FontAwesome");
       let iconName = byUnicode(prefix, hexValue);
       let iconIdentifier = iconName;
@@ -10216,15 +10213,15 @@ function replaceForPosition(node, position) {
         if (alreadyProcessedPseudoElement) {
           node.removeChild(alreadyProcessedPseudoElement);
         }
-        const meta = blankMeta();
+        const meta2 = blankMeta();
         const {
           extra
-        } = meta;
+        } = meta2;
         extra.attributes[DATA_FA_PSEUDO_ELEMENT] = position;
-        findIcon(iconName, prefix).then((main) => {
-          const abstract = makeInlineSvgAbstract(_objectSpread2$1(_objectSpread2$1({}, meta), {}, {
+        findIcon(iconName, prefix).then((main2) => {
+          const abstract = makeInlineSvgAbstract(_objectSpread2$1(_objectSpread2$1({}, meta2), {}, {
             icons: {
-              main,
+              main: main2,
               mask: emptyCanonicalIcon()
             },
             prefix,
@@ -10403,7 +10400,7 @@ var PowerTransforms = {
   provides(providers2) {
     providers2.generateAbstractTransformGrouping = function(_ref) {
       let {
-        main,
+        main: main2,
         transform,
         containerWidth,
         iconWidth
@@ -10432,9 +10429,9 @@ var PowerTransforms = {
           tag: "g",
           attributes: _objectSpread2$1({}, operations.inner),
           children: [{
-            tag: main.icon.tag,
-            children: main.icon.children,
-            attributes: _objectSpread2$1(_objectSpread2$1({}, main.icon.attributes), operations.path)
+            tag: main2.icon.tag,
+            children: main2.icon.children,
+            attributes: _objectSpread2$1(_objectSpread2$1({}, main2.icon.attributes), operations.path)
           }]
         }]
       };
@@ -10481,7 +10478,7 @@ var Masks = {
       let {
         children,
         attributes,
-        main,
+        main: main2,
         mask,
         maskId: explicitMaskId,
         transform
@@ -10489,7 +10486,7 @@ var Masks = {
       const {
         width: mainWidth,
         icon: mainPath
-      } = main;
+      } = main2;
       const {
         width: maskWidth,
         icon: maskPath
@@ -11097,13 +11094,14 @@ const Icon = (props) => {
   );
 };
 function Nav(props) {
-  const { title: title2 = "", menus: menus2 = [], navBlue = true } = props;
+  const { title: title2 = "", menus: menus2 = [], children } = props;
+  if (children) return children;
   const [isHide, setIsHide] = reactExports.useState(false);
-  const [isBlue, setIsBlue] = reactExports.useState(true);
+  const [isTop, setIsTop] = reactExports.useState(true);
   reactExports.useEffect(() => {
-    setIsBlue(navBlue);
-    const scroll = (direction) => {
+    const scroll = (direction, isTop2) => {
       setIsHide(direction == "down");
+      setIsTop(isTop2);
     };
     scrollManager.add(scroll);
     return () => {
@@ -11113,13 +11111,13 @@ function Nav(props) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "nav",
     {
-      className: classNames(styles$8.nav, {
-        [styles$8.hide]: isHide,
-        [styles$8["nav-blue"]]: isBlue
+      className: classNames(styles$e.nav, {
+        [styles$e.hide]: isHide,
+        [styles$e.top]: isTop
       }),
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: title2 }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$e["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: title2 }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$e.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
           return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: items.path, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: items.icon }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: items.title })
@@ -11129,366 +11127,1698 @@ function Nav(props) {
     }
   );
 }
-const homeLayout = "_homeLayout_n55af_1";
-const loop = "_loop_n55af_22";
-const info$2 = "_info_n55af_57";
-const avatar = "_avatar_n55af_108";
-const name = "_name_n55af_121";
-const description$1 = "_description_n55af_126";
-const styles$6 = {
-  homeLayout,
-  "home-info": "_home-info_n55af_16",
-  loop,
-  info: info$2,
-  "home-posts-wrap": "_home-posts-wrap_n55af_77",
-  "home-posts": "_home-posts_n55af_77",
-  "home-card": "_home-card_n55af_89",
-  "home-card-inner": "_home-card-inner_n55af_92",
-  avatar,
-  name,
-  description: description$1,
-  "friend-links": "_friend-links_n55af_131",
-  "icon-links": "_icon-links_n55af_132",
-  "icon-link": "_icon-link_n55af_132"
+const articleList = "_articleList_lrpq1_1";
+const item = "_item_lrpq1_1";
+const left$1 = "_left_lrpq1_16";
+const right$1 = "_right_lrpq1_25";
+const content$1 = "_content_lrpq1_31";
+const meta$1 = "_meta_lrpq1_41";
+const info = "_info_lrpq1_66";
+const styles$c = {
+  articleList,
+  item,
+  left: left$1,
+  right: right$1,
+  content: content$1,
+  meta: meta$1,
+  info,
+  "content-tag": "_content-tag_lrpq1_71",
+  "multiline-ellipsis": "_multiline-ellipsis_lrpq1_75"
 };
-const post = "_post_1657o_1";
-const category = "_category_1657o_19";
-const date = "_date_1657o_33";
-const description = "_description_1657o_36";
-const styles$5 = {
-  post,
-  "category-and-date": "_category-and-date_1657o_19",
-  category,
-  date,
-  description,
-  "post-tags": "_post-tags_1657o_39",
-  "go-post": "_go-post_1657o_48"
+const pagination = "_pagination_1rhmf_1";
+const block = "_block_1rhmf_8";
+const active$1 = "_active_1rhmf_21";
+const number = "_number_1rhmf_28";
+const styles$b = {
+  pagination,
+  block,
+  active: active$1,
+  number
 };
-const colors = [
-  "#03a9f4",
-  "#00bcd4",
-  "#00a596",
-  "#ff7d73",
-  "#00bcd4",
-  "#ffa2c4"
-];
-function getRandomColor() {
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
-}
-const Post = (props) => {
-  console.log(props);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.post, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: props.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: props.title }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["category-and-date"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$5.category, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${props.categories}`, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "folder-open" }),
-        props.categories
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: styles$5.date, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar" }),
-        props.date
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5.description, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { dangerouslySetInnerHTML: { __html: props.info } }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["post-tags"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
-      props.tags.map((tag, index) => {
-        return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag}`, style: { color: getRandomColor() }, children: tag }) }, index);
-      })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: props.path, className: styles$5["go-post"], children: "阅读全文" })
+function Pagination(props) {
+  const { currentPage = 1, pageCount = 1, onChange: onChange2 } = props;
+  const [selectPage, setSelectPage] = reactExports.useState(currentPage);
+  const renderPages = reactExports.useMemo(() => {
+    if (pageCount < 8) {
+      return Array.from({ length: pageCount }).map((_, i) => i + 1);
+    } else {
+      const pages = [];
+      let min = Math.max(selectPage - 2, 1);
+      let max = Math.min(selectPage + 2, pageCount);
+      if (selectPage - 2 <= 0) {
+        max = 5;
+      }
+      if (selectPage + 2 >= pageCount) {
+        min = pageCount - 4;
+      }
+      for (let i = min; i <= max; i++) {
+        pages.push(i);
+      }
+      if (pages[0] != 1) {
+        if (pages[0] > 2) {
+          pages.unshift(0);
+        }
+        pages.unshift(1);
+      }
+      if (pages.at(-1) != pageCount) {
+        if (pages.at(-1) < pageCount - 1) {
+          pages.push(0);
+        }
+        pages.push(pageCount);
+      }
+      return pages;
+    }
+  }, [pageCount, selectPage]);
+  const setPage = reactExports.useCallback(
+    (val) => {
+      if (val < 1) val = 1;
+      if (val > pageCount) val = pageCount;
+      setSelectPage(val);
+      onChange2 == null ? void 0 : onChange2(val);
+    },
+    [onChange2]
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$b.pagination, children: [
+    selectPage !== 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: classNames(styles$b.block),
+        onClick: () => setPage(selectPage - 1),
+        children: "<"
+      }
+    ),
+    renderPages.map((val, index) => {
+      if (val === 0) {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: classNames(styles$b.block),
+            onClick: () => setPage(selectPage + (index == 1 ? -5 : 5)),
+            title: `${index == 1 ? "后退 5 页" : "前进 5 页"}`,
+            children: "···"
+          },
+          `${val}-${index}`
+        );
+      } else {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: classNames(styles$b.block, styles$b.number, {
+              [styles$b.active]: val === selectPage
+            }),
+            onClick: () => {
+              setPage(val);
+            },
+            children: val
+          },
+          `page-${val}`
+        );
+      }
+    }),
+    selectPage !== pageCount && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: classNames(styles$b.block),
+        onClick: () => setPage(selectPage + 1),
+        children: ">"
+      }
+    )
   ] });
-};
+}
+function ArticleList(props) {
+  const { step = 5, children, filter } = props;
+  if (children) return children;
+  const [currentPage, setCurrentPage] = reactExports.useState(1);
+  const articleList2 = reactExports.useMemo(
+    () => props.articleList.map((aritcle) => {
+      if ((filter == null ? void 0 : filter.type) == "tag" && !aritcle.tags.includes(filter == null ? void 0 : filter.keyword)) {
+        return;
+      }
+      if ((filter == null ? void 0 : filter.type) == "category" && aritcle.categories !== (filter == null ? void 0 : filter.keyword)) {
+        return;
+      }
+      return aritcle;
+    }).filter(Boolean),
+    [props.articleList, filter]
+  );
+  const currentArtcleList = reactExports.useMemo(() => {
+    return articleList2.slice((currentPage - 1) * step, currentPage * step);
+  }, [currentPage]);
+  const paginationOptions = {
+    pageCount: Math.ceil(articleList2.length / step),
+    currentPage,
+    onChange: (page) => {
+      setCurrentPage(page);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$c.articleList, children: currentArtcleList.map((item2, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$c.item, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$c.left, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: item2.cover, alt: "" }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$c.right, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$c.content, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item2.title }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: styles$c.meta, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar-alt" }),
+              "发表于 ",
+              item2.date
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "inbox" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/category/${item2.categories}`, children: item2.categories })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: styles$c["content-tag"], children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tag" }),
+              item2.tags.map((tag2, index2) => {
+                return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag2}`, children: tag2 }, `${tag2}-${index2}`);
+              })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "p",
+            {
+              className: classNames(
+                styles$c.info,
+                styles$c["multiline-ellipsis"]
+              ),
+              children: item2.info
+            }
+          )
+        ] }) })
+      ] }, `${item2.title}-${index}`);
+    }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: articleList2.length && /* @__PURE__ */ jsxRuntimeExports.jsx(Pagination, { ...paginationOptions }) })
+  ] });
+}
 function HomeLayout(props) {
-  const { siteData: siteData2, title: title2, articlesList } = props.pageData;
-  const { themeConfig, author, avatar: avatar2, description: description2 } = siteData2;
-  const { banner } = themeConfig;
-  console.log(themeConfig);
-  const iconList = ["github", "qq", "envelope"];
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.homeLayout, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: banner.img, alt: "" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-info"], children: [
-        Array.from({ length: 4 }).map((_, i) => {
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6.loop }, i);
-        }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.info, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title2 }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: banner.subTitle })
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleList, { articleList: props.pageData.articlesList });
+}
+const layout = "_layout_1g63m_1";
+const header$1 = "_header_1g63m_9";
+const main = "_main_1g63m_18";
+const mainInner = "_mainInner_1g63m_24";
+const mainLeft = "_mainLeft_1g63m_33";
+const mainRight = "_mainRight_1g63m_38";
+const sidebarLeft = "_sidebarLeft_1g63m_43";
+const sidebarHide = "_sidebarHide_1g63m_47";
+const styles$a = {
+  layout,
+  header: header$1,
+  "not-home-page": "_not-home-page_1g63m_15",
+  main,
+  mainInner,
+  mainLeft,
+  mainRight,
+  sidebarLeft,
+  sidebarHide
+};
+const banner = "_banner_1hwpr_1";
+const meta = "_meta_1hwpr_33";
+const styles$9 = {
+  banner,
+  "banner-site-info": "_banner-site-info_1hwpr_20",
+  "banner-site-title": "_banner-site-title_1hwpr_25",
+  meta,
+  "content-tag": "_content-tag_1hwpr_60",
+  "not-home-page": "_not-home-page_1hwpr_64"
+};
+function Banner(props) {
+  const {
+    children,
+    isHomePage,
+    isArticlePage,
+    title: title2,
+    bannerData = { img: "" },
+    articleData
+  } = props;
+  if (children) return children;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      className: classNames(styles$9.banner, {
+        [styles$9["not-home-page"]]: !isHomePage
+      }),
+      style: {
+        backgroundImage: `url(${isArticlePage ? articleData.cover : bannerData.img})`
+      },
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9["banner-site-info"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$9["banner-site-title"], children: title2 }),
+        isArticlePage && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.meta, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar-alt" }),
+            "发表于 ",
+            formatDateToYYYYMMDD(articleData.date)
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "inbox" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/category/${articleData.categories}`, children: articleData.categories })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: styles$9["content-tag"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tag" }),
+            articleData.tags.map((tag2, index) => {
+              return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag2}`, children: tag2 }, `${tag2}-${index}`);
+            })
+          ] })
         ] })
       ] })
+    }
+  );
+}
+const footer = "_footer_iuxfi_1";
+const footerInner = "_footerInner_iuxfi_8";
+const styles$8 = {
+  footer,
+  footerInner,
+  "framework-info": "_framework-info_iuxfi_32"
+};
+function Footer(props) {
+  const { children } = props;
+  if (children) return children;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: styles$8.footer, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: styles$8.footerInner,
+      style: {
+        backgroundImage: `url(${props.footerImg})`
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "©2020 - 2023 By XXX17" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: styles$8["framework-info"], children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "框架" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "a",
+            {
+              href: "https://github.com/GitHubxxx17/fispo",
+              target: "_blank",
+              rel: "noreferrer",
+              children: "Fispo"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "|" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "主题" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "a",
+            {
+              href: "https://github.com/GitHubxxx17/fispo",
+              target: "_blank",
+              rel: "noreferrer",
+              children: "fish-in-pool"
+            }
+          )
+        ] })
+      ]
+    }
+  ) });
+}
+const sidebar = "_sidebar_18neh_1";
+const stickyLayout = "_stickyLayout_18neh_8";
+const styles$7 = {
+  sidebar,
+  stickyLayout
+};
+const card = "_card_5w79l_1";
+const avatar = "_avatar_5w79l_12";
+const author = "_author_5w79l_21";
+const header = "_header_5w79l_75";
+const list = "_list_5w79l_112";
+const left = "_left_5w79l_118";
+const right = "_right_5w79l_131";
+const title = "_title_5w79l_137";
+const time = "_time_5w79l_146";
+const progress = "_progress_5w79l_155";
+const content = "_content_5w79l_162";
+const active = "_active_5w79l_178";
+const styles$6 = {
+  card,
+  avatar,
+  author,
+  "author-name": "_author-name_5w79l_26",
+  "author-description": "_author-description_5w79l_31",
+  "author-data": "_author-data_5w79l_34",
+  "follow-btn": "_follow-btn_5w79l_53",
+  header,
+  "card-announcement": "_card-announcement_5w79l_84",
+  "card-article": "_card-article_5w79l_87",
+  "card-list": "_card-list_5w79l_93",
+  list,
+  left,
+  right,
+  title,
+  time,
+  "card-toc": "_card-toc_5w79l_151",
+  progress,
+  content,
+  active,
+  "card-tag-cloud": "_card-tag-cloud_5w79l_187"
+};
+const AuthorCard = (props) => {
+  var _a2, _b2, _c, _d;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.author, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.avatar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: props.avatar }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: styles$6["author-name"], children: props == null ? void 0 : props.author }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: styles$6["author-description"], children: props == null ? void 0 : props.description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["author-data"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "文章" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: props == null ? void 0 : props.articleNums })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/tag", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "标签" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: props == null ? void 0 : props.tagsNums })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/category", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "分类" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: props == null ? void 0 : props.categorizeNums })
+      ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-posts-wrap"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-posts"], children: articlesList.map((article, index) => {
-        return /* @__PURE__ */ reactExports.createElement(Post, { ...article, key: index });
-      }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-card"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-card-inner"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.avatar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: avatar2, alt: "avatar" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.name, children: author }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.description, children: description2 }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["icon-links"], children: iconList.map((item, index) => {
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6["icon-link"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: item }) }) }, index);
-        }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["friend-links"] })
-      ] }) })
-    ] })
+    ((_a2 = props == null ? void 0 : props.button) == null ? void 0 : _a2.enable) && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: styles$6["follow-btn"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: (_b2 = props == null ? void 0 : props.button) == null ? void 0 : _b2.link, target: "_blank", rel: "noreferrer", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (_c = props == null ? void 0 : props.button) == null ? void 0 : _c.icon }),
+      (_d = props == null ? void 0 : props.button) == null ? void 0 : _d.text
+    ] }) })
+  ] });
+};
+const AuthorCard$1 = reactExports.memo(AuthorCard);
+const AnnouncementCard = (props) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["card-announcement"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.header, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "history", shake: true }),
+      props == null ? void 0 : props.title
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: props.content })
+  ] });
+};
+const AnnouncementCard$1 = reactExports.memo(AnnouncementCard);
+const ArticleCard = (props) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["card-article"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.header, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "history" }),
+      props == null ? void 0 : props.title
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: styles$6.list, children: props == null ? void 0 : props.data.map((item2, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.left, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: item2.cover, alt: "" }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.right, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6.title, children: item2.title }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6.time, children: item2.date })
+        ] })
+      ] }, `${item2.title}-${index}`);
+    }) })
+  ] });
+};
+const ArticleCard$1 = reactExports.memo(ArticleCard);
+const ListCard = (props) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["card-list"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.header, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "folder-open" }),
+      props == null ? void 0 : props.title
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: styles$6.list, children: Object.entries(props == null ? void 0 : props.data).slice(0, props == null ? void 0 : props.limit).map(([name, value], index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: props.hover ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${name}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: Array.isArray(value) ? value.length : value })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: Array.isArray(value) ? value.length : value })
+      ] }) }, `${name}-${index}`);
+    }) })
+  ] });
+};
+const ListCard$1 = reactExports.memo(ListCard);
+const TocCard = (props) => {
+  const [activeIndex, setActiveIndex] = reactExports.useState(0);
+  const [progress2, setProgress] = reactExports.useState(0);
+  const tocList = reactExports.useRef([]);
+  const tocScroller = reactExports.useRef(null);
+  const newTocData = reactExports.useMemo(() => {
+    const serialNumberArr = [];
+    return props.data.map((item2) => {
+      if (item2.depth > serialNumberArr.length) {
+        while (item2.depth > serialNumberArr.length) {
+          serialNumberArr.push(1);
+        }
+      } else if (item2.depth < serialNumberArr.length) {
+        while (item2.depth < serialNumberArr.length) {
+          serialNumberArr.pop();
+        }
+        serialNumberArr[item2.depth - 1]++;
+      } else {
+        serialNumberArr[item2.depth - 1]++;
+      }
+      return { ...item2, serialNumber: serialNumberArr.join(".") };
+    });
+  }, [props]);
+  const tocActive = reactExports.useCallback(
+    (index, isScrollIntoView = true) => {
+      setActiveIndex(index);
+      const targetItem = tocList.current[index];
+      if (!isScrollIntoView && !targetItem && tocScroller.current.scrollHeight === tocScroller.current.offsetHeight)
+        return;
+      const itemTop = targetItem.offsetTop;
+      const itemBottom = itemTop + targetItem.offsetHeight;
+      const containerTop = tocScroller.current.scrollTop;
+      const containerBottom = containerTop + tocScroller.current.offsetHeight;
+      if (itemTop < containerTop || itemBottom > containerBottom) {
+        targetItem.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+    },
+    []
+  );
+  reactExports.useLayoutEffect(() => {
+    let headers = [];
+    const NAV_HEIGHT2 = 60;
+    const isBottom = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight;
+    let articleTop = 0;
+    const scrollToToc = (direction) => {
+      if (headers.length == 0) {
+        headers = Array.from(document.getElementsByClassName("header-anchor"));
+        articleTop = headers[0].parentElement.offsetTop;
+      }
+      let scrollTop = Math.ceil(window.scrollY);
+      if (scrollTop > articleTop) {
+        setProgress(
+          Math.ceil(
+            (scrollTop - articleTop) / (document.documentElement.scrollHeight - articleTop) * 100
+          )
+        );
+      } else {
+        setProgress(0);
+      }
+      if (isBottom) {
+        tocActive(headers.length - 1);
+        return;
+      }
+      if (direction == "up") {
+        scrollTop += NAV_HEIGHT2;
+      }
+      for (let i = 0; i < headers.length; i++) {
+        const currentAnchor = headers[i];
+        const nextAnchor = headers[i + 1];
+        const currentTop = currentAnchor.parentElement.offsetTop;
+        if (!nextAnchor) {
+          tocActive(i);
+          break;
+        }
+        if (i === 0 && scrollTop < currentTop || scrollTop == 0) {
+          tocActive(0);
+          break;
+        }
+        const nextTop = nextAnchor.parentElement.offsetTop;
+        if (currentTop <= scrollTop && scrollTop < nextTop) {
+          tocActive(i);
+          break;
+        }
+      }
+    };
+    scrollManager.add(scrollToToc);
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["card-toc"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.header, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "stream" }),
+        props == null ? void 0 : props.title
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6.progress, children: progress2 })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.content, ref: tocScroller, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: newTocData == null ? void 0 : newTocData.map(({ id, text, depth, serialNumber }, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "li",
+        {
+          className: classNames({
+            [styles$6.active]: index == activeIndex
+          }),
+          style: {
+            marginLeft: `${(depth - 1) * 20}px`
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "a",
+            {
+              ref: (el) => {
+                if (el) {
+                  tocList.current.push(el);
+                }
+              },
+              href: `#${id}`,
+              onClick: (e) => {
+                e.preventDefault();
+                const target = document.getElementById(id);
+                if (target) {
+                  scrollManager.scrollToTarget(target, true);
+                }
+                tocActive(index, false);
+              },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: `${serialNumber}. ` }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: text })
+              ]
+            }
+          )
+        },
+        `${text}-${index}`
+      );
+    }) }) })
+  ] });
+};
+const TocCard$1 = reactExports.memo(TocCard);
+const getRandomColor = () => {
+  const hue = Math.floor(Math.random() * 360);
+  const saturation = 70;
+  const minLightness = 30;
+  const maxLightness = 70;
+  const lightness = Math.floor(Math.random() * (maxLightness - minLightness + 1)) + minLightness;
+  const hslToHex = (h, s2, l) => {
+    l /= 100;
+    const a = s2 * Math.min(l, 1 - l) / 100;
+    const f = (n) => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, "0");
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  };
+  return hslToHex(hue, saturation, lightness);
+};
+const getRandomTextSize = (size) => {
+  return `${Math.min(size, 20) / 20 + 1}rem`;
+};
+const TagCard = (props) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["card-tag"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.header, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
+      props == null ? void 0 : props.title
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["card-tag-cloud"], children: Object.entries(props.data).map(([tag2, tagArr], index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "a",
+        {
+          href: `tag/${tag2}`,
+          style: {
+            color: getRandomColor(),
+            fontSize: getRandomTextSize(tagArr.length)
+          },
+          children: tag2
+        }
+      ) }, `${tag2}-${index}`);
+    }) })
+  ] });
+};
+const TagCard$1 = reactExports.memo(TagCard);
+function Card(props) {
+  const {
+    type,
+    authorData,
+    listData,
+    articleData,
+    tocData,
+    announcementData,
+    tagData
+  } = props;
+  const getContent = () => {
+    switch (type) {
+      case "author":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(AuthorCard$1, { ...authorData });
+      case "announcement":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(AnnouncementCard$1, { ...announcementData });
+      case "list":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(ListCard$1, { ...listData });
+      case "article":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleCard$1, { ...articleData });
+      case "toc":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(TocCard$1, { ...tocData });
+      case "tag":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(TagCard$1, { ...tagData });
+      default:
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.card, children: getContent() });
+}
+function Sidebar(props) {
+  const { children, pageData, isArticlePage = false } = props;
+  const { siteData: siteData2 } = pageData;
+  const { sidebar: sidebar2 } = siteData2.themeConfig;
+  const {
+    card_author,
+    card_categories,
+    card_recent_post,
+    card_announcement,
+    card_tags,
+    card_webinfo
+  } = sidebar2;
+  if (children) return children;
+  const [isUp, setIsUp] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    console.log(sidebar2);
+    const scroll = (direction) => {
+      setIsUp(direction == "up");
+    };
+    scrollManager.add(scroll);
+    return () => {
+      scrollManager.remove(scroll);
+    };
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$7.sidebar, children: [
+    card_author.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Card,
+      {
+        type: "author",
+        authorData: {
+          author: siteData2.author,
+          avatar: siteData2.avatar,
+          description: (card_author == null ? void 0 : card_author.description) || siteData2.description,
+          articleNums: pageData.articlesList.length,
+          tagsNums: Object.keys(pageData.tags).length,
+          categorizeNums: Object.keys(pageData.categories).length,
+          button: card_author.button
+        }
+      }
+    ),
+    card_announcement.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Card,
+      {
+        type: "announcement",
+        announcementData: {
+          title: "公告",
+          icon: "bullhorn",
+          content: card_announcement.content
+        }
+      }
+    ),
+    !isArticlePage && card_categories.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Card,
+      {
+        type: "list",
+        listData: {
+          title: "分类",
+          data: pageData.categories,
+          limit: card_categories.limit,
+          hover: true
+        }
+      }
+    ),
+    !isArticlePage && card_tags.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Card,
+      {
+        type: "tag",
+        tagData: {
+          title: "标签",
+          data: pageData.tags
+        }
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        className: styles$7.stickyLayout,
+        style: { top: isUp ? "70px" : "20px" },
+        children: [
+          isArticlePage && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Card,
+            {
+              type: "toc",
+              tocData: {
+                title: "目录",
+                data: pageData.toc
+              }
+            }
+          ),
+          card_recent_post.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Card,
+            {
+              type: "article",
+              articleData: {
+                title: "最新文章",
+                data: pageData.articlesList.slice(0, card_recent_post.limit)
+              }
+            }
+          ),
+          !isArticlePage && card_webinfo.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Card,
+            {
+              type: "list",
+              listData: {
+                title: "网站资讯",
+                icon: "chart-line",
+                data: {
+                  "文章数目：": pageData.articlesList.length,
+                  "已运行时间 :": `1 天`,
+                  "最后更新时间 :": `2025-03-${(/* @__PURE__ */ new Date()).getDay()}`
+                }
+              }
+            }
+          )
+        ]
+      }
+    )
   ] });
 }
-const footer = "_footer_dfym6_1";
-const styles$4 = {
-  footer,
-  "footer-wrap": "_footer-wrap_dfym6_9"
-};
-const Footer = (props) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: styles$4.footer, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["footer-wrap"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      "© 2022 - 2024 ",
-      props.title,
-      " | @",
-      props.author
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      "Based on the",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/GitHubxxx17/fispo", children: "Fispo Engine" }),
-      "|",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/GitHubxxx17/fispo", children: "Particle Theme" })
-    ] })
-  ] }) });
-};
 const Content = () => {
   console.log(routes);
   const routeElement = useRoutes(routes);
   return routeElement;
 };
-const articleLayout = "_articleLayout_1v93v_1";
-const header = "_header_1v93v_9";
-const info$1 = "_info_1v93v_12";
-const styles$3 = {
-  articleLayout,
-  header,
-  info: info$1
+const styles$5 = {
+  "article-layout": "_article-layout_zsltx_1",
+  "article-content": "_article-content_zsltx_10",
+  "post-copyright": "_post-copyright_zsltx_103",
+  "post-copyright-item": "_post-copyright-item_zsltx_125",
+  "article-tag": "_article-tag_zsltx_138",
+  "article-pagination": "_article-pagination_zsltx_158",
+  "pagination-left": "_pagination-left_zsltx_166",
+  "pagination-right": "_pagination-right_zsltx_167",
+  "pagination-info": "_pagination-info_zsltx_171",
+  "article-recommend": "_article-recommend_zsltx_183",
+  "recommend-title": "_recommend-title_zsltx_186",
+  "recommend-list": "_recommend-list_zsltx_191",
+  "recommend-info": "_recommend-info_zsltx_203",
+  "article-img-hover": "_article-img-hover_zsltx_214"
 };
-function convertDateString(dateStr) {
-  const date2 = new Date(dateStr);
-  const year = date2.getFullYear();
-  const month = String(date2.getMonth() + 1).padStart(2, "0");
-  const day = String(date2.getDate()).padStart(2, "0");
-  return `${year}/${month}/${day}`;
+/*! medium-zoom 1.1.0 | MIT License | https://github.com/francoischalifour/medium-zoom */
+var _extends = Object.assign || function(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+  return target;
+};
+var isSupported = function isSupported2(node) {
+  return node.tagName === "IMG";
+};
+var isNodeList = function isNodeList2(selector) {
+  return NodeList.prototype.isPrototypeOf(selector);
+};
+var isNode = function isNode2(selector) {
+  return selector && selector.nodeType === 1;
+};
+var isSvg = function isSvg2(image) {
+  var source = image.currentSrc || image.src;
+  return source.substr(-4).toLowerCase() === ".svg";
+};
+var getImagesFromSelector = function getImagesFromSelector2(selector) {
+  try {
+    if (Array.isArray(selector)) {
+      return selector.filter(isSupported);
+    }
+    if (isNodeList(selector)) {
+      return [].slice.call(selector).filter(isSupported);
+    }
+    if (isNode(selector)) {
+      return [selector].filter(isSupported);
+    }
+    if (typeof selector === "string") {
+      return [].slice.call(document.querySelectorAll(selector)).filter(isSupported);
+    }
+    return [];
+  } catch (err) {
+    throw new TypeError("The provided selector is invalid.\nExpects a CSS selector, a Node element, a NodeList or an array.\nSee: https://github.com/francoischalifour/medium-zoom");
+  }
+};
+var createOverlay = function createOverlay2(background) {
+  var overlay = document.createElement("div");
+  overlay.classList.add("medium-zoom-overlay");
+  overlay.style.background = background;
+  return overlay;
+};
+var cloneTarget = function cloneTarget2(template) {
+  var _template$getBounding = template.getBoundingClientRect(), top2 = _template$getBounding.top, left2 = _template$getBounding.left, width = _template$getBounding.width, height = _template$getBounding.height;
+  var clone = template.cloneNode();
+  var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+  clone.removeAttribute("id");
+  clone.style.position = "absolute";
+  clone.style.top = top2 + scrollTop + "px";
+  clone.style.left = left2 + scrollLeft + "px";
+  clone.style.width = width + "px";
+  clone.style.height = height + "px";
+  clone.style.transform = "";
+  return clone;
+};
+var createCustomEvent = function createCustomEvent2(type, params) {
+  var eventParams = _extends({
+    bubbles: false,
+    cancelable: false,
+    detail: void 0
+  }, params);
+  if (typeof window.CustomEvent === "function") {
+    return new CustomEvent(type, eventParams);
+  }
+  var customEvent = document.createEvent("CustomEvent");
+  customEvent.initCustomEvent(type, eventParams.bubbles, eventParams.cancelable, eventParams.detail);
+  return customEvent;
+};
+var mediumZoom = function mediumZoom2(selector) {
+  var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  var Promise2 = window.Promise || function Promise3(fn) {
+    function noop2() {
+    }
+    fn(noop2, noop2);
+  };
+  var _handleClick = function _handleClick2(event) {
+    var target = event.target;
+    if (target === overlay) {
+      close();
+      return;
+    }
+    if (images.indexOf(target) === -1) {
+      return;
+    }
+    toggle({ target });
+  };
+  var _handleScroll = function _handleScroll2() {
+    if (isAnimating || !active2.original) {
+      return;
+    }
+    var currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (Math.abs(scrollTop - currentScroll) > zoomOptions.scrollOffset) {
+      setTimeout(close, 150);
+    }
+  };
+  var _handleKeyUp = function _handleKeyUp2(event) {
+    var key = event.key || event.keyCode;
+    if (key === "Escape" || key === "Esc" || key === 27) {
+      close();
+    }
+  };
+  var update = function update2() {
+    var options2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    var newOptions = options2;
+    if (options2.background) {
+      overlay.style.background = options2.background;
+    }
+    if (options2.container && options2.container instanceof Object) {
+      newOptions.container = _extends({}, zoomOptions.container, options2.container);
+    }
+    if (options2.template) {
+      var template = isNode(options2.template) ? options2.template : document.querySelector(options2.template);
+      newOptions.template = template;
+    }
+    zoomOptions = _extends({}, zoomOptions, newOptions);
+    images.forEach(function(image) {
+      image.dispatchEvent(createCustomEvent("medium-zoom:update", {
+        detail: { zoom }
+      }));
+    });
+    return zoom;
+  };
+  var clone = function clone2() {
+    var options2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    return mediumZoom2(_extends({}, zoomOptions, options2));
+  };
+  var attach = function attach2() {
+    for (var _len = arguments.length, selectors = Array(_len), _key = 0; _key < _len; _key++) {
+      selectors[_key] = arguments[_key];
+    }
+    var newImages = selectors.reduce(function(imagesAccumulator, currentSelector) {
+      return [].concat(imagesAccumulator, getImagesFromSelector(currentSelector));
+    }, []);
+    newImages.filter(function(newImage) {
+      return images.indexOf(newImage) === -1;
+    }).forEach(function(newImage) {
+      images.push(newImage);
+      newImage.classList.add("medium-zoom-image");
+    });
+    eventListeners.forEach(function(_ref) {
+      var type = _ref.type, listener2 = _ref.listener, options2 = _ref.options;
+      newImages.forEach(function(image) {
+        image.addEventListener(type, listener2, options2);
+      });
+    });
+    return zoom;
+  };
+  var detach = function detach2() {
+    for (var _len2 = arguments.length, selectors = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      selectors[_key2] = arguments[_key2];
+    }
+    if (active2.zoomed) {
+      close();
+    }
+    var imagesToDetach = selectors.length > 0 ? selectors.reduce(function(imagesAccumulator, currentSelector) {
+      return [].concat(imagesAccumulator, getImagesFromSelector(currentSelector));
+    }, []) : images;
+    imagesToDetach.forEach(function(image) {
+      image.classList.remove("medium-zoom-image");
+      image.dispatchEvent(createCustomEvent("medium-zoom:detach", {
+        detail: { zoom }
+      }));
+    });
+    images = images.filter(function(image) {
+      return imagesToDetach.indexOf(image) === -1;
+    });
+    return zoom;
+  };
+  var on = function on2(type, listener2) {
+    var options2 = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    images.forEach(function(image) {
+      image.addEventListener("medium-zoom:" + type, listener2, options2);
+    });
+    eventListeners.push({ type: "medium-zoom:" + type, listener: listener2, options: options2 });
+    return zoom;
+  };
+  var off = function off2(type, listener2) {
+    var options2 = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    images.forEach(function(image) {
+      image.removeEventListener("medium-zoom:" + type, listener2, options2);
+    });
+    eventListeners = eventListeners.filter(function(eventListener) {
+      return !(eventListener.type === "medium-zoom:" + type && eventListener.listener.toString() === listener2.toString());
+    });
+    return zoom;
+  };
+  var open = function open2() {
+    var _ref2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, target = _ref2.target;
+    var _animate = function _animate2() {
+      var container = {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0
+      };
+      var viewportWidth = void 0;
+      var viewportHeight = void 0;
+      if (zoomOptions.container) {
+        if (zoomOptions.container instanceof Object) {
+          container = _extends({}, container, zoomOptions.container);
+          viewportWidth = container.width - container.left - container.right - zoomOptions.margin * 2;
+          viewportHeight = container.height - container.top - container.bottom - zoomOptions.margin * 2;
+        } else {
+          var zoomContainer = isNode(zoomOptions.container) ? zoomOptions.container : document.querySelector(zoomOptions.container);
+          var _zoomContainer$getBou = zoomContainer.getBoundingClientRect(), _width = _zoomContainer$getBou.width, _height = _zoomContainer$getBou.height, _left = _zoomContainer$getBou.left, _top = _zoomContainer$getBou.top;
+          container = _extends({}, container, {
+            width: _width,
+            height: _height,
+            left: _left,
+            top: _top
+          });
+        }
+      }
+      viewportWidth = viewportWidth || container.width - zoomOptions.margin * 2;
+      viewportHeight = viewportHeight || container.height - zoomOptions.margin * 2;
+      var zoomTarget = active2.zoomedHd || active2.original;
+      var naturalWidth = isSvg(zoomTarget) ? viewportWidth : zoomTarget.naturalWidth || viewportWidth;
+      var naturalHeight = isSvg(zoomTarget) ? viewportHeight : zoomTarget.naturalHeight || viewportHeight;
+      var _zoomTarget$getBoundi = zoomTarget.getBoundingClientRect(), top2 = _zoomTarget$getBoundi.top, left2 = _zoomTarget$getBoundi.left, width = _zoomTarget$getBoundi.width, height = _zoomTarget$getBoundi.height;
+      var scaleX = Math.min(Math.max(width, naturalWidth), viewportWidth) / width;
+      var scaleY = Math.min(Math.max(height, naturalHeight), viewportHeight) / height;
+      var scale = Math.min(scaleX, scaleY);
+      var translateX = (-left2 + (viewportWidth - width) / 2 + zoomOptions.margin + container.left) / scale;
+      var translateY = (-top2 + (viewportHeight - height) / 2 + zoomOptions.margin + container.top) / scale;
+      var transform = "scale(" + scale + ") translate3d(" + translateX + "px, " + translateY + "px, 0)";
+      active2.zoomed.style.transform = transform;
+      if (active2.zoomedHd) {
+        active2.zoomedHd.style.transform = transform;
+      }
+    };
+    return new Promise2(function(resolve) {
+      if (target && images.indexOf(target) === -1) {
+        resolve(zoom);
+        return;
+      }
+      var _handleOpenEnd = function _handleOpenEnd2() {
+        isAnimating = false;
+        active2.zoomed.removeEventListener("transitionend", _handleOpenEnd2);
+        active2.original.dispatchEvent(createCustomEvent("medium-zoom:opened", {
+          detail: { zoom }
+        }));
+        resolve(zoom);
+      };
+      if (active2.zoomed) {
+        resolve(zoom);
+        return;
+      }
+      if (target) {
+        active2.original = target;
+      } else if (images.length > 0) {
+        var _images = images;
+        active2.original = _images[0];
+      } else {
+        resolve(zoom);
+        return;
+      }
+      active2.original.dispatchEvent(createCustomEvent("medium-zoom:open", {
+        detail: { zoom }
+      }));
+      scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      isAnimating = true;
+      active2.zoomed = cloneTarget(active2.original);
+      document.body.appendChild(overlay);
+      if (zoomOptions.template) {
+        var template = isNode(zoomOptions.template) ? zoomOptions.template : document.querySelector(zoomOptions.template);
+        active2.template = document.createElement("div");
+        active2.template.appendChild(template.content.cloneNode(true));
+        document.body.appendChild(active2.template);
+      }
+      if (active2.original.parentElement && active2.original.parentElement.tagName === "PICTURE" && active2.original.currentSrc) {
+        active2.zoomed.src = active2.original.currentSrc;
+      }
+      document.body.appendChild(active2.zoomed);
+      window.requestAnimationFrame(function() {
+        document.body.classList.add("medium-zoom--opened");
+      });
+      active2.original.classList.add("medium-zoom-image--hidden");
+      active2.zoomed.classList.add("medium-zoom-image--opened");
+      active2.zoomed.addEventListener("click", close);
+      active2.zoomed.addEventListener("transitionend", _handleOpenEnd);
+      if (active2.original.getAttribute("data-zoom-src")) {
+        active2.zoomedHd = active2.zoomed.cloneNode();
+        active2.zoomedHd.removeAttribute("srcset");
+        active2.zoomedHd.removeAttribute("sizes");
+        active2.zoomedHd.removeAttribute("loading");
+        active2.zoomedHd.src = active2.zoomed.getAttribute("data-zoom-src");
+        active2.zoomedHd.onerror = function() {
+          clearInterval(getZoomTargetSize);
+          console.warn("Unable to reach the zoom image target " + active2.zoomedHd.src);
+          active2.zoomedHd = null;
+          _animate();
+        };
+        var getZoomTargetSize = setInterval(function() {
+          if (active2.zoomedHd.complete) {
+            clearInterval(getZoomTargetSize);
+            active2.zoomedHd.classList.add("medium-zoom-image--opened");
+            active2.zoomedHd.addEventListener("click", close);
+            document.body.appendChild(active2.zoomedHd);
+            _animate();
+          }
+        }, 10);
+      } else if (active2.original.hasAttribute("srcset")) {
+        active2.zoomedHd = active2.zoomed.cloneNode();
+        active2.zoomedHd.removeAttribute("sizes");
+        active2.zoomedHd.removeAttribute("loading");
+        var loadEventListener = active2.zoomedHd.addEventListener("load", function() {
+          active2.zoomedHd.removeEventListener("load", loadEventListener);
+          active2.zoomedHd.classList.add("medium-zoom-image--opened");
+          active2.zoomedHd.addEventListener("click", close);
+          document.body.appendChild(active2.zoomedHd);
+          _animate();
+        });
+      } else {
+        _animate();
+      }
+    });
+  };
+  var close = function close2() {
+    return new Promise2(function(resolve) {
+      if (isAnimating || !active2.original) {
+        resolve(zoom);
+        return;
+      }
+      var _handleCloseEnd = function _handleCloseEnd2() {
+        active2.original.classList.remove("medium-zoom-image--hidden");
+        document.body.removeChild(active2.zoomed);
+        if (active2.zoomedHd) {
+          document.body.removeChild(active2.zoomedHd);
+        }
+        document.body.removeChild(overlay);
+        active2.zoomed.classList.remove("medium-zoom-image--opened");
+        if (active2.template) {
+          document.body.removeChild(active2.template);
+        }
+        isAnimating = false;
+        active2.zoomed.removeEventListener("transitionend", _handleCloseEnd2);
+        active2.original.dispatchEvent(createCustomEvent("medium-zoom:closed", {
+          detail: { zoom }
+        }));
+        active2.original = null;
+        active2.zoomed = null;
+        active2.zoomedHd = null;
+        active2.template = null;
+        resolve(zoom);
+      };
+      isAnimating = true;
+      document.body.classList.remove("medium-zoom--opened");
+      active2.zoomed.style.transform = "";
+      if (active2.zoomedHd) {
+        active2.zoomedHd.style.transform = "";
+      }
+      if (active2.template) {
+        active2.template.style.transition = "opacity 150ms";
+        active2.template.style.opacity = 0;
+      }
+      active2.original.dispatchEvent(createCustomEvent("medium-zoom:close", {
+        detail: { zoom }
+      }));
+      active2.zoomed.addEventListener("transitionend", _handleCloseEnd);
+    });
+  };
+  var toggle = function toggle2() {
+    var _ref3 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, target = _ref3.target;
+    if (active2.original) {
+      return close();
+    }
+    return open({ target });
+  };
+  var getOptions = function getOptions2() {
+    return zoomOptions;
+  };
+  var getImages = function getImages2() {
+    return images;
+  };
+  var getZoomedImage = function getZoomedImage2() {
+    return active2.original;
+  };
+  var images = [];
+  var eventListeners = [];
+  var isAnimating = false;
+  var scrollTop = 0;
+  var zoomOptions = options;
+  var active2 = {
+    original: null,
+    zoomed: null,
+    zoomedHd: null,
+    template: null
+    // If the selector is omitted, it's replaced by the options
+  };
+  if (Object.prototype.toString.call(selector) === "[object Object]") {
+    zoomOptions = selector;
+  } else if (selector || typeof selector === "string") {
+    attach(selector);
+  }
+  zoomOptions = _extends({
+    margin: 0,
+    background: "#fff",
+    scrollOffset: 40,
+    container: null,
+    template: null
+  }, zoomOptions);
+  var overlay = createOverlay(zoomOptions.background);
+  document.addEventListener("click", _handleClick);
+  document.addEventListener("keyup", _handleKeyUp);
+  document.addEventListener("scroll", _handleScroll);
+  window.addEventListener("resize", close);
+  var zoom = {
+    open,
+    close,
+    toggle,
+    update,
+    clone,
+    attach,
+    detach,
+    on,
+    off,
+    getOptions,
+    getImages,
+    getZoomedImage
+  };
+  return zoom;
+};
+function styleInject(css2, ref) {
+  if (ref === void 0) ref = {};
+  var insertAt = ref.insertAt;
+  if (typeof document === "undefined") {
+    return;
+  }
+  var head = document.head || document.getElementsByTagName("head")[0];
+  var style = document.createElement("style");
+  style.type = "text/css";
+  if (insertAt === "top") {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css2;
+  } else {
+    style.appendChild(document.createTextNode(css2));
+  }
 }
-const ArticleLayout = (props) => {
-  const { title: title2, frontmatter } = props.pageData;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.articleLayout, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.header, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title2 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.info, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar" }),
-          convertDateString(frontmatter.date)
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${frontmatter.categories}`, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "folder-open" }),
-          frontmatter.categories
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
-          frontmatter.tags.map((tag, index) => {
-            return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: getRandomColor() }, children: tag }) }, index);
-          })
+var css = ".medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}";
+styleInject(css);
+function ArticleLayout(props) {
+  const { articlesList, pagePath, frontmatter, categories, siteData: siteData2 } = props.pageData;
+  const { title: title2, author: author2 } = siteData2;
+  const [currIndex, setCurrIndex] = reactExports.useState(0);
+  const copyrightText = reactExports.useMemo(() => {
+    const locationObj = typeof location === "undefined" ? {
+      href: "",
+      origin: ""
+    } : location;
+    return [
+      { meta: "文章作者：", value: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "", children: author2 }) },
+      {
+        meta: "文章链接：",
+        value: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: locationObj.href, children: locationObj.href })
+      },
+      {
+        meta: "版权声明：",
+        value: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          "本博客所有文章除特别声明外，均采用",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://creativecommons.org/licenses/by-nc-sa/4.0/", children: "CC BY-NC-SA 4.0" }),
+          "许可协议。转载请注明来自",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: locationObj.origin, children: title2 }),
+          "！"
         ] })
-      ] })
+      }
+    ];
+  }, []);
+  const recmmendList = reactExports.useMemo(() => {
+    const category2 = frontmatter.categories;
+    return articlesList.filter((article) => {
+      return categories[category2].includes(article.path) && decodeURI(article.path) !== decodeURI(pagePath);
+    });
+  }, [frontmatter, articlesList]);
+  reactExports.useEffect(() => {
+    setCurrIndex(
+      articlesList.findIndex(
+        (article) => decodeURI(article.path) === decodeURI(pagePath)
+      )
+    );
+  }, [articlesList]);
+  reactExports.useLayoutEffect(() => {
+    setTimeout(() => {
+      mediumZoom(".article-img");
+    }, 500);
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["article-layout"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["article-content"], children: /* @__PURE__ */ jsxRuntimeExports.jsx(Content, {}) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["post-copyright"], children: copyrightText.map((item2, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          className: styles$5["post-copyright-item"],
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2.meta }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2.value })
+          ]
+        },
+        `post-copyright-${index}`
+      );
+    }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["article-tag"], children: frontmatter.tags.map((item2, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${item2}`, children: item2 }) }, `${item2}-${index}`);
+    }) }),
+    currIndex !== 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["article-pagination"], children: [
+      currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: classNames(
+            styles$5["pagination-left"],
+            styles$5["article-img-hover"]
+          ),
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: articlesList[currIndex - 1].path, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: articlesList[currIndex - 1].cover, alt: "" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["pagination-info"], children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "上一篇" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articlesList[currIndex - 1].title })
+            ] })
+          ] })
+        }
+      ),
+      currIndex < articlesList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: classNames(
+            styles$5["pagination-right"],
+            styles$5["article-img-hover"]
+          ),
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: articlesList[currIndex + 1].path, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: articlesList[currIndex + 1].cover, alt: "" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["pagination-info"], children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "下一篇" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articlesList[currIndex + 1].title })
+            ] })
+          ] })
+        }
+      )
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Content, {})
-  ] });
-};
-const tags = "_tags_1cyzc_1";
-const styles$2 = {
-  tags,
-  "categories-tags": "_categories-tags_1cyzc_4"
-};
-const articleCard = "_articleCard_7qrok_1";
-const title = "_title_7qrok_9";
-const time = "_time_7qrok_15";
-const info = "_info_7qrok_23";
-const styles$1 = {
-  articleCard,
-  title,
-  time,
-  info
-};
-const ArticleCard = (props) => {
-  var _a2;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.articleCard, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1.time, children: props.date }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: props.path, className: styles$1.title, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: props.title }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.info, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${props.categories}`, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "folder-open" }),
-        props.categories
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
-        (_a2 = props.tags) == null ? void 0 : _a2.map((tag, index) => {
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: getRandomColor() }, children: tag }) }, index);
-        })
-      ] })
+    recmmendList.length !== 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["article-recommend"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["recommend-title"], children: "相关推荐" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["recommend-list"], children: recmmendList.map((recmmend, index) => {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: styles$5["article-img-hover"],
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: recmmend.path, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: recmmend.cover, alt: "" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["recommend-info"], children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: recmmend.date }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: recmmend.title })
+              ] })
+            ] })
+          },
+          `${recmmend.title}-${index}`
+        );
+      }) })
     ] })
   ] });
+}
+const tag = "_tag_1k45l_1";
+const tagItem = "_tagItem_1k45l_10";
+const styles$4 = {
+  tag,
+  tagItem
 };
-const Tags = (props) => {
-  const { tags: tags2 = [], type, articleList, keyword } = props;
-  const iconType = type === "tag" ? "tags" : "folder-open";
-  const currBg = "linear-gradient(120deg, rgb(154, 187, 247) 0px, rgb(255, 187, 244) 100%)";
-  const articles = reactExports.useMemo(() => {
-    if (!keyword) return [];
-    if (type == "tag") {
-      return articleList.filter((article) => {
-        var _a2;
-        return (_a2 = article.tags) == null ? void 0 : _a2.includes(keyword);
-      });
-    } else {
-      return articleList.filter((article) => {
-        return article.categories === keyword;
-      });
-    }
-  }, [articleList]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.tags, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2["categories-tags"], children: Object.entries(tags2).map(([tag], index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "a",
-        {
-          href: `/${type}/${tag}`,
-          style: {
-            background: tag === keyword ? currBg : getRandomColor()
-          },
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: iconType }),
-            tag
-          ]
-        }
-      ) }, index);
-    }) }),
-    articles.map((article, index) => {
-      return /* @__PURE__ */ reactExports.createElement(ArticleCard, { ...article, key: index });
-    })
-  ] });
+function Tags(props) {
+  const { tags = [] } = props;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4.tag, children: Object.keys(tags).map((name, index) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "a",
+      {
+        className: styles$4.tagItem,
+        style: { color: getRandomColor() },
+        href: `tag/${name}`,
+        children: name
+      },
+      `${name}-${index}`
+    );
+  }) });
+}
+const category = "_category_1l5ig_1";
+const styles$3 = {
+  category
 };
-const customLayout = "_customLayout_taknp_1";
-const styles = {
-  customLayout
-};
-const CustomLayout = (props) => {
-  const { pagePath, tags: tags2, categories, articlesList } = props.pageData;
+function Categories(props) {
+  const { categories } = props;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.category, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: Object.entries(categories).map(([name, value], index) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `category/${name}`, children: name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: `(${value.length})` })
+    ] }, `${name}-${index}`);
+  }) }) });
+}
+function CustomLayout(props) {
+  const { pagePath, tags, articlesList, categories } = props.pageData;
   const pathList = pagePath.split("/").filter(Boolean);
+  console.log(pathList);
   const type = pathList[0];
-  const keyword = decodeURI(pathList.at(-1));
-  const render2 = (type2) => {
-    switch (type2) {
-      case "tag":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Tags,
-          {
-            type: "tag",
-            tags: tags2,
-            articleList: articlesList,
-            keyword
-          }
-        );
-      case "category":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Tags,
-          {
-            type: "category",
-            tags: categories,
-            articleList: articlesList,
-            keyword
-          }
-        );
-      default:
-        return;
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.customLayout, children: render2(type) });
+  if (type == "tag") {
+    return pathList.length == 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Tags, { tags }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ArticleList,
+      {
+        articleList: articlesList,
+        filter: { type: "tag", keyword: decodeURIComponent(pathList.at(-1)) }
+      }
+    );
+  } else if (type === "category") {
+    return pathList.length == 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Categories, { categories }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ArticleList,
+      {
+        articleList: articlesList,
+        filter: {
+          type: "category",
+          keyword: decodeURIComponent(pathList.at(-1))
+        }
+      }
+    );
+  } else {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", {});
+  }
+}
+const rightSide = "_rightSide_g11mb_1";
+const styles$2 = {
+  rightSide,
+  "rightSide-settings": "_rightSide-settings_g11mb_8",
+  "rightSide-item": "_rightSide-item_g11mb_14",
+  "rightSide-hide": "_rightSide-hide_g11mb_30"
 };
-const Layout = (props) => {
-  const { pageData } = props;
-  const { pageType, siteData: siteData2 } = pageData;
-  const { title: siteTitle, themeConfig, author } = siteData2;
-  const { navMenus } = themeConfig;
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
-  console.log(pageData);
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
-    } else if (isArticlePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleLayout, { pageData });
-    } else if (pageType === "custom") {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(CustomLayout, { pageData });
+function localGetData(name) {
+  if (typeof localStorage === "undefined") {
+    return null;
+  }
+  const data = localStorage.getItem(name);
+  if (data !== null) {
+    return JSON.parse(data);
+  } else {
+    return null;
+  }
+}
+function localSaveData(name, data) {
+  localStorage.setItem(name, JSON.stringify(data));
+}
+const THEME = "THEME";
+function RightSide(props) {
+  const { setSideBarHide } = props;
+  const [isTop, setIsTop] = reactExports.useState(true);
+  const [settingsIsHide, setSettingsIsHide] = reactExports.useState(true);
+  const rightSideSettings = reactExports.useMemo(
+    () => [
+      {
+        icon: "adjust",
+        text: "深色和浅色模式切换",
+        click: () => {
+          const classList2 = document.documentElement.classList;
+          if (classList2.contains("dark")) {
+            localSaveData(THEME, "light");
+          } else {
+            localSaveData(THEME, "dark");
+          }
+          classList2.toggle("dark");
+        }
+      },
+      {
+        icon: "arrows-alt-h",
+        text: "单栏和双栏的切换",
+        click: () => {
+          setSideBarHide();
+        }
+      }
+    ],
+    []
+  );
+  const rightSideOptions = reactExports.useMemo(
+    () => [
+      {
+        icon: "cog",
+        text: "设置",
+        isSpin: true,
+        click: () => {
+          setSettingsIsHide((pre) => !pre);
+        }
+      },
+      {
+        icon: "arrow-up",
+        text: "回到顶部",
+        click: () => {
+          scrollManager.scrollToTarget(document.body, true);
+        }
+      }
+    ],
+    []
+  );
+  const setClassList = reactExports.useCallback((isDark = false) => {
+    const classList2 = document.documentElement.classList;
+    if (isDark) {
+      classList2.add("dark");
     } else {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "404" });
+      classList2.remove("dark");
     }
-  };
+  }, []);
+  const updateTheme = reactExports.useCallback(() => {
+    const theme = localGetData(THEME);
+    setClassList(theme === "dark");
+  }, []);
   reactExports.useEffect(() => {
-    scrollManager.init();
+    const showRightSide = (_, isTop2) => {
+      setIsTop(isTop2);
+    };
+    scrollManager.add(showRightSide);
+    updateTheme();
+    window.addEventListener("storage", updateTheme);
     return () => {
-      scrollManager.destory();
+      scrollManager.remove(showRightSide);
+      window.removeEventListener("storage", updateTheme);
     };
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.layout, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus, navBlue: !isHomePage }),
-    getCurrentLayout(),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, { author, title: siteTitle })
-  ] });
-};
-async function initPageData(routePath) {
-  const pathList = routePath.split("/").filter(Boolean);
-  const isHomeOrCustom = pathList.length === 0 || siteData.themeConfig.navMenus.find(
-    (item) => item.path == `/${pathList[0]}`
+  const rightSideItemRender = reactExports.useCallback(
+    (item2, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: styles$2["rightSide-item"],
+          title: item2.text,
+          onClick: () => {
+            var _a2;
+            (_a2 = item2.click) == null ? void 0 : _a2.call(item2);
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: item2.icon, isSpin: item2 == null ? void 0 : item2.isSpin })
+        },
+        `${item2}-${index}`
+      );
+    },
+    []
   );
-  const { articlesList, tags: tags2, categories } = await handleRoutes(routes);
-  sortByDate(articlesList);
-  const getPageData = (pageType, frontmatter, title2, toc) => {
-    return {
-      pageType,
-      siteData,
-      frontmatter,
-      pagePath: routePath,
-      title: title2,
-      articlesList,
-      tags: tags2,
-      categories,
-      toc
-    };
-  };
-  if (isHomeOrCustom) {
-    let bannerTitle = siteData.title;
-    if (pathList.length == 1) {
-      bannerTitle = siteData.themeConfig.navMenus.find(
-        (item) => item.path == `/${pathList[0]}`
-      ).title;
-    } else if (pathList.length > 1) {
-      bannerTitle = decodeURIComponent(pathList.at(-1));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: classNames(styles$2.rightSide, {
+        [styles$2["rightSide-hide"]]: isTop
+      }),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: classNames(styles$2["rightSide-settings"], {
+              [styles$2["rightSide-hide"]]: settingsIsHide
+            }),
+            children: rightSideSettings.map(rightSideItemRender)
+          }
+        ),
+        rightSideOptions.map(rightSideItemRender)
+      ]
     }
-    return getPageData(routePath === "/" ? "home" : "custom", {}, bannerTitle);
-  }
-  const matched = matchRoutes(routes, routePath);
-  if (matched) {
-    const moduleInfo = await matched[0].route.preload();
-    return getPageData(
-      "article",
-      moduleInfo.frontmatter,
-      moduleInfo.frontmatter.title || "",
-      moduleInfo.toc
-    );
-  }
-  return getPageData("404", {}, "404");
+  );
 }
-function App() {
-  const pageData = usePageData();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Loading..." }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { pageData }) });
+var reactFastCompare;
+var hasRequiredReactFastCompare;
+function requireReactFastCompare() {
+  if (hasRequiredReactFastCompare) return reactFastCompare;
+  hasRequiredReactFastCompare = 1;
+  var hasElementType = typeof Element !== "undefined";
+  var hasMap = typeof Map === "function";
+  var hasSet = typeof Set === "function";
+  var hasArrayBuffer = typeof ArrayBuffer === "function" && !!ArrayBuffer.isView;
+  function equal(a, b) {
+    if (a === b) return true;
+    if (a && b && typeof a == "object" && typeof b == "object") {
+      if (a.constructor !== b.constructor) return false;
+      var length, i, keys;
+      if (Array.isArray(a)) {
+        length = a.length;
+        if (length != b.length) return false;
+        for (i = length; i-- !== 0; )
+          if (!equal(a[i], b[i])) return false;
+        return true;
+      }
+      var it;
+      if (hasMap && a instanceof Map && b instanceof Map) {
+        if (a.size !== b.size) return false;
+        it = a.entries();
+        while (!(i = it.next()).done)
+          if (!b.has(i.value[0])) return false;
+        it = a.entries();
+        while (!(i = it.next()).done)
+          if (!equal(i.value[1], b.get(i.value[0]))) return false;
+        return true;
+      }
+      if (hasSet && a instanceof Set && b instanceof Set) {
+        if (a.size !== b.size) return false;
+        it = a.entries();
+        while (!(i = it.next()).done)
+          if (!b.has(i.value[0])) return false;
+        return true;
+      }
+      if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
+        length = a.length;
+        if (length != b.length) return false;
+        for (i = length; i-- !== 0; )
+          if (a[i] !== b[i]) return false;
+        return true;
+      }
+      if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+      if (a.valueOf !== Object.prototype.valueOf && typeof a.valueOf === "function" && typeof b.valueOf === "function") return a.valueOf() === b.valueOf();
+      if (a.toString !== Object.prototype.toString && typeof a.toString === "function" && typeof b.toString === "function") return a.toString() === b.toString();
+      keys = Object.keys(a);
+      length = keys.length;
+      if (length !== Object.keys(b).length) return false;
+      for (i = length; i-- !== 0; )
+        if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+      if (hasElementType && a instanceof Element) return false;
+      for (i = length; i-- !== 0; ) {
+        if ((keys[i] === "_owner" || keys[i] === "__v" || keys[i] === "__o") && a.$$typeof) {
+          continue;
+        }
+        if (!equal(a[keys[i]], b[keys[i]])) return false;
+      }
+      return true;
+    }
+    return a !== a && b !== b;
+  }
+  reactFastCompare = function isEqual(a, b) {
+    try {
+      return equal(a, b);
+    } catch (error) {
+      if ((error.message || "").match(/stack|recursion/i)) {
+        console.warn("react-fast-compare cannot handle circular refs");
+        return false;
+      }
+      throw error;
+    }
+  };
+  return reactFastCompare;
 }
+var reactFastCompareExports = requireReactFastCompare();
+const fastCompare = /* @__PURE__ */ getDefaultExportFromCjs(reactFastCompareExports);
+var browser;
+var hasRequiredBrowser;
+function requireBrowser() {
+  if (hasRequiredBrowser) return browser;
+  hasRequiredBrowser = 1;
+  var invariant2 = function(condition, format, a, b, c, d, e, f) {
+    if (!condition) {
+      var error;
+      if (format === void 0) {
+        error = new Error(
+          "Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings."
+        );
+      } else {
+        var args = [a, b, c, d, e, f];
+        var argIndex = 0;
+        error = new Error(
+          format.replace(/%s/g, function() {
+            return args[argIndex++];
+          })
+        );
+        error.name = "Invariant Violation";
+      }
+      error.framesToPop = 1;
+      throw error;
+    }
+  };
+  browser = invariant2;
+  return browser;
+}
+var browserExports = requireBrowser();
+const invariant = /* @__PURE__ */ getDefaultExportFromCjs(browserExports);
+var shallowequal;
+var hasRequiredShallowequal;
+function requireShallowequal() {
+  if (hasRequiredShallowequal) return shallowequal;
+  hasRequiredShallowequal = 1;
+  shallowequal = function shallowEqual2(objA, objB, compare, compareContext) {
+    var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
+    if (ret !== void 0) {
+      return !!ret;
+    }
+    if (objA === objB) {
+      return true;
+    }
+    if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
+      return false;
+    }
+    var keysA = Object.keys(objA);
+    var keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) {
+      return false;
+    }
+    var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+    for (var idx = 0; idx < keysA.length; idx++) {
+      var key = keysA[idx];
+      if (!bHasOwnProperty(key)) {
+        return false;
+      }
+      var valueA = objA[key];
+      var valueB = objB[key];
+      ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
+      if (ret === false || ret === void 0 && valueA !== valueB) {
+        return false;
+      }
+    }
+    return true;
+  };
+  return shallowequal;
+}
+var shallowequalExports = requireShallowequal();
+const shallowEqual = /* @__PURE__ */ getDefaultExportFromCjs(shallowequalExports);
 var TAG_NAMES = /* @__PURE__ */ ((TAG_NAMES2) => {
   TAG_NAMES2["BASE"] = "base";
   TAG_NAMES2["BODY"] = "body";
@@ -11526,7 +12856,7 @@ var SEO_PRIORITY_TAGS = {
     ]
   }
 };
-Object.values(TAG_NAMES);
+var VALID_TAG_NAMES = Object.values(TAG_NAMES);
 var REACT_TAG_MAP = {
   accesskey: "accessKey",
   charset: "charSet",
@@ -11537,7 +12867,7 @@ var REACT_TAG_MAP = {
   itemprop: "itemProp",
   tabindex: "tabIndex"
 };
-Object.entries(REACT_TAG_MAP).reduce(
+var HTML_TAG_MAP = Object.entries(REACT_TAG_MAP).reduce(
   (carry, [key, value]) => {
     carry[value] = key;
     return carry;
@@ -11545,6 +12875,180 @@ Object.entries(REACT_TAG_MAP).reduce(
   {}
 );
 var HELMET_ATTRIBUTE = "data-rh";
+var HELMET_PROPS = {
+  DEFAULT_TITLE: "defaultTitle",
+  DEFER: "defer",
+  ENCODE_SPECIAL_CHARACTERS: "encodeSpecialCharacters",
+  ON_CHANGE_CLIENT_STATE: "onChangeClientState",
+  TITLE_TEMPLATE: "titleTemplate",
+  PRIORITIZE_SEO_TAGS: "prioritizeSeoTags"
+};
+var getInnermostProperty = (propsList, property) => {
+  for (let i = propsList.length - 1; i >= 0; i -= 1) {
+    const props = propsList[i];
+    if (Object.prototype.hasOwnProperty.call(props, property)) {
+      return props[property];
+    }
+  }
+  return null;
+};
+var getTitleFromPropsList = (propsList) => {
+  let innermostTitle = getInnermostProperty(
+    propsList,
+    "title"
+    /* TITLE */
+  );
+  const innermostTemplate = getInnermostProperty(propsList, HELMET_PROPS.TITLE_TEMPLATE);
+  if (Array.isArray(innermostTitle)) {
+    innermostTitle = innermostTitle.join("");
+  }
+  if (innermostTemplate && innermostTitle) {
+    return innermostTemplate.replace(/%s/g, () => innermostTitle);
+  }
+  const innermostDefaultTitle = getInnermostProperty(propsList, HELMET_PROPS.DEFAULT_TITLE);
+  return innermostTitle || innermostDefaultTitle || void 0;
+};
+var getOnChangeClientState = (propsList) => getInnermostProperty(propsList, HELMET_PROPS.ON_CHANGE_CLIENT_STATE) || (() => {
+});
+var getAttributesFromPropsList = (tagType, propsList) => propsList.filter((props) => typeof props[tagType] !== "undefined").map((props) => props[tagType]).reduce((tagAttrs, current) => ({ ...tagAttrs, ...current }), {});
+var getBaseTagFromPropsList = (primaryAttributes, propsList) => propsList.filter((props) => typeof props[
+  "base"
+  /* BASE */
+] !== "undefined").map((props) => props[
+  "base"
+  /* BASE */
+]).reverse().reduce((innermostBaseTag, tag2) => {
+  if (!innermostBaseTag.length) {
+    const keys = Object.keys(tag2);
+    for (let i = 0; i < keys.length; i += 1) {
+      const attributeKey = keys[i];
+      const lowerCaseAttributeKey = attributeKey.toLowerCase();
+      if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && tag2[lowerCaseAttributeKey]) {
+        return innermostBaseTag.concat(tag2);
+      }
+    }
+  }
+  return innermostBaseTag;
+}, []);
+var warn = (msg) => console && typeof console.warn === "function" && console.warn(msg);
+var getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
+  const approvedSeenTags = {};
+  return propsList.filter((props) => {
+    if (Array.isArray(props[tagName])) {
+      return true;
+    }
+    if (typeof props[tagName] !== "undefined") {
+      warn(
+        `Helmet: ${tagName} should be of type "Array". Instead found type "${typeof props[tagName]}"`
+      );
+    }
+    return false;
+  }).map((props) => props[tagName]).reverse().reduce((approvedTags, instanceTags) => {
+    const instanceSeenTags = {};
+    instanceTags.filter((tag2) => {
+      let primaryAttributeKey;
+      const keys2 = Object.keys(tag2);
+      for (let i = 0; i < keys2.length; i += 1) {
+        const attributeKey = keys2[i];
+        const lowerCaseAttributeKey = attributeKey.toLowerCase();
+        if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && !(primaryAttributeKey === "rel" && tag2[primaryAttributeKey].toLowerCase() === "canonical") && !(lowerCaseAttributeKey === "rel" && tag2[lowerCaseAttributeKey].toLowerCase() === "stylesheet")) {
+          primaryAttributeKey = lowerCaseAttributeKey;
+        }
+        if (primaryAttributes.indexOf(attributeKey) !== -1 && (attributeKey === "innerHTML" || attributeKey === "cssText" || attributeKey === "itemprop")) {
+          primaryAttributeKey = attributeKey;
+        }
+      }
+      if (!primaryAttributeKey || !tag2[primaryAttributeKey]) {
+        return false;
+      }
+      const value = tag2[primaryAttributeKey].toLowerCase();
+      if (!approvedSeenTags[primaryAttributeKey]) {
+        approvedSeenTags[primaryAttributeKey] = {};
+      }
+      if (!instanceSeenTags[primaryAttributeKey]) {
+        instanceSeenTags[primaryAttributeKey] = {};
+      }
+      if (!approvedSeenTags[primaryAttributeKey][value]) {
+        instanceSeenTags[primaryAttributeKey][value] = true;
+        return true;
+      }
+      return false;
+    }).reverse().forEach((tag2) => approvedTags.push(tag2));
+    const keys = Object.keys(instanceSeenTags);
+    for (let i = 0; i < keys.length; i += 1) {
+      const attributeKey = keys[i];
+      const tagUnion = {
+        ...approvedSeenTags[attributeKey],
+        ...instanceSeenTags[attributeKey]
+      };
+      approvedSeenTags[attributeKey] = tagUnion;
+    }
+    return approvedTags;
+  }, []).reverse();
+};
+var getAnyTrueFromPropsList = (propsList, checkedTag) => {
+  if (Array.isArray(propsList) && propsList.length) {
+    for (let index = 0; index < propsList.length; index += 1) {
+      const prop = propsList[index];
+      if (prop[checkedTag]) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+var reducePropsToState = (propsList) => ({
+  baseTag: getBaseTagFromPropsList([
+    "href"
+    /* HREF */
+  ], propsList),
+  bodyAttributes: getAttributesFromPropsList("bodyAttributes", propsList),
+  defer: getInnermostProperty(propsList, HELMET_PROPS.DEFER),
+  encode: getInnermostProperty(propsList, HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS),
+  htmlAttributes: getAttributesFromPropsList("htmlAttributes", propsList),
+  linkTags: getTagsFromPropsList(
+    "link",
+    [
+      "rel",
+      "href"
+      /* HREF */
+    ],
+    propsList
+  ),
+  metaTags: getTagsFromPropsList(
+    "meta",
+    [
+      "name",
+      "charset",
+      "http-equiv",
+      "property",
+      "itemprop"
+      /* ITEM_PROP */
+    ],
+    propsList
+  ),
+  noscriptTags: getTagsFromPropsList("noscript", [
+    "innerHTML"
+    /* INNER_HTML */
+  ], propsList),
+  onChangeClientState: getOnChangeClientState(propsList),
+  scriptTags: getTagsFromPropsList(
+    "script",
+    [
+      "src",
+      "innerHTML"
+      /* INNER_HTML */
+    ],
+    propsList
+  ),
+  styleTags: getTagsFromPropsList("style", [
+    "cssText"
+    /* CSS_TEXT */
+  ], propsList),
+  title: getTitleFromPropsList(propsList),
+  titleAttributes: getAttributesFromPropsList("titleAttributes", propsList),
+  prioritizeSeoTags: getAnyTrueFromPropsList(propsList, HELMET_PROPS.PRIORITIZE_SEO_TAGS)
+});
 var flattenArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray.join("") : possibleArray;
 var checkIfPropsMatch = (props, toMatch) => {
   const keys = Object.keys(props);
@@ -11570,6 +13074,12 @@ var prioritizer = (elementsList, propsToMatch) => {
     );
   }
   return { default: elementsList, priority: [] };
+};
+var without = (obj, key) => {
+  return {
+    ...obj,
+    [key]: void 0
+  };
 };
 var SELF_CLOSING_TAGS = [
   "noscript",
@@ -11598,15 +13108,15 @@ var generateTitleAsString = (type, title2, attributes, encode) => {
     encode
   )}</${type}>`;
 };
-var generateTagsAsString = (type, tags2, encode = true) => tags2.reduce((str, t2) => {
-  const tag = t2;
-  const attributeHtml = Object.keys(tag).filter(
+var generateTagsAsString = (type, tags, encode = true) => tags.reduce((str, t2) => {
+  const tag2 = t2;
+  const attributeHtml = Object.keys(tag2).filter(
     (attribute) => !(attribute === "innerHTML" || attribute === "cssText")
   ).reduce((string, attribute) => {
-    const attr = typeof tag[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag[attribute], encode)}"`;
+    const attr = typeof tag2[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag2[attribute], encode)}"`;
     return string ? `${string} ${attr}` : attr;
   }, "");
-  const tagContent = tag.innerHTML || tag.cssText || "";
+  const tagContent = tag2.innerHTML || tag2.cssText || "";
   const isSelfClosing = SELF_CLOSING_TAGS.indexOf(type) === -1;
   return `${str}<${type} ${HELMET_ATTRIBUTE}="true" ${attributeHtml}${isSelfClosing ? `/>` : `>${tagContent}</${type}>`}`;
 }, "");
@@ -11623,56 +13133,56 @@ var generateTitleAsReactComponent = (_type, title2, attributes) => {
   const props = convertElementAttributesToReactProps(attributes, initProps);
   return [React3.createElement("title", props, title2)];
 };
-var generateTagsAsReactComponent = (type, tags2) => tags2.map((tag, i) => {
+var generateTagsAsReactComponent = (type, tags) => tags.map((tag2, i) => {
   const mappedTag = {
     key: i,
     [HELMET_ATTRIBUTE]: true
   };
-  Object.keys(tag).forEach((attribute) => {
+  Object.keys(tag2).forEach((attribute) => {
     const mapped = REACT_TAG_MAP[attribute];
     const mappedAttribute = mapped || attribute;
     if (mappedAttribute === "innerHTML" || mappedAttribute === "cssText") {
-      const content = tag.innerHTML || tag.cssText;
-      mappedTag.dangerouslySetInnerHTML = { __html: content };
+      const content2 = tag2.innerHTML || tag2.cssText;
+      mappedTag.dangerouslySetInnerHTML = { __html: content2 };
     } else {
-      mappedTag[mappedAttribute] = tag[attribute];
+      mappedTag[mappedAttribute] = tag2[attribute];
     }
   });
   return React3.createElement(type, mappedTag);
 });
-var getMethodsForTag = (type, tags2, encode = true) => {
+var getMethodsForTag = (type, tags, encode = true) => {
   switch (type) {
     case "title":
       return {
-        toComponent: () => generateTitleAsReactComponent(type, tags2.title, tags2.titleAttributes),
-        toString: () => generateTitleAsString(type, tags2.title, tags2.titleAttributes, encode)
+        toComponent: () => generateTitleAsReactComponent(type, tags.title, tags.titleAttributes),
+        toString: () => generateTitleAsString(type, tags.title, tags.titleAttributes, encode)
       };
     case "bodyAttributes":
     case "htmlAttributes":
       return {
-        toComponent: () => convertElementAttributesToReactProps(tags2),
-        toString: () => generateElementAttributesAsString(tags2)
+        toComponent: () => convertElementAttributesToReactProps(tags),
+        toString: () => generateElementAttributesAsString(tags)
       };
     default:
       return {
-        toComponent: () => generateTagsAsReactComponent(type, tags2),
-        toString: () => generateTagsAsString(type, tags2, encode)
+        toComponent: () => generateTagsAsReactComponent(type, tags),
+        toString: () => generateTagsAsString(type, tags, encode)
       };
   }
 };
 var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode }) => {
-  const meta = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
+  const meta2 = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
   const link = prioritizer(linkTags, SEO_PRIORITY_TAGS.link);
   const script = prioritizer(scriptTags, SEO_PRIORITY_TAGS.script);
   const priorityMethods = {
     toComponent: () => [
-      ...generateTagsAsReactComponent("meta", meta.priority),
+      ...generateTagsAsReactComponent("meta", meta2.priority),
       ...generateTagsAsReactComponent("link", link.priority),
       ...generateTagsAsReactComponent("script", script.priority)
     ],
     toString: () => (
       // generate all the tags as strings and concatenate them
-      `${getMethodsForTag("meta", meta.priority, encode)} ${getMethodsForTag(
+      `${getMethodsForTag("meta", meta2.priority, encode)} ${getMethodsForTag(
         "link",
         link.priority,
         encode
@@ -11681,7 +13191,7 @@ var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode }) => {
   };
   return {
     priorityMethods,
-    metaTags: meta.default,
+    metaTags: meta2.default,
     linkTags: link.default,
     scriptTags: script.default
   };
@@ -11773,6 +13283,625 @@ var HelmetProvider = (_a = class extends reactExports.Component {
     return /* @__PURE__ */ React3.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
   }
 }, __publicField(_a, "canUseDOM", isDocument), _a);
+var updateTags = (type, tags) => {
+  const headElement = document.head || document.querySelector(
+    "head"
+    /* HEAD */
+  );
+  const tagNodes = headElement.querySelectorAll(`${type}[${HELMET_ATTRIBUTE}]`);
+  const oldTags = [].slice.call(tagNodes);
+  const newTags = [];
+  let indexToDelete;
+  if (tags && tags.length) {
+    tags.forEach((tag2) => {
+      const newElement = document.createElement(type);
+      for (const attribute in tag2) {
+        if (Object.prototype.hasOwnProperty.call(tag2, attribute)) {
+          if (attribute === "innerHTML") {
+            newElement.innerHTML = tag2.innerHTML;
+          } else if (attribute === "cssText") {
+            if (newElement.styleSheet) {
+              newElement.styleSheet.cssText = tag2.cssText;
+            } else {
+              newElement.appendChild(document.createTextNode(tag2.cssText));
+            }
+          } else {
+            const attr = attribute;
+            const value = typeof tag2[attr] === "undefined" ? "" : tag2[attr];
+            newElement.setAttribute(attribute, value);
+          }
+        }
+      }
+      newElement.setAttribute(HELMET_ATTRIBUTE, "true");
+      if (oldTags.some((existingTag, index) => {
+        indexToDelete = index;
+        return newElement.isEqualNode(existingTag);
+      })) {
+        oldTags.splice(indexToDelete, 1);
+      } else {
+        newTags.push(newElement);
+      }
+    });
+  }
+  oldTags.forEach((tag2) => {
+    var _a2;
+    return (_a2 = tag2.parentNode) == null ? void 0 : _a2.removeChild(tag2);
+  });
+  newTags.forEach((tag2) => headElement.appendChild(tag2));
+  return {
+    oldTags,
+    newTags
+  };
+};
+var updateAttributes = (tagName, attributes) => {
+  const elementTag = document.getElementsByTagName(tagName)[0];
+  if (!elementTag) {
+    return;
+  }
+  const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
+  const helmetAttributes = helmetAttributeString ? helmetAttributeString.split(",") : [];
+  const attributesToRemove = [...helmetAttributes];
+  const attributeKeys = Object.keys(attributes);
+  for (const attribute of attributeKeys) {
+    const value = attributes[attribute] || "";
+    if (elementTag.getAttribute(attribute) !== value) {
+      elementTag.setAttribute(attribute, value);
+    }
+    if (helmetAttributes.indexOf(attribute) === -1) {
+      helmetAttributes.push(attribute);
+    }
+    const indexToSave = attributesToRemove.indexOf(attribute);
+    if (indexToSave !== -1) {
+      attributesToRemove.splice(indexToSave, 1);
+    }
+  }
+  for (let i = attributesToRemove.length - 1; i >= 0; i -= 1) {
+    elementTag.removeAttribute(attributesToRemove[i]);
+  }
+  if (helmetAttributes.length === attributesToRemove.length) {
+    elementTag.removeAttribute(HELMET_ATTRIBUTE);
+  } else if (elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(",")) {
+    elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(","));
+  }
+};
+var updateTitle = (title2, attributes) => {
+  if (typeof title2 !== "undefined" && document.title !== title2) {
+    document.title = flattenArray(title2);
+  }
+  updateAttributes("title", attributes);
+};
+var commitTagChanges = (newState, cb) => {
+  const {
+    baseTag,
+    bodyAttributes,
+    htmlAttributes,
+    linkTags,
+    metaTags,
+    noscriptTags,
+    onChangeClientState,
+    scriptTags,
+    styleTags,
+    title: title2,
+    titleAttributes
+  } = newState;
+  updateAttributes("body", bodyAttributes);
+  updateAttributes("html", htmlAttributes);
+  updateTitle(title2, titleAttributes);
+  const tagUpdates = {
+    baseTag: updateTags("base", baseTag),
+    linkTags: updateTags("link", linkTags),
+    metaTags: updateTags("meta", metaTags),
+    noscriptTags: updateTags("noscript", noscriptTags),
+    scriptTags: updateTags("script", scriptTags),
+    styleTags: updateTags("style", styleTags)
+  };
+  const addedTags = {};
+  const removedTags = {};
+  Object.keys(tagUpdates).forEach((tagType) => {
+    const { newTags, oldTags } = tagUpdates[tagType];
+    if (newTags.length) {
+      addedTags[tagType] = newTags;
+    }
+    if (oldTags.length) {
+      removedTags[tagType] = tagUpdates[tagType].oldTags;
+    }
+  });
+  if (cb) {
+    cb();
+  }
+  onChangeClientState(newState, addedTags, removedTags);
+};
+var _helmetCallback = null;
+var handleStateChangeOnClient = (newState) => {
+  if (_helmetCallback) {
+    cancelAnimationFrame(_helmetCallback);
+  }
+  if (newState.defer) {
+    _helmetCallback = requestAnimationFrame(() => {
+      commitTagChanges(newState, () => {
+        _helmetCallback = null;
+      });
+    });
+  } else {
+    commitTagChanges(newState);
+    _helmetCallback = null;
+  }
+};
+var client_default = handleStateChangeOnClient;
+var HelmetDispatcher = class extends reactExports.Component {
+  constructor() {
+    super(...arguments);
+    __publicField(this, "rendered", false);
+  }
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqual(nextProps, this.props);
+  }
+  componentDidUpdate() {
+    this.emitChange();
+  }
+  componentWillUnmount() {
+    const { helmetInstances } = this.props.context;
+    helmetInstances.remove(this);
+    this.emitChange();
+  }
+  emitChange() {
+    const { helmetInstances, setHelmet } = this.props.context;
+    let serverState = null;
+    const state = reducePropsToState(
+      helmetInstances.get().map((instance) => {
+        const props = { ...instance.props };
+        delete props.context;
+        return props;
+      })
+    );
+    if (HelmetProvider.canUseDOM) {
+      client_default(state);
+    } else if (server_default) {
+      serverState = server_default(state);
+    }
+    setHelmet(serverState);
+  }
+  // componentWillMount will be deprecated
+  // for SSR, initialize on first render
+  // constructor is also unsafe in StrictMode
+  init() {
+    if (this.rendered) {
+      return;
+    }
+    this.rendered = true;
+    const { helmetInstances } = this.props.context;
+    helmetInstances.add(this);
+    this.emitChange();
+  }
+  render() {
+    this.init();
+    return null;
+  }
+};
+var Helmet = (_b = class extends reactExports.Component {
+  shouldComponentUpdate(nextProps) {
+    return !fastCompare(without(this.props, "helmetData"), without(nextProps, "helmetData"));
+  }
+  mapNestedChildrenToProps(child, nestedChildren) {
+    if (!nestedChildren) {
+      return null;
+    }
+    switch (child.type) {
+      case "script":
+      case "noscript":
+        return {
+          innerHTML: nestedChildren
+        };
+      case "style":
+        return {
+          cssText: nestedChildren
+        };
+      default:
+        throw new Error(
+          `<${child.type} /> elements are self-closing and can not contain children. Refer to our API for more information.`
+        );
+    }
+  }
+  flattenArrayTypeChildren(child, arrayTypeChildren, newChildProps, nestedChildren) {
+    return {
+      ...arrayTypeChildren,
+      [child.type]: [
+        ...arrayTypeChildren[child.type] || [],
+        {
+          ...newChildProps,
+          ...this.mapNestedChildrenToProps(child, nestedChildren)
+        }
+      ]
+    };
+  }
+  mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren) {
+    switch (child.type) {
+      case "title":
+        return {
+          ...newProps,
+          [child.type]: nestedChildren,
+          titleAttributes: { ...newChildProps }
+        };
+      case "body":
+        return {
+          ...newProps,
+          bodyAttributes: { ...newChildProps }
+        };
+      case "html":
+        return {
+          ...newProps,
+          htmlAttributes: { ...newChildProps }
+        };
+      default:
+        return {
+          ...newProps,
+          [child.type]: { ...newChildProps }
+        };
+    }
+  }
+  mapArrayTypeChildrenToProps(arrayTypeChildren, newProps) {
+    let newFlattenedProps = { ...newProps };
+    Object.keys(arrayTypeChildren).forEach((arrayChildName) => {
+      newFlattenedProps = {
+        ...newFlattenedProps,
+        [arrayChildName]: arrayTypeChildren[arrayChildName]
+      };
+    });
+    return newFlattenedProps;
+  }
+  warnOnInvalidChildren(child, nestedChildren) {
+    invariant(
+      VALID_TAG_NAMES.some((name) => child.type === name),
+      typeof child.type === "function" ? `You may be attempting to nest <Helmet> components within each other, which is not allowed. Refer to our API for more information.` : `Only elements types ${VALID_TAG_NAMES.join(
+        ", "
+      )} are allowed. Helmet does not support rendering <${child.type}> elements. Refer to our API for more information.`
+    );
+    invariant(
+      !nestedChildren || typeof nestedChildren === "string" || Array.isArray(nestedChildren) && !nestedChildren.some((nestedChild) => typeof nestedChild !== "string"),
+      `Helmet expects a string as a child of <${child.type}>. Did you forget to wrap your children in braces? ( <${child.type}>{\`\`}</${child.type}> ) Refer to our API for more information.`
+    );
+    return true;
+  }
+  mapChildrenToProps(children, newProps) {
+    let arrayTypeChildren = {};
+    React3.Children.forEach(children, (child) => {
+      if (!child || !child.props) {
+        return;
+      }
+      const { children: nestedChildren, ...childProps } = child.props;
+      const newChildProps = Object.keys(childProps).reduce((obj, key) => {
+        obj[HTML_TAG_MAP[key] || key] = childProps[key];
+        return obj;
+      }, {});
+      let { type } = child;
+      if (typeof type === "symbol") {
+        type = type.toString();
+      } else {
+        this.warnOnInvalidChildren(child, nestedChildren);
+      }
+      switch (type) {
+        case "Symbol(react.fragment)":
+          newProps = this.mapChildrenToProps(nestedChildren, newProps);
+          break;
+        case "link":
+        case "meta":
+        case "noscript":
+        case "script":
+        case "style":
+          arrayTypeChildren = this.flattenArrayTypeChildren(
+            child,
+            arrayTypeChildren,
+            newChildProps,
+            nestedChildren
+          );
+          break;
+        default:
+          newProps = this.mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren);
+          break;
+      }
+    });
+    return this.mapArrayTypeChildrenToProps(arrayTypeChildren, newProps);
+  }
+  render() {
+    const { children, ...props } = this.props;
+    let newProps = { ...props };
+    let { helmetData } = props;
+    if (children) {
+      newProps = this.mapChildrenToProps(children, newProps);
+    }
+    if (helmetData && !(helmetData instanceof HelmetData)) {
+      const data = helmetData;
+      helmetData = new HelmetData(data.context, true);
+      delete newProps.helmetData;
+    }
+    return helmetData ? /* @__PURE__ */ React3.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ React3.createElement(Context.Consumer, null, (context) => /* @__PURE__ */ React3.createElement(HelmetDispatcher, { ...newProps, context }));
+  }
+}, __publicField(_b, "defaultProps", {
+  defer: true,
+  encodeSpecialCharacters: true,
+  prioritizeSeoTags: false
+}), _b);
+const notFoundLayout = "_notFoundLayout_18laa_1";
+const notFoundImg = "_notFoundImg_18laa_15";
+const errorInfo = "_errorInfo_18laa_30";
+const styles$1 = {
+  notFoundLayout,
+  notFoundImg,
+  errorInfo
+};
+const NotFoundLayout = (props) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.notFoundLayout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1.notFoundImg, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: props.notFoundImg, alt: "404" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.errorInfo, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "404" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "页面没有找到" })
+    ] })
+  ] });
+};
+function Layout(props) {
+  const { pageData } = props;
+  const { pageType, title: title2, siteData: siteData2, frontmatter } = pageData;
+  const { title: siteTitle, themeConfig } = siteData2;
+  const { sidebar: sidebar2, navMenus, banner: banner2 } = themeConfig;
+  const isHomePage = pageType === "home";
+  const isArticlePage = pageType === "article";
+  const is404 = pageType === "404";
+  const [sidebarEnable, setSidebarEnable] = reactExports.useState(() => {
+    if (is404) return false;
+    const hide2 = localGetData("sidebarHide");
+    if (hide2 !== null) {
+      return !hide2;
+    }
+    return sidebar2.enable;
+  });
+  const [sideBarHide, setSideBarHide] = reactExports.useState(sidebar2.hide);
+  const getCurrentLayout = () => {
+    if (isHomePage) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
+    } else if (isArticlePage) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleLayout, { pageData });
+    } else if (pageType === "custom") {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CustomLayout, { pageData });
+    } else {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(NotFoundLayout, { notFoundImg: siteData2.notFoundImg });
+    }
+  };
+  reactExports.useEffect(() => {
+    scrollManager.init();
+    const hide2 = localGetData("sidebarHide");
+    if (hide2 !== null) {
+      setSideBarHide(hide2);
+    }
+    return () => {
+      scrollManager.destory();
+    };
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: styles$a.layout,
+      style: {
+        backgroundImage: `url(${siteData2.backgroundImg})`
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Helmet, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: isHomePage ? title2 : `${title2} | ${siteData2.title}` }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "header",
+          {
+            className: classNames(styles$a.header, {
+              [styles$a["not-home-page"]]: !isHomePage
+            }),
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Banner,
+                {
+                  isHomePage,
+                  isArticlePage,
+                  title: title2,
+                  bannerData: banner2,
+                  articleData: frontmatter
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: styles$a.main, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$a.mainInner, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: styles$a.mainLeft,
+              style: {
+                width: sideBarHide ? "80%" : ""
+              },
+              children: getCurrentLayout()
+            }
+          ),
+          sidebarEnable && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: classNames(styles$a.mainRight, {
+                [styles$a.sidebarLeft]: sidebar2.position === "left",
+                [styles$a.sidebarHide]: sideBarHide
+              }),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Sidebar,
+                {
+                  pageData,
+                  isArticlePage
+                }
+              )
+            }
+          )
+        ] }) }),
+        !is404 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          RightSide,
+          {
+            pageData,
+            setSideBarHide: () => {
+              setSideBarHide((pre) => {
+                if (sidebarEnable === false) {
+                  setSidebarEnable(true);
+                }
+                localSaveData("sidebarHide", !pre);
+                return !pre;
+              });
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, { footerImg: banner2.img })
+      ]
+    }
+  );
+}
+const loading = "_loading_y2833_1";
+const finishLoading = "_finishLoading_y2833_78";
+const styles = {
+  loading,
+  "loading-left-bg": "_loading-left-bg_y2833_8",
+  "loading-right-bg": "_loading-right-bg_y2833_9",
+  "spinner-box": "_spinner-box_y2833_15",
+  "spinner-box-1": "_spinner-box-1_y2833_23",
+  "spinner-box-2": "_spinner-box-2_y2833_24",
+  "loading-text": "_loading-text_y2833_38",
+  finishLoading
+};
+const LoadingAnimation = (props) => {
+  const [hidden, setHidden] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    console.log("finishLoading", props.finishLoading);
+    if (!props.finishLoading) return;
+    const timer = setTimeout(() => {
+      setHidden(true);
+    }, 1e3);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [props.finishLoading]);
+  return !hidden && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: classNames(styles.loading, {
+        [styles.finishLoading]: props.finishLoading
+      }),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["loading-left-bg"] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["loading-right-bg"] }),
+        !props.finishLoading && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles["spinner-box"], children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["spinner-box-1"] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["spinner-box-2"] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["loading-text"], children: "加载中···" })
+        ] })
+      ]
+    }
+  );
+};
+const checkDomReady = () => {
+  return new Promise((resolve) => {
+    if (document.readyState === "complete") resolve(0);
+    else window.addEventListener("load", resolve, { once: true });
+  });
+};
+const checkAllImagesLoaded = () => {
+  const images = Array.from(document.querySelectorAll("img"));
+  console.log(images);
+  return Promise.all(
+    images.map((img) => {
+      return new Promise((resolve) => {
+        let isResolved = false;
+        const done = () => {
+          if (isResolved) return;
+          isResolved = true;
+          resolve("loaded");
+          cleanup();
+        };
+        const timeoutId = setTimeout(() => {
+          if (isResolved) return;
+          isResolved = true;
+          console.warn(`图片加载超时: ${img.src}`);
+          resolve("timeout");
+          cleanup();
+        }, 3e3);
+        const cleanup = () => {
+          clearTimeout(timeoutId);
+          img.removeEventListener("load", done);
+          img.removeEventListener("error", done);
+        };
+        if (img.complete) {
+          done();
+        } else {
+          img.addEventListener("load", done);
+          img.addEventListener("error", done);
+        }
+      });
+    })
+  );
+};
+const checkAllAssetsLoaded = async () => {
+  await checkDomReady();
+  console.log("dom节点加载完成");
+  await checkAllImagesLoaded();
+  console.log("图片资源加载完成");
+};
+async function initPageData(routePath) {
+  const pathList = routePath.split("/").filter(Boolean);
+  const isHomeOrCustom = pathList.length === 0 || siteData.themeConfig.navMenus.find(
+    (item2) => item2.path == `/${pathList[0]}`
+  );
+  const { articlesList, tags, categories } = await handleRoutes(routes);
+  sortByDate(articlesList);
+  const getPageData = (pageType, frontmatter, title2, toc) => {
+    return {
+      pageType,
+      siteData,
+      frontmatter,
+      pagePath: routePath,
+      title: title2,
+      articlesList,
+      tags,
+      categories,
+      toc
+    };
+  };
+  if (isHomeOrCustom) {
+    let bannerTitle = siteData.title;
+    if (pathList.length == 1) {
+      bannerTitle = siteData.themeConfig.navMenus.find(
+        (item2) => item2.path == `/${pathList[0]}`
+      ).title;
+    } else if (pathList.length > 1) {
+      bannerTitle = decodeURIComponent(pathList.at(-1));
+    }
+    return getPageData(routePath === "/" ? "home" : "custom", {}, bannerTitle);
+  }
+  const matched = matchRoutes(routes, routePath);
+  if (matched) {
+    const moduleInfo = await matched[0].route.preload();
+    return getPageData(
+      "article",
+      moduleInfo.frontmatter,
+      moduleInfo.frontmatter.title || "",
+      moduleInfo.toc
+    );
+  }
+  return getPageData("404", {}, "404");
+}
+function App() {
+  const pageData = usePageData();
+  const [finishLoading2, setFinishLoading] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const unmountLoading = () => {
+      checkAllAssetsLoaded().then(() => {
+        setFinishLoading(true);
+      });
+    };
+    unmountLoading();
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingAnimation, { finishLoading: finishLoading2 }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { pageData })
+  ] });
+}
 async function renderInBrowser() {
   const containerEl = document.getElementById("root");
   if (!containerEl) {

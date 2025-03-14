@@ -1,5 +1,5 @@
 import { IconName } from "@fortawesome/fontawesome-svg-core";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 import styles from "./index.module.scss";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 import { useCallback, useEffect, useMemo, useState } from "react";

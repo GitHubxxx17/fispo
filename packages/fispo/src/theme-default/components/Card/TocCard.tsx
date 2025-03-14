@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
-import Icon from "../Icon";
+import Icon from "shared/components/Icon";
 import { Toc } from "shared/types";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 import classNames from "classnames";
