@@ -1,8 +1,9 @@
 import { join } from "path";
+import { fileURLToPath } from "url";
 
 export const isTsupWatch = () => process.env.TSUP_MODE === "watch";
 
-export const PACKAGE_ROOT = join(__dirname, "..");
+export const PACKAGE_ROOT = join(fileURLToPath(import.meta.url), "../..");
 
 export const RUNTIME_PATH = join(PACKAGE_ROOT, "src", "runtime");
 

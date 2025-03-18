@@ -1,3 +1,6 @@
+import { normalizeSlash, withBase } from "shared/utils";
+import siteData from "fispo:site-data";
+
 const checkDomReady = () => {
   return new Promise((resolve) => {
     if (document.readyState === "complete") resolve(0);
@@ -55,3 +58,13 @@ export const checkAllAssetsLoaded = async () => {
   await checkAllImagesLoaded();
   console.log("图片资源加载完成");
 };
+
+export const baseUrl = (url = "/") => {
+  return withBase(url, siteData.base);
+};
+
+export function removeBase(url: string): string {
+  const normalizedBase = normalizeSlash(siteData.base);
+  const normalizedUrl = url.replace(normalizedBase, "") || "/";
+  return normalizedUrl;
+}

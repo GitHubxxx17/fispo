@@ -37,6 +37,7 @@ export async function createVitePlugins(
     }),
     pluginConfig(config, restartServer),
     pluginRoutes({
+      prefix: config.base || "/",
       root: config.root,
       isSSR,
     }),

@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./index.module.scss";
 import classNames from "classnames";
-import { BannerData, FrontMatter } from "shared/types";
+import { FrontMatter } from "shared/types";
 import { formatDateToYYYYMMDD } from "../../../shared/utils/date";
 import Icon from "shared/components/Icon";
+import { Link } from "shared/components";
+import { BannerData } from "shared/types/default-theme";
 interface BannerProps {
   isHomePage?: boolean;
   isArticlePage?: boolean;
@@ -43,17 +45,17 @@ function Banner(props: BannerProps) {
             </span>
             <span>
               <Icon icon="inbox" />
-              <a href={`/category/${articleData.categories}`}>
+              <Link href={`/category/${articleData.categories}`}>
                 {articleData.categories}
-              </a>
+              </Link>
             </span>
             <span className={styles["content-tag"]}>
               <Icon icon="tag" />
               {articleData.tags.map((tag, index) => {
                 return (
-                  <a href={`/tag/${tag}`} key={`${tag}-${index}`}>
+                  <Link href={`/tag/${tag}`} key={`${tag}-${index}`}>
                     {tag}
-                  </a>
+                  </Link>
                 );
               })}
             </span>

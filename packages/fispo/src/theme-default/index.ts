@@ -1,1 +1,3 @@
-export { default as Icon } from "../shared/components/Icon";
+import Layout from "./Layout";
+
+export default Layout;

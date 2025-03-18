@@ -2,6 +2,7 @@ import { IconName } from "@fortawesome/fontawesome-svg-core";
 import styles from "./index.module.scss";
 import { memo } from "react";
 import Icon from "shared/components/Icon";
+import { Link } from "shared/components";
 
 export interface ListCardProps {
   icon?: IconName;
@@ -27,10 +28,10 @@ const ListCard = (props: ListCardProps) => {
             return (
               <li key={`${name}-${index}`}>
                 {props.hover ? (
-                  <a href={`/category/${name}`}>
+                  <Link href={`/category/${name}`}>
                     <span>{name}</span>
                     <span>{Array.isArray(value) ? value.length : value}</span>
-                  </a>
+                  </Link>
                 ) : (
                   <>
                     <span>{name}</span>

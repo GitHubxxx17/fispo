@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
+import { Link } from "shared/components";
 interface FooterProps {
   children?: React.ReactNode;
   footerImg: string;
@@ -20,22 +21,10 @@ function Footer(props: FooterProps) {
         <p>©2020 - 2023 By XXX17</p>
         <p className={styles["framework-info"]}>
           <span>框架</span>
-          <a
-            href="https://github.com/GitHubxxx17/fispo"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Fispo
-          </a>
+          <Link href="https://github.com/GitHubxxx17/fispo">Fispo</Link>
           <span>|</span>
           <span>主题</span>
-          <a
-            href="https://github.com/GitHubxxx17/fispo"
-            target="_blank"
-            rel="noreferrer"
-          >
-            fish-in-pool
-          </a>
+          <Link href="https://github.com/GitHubxxx17/fispo">fish-in-pool</Link>
         </p>
       </div>
     </footer>

@@ -20,7 +20,7 @@
     },
     "./theme": {
       "types": "./theme.d.ts",
-      "default": "./src/theme-default/index.ts"
+      "default": "./src/shared/components/index.ts"
     },
     "./runtime": {
       "types": "./runtime.d.ts",

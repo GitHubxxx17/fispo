@@ -2,6 +2,7 @@ import styles from "./index.module.scss";
 import { memo } from "react";
 import Icon from "shared/components/Icon";
 import { getRandomColor, getRandomTextSize } from "../../helper/tag";
+import { Link } from "shared/components";
 
 export interface TagCardProps {
   title?: string;
@@ -22,7 +23,7 @@ const TagCard = (props: TagCardProps) => {
         {Object.entries(props.data).map(([tag, tagArr], index) => {
           return (
             <span key={`${tag}-${index}`}>
-              <a
+              <Link
                 href={`tag/${tag}`}
                 style={{
                   color: getRandomColor(),
@@ -30,7 +31,7 @@ const TagCard = (props: TagCardProps) => {
                 }}
               >
                 {tag}
-              </a>
+              </Link>
             </span>
           );
         })}

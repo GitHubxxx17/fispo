@@ -1,3 +1,4 @@
+import { Link } from "fispo-core/theme";
 import styles from "./index.module.scss";
 
 interface FooterProps {
@@ -14,8 +15,10 @@ const Footer = (props: FooterProps) => {
         </div>
         <div>
           Based on the{" "}
-          <a href="https://github.com/GitHubxxx17/fispo">Fispo Engine</a>|
-          <a href="https://github.com/GitHubxxx17/fispo">Particle Theme</a>
+          <Link href="https://github.com/GitHubxxx17/fispo">Fispo Engine</Link>|
+          <Link href="https://github.com/GitHubxxx17/fispo">
+            Particle Theme
+          </Link>
         </div>
       </div>
     </footer>

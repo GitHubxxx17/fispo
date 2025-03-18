@@ -1,7 +1,8 @@
 import { Route } from "shared/types";
 import { formatDateToYYYYMMDD } from "./date";
+import { removeBase } from ".";
 
-export async function handleRoutes(routes: Route[]) {
+export async function handleRoutes(routes: Route[], base: string) {
   // 处理文章frontmatter数据
   const articlesList = [];
   // 标签
@@ -14,7 +15,7 @@ export async function handleRoutes(routes: Route[]) {
     articlesList.push({
       ...moduleInfo.frontmatter,
       date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
-      path: route.path,
+      path: removeBase(route.path, base),
       info: moduleInfo.mdInfo,
     });
     moduleInfo.frontmatter.tags.forEach((tag) => {
@@ -40,8 +41,11 @@ export async function handleRoutes(routes: Route[]) {
   };
 }
 
-export async function getTagsAndCategoriesRoutes(routes: Route[]) {
-  const { tags, categories } = await handleRoutes(routes);
+export async function getTagsAndCategoriesRoutes(
+  routes: Route[],
+  base: string
+) {
+  const { tags, categories } = await handleRoutes(routes, base);
   const tagsRoutes = Object.keys(tags).map((tag) => {
     return {
       path: `tag/${tag}`,

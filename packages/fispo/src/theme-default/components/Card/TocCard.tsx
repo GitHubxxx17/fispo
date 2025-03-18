@@ -12,6 +12,7 @@ import Icon from "shared/components/Icon";
 import { Toc } from "shared/types";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 import classNames from "classnames";
+import { Link } from "shared/components";
 
 export interface TocCardProps {
   icon?: IconName;
@@ -158,7 +159,7 @@ const TocCard = (props: TocCardProps) => {
                   marginLeft: `${(depth - 1) * 20}px`,
                 }}
               >
-                <a
+                <Link
                   ref={(el) => {
                     if (el) {
                       tocList.current.push(el);
@@ -176,7 +177,7 @@ const TocCard = (props: TocCardProps) => {
                 >
                   <span>{`${serialNumber}. `}</span>
                   <span>{text}</span>
-                </a>
+                </Link>
               </li>
             );
           })}

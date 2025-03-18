@@ -2,6 +2,7 @@ import { IconName } from "@fortawesome/fontawesome-svg-core";
 import styles from "./index.module.scss";
 import { memo } from "react";
 import Icon from "shared/components/Icon";
+import { Link } from "shared/components";
 
 export interface AuthorCardProps {
   author?: string;
@@ -27,25 +28,25 @@ const AuthorCard = (props: AuthorCardProps) => {
       <h2 className={styles["author-name"]}>{props?.author}</h2>
       <p className={styles["author-description"]}>{props?.description}</p>
       <div className={styles["author-data"]}>
-        <a href="/">
+        <Link href="/">
           <span>文章</span>
           <span>{props?.articleNums}</span>
-        </a>
-        <a href="/tag">
+        </Link>
+        <Link href="/tag">
           <span>标签</span>
           <span>{props?.tagsNums}</span>
-        </a>
-        <a href="/category">
+        </Link>
+        <Link href="/category">
           <span>分类</span>
           <span>{props?.categorizeNums}</span>
-        </a>
+        </Link>
       </div>
       {props?.button?.enable && (
         <button className={styles["follow-btn"]}>
-          <a href={props?.button?.link} target="_blank" rel="noreferrer">
+          <Link href={props?.button?.link} target="_blank" rel="noreferrer">
             <Icon icon={props?.button?.icon}></Icon>
             {props?.button?.text}
-          </a>
+          </Link>
         </button>
       )}
     </div>

@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 import Icon from "shared/components/Icon";
 import { navMenuItem } from "shared/types/default-theme";
+import { Link } from "shared/components";
 
 interface NavProps {
   title?: string;
@@ -36,17 +37,17 @@ function Nav(props: NavProps) {
       })}
     >
       <div className={styles["blog-name"]}>
-        <a href="#">{title}</a>
+        <Link href="#">{title}</Link>
       </div>
       <div className={styles.menus}>
         <ul>
           {menus.map((items) => {
             return (
               <li key={items.title}>
-                <a href={items.path}>
+                <Link href={items.path}>
                   <Icon icon={items.icon}></Icon>
                   <span>{items.title}</span>
-                </a>
+                </Link>
               </li>
             );
           })}

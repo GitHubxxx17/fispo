@@ -70,6 +70,8 @@ export function pluginConfig(
               "react-helmet-async",
               "medium-zoom",
               "@fortawesome/react-fontawesome",
+              "@fortawesome/free-solid-svg-icons",
+              "@fortawesome/free-brands-svg-icons",
               "classnames",
             ],
           },

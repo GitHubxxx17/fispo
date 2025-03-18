@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
 import { ArticleData } from "shared/types";
 import Icon from "shared/components/Icon";
+import { Link } from "shared/components";
 
 interface ArticleListProps {
   articleList?: ArticleData[];
@@ -63,15 +64,15 @@ function ArticleList(props: ArticleListProps) {
           return (
             <div className={styles.item} key={`${item.title}-${index}`}>
               <div className={styles.left}>
-                <a href={item.path}>
+                <Link href={item.path}>
                   <img src={item.cover} alt="" />
-                </a>
+                </Link>
               </div>
               <div className={styles.right}>
                 <div className={styles.content}>
-                  <a href={item.path}>
+                  <Link href={item.path}>
                     <h2>{item.title}</h2>
-                  </a>
+                  </Link>
                   <p className={styles.meta}>
                     <span>
                       <Icon icon="calendar-alt" />
@@ -79,17 +80,17 @@ function ArticleList(props: ArticleListProps) {
                     </span>
                     <span>
                       <Icon icon="inbox" />
-                      <a href={`/category/${item.categories}`}>
+                      <Link href={`/category/${item.categories}`}>
                         {item.categories}
-                      </a>
+                      </Link>
                     </span>
                     <span className={styles["content-tag"]}>
                       <Icon icon="tag" />
                       {item.tags.map((tag, index) => {
                         return (
-                          <a href={`/tag/${tag}`} key={`${tag}-${index}`}>
+                          <Link href={`/tag/${tag}`} key={`${tag}-${index}`}>
                             {tag}
-                          </a>
+                          </Link>
                         );
                       })}
                     </span>

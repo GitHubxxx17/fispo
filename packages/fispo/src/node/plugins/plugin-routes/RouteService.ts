@@ -1,6 +1,7 @@
 import fastGlob from "fast-glob";
 import { normalizePath } from "vite";
 import path from "path";
+import { withBase } from "shared/utils";
 
 interface RouteMeta {
   routePath: string;
@@ -8,10 +9,12 @@ interface RouteMeta {
 }
 
 export class RouteService {
+  #base: string;
   #scanDir: string;
   #routeData: RouteMeta[] = [];
-  constructor(scanDir: string) {
+  constructor(prefix: string, scanDir: string) {
     this.#scanDir = scanDir;
+    this.#base = prefix;
   }
 
   async init() {
@@ -63,7 +66,7 @@ ${this.#routeData
 export const routes = [
   ${this.#routeData
     .map((route, index) => {
-      return `{ path: '${encodeURI(route.routePath)}', element: React.createElement(Route${index}), preload: () => import('${route.absolutePath}') }`;
+      return `{ path: '${withBase(encodeURI(route.routePath), this.#base)}', element: React.createElement(Route${index}), preload: () => import('${route.absolutePath}') }`;
     })
     .join(",\n")}
 ];

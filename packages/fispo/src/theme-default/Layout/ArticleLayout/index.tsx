@@ -4,6 +4,7 @@ import { PageData } from "shared/types";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import mediumZoom from "medium-zoom";
+import { Link } from "shared/components";
 
 interface ArticleLayoutProps {
   pageData: PageData;
@@ -24,21 +25,21 @@ export function ArticleLayout(props: ArticleLayoutProps) {
           }
         : location;
     return [
-      { meta: "文章作者：", value: <a href="">{author}</a> },
+      { meta: "文章作者：", value: <Link href="">{author}</Link> },
       {
         meta: "文章链接：",
-        value: <a href={locationObj.href}>{locationObj.href}</a>,
+        value: <Link href={locationObj.href}>{locationObj.href}</Link>,
       },
       {
         meta: "版权声明：",
         value: (
           <>
             本博客所有文章除特别声明外，均采用
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <Link href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
               CC BY-NC-SA 4.0
-            </a>
+            </Link>
             许可协议。转载请注明来自
-            <a href={locationObj.origin}>{title}</a>！
+            <Link href={locationObj.origin}>{title}</Link>！
           </>
         ),
       },
@@ -92,7 +93,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
         {frontmatter.tags.map((item, index) => {
           return (
             <span key={`${item}-${index}`}>
-              <a href={`/tag/${item}`}>{item}</a>
+              <Link href={`/tag/${item}`}>{item}</Link>
             </span>
           );
         })}
@@ -107,13 +108,13 @@ export function ArticleLayout(props: ArticleLayoutProps) {
                 styles["article-img-hover"]
               )}
             >
-              <a href={articlesList[currIndex - 1].path}>
+              <Link href={articlesList[currIndex - 1].path}>
                 <img src={articlesList[currIndex - 1].cover} alt="" />
                 <div className={styles["pagination-info"]}>
                   <span>上一篇</span>
                   <span>{articlesList[currIndex - 1].title}</span>
                 </div>
-              </a>
+              </Link>
             </div>
           )}
           {currIndex < articlesList.length - 1 && (
@@ -123,13 +124,13 @@ export function ArticleLayout(props: ArticleLayoutProps) {
                 styles["article-img-hover"]
               )}
             >
-              <a href={articlesList[currIndex + 1].path}>
+              <Link href={articlesList[currIndex + 1].path}>
                 <img src={articlesList[currIndex + 1].cover} alt="" />
                 <div className={styles["pagination-info"]}>
                   <span>下一篇</span>
                   <span>{articlesList[currIndex + 1].title}</span>
                 </div>
-              </a>
+              </Link>
             </div>
           )}
         </div>
@@ -145,13 +146,13 @@ export function ArticleLayout(props: ArticleLayoutProps) {
                   className={styles["article-img-hover"]}
                   key={`${recmmend.title}-${index}`}
                 >
-                  <a href={recmmend.path}>
+                  <Link href={recmmend.path}>
                     <img src={recmmend.cover} alt="" />
                     <div className={styles["recommend-info"]}>
                       <span>{recmmend.date}</span>
                       <span>{recmmend.title}</span>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               );
             })}

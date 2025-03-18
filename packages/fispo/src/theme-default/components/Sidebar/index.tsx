@@ -27,7 +27,6 @@ function Sidebar(props: SidebarProps) {
   const [isUp, setIsUp] = useState(false);
 
   useEffect(() => {
-    console.log(sidebar);
     const scroll: ScrollCallback = (direction) => {
       setIsUp(direction == "up");
     };

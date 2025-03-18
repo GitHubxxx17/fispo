@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import { Tags as TagsType } from "shared/types";
 import { getRandomColor } from "../../helper/tag";
+import { Link } from "shared/components";
 
 interface TagsProps {
   tags?: TagsType;
@@ -15,14 +16,14 @@ function Tags(props: TagsProps) {
     <div className={styles.tag}>
       {Object.keys(tags).map((name, index) => {
         return (
-          <a
+          <Link
             className={styles.tagItem}
             key={`${name}-${index}`}
             style={{ color: getRandomColor() }}
             href={`tag/${name}`}
           >
             {name}
-          </a>
+          </Link>
         );
       })}
     </div>

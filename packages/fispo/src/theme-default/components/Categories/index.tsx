@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { Categories as CategoriesType } from "shared/types";
+import { Link } from "shared/components";
 
 interface CategoriesProps {
   categories?: CategoriesType;
@@ -15,7 +16,7 @@ function Categories(props: CategoriesProps) {
         {Object.entries(categories).map(([name, value], index) => {
           return (
             <li key={`${name}-${index}`}>
-              <a href={`category/${name}`}>{name}</a>
+              <Link href={`category/${name}`}>{name}</Link>
               <span>{`(${value.length})`}</span>
             </li>
           );

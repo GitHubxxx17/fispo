@@ -67,11 +67,15 @@ export async function resolveSiteData(
   }
 
   return {
+    base: userConfig.base || "",
     title: userConfig.title || "fispo",
     description: userConfig.description || "SSG Framework",
     theme: userConfig.theme || "",
     themeConfig: mergeConfig(deConfig, targetConfig),
-    vite: userConfig.vite || {},
+    vite: {
+      ...userConfig.vite,
+      base: userConfig.base ?? "/",
+    },
     author: userConfig.author || "xxx",
     avatar: userConfig.avatar || "/avatar.jpg",
     backgroundImg: userConfig.backgroundImg || "/bg.png",
@@ -93,6 +97,7 @@ export async function resolveConfig(
   const [configPath, userConfig] = await resolveUserConfig(command, mode);
   const siteData = await resolveSiteData(userConfig as UserConfig);
   const siteConfig: SiteConfig = {
+    base: siteData.base,
     root: siteData.root,
     postDir: siteData.postDir,
     public: siteData.public,

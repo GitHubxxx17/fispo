@@ -8,6 +8,7 @@ import { Route, SiteConfig } from "shared/types";
 import { createVitePlugins } from "./plugins/vitePlugins";
 import { HelmetData } from "react-helmet-async";
 import { getTagsAndCategoriesRoutes } from "shared/utils/handleRoutes";
+import { withBase } from "shared/utils";
 
 export async function bundle(root: string, config: SiteConfig) {
   root = join(process.cwd(), root);
@@ -64,6 +65,7 @@ export async function renderPage(
   const clientChunk = clientBundle.output.find(
     (chunk) => chunk.type === "chunk" && chunk.isEntry
   );
+  const withBaseUrl = (url: string) => withBase(url, config.base || "/");
   console.log(`Rendering page in server side...`);
   return Promise.all(
     routes.map(async (route) => {
@@ -76,6 +78,7 @@ export async function renderPage(
       const styleAssets = clientBundle.output.filter(
         (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
       );
+
       const html = `
 <!DOCTYPE html>
 <html>
@@ -86,15 +89,17 @@ export async function renderPage(
     ${helmet?.meta?.toString() || ""}
     ${helmet?.link?.toString() || ""}
     ${helmet?.style?.toString() || ""}
-    <link rel="icon" href="${config.logo}" type="image/png">
-    <meta name="description" content="xxx">
+    <link rel="icon" href="${withBaseUrl(config.logo)}" type="image/png">
+    <meta name="description" content="${config.siteData.description}">
     ${styleAssets
-      .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+      .map(
+        (item) => `<link rel="stylesheet" href="${withBaseUrl(item.fileName)}">`
+      )
       .join("\n")}
   </head>
   <body>
     <div id="root">${appHtml}</div>
-    <script type="module" src="/${clientChunk?.fileName}"></script>
+    <script type="module" src="${withBaseUrl(clientChunk?.fileName)}"></script>
   </body>
 </html>`.trim();
       const fileName = routePath.endsWith("/")
@@ -112,7 +117,10 @@ export async function build(root: string, config: SiteConfig) {
   const { render, routes } = await import(
     pathToFileURL(serverEntryPath).toString()
   );
-  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(routes);
+  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(
+    routes,
+    config.base
+  );
   const newRoutes = [
     ...routes,
     ...config.siteData.themeConfig.navMenus,

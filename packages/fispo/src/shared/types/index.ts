@@ -10,6 +10,7 @@ export interface MarkdownOptions {
 }
 
 export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
+  base?: string;
   title?: string;
   description?: string;
   theme?: string;
@@ -29,6 +30,7 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
 }
 
 export interface SiteConfig {
+  base: string;
   root: string;
   configPath: string;
   siteData: UserConfig;

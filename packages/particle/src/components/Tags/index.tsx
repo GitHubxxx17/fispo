@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import { getRandomColor } from "../../helper/tag";
 import { ArticleData, Tags as TagsType } from "fispo-core/types";
-import { Icon, IconName } from "fispo-core/theme";
+import { Icon, IconName, Link } from "fispo-core/theme";
 import ArticleCard from "../ArticleCard";
 import { useMemo } from "react";
 
@@ -39,7 +39,7 @@ const Tags = (props: TagsProps) => {
         {Object.entries(tags).map(([tag], index) => {
           return (
             <span key={index}>
-              <a
+              <Link
                 href={`/${type}/${tag}`}
                 style={{
                   background: tag === keyword ? currBg : getRandomColor(),
@@ -47,7 +47,7 @@ const Tags = (props: TagsProps) => {
               >
                 <Icon icon={iconType} />
                 {tag}
-              </a>
+              </Link>
             </span>
           );
         })}

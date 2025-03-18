@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import scrollManager, { ScrollCallback } from "../../helper/scroll";
 import { navMenuItem } from "types";
-import { Icon } from "fispo-core/theme";
+import { Icon, Link } from "fispo-core/theme";
 
 interface NavProps {
   title?: string;
@@ -36,17 +36,17 @@ function Nav(props: NavProps) {
       })}
     >
       <div className={styles["blog-name"]}>
-        <a href="#">{title}</a>
+        <Link href="#">{title}</Link>
       </div>
       <div className={styles.menus}>
         <ul>
           {menus.map((items) => {
             return (
               <li key={items.title}>
-                <a href={items.path}>
+                <Link href={items.path}>
                   <Icon icon={items.icon} />
                   <span>{items.title}</span>
-                </a>
+                </Link>
               </li>
             );
           })}

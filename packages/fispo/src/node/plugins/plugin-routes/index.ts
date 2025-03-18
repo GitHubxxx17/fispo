@@ -3,6 +3,7 @@ import { RouteService } from "./RouteService";
 
 // 本质: 把文件目录结构 -> 路由数据
 interface PluginOptions {
+  prefix: string;
   root: string;
   isSSR: boolean;
 }
@@ -10,7 +11,7 @@ interface PluginOptions {
 export const CONVENTIONAL_ROUTE_ID = "virtual:routes";
 
 export function pluginRoutes(options: PluginOptions): Plugin {
-  const routeService = new RouteService(options.root);
+  const routeService = new RouteService(options.prefix, options.root);
   return {
     name: "fispo:vite-plugin-routes",
     async configResolved() {

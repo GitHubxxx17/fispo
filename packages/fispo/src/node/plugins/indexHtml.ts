@@ -2,6 +2,7 @@ import { readFile } from "fs/promises";
 import { Plugin } from "vite";
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from "../constants";
 import { SiteConfig } from "shared/types";
+import { withBase } from "shared/utils";
 
 export function pluginIndexHtml(config: SiteConfig): Plugin {
   return {
@@ -16,7 +17,7 @@ export function pluginIndexHtml(config: SiteConfig): Plugin {
             tag: "link",
             attrs: {
               rel: "icon",
-              href: `${config.logo}`,
+              href: withBase(config.logo, config.base),
               type: "image/png",
             },
             injectTo: "head",
@@ -25,7 +26,7 @@ export function pluginIndexHtml(config: SiteConfig): Plugin {
             tag: "script",
             attrs: {
               type: "module",
-              src: `/@fs/${CLIENT_ENTRY_PATH}`,
+              src: withBase(`@fs/${CLIENT_ENTRY_PATH}`, config.base),
             },
             injectTo: "body",
           },

@@ -8,9 +8,10 @@ import { usePageData } from "./hooks";
 import ThemeLayout from "fispo:theme";
 import { useEffect, useState } from "react";
 import Preloader from "fispo:preloader";
-import { checkAllAssetsLoaded } from "./util";
+import { baseUrl, checkAllAssetsLoaded, removeBase } from "./util";
 
 export async function initPageData(routePath: string): Promise<PageData> {
+  routePath = removeBase(routePath);
   const pathList = routePath.split("/").filter(Boolean);
 
   //  判断是否为nav的路径
@@ -20,7 +21,10 @@ export async function initPageData(routePath: string): Promise<PageData> {
       (item) => item.path == `/${pathList[0]}`
     );
 
-  const { articlesList, tags, categories } = await handleRoutes(routes);
+  const { articlesList, tags, categories } = await handleRoutes(
+    routes,
+    siteData.base
+  );
 
   sortByDate(articlesList);
 
@@ -59,9 +63,10 @@ export async function initPageData(routePath: string): Promise<PageData> {
   }
 
   // 文章：获取路由组件编译后的模块内容
-  const matched = matchRoutes(routes, routePath);
+  const matched = matchRoutes(routes, baseUrl(routePath));
   if (matched) {
     const moduleInfo = await (matched[0].route as Route).preload();
+
     return getPageData(
       "article",
       moduleInfo.frontmatter,

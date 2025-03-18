@@ -1,4 +1,4 @@
-import { Icon } from "fispo-core/theme";
+import { Icon, Link } from "fispo-core/theme";
 import styles from "./index.module.scss";
 import { ArticleData } from "fispo-core/types";
 import { getRandomColor } from "../../helper/tag";
@@ -10,23 +10,23 @@ const ArticleCard = (props: ArticleCardProps) => {
   return (
     <div className={styles.articleCard}>
       <div className={styles.time}>{props.date}</div>
-      <a href={props.path} className={styles.title}>
+      <Link href={props.path} className={styles.title}>
         <h3>{props.title}</h3>
-      </a>
+      </Link>
       <div className={styles.info}>
         <span>
-          <a href={`/category/${props.categories}`}>
+          <Link href={`/category/${props.categories}`}>
             <Icon icon="folder-open" />
             {props.categories}
-          </a>
+          </Link>
         </span>
         <span>
           <Icon icon="tags" />
           {props.tags?.map((tag, index) => {
             return (
-              <a href={`/tag/${tag}`} key={index}>
+              <Link href={`/tag/${tag}`} key={index}>
                 <span style={{ color: getRandomColor() }}>{tag}</span>
-              </a>
+              </Link>
             );
           })}
         </span>

@@ -16,8 +16,8 @@ export function pluginTheme(config: SiteConfig): Plugin {
         try {
           const theme = config.siteData.theme;
           const themeEntryPath = theme
-            ? `@fispo/${config.siteData.theme}/src/Layout/index.tsx`
-            : `@theme-default/Layout/index.tsx`;
+            ? `@fispo/${config.siteData.theme}/src/index.ts`
+            : `@theme-default/index.ts`;
 
           return `
             import React from 'react';

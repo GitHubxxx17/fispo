@@ -1,6 +1,6 @@
 import { ArticleData } from "fispo-core/types";
 import styles from "./index.module.scss";
-import { Icon } from "fispo-core/theme";
+import { Icon, Link } from "fispo-core/theme";
 import { getRandomColor } from "../../helper/tag";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -10,15 +10,15 @@ const Post = (props: PostProps) => {
   console.log(props);
   return (
     <div className={styles.post}>
-      <a href={props.path}>
+      <Link href={props.path}>
         <h2>{props.title}</h2>
-      </a>
+      </Link>
       <div className={styles["category-and-date"]}>
         <span className={styles.category}>
-          <a href={`/category/${props.categories}`}>
+          <Link href={`/category/${props.categories}`}>
             <Icon icon="folder-open" />
             {props.categories}
-          </a>
+          </Link>
         </span>
         <span className={styles.date}>
           <Icon icon="calendar" />
@@ -33,16 +33,16 @@ const Post = (props: PostProps) => {
         {props.tags.map((tag, index) => {
           return (
             <span key={index}>
-              <a href={`/tag/${tag}`} style={{ color: getRandomColor() }}>
+              <Link href={`/tag/${tag}`} style={{ color: getRandomColor() }}>
                 {tag}
-              </a>
+              </Link>
             </span>
           );
         })}
       </div>
-      <a href={props.path} className={styles["go-post"]}>
+      <Link href={props.path} className={styles["go-post"]}>
         阅读全文
-      </a>
+      </Link>
     </div>
   );
 };

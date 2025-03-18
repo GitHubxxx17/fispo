@@ -1,7 +1,7 @@
 import { Content } from "fispo-core/runtime";
 import styles from "./index.module.scss";
 import { PageData } from "fispo-core/types";
-import { Icon } from "fispo-core/theme";
+import { Icon, Link } from "fispo-core/theme";
 import { convertDateString } from "../../helper/date";
 import { getRandomColor } from "../../helper/tag";
 
@@ -22,18 +22,18 @@ const ArticleLayout = (props: ArticleLayoutProps) => {
             {convertDateString(frontmatter.date)}
           </span>
           <span>
-            <a href={`/category/${frontmatter.categories}`}>
+            <Link href={`/category/${frontmatter.categories}`}>
               <Icon icon="folder-open" />
               {frontmatter.categories}
-            </a>
+            </Link>
           </span>
           <span>
             <Icon icon="tags" />
             {frontmatter.tags.map((tag, index) => {
               return (
-                <a href={`/tag/${tag}`} key={index}>
+                <Link href={`/tag/${tag}`} key={index}>
                   <span style={{ color: getRandomColor() }}>{tag}</span>
-                </a>
+                </Link>
               );
             })}
           </span>

@@ -6,6 +6,7 @@ import { createVitePlugins } from "./plugins/vitePlugins";
 export async function createDevServer(restartServer: () => Promise<void>) {
   const config = await resolveConfig("serve", "development");
   return createViteDevServer({
+    base: "/",
     root: PACKAGE_ROOT,
     plugins: await createVitePlugins(config, restartServer),
     server: {

@@ -2,7 +2,7 @@ import { PageData } from "fispo-core/types";
 import styles from "./index.module.scss";
 import { ThemeConfig } from "types";
 import Post from "../../components/Post";
-import { Icon, IconName } from "fispo-core/theme";
+import { Icon, IconName, Link } from "fispo-core/theme";
 
 interface HomeLayoutProps {
   pageData: PageData;
@@ -46,9 +46,9 @@ export function HomeLayout(props: HomeLayoutProps) {
               {iconList.map((item, index) => {
                 return (
                   <span key={index} className={styles["icon-link"]}>
-                    <a href="">
+                    <Link href="">
                       <Icon icon={item}></Icon>
-                    </a>
+                    </Link>
                   </span>
                 );
               })}
