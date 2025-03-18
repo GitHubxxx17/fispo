@@ -4,7 +4,7 @@ categories: "笔记"
 date: 2022-09-22 00:00:00
 tags:
   - 笔记
-cover: http://GitHubxxx17.github.io/img/post_cover/6.jpg
+cover: /cover/d.png
 ---
 
 

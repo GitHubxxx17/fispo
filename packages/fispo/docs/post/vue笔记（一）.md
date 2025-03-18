@@ -5,7 +5,7 @@ date: 2022-12-11 00:00:00
 tags:
   - 笔记
   - vue
-cover: http://GitHubxxx17.github.io/img/post_cover/9.jpg
+cover: /cover/i.jpg
 ---
 
 # Vue入门

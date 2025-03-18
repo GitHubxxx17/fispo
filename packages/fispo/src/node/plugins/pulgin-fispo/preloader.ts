@@ -35,7 +35,7 @@ export function preloaderPlugin(config: SiteConfig): Plugin {
 
           return `
             import React from 'react';
-            import Preloader from '${callbackList[0]()}';
+            import Preloader from '${callbackList[0]}';
             export default Preloader;
           `;
         } catch (error) {

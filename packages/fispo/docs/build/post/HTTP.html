@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-rh="true">HTTP | XXX17的个人博客</title>
+    
+    
+    
+    <link rel="icon" href="/logo.png" type="image/png">
+    <meta name="description" content="xxx">
+    <link rel="stylesheet" href="/assets/client-entry-HfV3hKDZ.css">
+  </head>
+  <body>
+    <div id="root"><div class="_loading_y2833_1"><div class="_loading-left-bg_y2833_8"></div><div class="_loading-right-bg_y2833_9"></div><div class="_spinner-box_y2833_15"><div class="_spinner-box-1_y2833_23"></div><div class="_spinner-box-2_y2833_24"></div><div class="_loading-text_y2833_38">加载中···</div></div></div><div class="_layout_1g63m_1" style="background-image:url(/bg.png)"><header class="_header_1g63m_9 _not-home-page_1g63m_15"><nav class="_nav_14t1j_1 _top_14t1j_57"><div class="_blog-name_14t1j_15"><a href="#">XXX17的个人博客</a></div><div class="_menus_14t1j_27"><ul><li><a href="/"><span>首页</span></a></li><li><a href="/tag"><span>标签</span></a></li><li><a href="/category"><span>分类</span></a></li><li><a href="/about"><span>关于</span></a></li></ul></div></nav><div class="_banner_1hwpr_1 _not-home-page_1hwpr_64" style="background-image:url(http://GitHubxxx17.github.io/img/post_cover/25.jpg)"><div class="_banner-site-info_1hwpr_20"><div class="_banner-site-title_1hwpr_25">HTTP</div><div class="_meta_1hwpr_33"><span>发表于 <!-- -->2022-07-15</span><span><a href="/category/笔记">笔记</a></span><span class="_content-tag_1hwpr_60"><a href="/tag/笔记">笔记</a><a href="/tag/HTTP">HTTP</a></span></div></div></div></header><main class="_main_1g63m_18"><div class="_mainInner_1g63m_24"><div class="_mainLeft_1g63m_33"><div class="_article-layout_zsltx_1"><div class="_article-content_zsltx_10"><h1 id="http起源"><a class="header-anchor" href="#http起源"><span class="icon icon-link"></span></a>HTTP起源</h1>
+<blockquote>
+<p>HTTP起源于20世纪90年代初，由英国物理学家蒂姆·伯纳斯-李（<code>Tim Berners-Lee</code>）和他的团队在欧洲核子研究组织（CERN）开发出来。他们的目标是创建一种简单、通用的协议，使不同的计算机和系统可以<strong>互相通信</strong>和<strong>交换信息</strong>。<br/>
+最初的HTTP版本是<code>HTTP/0.9</code>，它非常简单，只支持获取HTML文档，并且没有头部信息和请求方法。随着互联网的发展，HTTP逐渐演化并推出了更高版本，如<code>HTTP/1.0</code>、<code>HTTP/1.1</code>和<code>HTTP/2</code>。<br/>
+HTTP协议的广泛应用使得互联网的发展变得更加便捷和高效，它成为了<strong>访问网页</strong>、<strong>发送电子邮件</strong>、<strong>下载文件</strong>等各种互联网活动的<strong>基础</strong>。</p>
+</blockquote>
+<h1 id="http是什么"><a class="header-anchor" href="#http是什么"><span class="icon icon-link"></span></a>HTTP是什么？</h1>
+<p>全称：超文本传输协议（<code>HyperText Transfer Protocol</code>）</p>
+<p>功能：HTTP是一种用于在<strong>客户端</strong>和<strong>服务器</strong>之间传输超文本的协议。它是互联网数据传输的基础，使得互联网上的网页浏览、文件传输等活动变得便捷和高效。</p>
+<p>工作原理: <strong>通过客户端和服务器之间的请求和响应来传输信息</strong>。客户端发送HTTP请求给服务器，服务器接收到请求后，根据请求的内容做出相应的动作，并将结果以HTTP响应的形式返回给客户端。</p>
+<h1 id="http报文"><a class="header-anchor" href="#http报文"><span class="icon icon-link"></span></a>HTTP报文</h1>
+<p>概念：用于HTTP协议交互的信息被称为HTTP报文。客户端的HTTP报文叫请求报文，服务端的HTTP报文叫响应报文。</p>
+<h2 id="请求报文"><a class="header-anchor" href="#请求报文"><span class="icon icon-link"></span></a>请求报文</h2>
+<blockquote>
+<p>HTTP请求报文由四个部分组成：请求行、请求头、空行、请求体。</p>
+</blockquote>
+<ol>
+<li>请求行：请求行由<code>请求方法字段</code>、<code>URL字段</code>和<code>HTTP协议版本字段</code>3个字段组成，它们用空格分隔。比如 <code>Post /form/login HTTP/1.1</code></li>
+<li>请求头：由<code>key: value</code>值的方式构成，告诉服务器客户端需要哪些内容，什么类型。</li>
+<li>空行：它的作用是通过一个空行，告诉服务器请求头部到此为止。</li>
+<li>请求体：若方法字段是<code>GET</code>，则此项为空，没有数据。若方法字段是<code>POST</code>,则通常来说此处放置的就是要提交的数据</li>
+</ol>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b3525343851e42dfa8fe1d2cca69d315~tplv-k3u1fbpfcp-watermark.image?" alt="1.png" class="article-img"/></p>
+<h2 id="响应报文"><a class="header-anchor" href="#响应报文"><span class="icon icon-link"></span></a>响应报文</h2>
+<blockquote>
+<p>HTTP响应报文也由四部分组成：状态行、响应头、空行、响应体。</p>
+</blockquote>
+<ol>
+<li>响应行：响应行一般由<code>协议版本</code>、<code>状态码</code>及其<code>描述</code>组成 比如 <code>HTTP/1.1 200 OK</code></li>
+<li>响应头：响应头用于描述服务器的基本信息，以及数据的描述，服务器通过这些数据的描述信息，可以通知客户端如何处理待会它回送的数据。</li>
+<li>空行：它的作用是通过一个空行，告诉服务器请求头部到此为止。</li>
+<li>响应体：响应体就是响应的消息体，如果是纯数据就是返回纯数据，如果请求的是HTML页面，那么返回的就是HTML代码，如果是JSON就是JSON数据，如此之类。<br/>
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/915406f07df44af88764108ad1bd4e1d~tplv-k3u1fbpfcp-watermark.image?" alt="2.png" class="article-img"/></li>
+</ol>
+<h2 id="请求方法"><a class="header-anchor" href="#请求方法"><span class="icon icon-link"></span></a>请求方法</h2>
+<p>HTTP请求方法定义了客户端对服务器资源的操作方式。以下是常见的HTTP请求方法：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:center">方法</th><th>描述</th></tr></thead><tbody><tr><td style="text-align:center"><strong>GET</strong></td><td>用于从服务器获取资源，通常用于获取页面内容或数据。GET请求可以通过URL参数传递数据，但数据会明文显示在URL中。</td></tr><tr><td style="text-align:center"><strong>POST</strong></td><td>用于向服务器提交数据，通常用于发送表单数据或上传文件等。POST请求将数据放在请求主体中，而不是URL参数中，因此更适合处理敏感信息。</td></tr><tr><td style="text-align:center"><strong>PUT</strong></td><td>用于向服务器存储一个资源，可以替换现有资源或在指定位置创建新资源。PUT请求需要提供完整的资源表示，并将其放置在指定的URL位置。</td></tr><tr><td style="text-align:center"><strong>DELETE</strong></td><td>用于从服务器删除指定的资源。DELETE请求会删除指定URL位置上的资源。</td></tr><tr><td style="text-align:center"><strong>HEAD</strong></td><td>类似于GET请求，但只返回响应头部，不返回实际的响应主体。HEAD请求常用于获取资源的元数据或检查资源是否存在。</td></tr><tr><td style="text-align:center"><strong>OPTIONS</strong></td><td>用于获取服务器支持的请求方法列表，也可以查询服务器的功能和配置选项。</td></tr><tr><td style="text-align:center"><strong>PATCH</strong></td><td>用于部分更新服务器上的资源。PATCH请求包含要应用于资源的更改内容，而不是替换整个资源。</td></tr></tbody></table>
+<p>除了上述常见的HTTP请求方法，还有一些不太常见的方法，如<code>TRACE</code>、<code>CONNECT</code>等。这些方法在实际的前端开发中使用较少，更多地被用于特定的场景和协议扩展。</p>
+<p>在前端开发中，通常使用<code>GET</code>和<code>POST</code>方法最为频繁。<code>GET</code>用于从服务器获取数据或页面内容，而<code>POST</code>则用于向服务器提交数据。使用适当的请求方法可以确保与服务器正确交互，并符合HTTP协议的规范。</p>
+<h2 id="http状态码"><a class="header-anchor" href="#http状态码"><span class="icon icon-link"></span></a>HTTP状态码</h2>
+<p>概念：HTTP状态码是服务器在接收到客户端的请求后，返回给客户端的响应中的一个数字代码。这个状态码提供了关于请求处理结果的信息，帮助客户端了解请求的状态和如何进一步处理。</p>
+<p>以下是常见的HTTP状态码、含义及其描述：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:center">状态码</th><th style="text-align:center">含义</th><th style="text-align:center">描述</th></tr></thead><tbody><tr><td style="text-align:center">1xx</td><td style="text-align:center"><strong>信息性状态码</strong></td><td style="text-align:center">表示请求已被接受，需要进一步处理。</td></tr><tr><td style="text-align:center">100</td><td style="text-align:center">Continue</td><td style="text-align:center">服务器正在处理请求，客户端应继续发送剩余部分。</td></tr><tr><td style="text-align:center">101</td><td style="text-align:center">Switching Protocols</td><td style="text-align:center">服务器已根据客户端的请求切换协议。</td></tr><tr><td style="text-align:center">2xx</td><td style="text-align:center"><strong>成功状态码</strong></td><td style="text-align:center">表示请求已成功接收、理解和处理。</td></tr><tr><td style="text-align:center">200</td><td style="text-align:center">OK</td><td style="text-align:center">请求成功，并返回所请求的数据。</td></tr><tr><td style="text-align:center">201</td><td style="text-align:center">Created</td><td style="text-align:center">请求已成功处理，并创建了新的资源。</td></tr><tr><td style="text-align:center">204</td><td style="text-align:center">No Content</td><td style="text-align:center">请求成功处理，但没有返回任何内容。</td></tr><tr><td style="text-align:center">3xx</td><td style="text-align:center"><strong>重定向状态码</strong></td><td style="text-align:center">表示请求需要进一步处理以完成。</td></tr><tr><td style="text-align:center">301</td><td style="text-align:center">Moved Permanently</td><td style="text-align:center">请求的资源已永久移动到新位置。</td></tr><tr><td style="text-align:center">302</td><td style="text-align:center">Found</td><td style="text-align:center">请求的资源临时移动到不同的位置。</td></tr><tr><td style="text-align:center">304</td><td style="text-align:center">Not Modified</td><td style="text-align:center">客户端缓存未过期，可以使用本地缓存的版本。</td></tr><tr><td style="text-align:center">4xx</td><td style="text-align:center"><strong>客户端错误状态码</strong></td><td style="text-align:center">表示客户端发送的请求有误或无法完成。</td></tr><tr><td style="text-align:center">400</td><td style="text-align:center">Bad Request</td><td style="text-align:center">请求语法错误，服务器无法理解。</td></tr><tr><td style="text-align:center">401</td><td style="text-align:center">Unauthorized</td><td style="text-align:center">请求需要身份验证。</td></tr><tr><td style="text-align:center">404</td><td style="text-align:center">Not Found</td><td style="text-align:center">请求的资源不存在。</td></tr><tr><td style="text-align:center">5xx</td><td style="text-align:center"><strong>服务器错误状态码</strong></td><td style="text-align:center">表示服务器在处理请求时发生了错误。</td></tr><tr><td style="text-align:center">500</td><td style="text-align:center">Internal Server Error</td><td style="text-align:center">服务器内部错误，无法完成请求。</td></tr><tr><td style="text-align:center">503</td><td style="text-align:center">Service Unavailable</td><td style="text-align:center">服务器暂时无法处理请求，通常是由于维护或过载。</td></tr></tbody></table>
+<p>这个表格将HTTP状态码按照类别进行了分组，并列出了常见的状态码与其含义。使用这个表格，你可以更方便地查找和记忆不同状态码的含义，以便在前端开发中进行正确的处理和适当的用户反馈。</p></div><div class="_post-copyright_zsltx_103"><div class="_post-copyright-item_zsltx_125"><span>文章作者：</span><span><a href="">XXX17</a></span></div><div class="_post-copyright-item_zsltx_125"><span>文章链接：</span><span><a href=""></a></span></div><div class="_post-copyright-item_zsltx_125"><span>版权声明：</span><span>本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>许可协议。转载请注明来自<a href="">XXX17的个人博客</a>！</span></div></div><div class="_article-tag_zsltx_138"><span><a href="/tag/笔记">笔记</a></span><span><a href="/tag/HTTP">HTTP</a></span></div><div class="_article-recommend_zsltx_183"><div class="_recommend-title_zsltx_186">相关推荐</div><div class="_recommend-list_zsltx_191"><div class="_article-img-hover_zsltx_214"><a href="/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3"><img src="http://GitHubxxx17.github.io/img/post_cover/19.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2023-04-15</span><span>数组sort()详解</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/22.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2023-02-27</span><span>vue3笔记（四）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/21.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2023-01-05</span><span>vue笔记（三）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/10.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-12-30</span><span>vue笔记（二）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/9.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-12-11</span><span>vue笔记（一）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/node"><img src="http://GitHubxxx17.github.io/img/post_cover/12.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-09-25</span><span>node.js</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/MySQL"><img src="http://GitHubxxx17.github.io/img/post_cover/6.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-09-22</span><span>MYSQL</span></div></a></div></div></div></div></div><div class="_mainRight_1g63m_38"><div class="_sidebar_18neh_1"><div class="_card_5w79l_1"><div class="_author_5w79l_21"><div class="_avatar_5w79l_12"><img src="/avatar.jpg"/></div><h2 class="_author-name_5w79l_26">XXX17</h2><p class="_author-description_5w79l_31">学无止境</p><div class="_author-data_5w79l_34"><a href="/"><span>文章</span><span>9</span></a><a href="/tag"><span>标签</span><span>4</span></a><a href="/category"><span>分类</span><span>2</span></a></div><button class="_follow-btn_5w79l_53"><a href="" target="_blank" rel="noreferrer">Follow me</a></button></div></div><div class="_card_5w79l_1"><div class="_card-announcement_5w79l_84"><div class="_header_5w79l_75">公告</div><p></p></div></div><div class="_stickyLayout_18neh_8" style="top:20px"><div class="_card_5w79l_1"><div class="_card-toc_5w79l_151"><div class="_header_5w79l_75"><span>目录</span><span class="_progress_5w79l_155">0</span></div><div class="_content_5w79l_162"><ul><li class="_active_5w79l_178" style="margin-left:0px"><a href="#http起源"><span>1. </span><span>HTTP起源</span></a></li><li class="" style="margin-left:0px"><a href="#http是什么"><span>2. </span><span>HTTP是什么？</span></a></li><li class="" style="margin-left:0px"><a href="#http报文"><span>3. </span><span>HTTP报文</span></a></li><li class="" style="margin-left:20px"><a href="#请求报文"><span>3.1. </span><span>请求报文</span></a></li><li class="" style="margin-left:20px"><a href="#响应报文"><span>3.2. </span><span>响应报文</span></a></li><li class="" style="margin-left:20px"><a href="#请求方法"><span>3.3. </span><span>请求方法</span></a></li><li class="" style="margin-left:20px"><a href="#http状态码"><span>3.4. </span><span>HTTP状态码</span></a></li></ul></div></div></div><div class="_card_5w79l_1"><div class="_card-article_5w79l_87"><div class="_header_5w79l_75">最新文章</div><ul class="_list_5w79l_112"><li><div class="_left_5w79l_118"><a href="/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><img src="http://GitHubxxx17.github.io/img/post_cover/31.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="_title_5w79l_137">搭建云服务器</span></a><span class="_time_5w79l_146">2023-07-14</span></div></li><li><div class="_left_5w79l_118"><a href="/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3"><img src="http://GitHubxxx17.github.io/img/post_cover/19.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3"><span class="_title_5w79l_137">数组sort()详解</span></a><span class="_time_5w79l_146">2023-04-15</span></div></li><li><div class="_left_5w79l_118"><a href="/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/22.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89"><span class="_title_5w79l_137">vue3笔记（四）</span></a><span class="_time_5w79l_146">2023-02-27</span></div></li><li><div class="_left_5w79l_118"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/21.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89"><span class="_title_5w79l_137">vue笔记（三）</span></a><span class="_time_5w79l_146">2023-01-05</span></div></li><li><div class="_left_5w79l_118"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/10.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="_title_5w79l_137">vue笔记（二）</span></a><span class="_time_5w79l_146">2022-12-30</span></div></li></ul></div></div></div></div></div></div></main><div class="_rightSide_g11mb_1 _rightSide-hide_g11mb_30"><div class="_rightSide-settings_g11mb_8 _rightSide-hide_g11mb_30"><div class="_rightSide-item_g11mb_14" title="深色和浅色模式切换"></div><div class="_rightSide-item_g11mb_14" title="单栏和双栏的切换"></div></div><div class="_rightSide-item_g11mb_14" title="设置"></div><div class="_rightSide-item_g11mb_14" title="回到顶部"></div></div><footer class="_footer_iuxfi_1"><div class="_footerInner_iuxfi_8" style="background-image:url(/banner.png)"><p>©2020 - 2023 By XXX17</p><p class="_framework-info_iuxfi_32"><span>框架</span><a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noreferrer">Fispo</a><span>|</span><span>主题</span><a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noreferrer">fish-in-pool</a></p></div></footer></div></div>
+    <script type="module" src="/assets/client-entry-Bq6ifpqd.js"></script>
+  </body>
+</html>

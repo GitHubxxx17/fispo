@@ -56,7 +56,7 @@ import React from 'react';
 ${this.#routeData
   .map((route, index) => {
     return ssr
-      ? `import * as Route${index} from '${route.absolutePath}';`
+      ? `import Route${index} from '${route.absolutePath}';`
       : `const Route${index} = React.lazy(() => import('${route.absolutePath}'))`;
   })
   .join("\n")}

@@ -33,7 +33,7 @@ Fispo 是一个基于 React + Vite + TypeScript 的静态站点生成器，专�
 #### 安装初始化项目工具
 
 ```
-npm i fispo-create -g
+npm i @fispo/fispo-create -g
 ```
 
 #### 初始化项目

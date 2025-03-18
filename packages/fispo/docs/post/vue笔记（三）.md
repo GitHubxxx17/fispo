@@ -4,7 +4,8 @@ categories: "笔记"
 date: 2023-1-5 00:00:00
 tags:
   - 笔记
-cover: http://GitHubxxx17.github.io/img/post_cover/21.jpg
+  - vue
+cover: /cover/h.png
 ---
 
 

@@ -4,7 +4,7 @@ categories: "笔记"
 date: 2023-4-15 00:08:45
 tags:
   - 笔记
-cover: http://GitHubxxx17.github.io/img/post_cover/19.jpg
+cover: /cover/b.png
 ---
 
 # 数组sort()

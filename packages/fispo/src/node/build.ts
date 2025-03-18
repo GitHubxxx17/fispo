@@ -98,17 +98,15 @@ export async function renderPage(
   </body>
 </html>`.trim();
       const fileName = routePath.endsWith("/")
-        ? `${routePath}index.html`
-        : `${routePath}.html`;
+        ? `${decodeURI(routePath)}index.html`
+        : `${decodeURI(routePath)}.html`;
       await fs.ensureDir(join(root, "build", dirname(fileName)));
       await fs.writeFile(join(root, "build", fileName), html);
     })
   );
 }
 
-// 新增入参
 export async function build(root: string, config: SiteConfig) {
-  // bundle 方法也新增入参
   const [clientBundle] = await bundle(root, config);
   const serverEntryPath = join(root, ".temp", "ssr-entry.cjs");
   const { render, routes } = await import(

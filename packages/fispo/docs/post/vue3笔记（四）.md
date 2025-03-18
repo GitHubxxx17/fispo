@@ -4,7 +4,8 @@ categories: "笔记"
 date: 2023-2-27 00:00:00
 tags:
   - 笔记
-cover: http://GitHubxxx17.github.io/img/post_cover/22.jpg
+  - vue
+cover: /cover/f.png
 ---
 
 # Vue3简介

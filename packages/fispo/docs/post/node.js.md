@@ -4,7 +4,7 @@ categories: "笔记"
 date: 2022-09-25 00:00:00
 tags:
   - 笔记
-cover: http://GitHubxxx17.github.io/img/post_cover/12.jpg
+cover: /cover/e.png
 ---
 
 # 初识node.js与内置模块

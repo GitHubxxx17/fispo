@@ -1,7 +1,7 @@
 import { join, relative } from "path";
 import { mergeConfig, Plugin, UserConfig } from "vite";
 import { SiteConfig } from "shared/types/index";
-import { configFiles, PACKAGE_ROOT, THEME_PATH } from "node/constants";
+import { configFiles, PACKAGE_ROOT, THEME_PATH } from "../constants";
 import fs from "fs-extra";
 import sirv from "sirv";
 

@@ -5,7 +5,7 @@ date: 2022-07-15 10:00:00
 tags: 
     - 笔记
     - HTTP
-cover: http://GitHubxxx17.github.io/img/post_cover/25.jpg
+cover: /cover/c.png
 ---
 
 # HTTP起源

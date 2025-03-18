@@ -7,9 +7,6 @@ export function preloaderPlugin(): FispoPlugin {
     alias: {
       "@plugin-perloader": join(__dirname, "../src/Loading/index.tsx"),
     },
-    preloader: (config) => {
-      console.log(config);
-      return "@plugin-perloader";
-    },
+    preloader: "@plugin-perloader",
   };
 }

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title data-rh="true">vue笔记（三） | XXX17的个人博客</title>
+    
+    
+    
+    <link rel="icon" href="/logo.png" type="image/png">
+    <meta name="description" content="xxx">
+    <link rel="stylesheet" href="/assets/client-entry-HfV3hKDZ.css">
+  </head>
+  <body>
+    <div id="root"><div class="_loading_y2833_1"><div class="_loading-left-bg_y2833_8"></div><div class="_loading-right-bg_y2833_9"></div><div class="_spinner-box_y2833_15"><div class="_spinner-box-1_y2833_23"></div><div class="_spinner-box-2_y2833_24"></div><div class="_loading-text_y2833_38">加载中···</div></div></div><div class="_layout_1g63m_1" style="background-image:url(/bg.png)"><header class="_header_1g63m_9 _not-home-page_1g63m_15"><nav class="_nav_14t1j_1 _top_14t1j_57"><div class="_blog-name_14t1j_15"><a href="#">XXX17的个人博客</a></div><div class="_menus_14t1j_27"><ul><li><a href="/"><span>首页</span></a></li><li><a href="/tag"><span>标签</span></a></li><li><a href="/category"><span>分类</span></a></li><li><a href="/about"><span>关于</span></a></li></ul></div></nav><div class="_banner_1hwpr_1 _not-home-page_1hwpr_64" style="background-image:url(http://GitHubxxx17.github.io/img/post_cover/21.jpg)"><div class="_banner-site-info_1hwpr_20"><div class="_banner-site-title_1hwpr_25">vue笔记（三）</div><div class="_meta_1hwpr_33"><span>发表于 <!-- -->2023-01-05</span><span><a href="/category/笔记">笔记</a></span><span class="_content-tag_1hwpr_60"><a href="/tag/笔记">笔记</a></span></div></div></div></header><main class="_main_1g63m_18"><div class="_mainInner_1g63m_24"><div class="_mainLeft_1g63m_33"><div class="_article-layout_zsltx_1"><div class="_article-content_zsltx_10"><h1 id="vuex"><a class="header-anchor" href="#vuex"><span class="icon icon-link"></span></a>vuex</h1>
+<p><strong>概念</strong><br/>
+在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应用中多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式，且适用于任意组件间通信。<br/>
+<strong>何时使用？</strong><br/>
+​多个组件需要共享数据时</p>
+<h2 id="搭建vuex环境"><a class="header-anchor" href="#搭建vuex环境"><span class="icon icon-link"></span></a>搭建vuex环境</h2>
+<ol>
+<li><strong>创建文件</strong>：<code>src/store/index.js</code></li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//引入Vue核心库</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">Vue</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">vue</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#616E88">//引入Vuex</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">Vuex</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">vuex</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#616E88">//应用Vuex插件</span></span>
+<span class="line"><span style="color:#D8DEE9">Vue</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">use</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">Vuex</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//准备actions对象——响应组件中用户的动作</span></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">actions</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{}</span></span>
+<span class="line"><span style="color:#616E88">//准备mutations对象——修改state中的数据</span></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">mutations</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{}</span></span>
+<span class="line"><span style="color:#616E88">//准备state对象——保存具体的数据</span></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">state</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//创建并暴露store</span></span>
+<span class="line"><span style="color:#81A1C1">export</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">default</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">Vuex</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">Store</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">actions</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">mutations</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">state</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="2">
+<li>在<code>main.js</code>中创建vm时传入<code>store</code>配置项</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">......</span></span>
+<span class="line"><span style="color:#616E88">//引入store</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">store</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">./store</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#81A1C1">......</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//创建vm</span></span>
+<span class="line"><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#88C0D0">Vue</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">el</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">#app</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">render</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">h</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=&gt;</span><span style="color:#D8DEE9FF"> </span><span style="color:#88C0D0">h</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">App</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">store</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="基本使用"><a class="header-anchor" href="#基本使用"><span class="icon icon-link"></span></a>基本使用</h2>
+<ol>
+<li>初始化数据、配置<code>actions</code>、配置<code>mutations</code>，操作文件<code>store.js</code></li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//引入Vue核心库</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">Vue</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">vue</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#616E88">//引入Vuex</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">Vuex</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">vuex</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#616E88">//引用Vuex</span></span>
+<span class="line"><span style="color:#D8DEE9">Vue</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">use</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">Vuex</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">actions</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//响应组件中加的动作</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">jia</span><span style="color:#ECEFF4">(</span><span style="color:#D8DEE9">context</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">value</span><span style="color:#ECEFF4">){</span></span>
+<span class="line"><span style="color:#ECEFF4">		</span><span style="color:#616E88">// console.log(&#x27;actions中的jia被调用了&#x27;,miniStore,value)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#D8DEE9">context</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">commit</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIA</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">value</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">mutations</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//执行加</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">JIA</span><span style="color:#ECEFF4">(</span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">value</span><span style="color:#ECEFF4">){</span></span>
+<span class="line"><span style="color:#ECEFF4">		</span><span style="color:#616E88">// console.log(&#x27;mutations中的JIA被调用了&#x27;,state,value)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">sum</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">+=</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">value</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//初始化数据</span></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">state</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">   </span><span style="color:#88C0D0">sum</span><span style="color:#ECEFF4">:</span><span style="color:#B48EAD">0</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//创建并暴露store</span></span>
+<span class="line"><span style="color:#81A1C1">export</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">default</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">Vuex</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">Store</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">actions</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">mutations</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="2">
+<li>组件中读取vuex中的数据：<code>$store.state.sum</code></li>
+<li>组件中修改vuex中的数据：<code>$store.dispatch(&#x27;action中的方法名&#x27;,数据)</code>或 <code>$store.commit(&#x27;mutations中的方法名&#x27;,数据)</code></li>
+</ol>
+<blockquote>
+<p><strong>备注</strong>：若没有网络请求或其他业务逻辑，组件中也可以越过<code>actions</code>，即不写<code>dispatch</code>，直接编写<code>commit</code></p>
+</blockquote>
+<h2 id="getters的使用"><a class="header-anchor" href="#getters的使用"><span class="icon icon-link"></span></a>getters的使用</h2>
+<ol>
+<li><strong>概念</strong>：当<code>state</code>中的数据需要经过加工后再使用时，可以使用<code>getters</code>加工。</li>
+<li>在<code>store.js</code>中追加<code>getters</code>配置</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">......</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">getters</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">bigSum</span><span style="color:#ECEFF4">(</span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">){</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#81A1C1">return</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">sum</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">*</span><span style="color:#D8DEE9FF"> </span><span style="color:#B48EAD">10</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//创建并暴露store</span></span>
+<span class="line"><span style="color:#81A1C1">export</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">default</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">Vuex</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">Store</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#81A1C1">......</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">getters</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="3">
+<li>组件中读取数据：<code>$store.getters.bigSum</code></li>
+</ol>
+<h2 id="四个map方法的使用"><a class="header-anchor" href="#四个map方法的使用"><span class="icon icon-link"></span></a>四个map方法的使用</h2>
+<ol>
+<li><strong>mapState方法</strong>：用于帮助我们映射<code>state</code>中的数据为计算属性</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9FF">computed</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//借助mapState生成计算属性：sum、school、subject（对象写法）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">     </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapState</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span><span style="color:#88C0D0">sum</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">sum</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#88C0D0">school</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">school</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#88C0D0">subject</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">subject</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">         </span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//借助mapState生成计算属性：sum、school、subject（数组写法）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapState</span><span style="color:#D8DEE9FF">([</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">sum</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">school</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">subject</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">])</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">},</span></span>
+<span class="line"></span></code></pre></div>
+<ol>
+<li><strong>mapGetters方法</strong>：用于帮助我们映射<code>getters</code>中的数据为计算属性</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9FF">computed</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//借助mapGetters生成计算属性：bigSum（对象写法）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapGetters</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span><span style="color:#88C0D0">bigSum</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">bigSum</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//借助mapGetters生成计算属性：bigSum（数组写法）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapGetters</span><span style="color:#D8DEE9FF">([</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">bigSum</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">])</span></span>
+<span class="line"><span style="color:#ECEFF4">},</span></span>
+<span class="line"></span></code></pre></div>
+<ol>
+<li><strong>mapActions方法</strong>：用于帮助我们生成与<code>actions</code>对话的方法，即：包含<code>$store.dispatch(xxx)</code>的函数</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9FF">methods</span><span style="color:#ECEFF4">:{</span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//靠mapActions生成：incrementOdd、incrementWait（对象形式）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapActions</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span><span style="color:#88C0D0">incrementOdd</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">jiaOdd</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#88C0D0">incrementWait</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">jiaWait</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//靠mapActions生成：incrementOdd、incrementWait（数组形式）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapActions</span><span style="color:#D8DEE9FF">([</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">jiaOdd</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">jiaWait</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">])</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<ol>
+<li><strong>mapMutations方法</strong>：用于帮助我们生成与<code>mutations</code>对话的方法，即：包含<code>$store.commit(xxx)</code>的函数</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9FF">methods</span><span style="color:#ECEFF4">:{</span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//靠mapActions生成：increment、decrement（对象形式）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapMutations</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span><span style="color:#88C0D0">increment</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIA</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#88C0D0">decrement</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIAN</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span></span>
+<span class="line"><span style="color:#ECEFF4">    </span><span style="color:#616E88">//靠mapMutations生成：JIA、JIAN（对象形式）</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapMutations</span><span style="color:#D8DEE9FF">([</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIA</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIAN</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">])</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<blockquote>
+<p><strong>备注</strong>：mapActions与mapMutations使用时，若需要传递参数需要：在模板中绑定事件时传递好参数，否则参数是事件对象。</p>
+</blockquote>
+<h2 id="模块化命名空间"><a class="header-anchor" href="#模块化命名空间"><span class="icon icon-link"></span></a>模块化+命名空间</h2>
+<ol>
+<li><strong>目的</strong>：让代码更好维护，让多种数据分类更加明确。</li>
+<li>修改<code>store.js</code></li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">countAbout</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">namespaced</span><span style="color:#ECEFF4">:</span><span style="color:#81A1C1">true</span><span style="color:#ECEFF4">,</span><span style="color:#616E88">//开启命名空间</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">state</span><span style="color:#ECEFF4">:{</span><span style="color:#88C0D0">x</span><span style="color:#ECEFF4">:</span><span style="color:#B48EAD">1</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">mutations</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">...</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">actions</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">...</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">getters</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#88C0D0">bigSum</span><span style="color:#ECEFF4">(</span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">){</span></span>
+<span class="line"><span style="color:#D8DEE9FF">       </span><span style="color:#81A1C1">return</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">sum</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">*</span><span style="color:#D8DEE9FF"> </span><span style="color:#B48EAD">10</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">personAbout</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">namespaced</span><span style="color:#ECEFF4">:</span><span style="color:#81A1C1">true</span><span style="color:#ECEFF4">,</span><span style="color:#616E88">//开启命名空间</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">state</span><span style="color:#ECEFF4">:{</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">...</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">mutations</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">...</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">actions</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">...</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">store</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">Vuex</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">Store</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#88C0D0">modules</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#D8DEE9">countAbout</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#D8DEE9">personAbout</span></span>
+<span class="line"><span style="color:#D8DEE9FF">  </span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="3">
+<li>开启命名空间后，组件中读取state数据：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//方式一：自己直接读取</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$store</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">state</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">personAbout</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">list</span></span>
+<span class="line"><span style="color:#616E88">//方式二：借助mapState读取：</span></span>
+<span class="line"><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapState</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">countAbout</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF">[</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">sum</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">school</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">subject</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">])</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="4">
+<li>开启命名空间后，组件中读取getters数据：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//方式一：自己直接读取</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$store</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">getters</span><span style="color:#D8DEE9FF">[</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">personAbout/firstPersonName</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">]</span></span>
+<span class="line"><span style="color:#616E88">//方式二：借助mapGetters读取：</span></span>
+<span class="line"><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapGetters</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">countAbout</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF">[</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">bigSum</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">])</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="5">
+<li>开启命名空间后，组件中调用dispatch</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//方式一：自己直接dispatch</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$store</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">dispatch</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">personAbout/addPersonWang</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">person</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#616E88">//方式二：借助mapActions：</span></span>
+<span class="line"><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapActions</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">countAbout</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,{</span><span style="color:#88C0D0">incrementOdd</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">jiaOdd</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#88C0D0">incrementWait</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">jiaWait</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="6">
+<li>开启命名空间后，组件中调用commit</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//方式一：自己直接commit</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$store</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">commit</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">personAbout/ADD_PERSON</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">person</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#616E88">//方式二：借助mapMutations：</span></span>
+<span class="line"><span style="color:#81A1C1">...</span><span style="color:#88C0D0">mapMutations</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">countAbout</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,{</span><span style="color:#88C0D0">increment</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIA</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#88C0D0">decrement</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">JIAN</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"></span></code></pre></div>
+<h1 id="路由"><a class="header-anchor" href="#路由"><span class="icon icon-link"></span></a>路由</h1>
+<ol>
+<li><strong>理解</strong>： 一个路由（route）就是一组映射关系（<code>key - value</code>），多个路由需要路由器（router）进行管理。</li>
+<li><strong>前端路由</strong>：key是路径，value是组件。</li>
+</ol>
+<h2 id="基本使用-1"><a class="header-anchor" href="#基本使用-1"><span class="icon icon-link"></span></a>基本使用</h2>
+<ol>
+<li>安装<code>vue-router</code>，命令：<code>npm i vue-router</code></li>
+<li>应用插件：<code>Vue.use(VueRouter)</code></li>
+<li>编写router配置项:</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//引入VueRouter</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">VueRouter</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">vue-router</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#616E88">//引入Luyou 组件</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">About</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">../components/About</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">Home</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">../components/Home</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//创建router实例对象，去管理一组一组的路由规则</span></span>
+<span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">router</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#88C0D0">VueRouter</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">routes</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/about</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">About</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/home</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Home</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	]</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//暴露router</span></span>
+<span class="line"><span style="color:#81A1C1">export</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">default</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">router</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="4">
+<li>实现切换（<code>active-class</code>可配置高亮样式）</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">&lt;</span><span style="color:#8FBCBB">router-link</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">active-class</span><span style="color:#81A1C1">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">active</span><span style="color:#ECEFF4">&quot;</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">to</span><span style="color:#81A1C1">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">/about</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">About</span><span style="color:#81A1C1">&lt;/</span><span style="color:#8FBCBB">router-link</span><span style="color:#81A1C1">&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="5">
+<li>指定展示位置</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">&lt;</span><span style="color:#8FBCBB">router-view</span><span style="color:#81A1C1">&gt;&lt;/</span><span style="color:#8FBCBB">router-view</span><span style="color:#81A1C1">&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="几个注意点"><a class="header-anchor" href="#几个注意点"><span class="icon icon-link"></span></a>几个注意点</h2>
+<blockquote>
+<ol>
+<li>路由组件通常存放在<code>pages</code>文件夹，一般组件通常存放在<code>components</code>文件夹。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>通过切换，“隐藏”了的路由组件，默认是被销毁掉的，需要的时候再去挂载。</li>
+<li>每个组件都有自己的<code>$route</code>属性，里面存储着自己的路由信息。</li>
+<li>整个应用只有一个router，可以通过组件的<code>$router</code>属性获取到。</li>
+</ol>
+<h2 id="多级路由多级路由"><a class="header-anchor" href="#多级路由多级路由"><span class="icon icon-link"></span></a>多级路由（多级路由）</h2>
+<ol>
+<li>配置路由规则，使用children配置项：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9FF">routes</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/about</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">About</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/home</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Home</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">children</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[ </span><span style="color:#616E88">//通过children配置子级路由</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">news</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//此处一定不要写：/news</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">News</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">message</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#616E88">//此处一定不要写：/message</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Message</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		]</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">]</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="2">
+<li>跳转（要写完整路径）：</li>
+</ol>
+<div class="language-html"><div class="highlight-tools"><span class="lang">html</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">/home/news</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">News</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="路由的query参数"><a class="header-anchor" href="#路由的query参数"><span class="icon icon-link"></span></a>路由的query参数</h2>
+<ol>
+<li>传递参数</li>
+</ol>
+<div class="language-html"><div class="highlight-tools"><span class="lang">html</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">&lt;!-- 跳转并携带query参数，to的字符串写法 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">:to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">/home/message/detail?id=666&amp;title=你好</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span></span>
+<span class="line"><span style="color:#616E88">&lt;!-- 跳转并携带query参数，to的对象写法 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#8FBCBB">:to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">{</span></span>
+<span class="line"><span style="color:#A3BE8C">		path:&#x27;/home/message/detail&#x27;,</span></span>
+<span class="line"><span style="color:#A3BE8C">		query:{</span></span>
+<span class="line"><span style="color:#A3BE8C">		   id:666,</span></span>
+<span class="line"><span style="color:#A3BE8C">            title:&#x27;你好&#x27;</span></span>
+<span class="line"><span style="color:#A3BE8C">		}</span></span>
+<span class="line"><span style="color:#A3BE8C">	}</span><span style="color:#ECEFF4">&quot;</span></span>
+<span class="line"><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="2">
+<li>接收参数：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">$route</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">query</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">id</span></span>
+<span class="line"><span style="color:#D8DEE9">$route</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">query</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="命名路由"><a class="header-anchor" href="#命名路由"><span class="icon icon-link"></span></a>命名路由</h2>
+<ol>
+<li><strong>作用</strong>：可以简化路由的跳转。</li>
+<li>如何使用<br/>
+给路由命名：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/demo</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Demo</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	children</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">test</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Test</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">children</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">                      </span><span style="color:#88C0D0">name</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">hello</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//给路由命名</span></span>
+<span class="line"><span style="color:#D8DEE9FF">					</span><span style="color:#D8DEE9">path</span><span style="color:#D8DEE9FF">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">welcome</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">					</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Hello</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			]</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	]</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<p>简化跳转：</p>
+<div class="language-html"><div class="highlight-tools"><span class="lang">html</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">&lt;!--简化前，需要写完整的路径 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">/demo/test/welcome</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">&lt;!--简化后，直接通过名字跳转 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">:to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">{name:&#x27;hello&#x27;}</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">&lt;!--简化写法配合传递参数 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#8FBCBB">:to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">{</span></span>
+<span class="line"><span style="color:#A3BE8C">		name:&#x27;hello&#x27;,</span></span>
+<span class="line"><span style="color:#A3BE8C">		query:{</span></span>
+<span class="line"><span style="color:#A3BE8C">		   id:666,</span></span>
+<span class="line"><span style="color:#A3BE8C">            title:&#x27;你好&#x27;</span></span>
+<span class="line"><span style="color:#A3BE8C">		}</span></span>
+<span class="line"><span style="color:#A3BE8C">	}</span><span style="color:#ECEFF4">&quot;</span></span>
+<span class="line"><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="路由的params参数"><a class="header-anchor" href="#路由的params参数"><span class="icon icon-link"></span></a>路由的params参数</h2>
+<ol>
+<li>配置路由，声明接收params参数</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/home</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Home</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	children</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">news</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">News</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Message</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">children</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">					</span><span style="color:#88C0D0">name</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">xiangqing</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">					</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">detail/:id/:title</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//使用占位符声明接收params参数</span></span>
+<span class="line"><span style="color:#D8DEE9FF">					</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Detail</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			]</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	]</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<ol start="2">
+<li>传递参数</li>
+</ol>
+<div class="language-html"><div class="highlight-tools"><span class="lang">html</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">&lt;!-- 跳转并携带params参数，to的字符串写法 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">:to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">/home/message/detail/666/你好</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"><span style="color:#D8DEE9FF">				</span></span>
+<span class="line"><span style="color:#616E88">&lt;!-- 跳转并携带params参数，to的对象写法 --&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;router-link</span><span style="color:#D8DEE9FF"> </span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#8FBCBB">:to</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">{</span></span>
+<span class="line"><span style="color:#A3BE8C">		name:&#x27;xiangqing&#x27;,</span></span>
+<span class="line"><span style="color:#A3BE8C">		params:{</span></span>
+<span class="line"><span style="color:#A3BE8C">		   id:666,</span></span>
+<span class="line"><span style="color:#A3BE8C">            title:&#x27;你好&#x27;</span></span>
+<span class="line"><span style="color:#A3BE8C">		}</span></span>
+<span class="line"><span style="color:#A3BE8C">	}</span><span style="color:#ECEFF4">&quot;</span></span>
+<span class="line"><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF">跳转</span><span style="color:#81A1C1">&lt;/router-link&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<blockquote>
+<p><strong>特别注意</strong>：路由携带params参数时，若使用to的对象写法，则不能使用path配置项，必须使用name配置！</p>
+</blockquote>
+<ol start="3">
+<li>接收参数：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">$route</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">params</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">id</span></span>
+<span class="line"><span style="color:#D8DEE9">$route</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">params</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="路由的props配置"><a class="header-anchor" href="#路由的props配置"><span class="icon icon-link"></span></a>路由的props配置</h2>
+<p><strong>​作用</strong>：让路由组件更方便的收到参数</p>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	name</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">xiangqing</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">detail/:id</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Detail</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ECEFF4">	</span><span style="color:#616E88">//第一种写法：props值为对象，该对象中所有的key-value的组合最终都会通过props传给Detail组件</span></span>
+<span class="line"><span style="color:#ECEFF4">	</span><span style="color:#616E88">// props:{a:900}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ECEFF4">	</span><span style="color:#616E88">//第二种写法：props值为布尔值，布尔值为true，则把路由收到的所有params参数通过props传给Detail组件</span></span>
+<span class="line"><span style="color:#ECEFF4">	</span><span style="color:#616E88">// props:true</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span></span>
+<span class="line"><span style="color:#ECEFF4">	</span><span style="color:#616E88">//第三种写法：props值为函数，该函数返回的对象中每一组key-value都会通过props传给Detail组件</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">props</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">route</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#81A1C1">return</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">id</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">route</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">query</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">id</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">title</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">route</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">query</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="的replace属性"><a class="header-anchor" href="#的replace属性"><span class="icon icon-link"></span></a><router-link>的replace属性</router-link></h2>
+<blockquote>
+<p><strong>作用</strong>：控制路由跳转时操作浏览器历史记录的模式<br/>
+<strong>浏览器的历史记录有两种写入方式</strong>：分别为push和replace，push是追加历史记录，replace是替换当前记录。路由跳转时候默认为push<br/>
+<strong>如何开启replace模式</strong>：<code>&lt;router-link replace .......&gt;News&lt;/router-link&gt;</code></p>
+</blockquote>
+<h2 id="编程式路由导航"><a class="header-anchor" href="#编程式路由导航"><span class="icon icon-link"></span></a>编程式路由导航</h2>
+<ol>
+<li><strong>作用</strong>：不借助<code>&lt;router-link&gt;</code>实现路由跳转，让路由跳转更加灵活</li>
+<li>具体编码：</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//$router的两个API</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">push</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">name</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">xiangqing</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">params</span><span style="color:#ECEFF4">:{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">id</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">xxx</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">title</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">xxx</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">replace</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">name</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">xiangqing</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">params</span><span style="color:#ECEFF4">:{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">id</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">xxx</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">title</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">xxx</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">forward</span><span style="color:#D8DEE9FF">() </span><span style="color:#616E88">//前进</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">back</span><span style="color:#D8DEE9FF">() </span><span style="color:#616E88">//后退</span></span>
+<span class="line"><span style="color:#81A1C1">this</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">$router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">go</span><span style="color:#D8DEE9FF">() </span><span style="color:#616E88">//可前进也可后退</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="缓存路由组件"><a class="header-anchor" href="#缓存路由组件"><span class="icon icon-link"></span></a>缓存路由组件</h2>
+<ol>
+<li><strong>作用</strong>：让不展示的路由组件保持挂载，不被销毁。</li>
+<li><strong>具体编码</strong>：</li>
+</ol>
+<div class="language-html"><div class="highlight-tools"><span class="lang">html</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">&lt;keep-alive</span><span style="color:#D8DEE9FF"> </span><span style="color:#8FBCBB">include</span><span style="color:#ECEFF4">=</span><span style="color:#ECEFF4">&quot;</span><span style="color:#A3BE8C">News</span><span style="color:#ECEFF4">&quot;</span><span style="color:#81A1C1">&gt;</span><span style="color:#D8DEE9FF"> </span></span>
+<span class="line"><span style="color:#D8DEE9FF">    </span><span style="color:#81A1C1">&lt;router-view&gt;&lt;/router-view&gt;</span></span>
+<span class="line"><span style="color:#81A1C1">&lt;/keep-alive&gt;</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="两个新的生命周期钩子"><a class="header-anchor" href="#两个新的生命周期钩子"><span class="icon icon-link"></span></a>两个新的生命周期钩子</h2>
+<blockquote>
+<ol>
+<li><strong>作用</strong>：路由组件所独有的两个钩子，用于捕获路由组件的激活状态。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><strong>具体名字</strong>：</li>
+</ol>
+<ul>
+<li><code>activated</code>路由组件被激活时触发。</li>
+<li><code>deactivated</code>路由组件失活时触发。</li>
+</ul>
+<h2 id="路由守卫"><a class="header-anchor" href="#路由守卫"><span class="icon icon-link"></span></a>路由守卫</h2>
+<ol>
+<li><strong>作用</strong>：对路由进行权限控制</li>
+<li><strong>分类</strong>：全局守卫、独享守卫、组件内守卫</li>
+<li>全局守卫:</li>
+</ol>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//全局前置守卫：初始化时执行、每次路由切换前执行</span></span>
+<span class="line"><span style="color:#D8DEE9">router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">beforeEach</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">(</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">from</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">next</span><span style="color:#ECEFF4">)</span><span style="color:#81A1C1">=&gt;</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">beforeEach</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">from</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#81A1C1">if</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">meta</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">isAuth</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//判断当前路由是否需要进行权限控制</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#81A1C1">if</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">localStorage</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">getItem</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">school</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">) </span><span style="color:#81A1C1">===</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">atguigu</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//权限控制的具体规则</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">next</span><span style="color:#D8DEE9FF">() </span><span style="color:#616E88">//放行</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span><span style="color:#81A1C1">else</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">alert</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">暂无权限查看</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#ECEFF4">			</span><span style="color:#616E88">// next({name:&#x27;guanyu&#x27;})</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span><span style="color:#81A1C1">else</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">next</span><span style="color:#D8DEE9FF">() </span><span style="color:#616E88">//放行</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#616E88">//全局后置守卫：初始化时执行、每次路由切换后执行</span></span>
+<span class="line"><span style="color:#D8DEE9">router</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">afterEach</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">(</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">from</span><span style="color:#ECEFF4">)</span><span style="color:#81A1C1">=&gt;</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">afterEach</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">from</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#81A1C1">if</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">meta</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#D8DEE9">document</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">meta</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//修改网页的title</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span><span style="color:#81A1C1">else</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#D8DEE9">document</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">title</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">vue_test</span><span style="color:#ECEFF4">&#x27;</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div>
+<p>独享守卫:</p>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#88C0D0">beforeEnter</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">from</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">next</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">beforeEnter</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9">from</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#81A1C1">if</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">meta</span><span style="color:#ECEFF4">.</span><span style="color:#D8DEE9">isAuth</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span><span style="color:#D8DEE9FF"> </span><span style="color:#616E88">//判断当前路由是否需要进行权限控制</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#81A1C1">if</span><span style="color:#D8DEE9FF">(</span><span style="color:#D8DEE9">localStorage</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">getItem</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">school</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">) </span><span style="color:#81A1C1">===</span><span style="color:#D8DEE9FF"> </span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">atguigu</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">)</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">next</span><span style="color:#D8DEE9FF">()</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span><span style="color:#81A1C1">else</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">alert</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">暂无权限查看</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"><span style="color:#ECEFF4">			</span><span style="color:#616E88">// next({name:&#x27;guanyu&#x27;})</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span><span style="color:#81A1C1">else</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#88C0D0">next</span><span style="color:#D8DEE9FF">()</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<p>组件内守卫：</p>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#616E88">//进入守卫：通过路由规则，进入该组件时被调用</span></span>
+<span class="line"><span style="color:#88C0D0">beforeRouteEnter</span><span style="color:#D8DEE9FF"> (</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">from</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">next</span><span style="color:#D8DEE9FF">) </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#616E88">//离开守卫：通过路由规则，离开该组件时被调用</span></span>
+<span class="line"><span style="color:#88C0D0">beforeRouteLeave</span><span style="color:#D8DEE9FF"> (</span><span style="color:#D8DEE9">to</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">from</span><span style="color:#ECEFF4">,</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">next</span><span style="color:#D8DEE9FF">) </span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="路由器的两种工作模式"><a class="header-anchor" href="#路由器的两种工作模式"><span class="icon icon-link"></span></a>路由器的两种工作模式</h2>
+<blockquote>
+<ol>
+<li>对于一个url来说，什么是hash值？—— #及其后面的内容就是hash值。</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>hash值不会包含在 HTTP 请求中，即：hash值不会带给服务器。<br/>
+<strong>hash模式</strong>：</li>
+</ol>
+<ul>
+<li>地址中永远带着#号，不美观 。</li>
+<li>若以后将地址通过第三方手机app分享，若app校验严格，则地址会被标记为不合法。</li>
+<li>兼容性较好。<br/>
+<strong>history模式</strong>：</li>
+<li>地址干净，美观 。</li>
+<li>兼容性和hash模式相比略差。</li>
+<li>应用部署上线时需要后端人员支持，解决刷新页面服务端404的问题。</li>
+</ul>
+<p><strong>配置路由</strong></p>
+<div class="language-javascript"><div class="highlight-tools"><span class="lang">javascript</span></div><pre class="shiki nord" style="background-color:#2e3440ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9FF"> </span><span style="color:#D8DEE9">router</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF"> </span><span style="color:#81A1C1">new</span><span style="color:#D8DEE9FF"> </span><span style="color:#88C0D0">VueRouter</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	</span><span style="color:#88C0D0">routes</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9FF">[</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/about</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">About</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">},</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">{</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">path</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#A3BE8C">/home</span><span style="color:#ECEFF4">&#x27;</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#D8DEE9FF">			</span><span style="color:#88C0D0">component</span><span style="color:#ECEFF4">:</span><span style="color:#D8DEE9">Home</span></span>
+<span class="line"><span style="color:#D8DEE9FF">		</span><span style="color:#ECEFF4">}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">	]</span></span>
+<span class="line"><span style="color:#ECEFF4">}</span><span style="color:#D8DEE9FF">)</span></span>
+<span class="line"></span></code></pre></div></div><div class="_post-copyright_zsltx_103"><div class="_post-copyright-item_zsltx_125"><span>文章作者：</span><span><a href="">XXX17</a></span></div><div class="_post-copyright-item_zsltx_125"><span>文章链接：</span><span><a href=""></a></span></div><div class="_post-copyright-item_zsltx_125"><span>版权声明：</span><span>本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>许可协议。转载请注明来自<a href="">XXX17的个人博客</a>！</span></div></div><div class="_article-tag_zsltx_138"><span><a href="/tag/笔记">笔记</a></span></div><div class="_article-recommend_zsltx_183"><div class="_recommend-title_zsltx_186">相关推荐</div><div class="_recommend-list_zsltx_191"><div class="_article-img-hover_zsltx_214"><a href="/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3"><img src="http://GitHubxxx17.github.io/img/post_cover/19.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2023-04-15</span><span>数组sort()详解</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/22.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2023-02-27</span><span>vue3笔记（四）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/10.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-12-30</span><span>vue笔记（二）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/9.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-12-11</span><span>vue笔记（一）</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/node"><img src="http://GitHubxxx17.github.io/img/post_cover/12.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-09-25</span><span>node.js</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/MySQL"><img src="http://GitHubxxx17.github.io/img/post_cover/6.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-09-22</span><span>MYSQL</span></div></a></div><div class="_article-img-hover_zsltx_214"><a href="/post/HTTP"><img src="http://GitHubxxx17.github.io/img/post_cover/25.jpg" alt=""/><div class="_recommend-info_zsltx_203"><span>2022-07-15</span><span>HTTP</span></div></a></div></div></div></div></div><div class="_mainRight_1g63m_38"><div class="_sidebar_18neh_1"><div class="_card_5w79l_1"><div class="_author_5w79l_21"><div class="_avatar_5w79l_12"><img src="/avatar.jpg"/></div><h2 class="_author-name_5w79l_26">XXX17</h2><p class="_author-description_5w79l_31">学无止境</p><div class="_author-data_5w79l_34"><a href="/"><span>文章</span><span>9</span></a><a href="/tag"><span>标签</span><span>4</span></a><a href="/category"><span>分类</span><span>2</span></a></div><button class="_follow-btn_5w79l_53"><a href="" target="_blank" rel="noreferrer">Follow me</a></button></div></div><div class="_card_5w79l_1"><div class="_card-announcement_5w79l_84"><div class="_header_5w79l_75">公告</div><p></p></div></div><div class="_stickyLayout_18neh_8" style="top:20px"><div class="_card_5w79l_1"><div class="_card-toc_5w79l_151"><div class="_header_5w79l_75"><span>目录</span><span class="_progress_5w79l_155">0</span></div><div class="_content_5w79l_162"><ul><li class="_active_5w79l_178" style="margin-left:0px"><a href="#vuex"><span>1. </span><span>vuex</span></a></li><li class="" style="margin-left:20px"><a href="#搭建vuex环境"><span>1.1. </span><span>搭建vuex环境</span></a></li><li class="" style="margin-left:20px"><a href="#基本使用"><span>1.2. </span><span>基本使用</span></a></li><li class="" style="margin-left:20px"><a href="#getters的使用"><span>1.3. </span><span>getters的使用</span></a></li><li class="" style="margin-left:20px"><a href="#四个map方法的使用"><span>1.4. </span><span>四个map方法的使用</span></a></li><li class="" style="margin-left:20px"><a href="#模块化命名空间"><span>1.5. </span><span>模块化+命名空间</span></a></li><li class="" style="margin-left:0px"><a href="#路由"><span>2. </span><span>路由</span></a></li><li class="" style="margin-left:20px"><a href="#基本使用-1"><span>2.1. </span><span>基本使用</span></a></li><li class="" style="margin-left:20px"><a href="#几个注意点"><span>2.2. </span><span>几个注意点</span></a></li><li class="" style="margin-left:20px"><a href="#多级路由多级路由"><span>2.3. </span><span>多级路由（多级路由）</span></a></li><li class="" style="margin-left:20px"><a href="#路由的query参数"><span>2.4. </span><span>路由的query参数</span></a></li><li class="" style="margin-left:20px"><a href="#命名路由"><span>2.5. </span><span>命名路由</span></a></li><li class="" style="margin-left:20px"><a href="#路由的params参数"><span>2.6. </span><span>路由的params参数</span></a></li><li class="" style="margin-left:20px"><a href="#路由的props配置"><span>2.7. </span><span>路由的props配置</span></a></li><li class="" style="margin-left:20px"><a href="#router-link的replace属性"><span>2.8. </span><span>&lt;router-link&gt;的replace属性</span></a></li><li class="" style="margin-left:20px"><a href="#编程式路由导航"><span>2.9. </span><span>编程式路由导航</span></a></li><li class="" style="margin-left:20px"><a href="#缓存路由组件"><span>2.10. </span><span>缓存路由组件</span></a></li><li class="" style="margin-left:20px"><a href="#两个新的生命周期钩子"><span>2.11. </span><span>两个新的生命周期钩子</span></a></li><li class="" style="margin-left:20px"><a href="#路由守卫"><span>2.12. </span><span>路由守卫</span></a></li><li class="" style="margin-left:20px"><a href="#路由器的两种工作模式"><span>2.13. </span><span>路由器的两种工作模式</span></a></li></ul></div></div></div><div class="_card_5w79l_1"><div class="_card-article_5w79l_87"><div class="_header_5w79l_75">最新文章</div><ul class="_list_5w79l_112"><li><div class="_left_5w79l_118"><a href="/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><img src="http://GitHubxxx17.github.io/img/post_cover/31.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="_title_5w79l_137">搭建云服务器</span></a><span class="_time_5w79l_146">2023-07-14</span></div></li><li><div class="_left_5w79l_118"><a href="/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3"><img src="http://GitHubxxx17.github.io/img/post_cover/19.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3"><span class="_title_5w79l_137">数组sort()详解</span></a><span class="_time_5w79l_146">2023-04-15</span></div></li><li><div class="_left_5w79l_118"><a href="/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/22.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89"><span class="_title_5w79l_137">vue3笔记（四）</span></a><span class="_time_5w79l_146">2023-02-27</span></div></li><li><div class="_left_5w79l_118"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/21.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89"><span class="_title_5w79l_137">vue笔记（三）</span></a><span class="_time_5w79l_146">2023-01-05</span></div></li><li><div class="_left_5w79l_118"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><img src="http://GitHubxxx17.github.io/img/post_cover/10.jpg" alt=""/></a></div><div class="_right_5w79l_131"><a href="/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="_title_5w79l_137">vue笔记（二）</span></a><span class="_time_5w79l_146">2022-12-30</span></div></li></ul></div></div></div></div></div></div></main><div class="_rightSide_g11mb_1 _rightSide-hide_g11mb_30"><div class="_rightSide-settings_g11mb_8 _rightSide-hide_g11mb_30"><div class="_rightSide-item_g11mb_14" title="深色和浅色模式切换"></div><div class="_rightSide-item_g11mb_14" title="单栏和双栏的切换"></div></div><div class="_rightSide-item_g11mb_14" title="设置"></div><div class="_rightSide-item_g11mb_14" title="回到顶部"></div></div><footer class="_footer_iuxfi_1"><div class="_footerInner_iuxfi_8" style="background-image:url(/banner.png)"><p>©2020 - 2023 By XXX17</p><p class="_framework-info_iuxfi_32"><span>框架</span><a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noreferrer">Fispo</a><span>|</span><span>主题</span><a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noreferrer">fish-in-pool</a></p></div></footer></div></div>
+    <script type="module" src="/assets/client-entry-Bq6ifpqd.js"></script>
+  </body>
+</html>
