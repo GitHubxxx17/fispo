@@ -196,7 +196,7 @@ importers:
         specifier: ^2.0.5
         version: 2.0.5(react@18.3.1)
       react-router-dom:
-        specifier: 6.3.0
+        specifier: ^6.3.0
         version: 6.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rehype-autolink-headings:
         specifier: ^7.1.0
@@ -258,9 +258,6 @@ importers:
       vite:
         specifier: ^6.1.1
         version: 6.1.1(@types/node@22.13.5)(jiti@2.4.2)(sass@1.85.1)(tsx@4.19.3)(yaml@2.7.0)
-      vite-plugin-commonjs:
-        specifier: ^0.10.4
-        version: 0.10.4
     devDependencies:
       '@types/hast':
         specifier: ^3.0.4
@@ -3792,12 +3789,6 @@ packages:
     resolution: {integrity: sha512-s51RzrTkXKJrhNbUzQRsarjmAae7VmMPAsRT7lppVpIg6mK3zGthP9Hgz0YQQKuNcF+Ii7DfYk3Fxz40jRmePw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
-
-  vite-plugin-commonjs@0.10.4:
-    resolution: {integrity: sha512-eWQuvQKCcx0QYB5e5xfxBNjQKyrjEWZIR9UOkOV6JAgxVhtbZvCOF+FNC2ZijBJ3U3Px04ZMMyyMyFBVWIJ5+g==}
-
-  vite-plugin-dynamic-import@1.6.0:
-    resolution: {integrity: sha512-TM0sz70wfzTIo9YCxVFwS8OA9lNREsh+0vMHGSkWDTZ7bgd1Yjs5RV8EgB634l/91IsXJReg0xtmuQqP0mf+rg==}
 
   vite@6.1.1:
     resolution: {integrity: sha512-4GgM54XrwRfrOp297aIYspIti66k56v16ZnqHvrIM7mG+HjDlAwS7p+Srr7J6fGvEdOJ5JcQ/D9T7HhtdXDTzA==}
@@ -8139,19 +8130,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-
-  vite-plugin-commonjs@0.10.4:
-    dependencies:
-      acorn: 8.14.0
-      magic-string: 0.30.17
-      vite-plugin-dynamic-import: 1.6.0
-
-  vite-plugin-dynamic-import@1.6.0:
-    dependencies:
-      acorn: 8.14.0
-      es-module-lexer: 1.6.0
-      fast-glob: 3.3.3
-      magic-string: 0.30.17
 
   vite@6.1.1(@types/node@22.13.5)(jiti@2.4.2)(sass@1.85.1)(tsx@4.19.3)(yaml@2.7.0):
     dependencies:

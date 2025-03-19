@@ -6,7 +6,7 @@ import { SiteConfig } from "shared/types";
 import pluginMdx from "@mdx-js/rollup";
 import shiki from "shiki";
 import { createPluginMdx } from "./plugin-mdx";
-import commonjs from "@rollup/plugin-commonjs";
+import { pluginTheme } from "./theme";
 
 type enforceType = "pre" | "post";
 
@@ -23,7 +23,6 @@ export async function createVitePlugins(
       enforce: "pre" as enforceType,
       ...pluginMdx({ remarkPlugins, rehypePlugins }),
     },
-    commonjs(),
     pluginReact({
       jsxRuntime: "automatic",
       include: /\.(mdx|js|jsx|ts|tsx)$/,
@@ -33,5 +32,6 @@ export async function createVitePlugins(
       root: config.root,
       isSSR,
     }),
+    pluginTheme(config),
   ];
 }

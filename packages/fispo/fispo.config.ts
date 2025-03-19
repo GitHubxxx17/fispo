@@ -1,12 +1,10 @@
 import { defineConfig } from "fispo-core";
-import { ParticleThemeConfig } from "../particle/src";
 
-export default defineConfig<ParticleThemeConfig>({
+export default defineConfig({
   title: "XXX17的个人博客",
   author: "XXX17",
   description: "学无止境",
   notFoundImg: "/404.png",
-  theme: "particle",
   themeConfig: {
     navMenus: [
       {
@@ -30,10 +28,5 @@ export default defineConfig<ParticleThemeConfig>({
         icon: "heart",
       },
     ],
-    banner: {
-      title: "Argvchs の小窝",
-      img: "/background.jpg",
-      subTitle: "Here's an argvchs...",
-    },
   },
 });

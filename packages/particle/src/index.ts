@@ -1,1 +1,1 @@
-export { ThemeConfig as ParticleThemeConfig } from "./types";
+export { default as Layout } from "Layout";

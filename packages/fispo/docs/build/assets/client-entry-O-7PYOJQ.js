@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-var _a, _b;
+var _a;
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
@@ -7023,168 +7023,242 @@ function requireClient() {
 var clientExports = requireClient();
 var reactExports = requireReact();
 const React3 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
-var dist = {};
-var hasRequiredDist;
-function requireDist() {
-  if (hasRequiredDist) return dist;
-  hasRequiredDist = 1;
-  Object.defineProperty(dist, "__esModule", { value: true });
-  dist.parse = parse2;
-  dist.serialize = serialize;
-  const cookieNameRegExp = /^[\u0021-\u003A\u003C\u003E-\u007E]+$/;
-  const cookieValueRegExp = /^[\u0021-\u003A\u003C-\u007E]*$/;
-  const domainValueRegExp = /^([.]?[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)([.][a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$/i;
-  const pathValueRegExp = /^[\u0020-\u003A\u003D-\u007E]*$/;
-  const __toString = Object.prototype.toString;
-  const NullObject = /* @__PURE__ */ (() => {
-    const C = function() {
-    };
-    C.prototype = /* @__PURE__ */ Object.create(null);
-    return C;
-  })();
-  function parse2(str, options) {
-    const obj = new NullObject();
-    const len = str.length;
-    if (len < 2)
-      return obj;
-    const dec = (options == null ? void 0 : options.decode) || decode;
-    let index = 0;
-    do {
-      const eqIdx = str.indexOf("=", index);
-      if (eqIdx === -1)
-        break;
-      const colonIdx = str.indexOf(";", index);
-      const endIdx = colonIdx === -1 ? len : colonIdx;
-      if (eqIdx > endIdx) {
-        index = str.lastIndexOf(";", eqIdx - 1) + 1;
-        continue;
-      }
-      const keyStartIdx = startIndex(str, index, eqIdx);
-      const keyEndIdx = endIndex(str, eqIdx, keyStartIdx);
-      const key = str.slice(keyStartIdx, keyEndIdx);
-      if (obj[key] === void 0) {
-        let valStartIdx = startIndex(str, eqIdx + 1, endIdx);
-        let valEndIdx = endIndex(str, endIdx, valStartIdx);
-        const value = dec(str.slice(valStartIdx, valEndIdx));
-        obj[key] = value;
-      }
-      index = endIdx + 1;
-    } while (index < len);
-    return obj;
-  }
-  function startIndex(str, index, max) {
-    do {
-      const code = str.charCodeAt(index);
-      if (code !== 32 && code !== 9)
-        return index;
-    } while (++index < max);
-    return max;
-  }
-  function endIndex(str, index, min) {
-    while (index > min) {
-      const code = str.charCodeAt(--index);
-      if (code !== 32 && code !== 9)
-        return index + 1;
+function _extends() {
+  return _extends = Object.assign ? Object.assign.bind() : function(n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t2 = arguments[e];
+      for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n[r2] = t2[r2]);
     }
-    return min;
-  }
-  function serialize(name, val, options) {
-    const enc = (options == null ? void 0 : options.encode) || encodeURIComponent;
-    if (!cookieNameRegExp.test(name)) {
-      throw new TypeError(`argument name is invalid: ${name}`);
-    }
-    const value = enc(val);
-    if (!cookieValueRegExp.test(value)) {
-      throw new TypeError(`argument val is invalid: ${val}`);
-    }
-    let str = name + "=" + value;
-    if (!options)
-      return str;
-    if (options.maxAge !== void 0) {
-      if (!Number.isInteger(options.maxAge)) {
-        throw new TypeError(`option maxAge is invalid: ${options.maxAge}`);
-      }
-      str += "; Max-Age=" + options.maxAge;
-    }
-    if (options.domain) {
-      if (!domainValueRegExp.test(options.domain)) {
-        throw new TypeError(`option domain is invalid: ${options.domain}`);
-      }
-      str += "; Domain=" + options.domain;
-    }
-    if (options.path) {
-      if (!pathValueRegExp.test(options.path)) {
-        throw new TypeError(`option path is invalid: ${options.path}`);
-      }
-      str += "; Path=" + options.path;
-    }
-    if (options.expires) {
-      if (!isDate(options.expires) || !Number.isFinite(options.expires.valueOf())) {
-        throw new TypeError(`option expires is invalid: ${options.expires}`);
-      }
-      str += "; Expires=" + options.expires.toUTCString();
-    }
-    if (options.httpOnly) {
-      str += "; HttpOnly";
-    }
-    if (options.secure) {
-      str += "; Secure";
-    }
-    if (options.partitioned) {
-      str += "; Partitioned";
-    }
-    if (options.priority) {
-      const priority = typeof options.priority === "string" ? options.priority.toLowerCase() : void 0;
-      switch (priority) {
-        case "low":
-          str += "; Priority=Low";
-          break;
-        case "medium":
-          str += "; Priority=Medium";
-          break;
-        case "high":
-          str += "; Priority=High";
-          break;
-        default:
-          throw new TypeError(`option priority is invalid: ${options.priority}`);
-      }
-    }
-    if (options.sameSite) {
-      const sameSite = typeof options.sameSite === "string" ? options.sameSite.toLowerCase() : options.sameSite;
-      switch (sameSite) {
-        case true:
-        case "strict":
-          str += "; SameSite=Strict";
-          break;
-        case "lax":
-          str += "; SameSite=Lax";
-          break;
-        case "none":
-          str += "; SameSite=None";
-          break;
-        default:
-          throw new TypeError(`option sameSite is invalid: ${options.sameSite}`);
-      }
-    }
-    return str;
-  }
-  function decode(str) {
-    if (str.indexOf("%") === -1)
-      return str;
-    try {
-      return decodeURIComponent(str);
-    } catch (e) {
-      return str;
-    }
-  }
-  function isDate(val) {
-    return __toString.call(val) === "[object Date]";
-  }
-  return dist;
+    return n;
+  }, _extends.apply(null, arguments);
 }
-requireDist();
+var Action;
+(function(Action2) {
+  Action2["Pop"] = "POP";
+  Action2["Push"] = "PUSH";
+  Action2["Replace"] = "REPLACE";
+})(Action || (Action = {}));
+var readOnly = function(obj) {
+  return obj;
+};
+var BeforeUnloadEventType = "beforeunload";
+var PopStateEventType = "popstate";
+function createBrowserHistory(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var _options = options, _options$window = _options.window, window2 = _options$window === void 0 ? document.defaultView : _options$window;
+  var globalHistory = window2.history;
+  function getIndexAndLocation() {
+    var _window$location = window2.location, pathname = _window$location.pathname, search = _window$location.search, hash = _window$location.hash;
+    var state = globalHistory.state || {};
+    return [state.idx, readOnly({
+      pathname,
+      search,
+      hash,
+      state: state.usr || null,
+      key: state.key || "default"
+    })];
+  }
+  var blockedPopTx = null;
+  function handlePop() {
+    if (blockedPopTx) {
+      blockers.call(blockedPopTx);
+      blockedPopTx = null;
+    } else {
+      var nextAction = Action.Pop;
+      var _getIndexAndLocation = getIndexAndLocation(), nextIndex = _getIndexAndLocation[0], nextLocation = _getIndexAndLocation[1];
+      if (blockers.length) {
+        if (nextIndex != null) {
+          var delta = index - nextIndex;
+          if (delta) {
+            blockedPopTx = {
+              action: nextAction,
+              location: nextLocation,
+              retry: function retry() {
+                go(delta * -1);
+              }
+            };
+            go(delta);
+          }
+        }
+      } else {
+        applyTx(nextAction);
+      }
+    }
+  }
+  window2.addEventListener(PopStateEventType, handlePop);
+  var action = Action.Pop;
+  var _getIndexAndLocation2 = getIndexAndLocation(), index = _getIndexAndLocation2[0], location2 = _getIndexAndLocation2[1];
+  var listeners = createEvents();
+  var blockers = createEvents();
+  if (index == null) {
+    index = 0;
+    globalHistory.replaceState(_extends({}, globalHistory.state, {
+      idx: index
+    }), "");
+  }
+  function createHref(to) {
+    return typeof to === "string" ? to : createPath(to);
+  }
+  function getNextLocation(to, state) {
+    if (state === void 0) {
+      state = null;
+    }
+    return readOnly(_extends({
+      pathname: location2.pathname,
+      hash: "",
+      search: ""
+    }, typeof to === "string" ? parsePath(to) : to, {
+      state,
+      key: createKey()
+    }));
+  }
+  function getHistoryStateAndUrl(nextLocation, index2) {
+    return [{
+      usr: nextLocation.state,
+      key: nextLocation.key,
+      idx: index2
+    }, createHref(nextLocation)];
+  }
+  function allowTx(action2, location22, retry) {
+    return !blockers.length || (blockers.call({
+      action: action2,
+      location: location22,
+      retry
+    }), false);
+  }
+  function applyTx(nextAction) {
+    action = nextAction;
+    var _getIndexAndLocation3 = getIndexAndLocation();
+    index = _getIndexAndLocation3[0];
+    location2 = _getIndexAndLocation3[1];
+    listeners.call({
+      action,
+      location: location2
+    });
+  }
+  function push(to, state) {
+    var nextAction = Action.Push;
+    var nextLocation = getNextLocation(to, state);
+    function retry() {
+      push(to, state);
+    }
+    if (allowTx(nextAction, nextLocation, retry)) {
+      var _getHistoryStateAndUr = getHistoryStateAndUrl(nextLocation, index + 1), historyState = _getHistoryStateAndUr[0], url = _getHistoryStateAndUr[1];
+      try {
+        globalHistory.pushState(historyState, "", url);
+      } catch (error) {
+        window2.location.assign(url);
+      }
+      applyTx(nextAction);
+    }
+  }
+  function replace2(to, state) {
+    var nextAction = Action.Replace;
+    var nextLocation = getNextLocation(to, state);
+    function retry() {
+      replace2(to, state);
+    }
+    if (allowTx(nextAction, nextLocation, retry)) {
+      var _getHistoryStateAndUr2 = getHistoryStateAndUrl(nextLocation, index), historyState = _getHistoryStateAndUr2[0], url = _getHistoryStateAndUr2[1];
+      globalHistory.replaceState(historyState, "", url);
+      applyTx(nextAction);
+    }
+  }
+  function go(delta) {
+    globalHistory.go(delta);
+  }
+  var history = {
+    get action() {
+      return action;
+    },
+    get location() {
+      return location2;
+    },
+    createHref,
+    push,
+    replace: replace2,
+    go,
+    back: function back() {
+      go(-1);
+    },
+    forward: function forward() {
+      go(1);
+    },
+    listen: function listen(listener2) {
+      return listeners.push(listener2);
+    },
+    block: function block(blocker) {
+      var unblock = blockers.push(blocker);
+      if (blockers.length === 1) {
+        window2.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+      }
+      return function() {
+        unblock();
+        if (!blockers.length) {
+          window2.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+      };
+    }
+  };
+  return history;
+}
+function promptBeforeUnload(event) {
+  event.preventDefault();
+  event.returnValue = "";
+}
+function createEvents() {
+  var handlers = [];
+  return {
+    get length() {
+      return handlers.length;
+    },
+    push: function push(fn) {
+      handlers.push(fn);
+      return function() {
+        handlers = handlers.filter(function(handler) {
+          return handler !== fn;
+        });
+      };
+    },
+    call: function call(arg) {
+      handlers.forEach(function(fn) {
+        return fn && fn(arg);
+      });
+    }
+  };
+}
+function createKey() {
+  return Math.random().toString(36).substr(2, 8);
+}
+function createPath(_ref) {
+  var _ref$pathname = _ref.pathname, pathname = _ref$pathname === void 0 ? "/" : _ref$pathname, _ref$search = _ref.search, search = _ref$search === void 0 ? "" : _ref$search, _ref$hash = _ref.hash, hash = _ref$hash === void 0 ? "" : _ref$hash;
+  if (search && search !== "?") pathname += search.charAt(0) === "?" ? search : "?" + search;
+  if (hash && hash !== "#") pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+  return pathname;
+}
+function parsePath(path) {
+  var parsedPath = {};
+  if (path) {
+    var hashIndex = path.indexOf("#");
+    if (hashIndex >= 0) {
+      parsedPath.hash = path.substr(hashIndex);
+      path = path.substr(0, hashIndex);
+    }
+    var searchIndex = path.indexOf("?");
+    if (searchIndex >= 0) {
+      parsedPath.search = path.substr(searchIndex);
+      path = path.substr(0, searchIndex);
+    }
+    if (path) {
+      parsedPath.pathname = path;
+    }
+  }
+  return parsedPath;
+}
 /**
- * react-router v7.2.0
+ * React Router v6.3.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -7193,201 +7267,19 @@ requireDist();
  *
  * @license MIT
  */
-var PopStateEventType = "popstate";
-function createBrowserHistory(options = {}) {
-  function createBrowserLocation(window2, globalHistory) {
-    let { pathname, search, hash } = window2.location;
-    return createLocation(
-      "",
-      { pathname, search, hash },
-      // state defaults to `null` because `window.history.state` does
-      globalHistory.state && globalHistory.state.usr || null,
-      globalHistory.state && globalHistory.state.key || "default"
-    );
-  }
-  function createBrowserHref(window2, to) {
-    return typeof to === "string" ? to : createPath(to);
-  }
-  return getUrlBasedHistory(
-    createBrowserLocation,
-    createBrowserHref,
-    null,
-    options
-  );
+const NavigationContext = /* @__PURE__ */ reactExports.createContext(null);
+const LocationContext = /* @__PURE__ */ reactExports.createContext(null);
+const RouteContext = /* @__PURE__ */ reactExports.createContext({
+  outlet: null,
+  matches: []
+});
+function invariant(cond, message) {
+  throw new Error(message);
 }
-function invariant$2(value, message) {
-  if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message);
+function matchRoutes(routes2, locationArg, basename) {
+  if (basename === void 0) {
+    basename = "/";
   }
-}
-function warning(cond, message) {
-  if (!cond) {
-    if (typeof console !== "undefined") console.warn(message);
-    try {
-      throw new Error(message);
-    } catch (e) {
-    }
-  }
-}
-function createKey() {
-  return Math.random().toString(36).substring(2, 10);
-}
-function getHistoryState(location2, index) {
-  return {
-    usr: location2.state,
-    key: location2.key,
-    idx: index
-  };
-}
-function createLocation(current, to, state = null, key) {
-  let location2 = {
-    pathname: typeof current === "string" ? current : current.pathname,
-    search: "",
-    hash: "",
-    ...typeof to === "string" ? parsePath(to) : to,
-    state,
-    // TODO: This could be cleaned up.  push/replace should probably just take
-    // full Locations now and avoid the need to run through this flow at all
-    // But that's a pretty big refactor to the current test suite so going to
-    // keep as is for the time being and just let any incoming keys take precedence
-    key: to && to.key || key || createKey()
-  };
-  return location2;
-}
-function createPath({
-  pathname = "/",
-  search = "",
-  hash = ""
-}) {
-  if (search && search !== "?")
-    pathname += search.charAt(0) === "?" ? search : "?" + search;
-  if (hash && hash !== "#")
-    pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
-  return pathname;
-}
-function parsePath(path) {
-  let parsedPath = {};
-  if (path) {
-    let hashIndex = path.indexOf("#");
-    if (hashIndex >= 0) {
-      parsedPath.hash = path.substring(hashIndex);
-      path = path.substring(0, hashIndex);
-    }
-    let searchIndex = path.indexOf("?");
-    if (searchIndex >= 0) {
-      parsedPath.search = path.substring(searchIndex);
-      path = path.substring(0, searchIndex);
-    }
-    if (path) {
-      parsedPath.pathname = path;
-    }
-  }
-  return parsedPath;
-}
-function getUrlBasedHistory(getLocation, createHref2, validateLocation, options = {}) {
-  let { window: window2 = document.defaultView, v5Compat = false } = options;
-  let globalHistory = window2.history;
-  let action = "POP";
-  let listener2 = null;
-  let index = getIndex();
-  if (index == null) {
-    index = 0;
-    globalHistory.replaceState({ ...globalHistory.state, idx: index }, "");
-  }
-  function getIndex() {
-    let state = globalHistory.state || { idx: null };
-    return state.idx;
-  }
-  function handlePop() {
-    action = "POP";
-    let nextIndex = getIndex();
-    let delta = nextIndex == null ? null : nextIndex - index;
-    index = nextIndex;
-    if (listener2) {
-      listener2({ action, location: history.location, delta });
-    }
-  }
-  function push(to, state) {
-    action = "PUSH";
-    let location2 = createLocation(history.location, to, state);
-    index = getIndex() + 1;
-    let historyState = getHistoryState(location2, index);
-    let url = history.createHref(location2);
-    try {
-      globalHistory.pushState(historyState, "", url);
-    } catch (error) {
-      if (error instanceof DOMException && error.name === "DataCloneError") {
-        throw error;
-      }
-      window2.location.assign(url);
-    }
-    if (v5Compat && listener2) {
-      listener2({ action, location: history.location, delta: 1 });
-    }
-  }
-  function replace2(to, state) {
-    action = "REPLACE";
-    let location2 = createLocation(history.location, to, state);
-    index = getIndex();
-    let historyState = getHistoryState(location2, index);
-    let url = history.createHref(location2);
-    globalHistory.replaceState(historyState, "", url);
-    if (v5Compat && listener2) {
-      listener2({ action, location: history.location, delta: 0 });
-    }
-  }
-  function createURL(to) {
-    let base = window2.location.origin !== "null" ? window2.location.origin : window2.location.href;
-    let href2 = typeof to === "string" ? to : createPath(to);
-    href2 = href2.replace(/ $/, "%20");
-    invariant$2(
-      base,
-      `No window.location.(origin|href) available to create URL for href: ${href2}`
-    );
-    return new URL(href2, base);
-  }
-  let history = {
-    get action() {
-      return action;
-    },
-    get location() {
-      return getLocation(window2, globalHistory);
-    },
-    listen(fn) {
-      if (listener2) {
-        throw new Error("A history only accepts one active listener");
-      }
-      window2.addEventListener(PopStateEventType, handlePop);
-      listener2 = fn;
-      return () => {
-        window2.removeEventListener(PopStateEventType, handlePop);
-        listener2 = null;
-      };
-    },
-    createHref(to) {
-      return createHref2(window2, to);
-    },
-    createURL,
-    encodeLocation(to) {
-      let url = createURL(to);
-      return {
-        pathname: url.pathname,
-        search: url.search,
-        hash: url.hash
-      };
-    },
-    push,
-    replace: replace2,
-    go(n) {
-      return globalHistory.go(n);
-    }
-  };
-  return history;
-}
-function matchRoutes(routes2, locationArg, basename = "/") {
-  return matchRoutesImpl(routes2, locationArg, basename, false);
-}
-function matchRoutesImpl(routes2, locationArg, basename, allowPartial) {
   let location2 = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
   let pathname = stripBasename(location2.pathname || "/", basename);
   if (pathname == null) {
@@ -7397,39 +7289,35 @@ function matchRoutesImpl(routes2, locationArg, basename, allowPartial) {
   rankRouteBranches(branches);
   let matches = null;
   for (let i = 0; matches == null && i < branches.length; ++i) {
-    let decoded = decodePath(pathname);
-    matches = matchRouteBranch(
-      branches[i],
-      decoded,
-      allowPartial
-    );
+    matches = matchRouteBranch(branches[i], pathname);
   }
   return matches;
 }
-function flattenRoutes(routes2, branches = [], parentsMeta = [], parentPath = "") {
-  let flattenRoute = (route, index, relativePath) => {
-    let meta2 = {
-      relativePath: relativePath === void 0 ? route.path || "" : relativePath,
+function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
+  if (branches === void 0) {
+    branches = [];
+  }
+  if (parentsMeta === void 0) {
+    parentsMeta = [];
+  }
+  if (parentPath === void 0) {
+    parentPath = "";
+  }
+  routes2.forEach((route, index) => {
+    let meta = {
+      relativePath: route.path || "",
       caseSensitive: route.caseSensitive === true,
       childrenIndex: index,
       route
     };
-    if (meta2.relativePath.startsWith("/")) {
-      invariant$2(
-        meta2.relativePath.startsWith(parentPath),
-        `Absolute route path "${meta2.relativePath}" nested under path "${parentPath}" is not valid. An absolute child route path must start with the combined path of all its parent routes.`
-      );
-      meta2.relativePath = meta2.relativePath.slice(parentPath.length);
+    if (meta.relativePath.startsWith("/")) {
+      !meta.relativePath.startsWith(parentPath) ? invariant() : void 0;
+      meta.relativePath = meta.relativePath.slice(parentPath.length);
     }
-    let path = joinPaths([parentPath, meta2.relativePath]);
-    let routesMeta = parentsMeta.concat(meta2);
+    let path = joinPaths([parentPath, meta.relativePath]);
+    let routesMeta = parentsMeta.concat(meta);
     if (route.children && route.children.length > 0) {
-      invariant$2(
-        // Our types know better, but runtime JS may not!
-        // @ts-expect-error
-        route.index !== true,
-        `Index routes must not have child routes. Please remove all child routes from route path "${path}".`
-      );
+      !(route.index !== true) ? invariant() : void 0;
       flattenRoutes(route.children, branches, routesMeta, path);
     }
     if (route.path == null && !route.index) {
@@ -7440,57 +7328,19 @@ function flattenRoutes(routes2, branches = [], parentsMeta = [], parentPath = ""
       score: computeScore(path, route.index),
       routesMeta
     });
-  };
-  routes2.forEach((route, index) => {
-    var _a2;
-    if (route.path === "" || !((_a2 = route.path) == null ? void 0 : _a2.includes("?"))) {
-      flattenRoute(route, index);
-    } else {
-      for (let exploded of explodeOptionalSegments(route.path)) {
-        flattenRoute(route, index, exploded);
-      }
-    }
   });
   return branches;
 }
-function explodeOptionalSegments(path) {
-  let segments = path.split("/");
-  if (segments.length === 0) return [];
-  let [first, ...rest] = segments;
-  let isOptional = first.endsWith("?");
-  let required = first.replace(/\?$/, "");
-  if (rest.length === 0) {
-    return isOptional ? [required, ""] : [required];
-  }
-  let restExploded = explodeOptionalSegments(rest.join("/"));
-  let result = [];
-  result.push(
-    ...restExploded.map(
-      (subpath) => subpath === "" ? required : [required, subpath].join("/")
-    )
-  );
-  if (isOptional) {
-    result.push(...restExploded);
-  }
-  return result.map(
-    (exploded) => path.startsWith("/") && exploded === "" ? "/" : exploded
-  );
-}
 function rankRouteBranches(branches) {
-  branches.sort(
-    (a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(
-      a.routesMeta.map((meta2) => meta2.childrenIndex),
-      b.routesMeta.map((meta2) => meta2.childrenIndex)
-    )
-  );
+  branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
 }
-var paramRe = /^:[\w-]+$/;
-var dynamicSegmentValue = 3;
-var indexRouteValue = 2;
-var emptySegmentValue = 1;
-var staticSegmentValue = 10;
-var splatPenalty = -2;
-var isSplat = (s2) => s2 === "*";
+const paramRe = /^:\w+$/;
+const dynamicSegmentValue = 3;
+const indexRouteValue = 2;
+const emptySegmentValue = 1;
+const staticSegmentValue = 10;
+const splatPenalty = -2;
+const isSplat = (s2) => s2 === "*";
 function computeScore(path, index) {
   let segments = path.split("/");
   let initialScore = segments.length;
@@ -7500,10 +7350,7 @@ function computeScore(path, index) {
   if (index) {
     initialScore += indexRouteValue;
   }
-  return segments.filter((s2) => !isSplat(s2)).reduce(
-    (score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue),
-    initialScore
-  );
+  return segments.filter((s2) => !isSplat(s2)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
 }
 function compareIndexes(a, b) {
   let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
@@ -7519,41 +7366,29 @@ function compareIndexes(a, b) {
     0
   );
 }
-function matchRouteBranch(branch, pathname, allowPartial = false) {
-  let { routesMeta } = branch;
+function matchRouteBranch(branch, pathname) {
+  let {
+    routesMeta
+  } = branch;
   let matchedParams = {};
   let matchedPathname = "/";
   let matches = [];
   for (let i = 0; i < routesMeta.length; ++i) {
-    let meta2 = routesMeta[i];
+    let meta = routesMeta[i];
     let end2 = i === routesMeta.length - 1;
     let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
-    let match = matchPath(
-      { path: meta2.relativePath, caseSensitive: meta2.caseSensitive, end: end2 },
-      remainingPathname
-    );
-    let route = meta2.route;
-    if (!match && end2 && allowPartial && !routesMeta[routesMeta.length - 1].route.index) {
-      match = matchPath(
-        {
-          path: meta2.relativePath,
-          caseSensitive: meta2.caseSensitive,
-          end: false
-        },
-        remainingPathname
-      );
-    }
-    if (!match) {
-      return null;
-    }
+    let match = matchPath({
+      path: meta.relativePath,
+      caseSensitive: meta.caseSensitive,
+      end: end2
+    }, remainingPathname);
+    if (!match) return null;
     Object.assign(matchedParams, match.params);
+    let route = meta.route;
     matches.push({
-      // TODO: Can this as be avoided?
       params: matchedParams,
       pathname: joinPaths([matchedPathname, match.pathname]),
-      pathnameBase: normalizePathname(
-        joinPaths([matchedPathname, match.pathnameBase])
-      ),
+      pathnameBase: normalizePathname(joinPaths([matchedPathname, match.pathnameBase])),
       route
     });
     if (match.pathnameBase !== "/") {
@@ -7564,34 +7399,26 @@ function matchRouteBranch(branch, pathname, allowPartial = false) {
 }
 function matchPath(pattern, pathname) {
   if (typeof pattern === "string") {
-    pattern = { path: pattern, caseSensitive: false, end: true };
+    pattern = {
+      path: pattern,
+      caseSensitive: false,
+      end: true
+    };
   }
-  let [matcher, compiledParams] = compilePath(
-    pattern.path,
-    pattern.caseSensitive,
-    pattern.end
-  );
+  let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
   let match = pathname.match(matcher);
   if (!match) return null;
   let matchedPathname = match[0];
   let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
   let captureGroups = match.slice(1);
-  let params = compiledParams.reduce(
-    (memo2, { paramName, isOptional }, index) => {
-      if (paramName === "*") {
-        let splatValue = captureGroups[index] || "";
-        pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
-      }
-      const value = captureGroups[index];
-      if (isOptional && !value) {
-        memo2[paramName] = void 0;
-      } else {
-        memo2[paramName] = (value || "").replace(/%2F/g, "/");
-      }
-      return memo2;
-    },
-    {}
-  );
+  let params = paramNames.reduce((memo, paramName, index) => {
+    if (paramName === "*") {
+      let splatValue = captureGroups[index] || "";
+      pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+    }
+    memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "");
+    return memo;
+  }, {});
   return {
     params,
     pathname: matchedPathname,
@@ -7599,38 +7426,39 @@ function matchPath(pattern, pathname) {
     pattern
   };
 }
-function compilePath(path, caseSensitive = false, end2 = true) {
-  warning(
-    path === "*" || !path.endsWith("*") || path.endsWith("/*"),
-    `Route path "${path}" will be treated as if it were "${path.replace(/\*$/, "/*")}" because the \`*\` character must always follow a \`/\` in the pattern. To get rid of this warning, please change the route path to "${path.replace(/\*$/, "/*")}".`
-  );
-  let params = [];
-  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^${}|()[\]]/g, "\\$&").replace(
-    /\/:([\w-]+)(\?)?/g,
-    (_, paramName, isOptional) => {
-      params.push({ paramName, isOptional: isOptional != null });
-      return isOptional ? "/?([^\\/]+)?" : "/([^\\/]+)";
-    }
-  );
+function compilePath(path, caseSensitive, end2) {
+  if (caseSensitive === void 0) {
+    caseSensitive = false;
+  }
+  if (end2 === void 0) {
+    end2 = true;
+  }
+  let paramNames = [];
+  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_, paramName) => {
+    paramNames.push(paramName);
+    return "([^\\/]+)";
+  });
   if (path.endsWith("*")) {
-    params.push({ paramName: "*" });
+    paramNames.push("*");
     regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
-  } else if (end2) {
-    regexpSource += "\\/*$";
-  } else if (path !== "" && path !== "/") {
-    regexpSource += "(?:(?=\\/|$))";
-  } else ;
-  let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
-  return [matcher, params];
-}
-function decodePath(value) {
-  try {
-    return value.split("/").map((v) => decodeURIComponent(v).replace(/\//g, "%2F")).join("/");
-  } catch (error) {
-    warning(
-      false,
-      `The URL path "${value}" could not be decoded because it is a malformed URL segment. This is probably due to a bad percent encoding (${error}).`
+  } else {
+    regexpSource += end2 ? "\\/*$" : (
+      // Otherwise, match a word boundary or a proceeding /. The word boundary restricts
+      // parent routes to matching only their own words and nothing more, e.g. parent
+      // route "/home" should not match "/home2".
+      // Additionally, allow paths starting with `.`, `-`, `~`, and url-encoded entities,
+      // but do not consume the character in the matched path so they can match against
+      // nested paths.
+      "(?:(?=[.~-]|%[0-9A-F]{2})|\\b|\\/|$)"
     );
+  }
+  let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
+  return [matcher, paramNames];
+}
+function safelyDecodeURIComponent(value, paramName) {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
     return value;
   }
 }
@@ -7639,620 +7467,78 @@ function stripBasename(pathname, basename) {
   if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
     return null;
   }
-  let startIndex = basename.endsWith("/") ? basename.length - 1 : basename.length;
-  let nextChar = pathname.charAt(startIndex);
+  let nextChar = pathname.charAt(basename.length);
   if (nextChar && nextChar !== "/") {
     return null;
   }
-  return pathname.slice(startIndex) || "/";
+  return pathname.slice(basename.length) || "/";
 }
-function resolvePath(to, fromPathname = "/") {
-  let {
-    pathname: toPathname,
-    search = "",
-    hash = ""
-  } = typeof to === "string" ? parsePath(to) : to;
-  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
-  return {
-    pathname,
-    search: normalizeSearch(search),
-    hash: normalizeHash(hash)
-  };
-}
-function resolvePathname(relativePath, fromPathname) {
-  let segments = fromPathname.replace(/\/+$/, "").split("/");
-  let relativeSegments = relativePath.split("/");
-  relativeSegments.forEach((segment) => {
-    if (segment === "..") {
-      if (segments.length > 1) segments.pop();
-    } else if (segment !== ".") {
-      segments.push(segment);
-    }
-  });
-  return segments.length > 1 ? segments.join("/") : "/";
-}
-function getInvalidPathError(char, field, dest, path) {
-  return `Cannot include a '${char}' character in a manually specified \`to.${field}\` field [${JSON.stringify(
-    path
-  )}].  Please separate it out to the \`to.${dest}\` field. Alternatively you may provide the full path as a string in <Link to="..."> and the router will parse it for you.`;
-}
-function getPathContributingMatches(matches) {
-  return matches.filter(
-    (match, index) => index === 0 || match.route.path && match.route.path.length > 0
-  );
-}
-function getResolveToMatches(matches) {
-  let pathMatches = getPathContributingMatches(matches);
-  return pathMatches.map(
-    (match, idx) => idx === pathMatches.length - 1 ? match.pathname : match.pathnameBase
-  );
-}
-function resolveTo(toArg, routePathnames, locationPathname, isPathRelative = false) {
-  let to;
-  if (typeof toArg === "string") {
-    to = parsePath(toArg);
-  } else {
-    to = { ...toArg };
-    invariant$2(
-      !to.pathname || !to.pathname.includes("?"),
-      getInvalidPathError("?", "pathname", "search", to)
-    );
-    invariant$2(
-      !to.pathname || !to.pathname.includes("#"),
-      getInvalidPathError("#", "pathname", "hash", to)
-    );
-    invariant$2(
-      !to.search || !to.search.includes("#"),
-      getInvalidPathError("#", "search", "hash", to)
-    );
-  }
-  let isEmptyPath = toArg === "" || to.pathname === "";
-  let toPathname = isEmptyPath ? "/" : to.pathname;
-  let from;
-  if (toPathname == null) {
-    from = locationPathname;
-  } else {
-    let routePathnameIndex = routePathnames.length - 1;
-    if (!isPathRelative && toPathname.startsWith("..")) {
-      let toSegments = toPathname.split("/");
-      while (toSegments[0] === "..") {
-        toSegments.shift();
-        routePathnameIndex -= 1;
-      }
-      to.pathname = toSegments.join("/");
-    }
-    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
-  }
-  let path = resolvePath(to, from);
-  let hasExplicitTrailingSlash = toPathname && toPathname !== "/" && toPathname.endsWith("/");
-  let hasCurrentTrailingSlash = (isEmptyPath || toPathname === ".") && locationPathname.endsWith("/");
-  if (!path.pathname.endsWith("/") && (hasExplicitTrailingSlash || hasCurrentTrailingSlash)) {
-    path.pathname += "/";
-  }
-  return path;
-}
-var joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
-var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
-var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
-var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
-function isRouteErrorResponse(error) {
-  return error != null && typeof error.status === "number" && typeof error.statusText === "string" && typeof error.internal === "boolean" && "data" in error;
-}
-var validMutationMethodsArr = [
-  "POST",
-  "PUT",
-  "PATCH",
-  "DELETE"
-];
-new Set(
-  validMutationMethodsArr
-);
-var validRequestMethodsArr = [
-  "GET",
-  ...validMutationMethodsArr
-];
-new Set(validRequestMethodsArr);
-var DataRouterContext = reactExports.createContext(null);
-DataRouterContext.displayName = "DataRouter";
-var DataRouterStateContext = reactExports.createContext(null);
-DataRouterStateContext.displayName = "DataRouterState";
-var ViewTransitionContext = reactExports.createContext({
-  isTransitioning: false
-});
-ViewTransitionContext.displayName = "ViewTransition";
-var FetchersContext = reactExports.createContext(
-  /* @__PURE__ */ new Map()
-);
-FetchersContext.displayName = "Fetchers";
-var AwaitContext = reactExports.createContext(null);
-AwaitContext.displayName = "Await";
-var NavigationContext = reactExports.createContext(
-  null
-);
-NavigationContext.displayName = "Navigation";
-var LocationContext = reactExports.createContext(
-  null
-);
-LocationContext.displayName = "Location";
-var RouteContext = reactExports.createContext({
-  outlet: null,
-  matches: [],
-  isDataRoute: false
-});
-RouteContext.displayName = "Route";
-var RouteErrorContext = reactExports.createContext(null);
-RouteErrorContext.displayName = "RouteError";
-function useHref(to, { relative } = {}) {
-  invariant$2(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useHref() may be used only in the context of a <Router> component.`
-  );
-  let { basename, navigator: navigator2 } = reactExports.useContext(NavigationContext);
-  let { hash, pathname, search } = useResolvedPath(to, { relative });
-  let joinedPathname = pathname;
-  if (basename !== "/") {
-    joinedPathname = pathname === "/" ? basename : joinPaths([basename, pathname]);
-  }
-  return navigator2.createHref({ pathname: joinedPathname, search, hash });
-}
+const joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
+const normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
 function useInRouterContext() {
   return reactExports.useContext(LocationContext) != null;
 }
 function useLocation() {
-  invariant$2(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useLocation() may be used only in the context of a <Router> component.`
-  );
+  !useInRouterContext() ? invariant() : void 0;
   return reactExports.useContext(LocationContext).location;
 }
-var navigateEffectWarning = `You should call navigate() in a React.useEffect(), not when your component is first rendered.`;
-function useIsomorphicLayoutEffect(cb) {
-  let isStatic = reactExports.useContext(NavigationContext).static;
-  if (!isStatic) {
-    reactExports.useLayoutEffect(cb);
-  }
-}
-function useNavigate() {
-  let { isDataRoute } = reactExports.useContext(RouteContext);
-  return isDataRoute ? useNavigateStable() : useNavigateUnstable();
-}
-function useNavigateUnstable() {
-  invariant$2(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useNavigate() may be used only in the context of a <Router> component.`
-  );
-  let dataRouterContext = reactExports.useContext(DataRouterContext);
-  let { basename, navigator: navigator2 } = reactExports.useContext(NavigationContext);
-  let { matches } = reactExports.useContext(RouteContext);
-  let { pathname: locationPathname } = useLocation();
-  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-  let activeRef = reactExports.useRef(false);
-  useIsomorphicLayoutEffect(() => {
-    activeRef.current = true;
-  });
-  let navigate = reactExports.useCallback(
-    (to, options = {}) => {
-      warning(activeRef.current, navigateEffectWarning);
-      if (!activeRef.current) return;
-      if (typeof to === "number") {
-        navigator2.go(to);
-        return;
-      }
-      let path = resolveTo(
-        to,
-        JSON.parse(routePathnamesJson),
-        locationPathname,
-        options.relative === "path"
-      );
-      if (dataRouterContext == null && basename !== "/") {
-        path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
-      }
-      (!!options.replace ? navigator2.replace : navigator2.push)(
-        path,
-        options.state,
-        options
-      );
-    },
-    [
-      basename,
-      navigator2,
-      routePathnamesJson,
-      locationPathname,
-      dataRouterContext
-    ]
-  );
-  return navigate;
-}
-reactExports.createContext(null);
-function useResolvedPath(to, { relative } = {}) {
-  let { matches } = reactExports.useContext(RouteContext);
-  let { pathname: locationPathname } = useLocation();
-  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-  return reactExports.useMemo(
-    () => resolveTo(
-      to,
-      JSON.parse(routePathnamesJson),
-      locationPathname,
-      relative === "path"
-    ),
-    [to, routePathnamesJson, locationPathname, relative]
-  );
-}
 function useRoutes(routes2, locationArg) {
-  return useRoutesImpl(routes2);
-}
-function useRoutesImpl(routes2, locationArg, dataRouterState, future) {
-  invariant$2(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useRoutes() may be used only in the context of a <Router> component.`
-  );
-  let { navigator: navigator2, static: isStatic } = reactExports.useContext(NavigationContext);
-  let { matches: parentMatches } = reactExports.useContext(RouteContext);
+  !useInRouterContext() ? invariant() : void 0;
+  let {
+    matches: parentMatches
+  } = reactExports.useContext(RouteContext);
   let routeMatch = parentMatches[parentMatches.length - 1];
   let parentParams = routeMatch ? routeMatch.params : {};
-  let parentPathname = routeMatch ? routeMatch.pathname : "/";
+  routeMatch ? routeMatch.pathname : "/";
   let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
-  let parentRoute = routeMatch && routeMatch.route;
-  {
-    let parentPath = parentRoute && parentRoute.path || "";
-    warningOnce(
-      parentPathname,
-      !parentRoute || parentPath.endsWith("*") || parentPath.endsWith("*?"),
-      `You rendered descendant <Routes> (or called \`useRoutes()\`) at "${parentPathname}" (under <Route path="${parentPath}">) but the parent route path has no trailing "*". This means if you navigate deeper, the parent won't match anymore and therefore the child routes will never render.
-
-Please change the parent <Route path="${parentPath}"> to <Route path="${parentPath === "/" ? "*" : `${parentPath}/*`}">.`
-    );
-  }
+  routeMatch && routeMatch.route;
   let locationFromContext = useLocation();
   let location2;
   {
     location2 = locationFromContext;
   }
   let pathname = location2.pathname || "/";
-  let remainingPathname = pathname;
-  if (parentPathnameBase !== "/") {
-    let parentSegments = parentPathnameBase.replace(/^\//, "").split("/");
-    let segments = pathname.replace(/^\//, "").split("/");
-    remainingPathname = "/" + segments.slice(parentSegments.length).join("/");
-  }
-  let matches = !isStatic && dataRouterState && dataRouterState.matches && dataRouterState.matches.length > 0 ? dataRouterState.matches : matchRoutes(routes2, { pathname: remainingPathname });
-  {
-    warning(
-      parentRoute || matches != null,
-      `No routes matched location "${location2.pathname}${location2.search}${location2.hash}" `
-    );
-    warning(
-      matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0 || matches[matches.length - 1].route.lazy !== void 0,
-      `Matched leaf route at location "${location2.pathname}${location2.search}${location2.hash}" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.`
-    );
-  }
-  let renderedMatches = _renderMatches(
-    matches && matches.map(
-      (match) => Object.assign({}, match, {
-        params: Object.assign({}, parentParams, match.params),
-        pathname: joinPaths([
-          parentPathnameBase,
-          // Re-encode pathnames that were decoded inside matchRoutes
-          navigator2.encodeLocation ? navigator2.encodeLocation(match.pathname).pathname : match.pathname
-        ]),
-        pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([
-          parentPathnameBase,
-          // Re-encode pathnames that were decoded inside matchRoutes
-          navigator2.encodeLocation ? navigator2.encodeLocation(match.pathnameBase).pathname : match.pathnameBase
-        ])
-      })
-    ),
-    parentMatches,
-    dataRouterState,
-    future
-  );
-  return renderedMatches;
+  let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+  let matches = matchRoutes(routes2, {
+    pathname: remainingPathname
+  });
+  return _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
+    params: Object.assign({}, parentParams, match.params),
+    pathname: joinPaths([parentPathnameBase, match.pathname]),
+    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+  })), parentMatches);
 }
-function DefaultErrorComponent() {
-  let error = useRouteError();
-  let message = isRouteErrorResponse(error) ? `${error.status} ${error.statusText}` : error instanceof Error ? error.message : JSON.stringify(error);
-  let stack = error instanceof Error ? error.stack : null;
-  let lightgrey = "rgba(200,200,200, 0.5)";
-  let preStyles = { padding: "0.5rem", backgroundColor: lightgrey };
-  let codeStyles = { padding: "2px 4px", backgroundColor: lightgrey };
-  let devInfo = null;
-  {
-    console.error(
-      "Error handled by React Router default ErrorBoundary:",
-      error
-    );
-    devInfo = /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("p", null, "💿 Hey developer 👋"), /* @__PURE__ */ reactExports.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ reactExports.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ reactExports.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
+function _renderMatches(matches, parentMatches) {
+  if (parentMatches === void 0) {
+    parentMatches = [];
   }
-  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ reactExports.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ reactExports.createElement("pre", { style: preStyles }, stack) : null, devInfo);
-}
-var defaultErrorElement = /* @__PURE__ */ reactExports.createElement(DefaultErrorComponent, null);
-var RenderErrorBoundary = class extends reactExports.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: props.location,
-      revalidation: props.revalidation,
-      error: props.error
-    };
-  }
-  static getDerivedStateFromError(error) {
-    return { error };
-  }
-  static getDerivedStateFromProps(props, state) {
-    if (state.location !== props.location || state.revalidation !== "idle" && props.revalidation === "idle") {
-      return {
-        error: props.error,
-        location: props.location,
-        revalidation: props.revalidation
-      };
-    }
-    return {
-      error: props.error !== void 0 ? props.error : state.error,
-      location: state.location,
-      revalidation: props.revalidation || state.revalidation
-    };
-  }
-  componentDidCatch(error, errorInfo2) {
-    console.error(
-      "React Router caught the following error during render",
-      error,
-      errorInfo2
-    );
-  }
-  render() {
-    return this.state.error !== void 0 ? /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ reactExports.createElement(
-      RouteErrorContext.Provider,
-      {
-        value: this.state.error,
-        children: this.props.component
+  if (matches == null) return null;
+  return matches.reduceRight((outlet, match, index) => {
+    return /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, {
+      children: match.route.element !== void 0 ? match.route.element : outlet,
+      value: {
+        outlet,
+        matches: parentMatches.concat(matches.slice(0, index + 1))
       }
-    )) : this.props.children;
-  }
-};
-function RenderedRoute({ routeContext, match, children }) {
-  let dataRouterContext = reactExports.useContext(DataRouterContext);
-  if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
-    dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
-  }
-  return /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: routeContext }, children);
-}
-function _renderMatches(matches, parentMatches = [], dataRouterState = null, future = null) {
-  if (matches == null) {
-    if (!dataRouterState) {
-      return null;
-    }
-    if (dataRouterState.errors) {
-      matches = dataRouterState.matches;
-    } else if (parentMatches.length === 0 && !dataRouterState.initialized && dataRouterState.matches.length > 0) {
-      matches = dataRouterState.matches;
-    } else {
-      return null;
-    }
-  }
-  let renderedMatches = matches;
-  let errors = dataRouterState == null ? void 0 : dataRouterState.errors;
-  if (errors != null) {
-    let errorIndex = renderedMatches.findIndex(
-      (m) => m.route.id && (errors == null ? void 0 : errors[m.route.id]) !== void 0
-    );
-    invariant$2(
-      errorIndex >= 0,
-      `Could not find a matching route for errors on route IDs: ${Object.keys(
-        errors
-      ).join(",")}`
-    );
-    renderedMatches = renderedMatches.slice(
-      0,
-      Math.min(renderedMatches.length, errorIndex + 1)
-    );
-  }
-  let renderFallback = false;
-  let fallbackIndex = -1;
-  if (dataRouterState) {
-    for (let i = 0; i < renderedMatches.length; i++) {
-      let match = renderedMatches[i];
-      if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
-        fallbackIndex = i;
-      }
-      if (match.route.id) {
-        let { loaderData, errors: errors2 } = dataRouterState;
-        let needsToRunLoader = match.route.loader && !loaderData.hasOwnProperty(match.route.id) && (!errors2 || errors2[match.route.id] === void 0);
-        if (match.route.lazy || needsToRunLoader) {
-          renderFallback = true;
-          if (fallbackIndex >= 0) {
-            renderedMatches = renderedMatches.slice(0, fallbackIndex + 1);
-          } else {
-            renderedMatches = [renderedMatches[0]];
-          }
-          break;
-        }
-      }
-    }
-  }
-  return renderedMatches.reduceRight((outlet, match, index) => {
-    let error;
-    let shouldRenderHydrateFallback = false;
-    let errorElement = null;
-    let hydrateFallbackElement = null;
-    if (dataRouterState) {
-      error = errors && match.route.id ? errors[match.route.id] : void 0;
-      errorElement = match.route.errorElement || defaultErrorElement;
-      if (renderFallback) {
-        if (fallbackIndex < 0 && index === 0) {
-          warningOnce(
-            "route-fallback",
-            false,
-            "No `HydrateFallback` element provided to render during initial hydration"
-          );
-          shouldRenderHydrateFallback = true;
-          hydrateFallbackElement = null;
-        } else if (fallbackIndex === index) {
-          shouldRenderHydrateFallback = true;
-          hydrateFallbackElement = match.route.hydrateFallbackElement || null;
-        }
-      }
-    }
-    let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
-    let getChildren = () => {
-      let children;
-      if (error) {
-        children = errorElement;
-      } else if (shouldRenderHydrateFallback) {
-        children = hydrateFallbackElement;
-      } else if (match.route.Component) {
-        children = /* @__PURE__ */ reactExports.createElement(match.route.Component, null);
-      } else if (match.route.element) {
-        children = match.route.element;
-      } else {
-        children = outlet;
-      }
-      return /* @__PURE__ */ reactExports.createElement(
-        RenderedRoute,
-        {
-          match,
-          routeContext: {
-            outlet,
-            matches: matches2,
-            isDataRoute: dataRouterState != null
-          },
-          children
-        }
-      );
-    };
-    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ reactExports.createElement(
-      RenderErrorBoundary,
-      {
-        location: dataRouterState.location,
-        revalidation: dataRouterState.revalidation,
-        component: errorElement,
-        error,
-        children: getChildren(),
-        routeContext: { outlet: null, matches: matches2, isDataRoute: true }
-      }
-    ) : getChildren();
+    });
   }, null);
 }
-function getDataRouterConsoleError(hookName) {
-  return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
-}
-function useDataRouterContext(hookName) {
-  let ctx = reactExports.useContext(DataRouterContext);
-  invariant$2(ctx, getDataRouterConsoleError(hookName));
-  return ctx;
-}
-function useDataRouterState(hookName) {
-  let state = reactExports.useContext(DataRouterStateContext);
-  invariant$2(state, getDataRouterConsoleError(hookName));
-  return state;
-}
-function useRouteContext(hookName) {
-  let route = reactExports.useContext(RouteContext);
-  invariant$2(route, getDataRouterConsoleError(hookName));
-  return route;
-}
-function useCurrentRouteId(hookName) {
-  let route = useRouteContext(hookName);
-  let thisRoute = route.matches[route.matches.length - 1];
-  invariant$2(
-    thisRoute.route.id,
-    `${hookName} can only be used on routes that contain a unique "id"`
-  );
-  return thisRoute.route.id;
-}
-function useRouteId() {
-  return useCurrentRouteId(
-    "useRouteId"
-    /* UseRouteId */
-  );
-}
-function useRouteError() {
-  var _a2;
-  let error = reactExports.useContext(RouteErrorContext);
-  let state = useDataRouterState(
-    "useRouteError"
-    /* UseRouteError */
-  );
-  let routeId = useCurrentRouteId(
-    "useRouteError"
-    /* UseRouteError */
-  );
-  if (error !== void 0) {
-    return error;
-  }
-  return (_a2 = state.errors) == null ? void 0 : _a2[routeId];
-}
-function useNavigateStable() {
-  let { router } = useDataRouterContext(
-    "useNavigate"
-    /* UseNavigateStable */
-  );
-  let id = useCurrentRouteId(
-    "useNavigate"
-    /* UseNavigateStable */
-  );
-  let activeRef = reactExports.useRef(false);
-  useIsomorphicLayoutEffect(() => {
-    activeRef.current = true;
-  });
-  let navigate = reactExports.useCallback(
-    async (to, options = {}) => {
-      warning(activeRef.current, navigateEffectWarning);
-      if (!activeRef.current) return;
-      if (typeof to === "number") {
-        router.navigate(to);
-      } else {
-        await router.navigate(to, { fromRouteId: id, ...options });
-      }
-    },
-    [router, id]
-  );
-  return navigate;
-}
-var alreadyWarned = {};
-function warningOnce(key, cond, message) {
-  if (!cond && !alreadyWarned[key]) {
-    alreadyWarned[key] = true;
-    warning(false, message);
-  }
-}
-reactExports.memo(DataRoutes);
-function DataRoutes({
-  routes: routes2,
-  future,
-  state
-}) {
-  return useRoutesImpl(routes2, void 0, state, future);
-}
-function Router({
-  basename: basenameProp = "/",
-  children = null,
-  location: locationProp,
-  navigationType = "POP",
-  navigator: navigator2,
-  static: staticProp = false
-}) {
-  invariant$2(
-    !useInRouterContext(),
-    `You cannot render a <Router> inside another <Router>. You should never have more than one in your app.`
-  );
-  let basename = basenameProp.replace(/^\/*/, "/");
-  let navigationContext = reactExports.useMemo(
-    () => ({
-      basename,
-      navigator: navigator2,
-      static: staticProp,
-      future: {}
-    }),
-    [basename, navigator2, staticProp]
-  );
+function Router(_ref3) {
+  let {
+    basename: basenameProp = "/",
+    children = null,
+    location: locationProp,
+    navigationType = Action.Pop,
+    navigator: navigator2,
+    static: staticProp = false
+  } = _ref3;
+  !!useInRouterContext() ? invariant() : void 0;
+  let basename = normalizePathname(basenameProp);
+  let navigationContext = reactExports.useMemo(() => ({
+    basename,
+    navigator: navigator2,
+    static: staticProp
+  }), [basename, navigator2, staticProp]);
   if (typeof locationProp === "string") {
     locationProp = parsePath(locationProp);
   }
@@ -8263,884 +7549,211 @@ function Router({
     state = null,
     key = "default"
   } = locationProp;
-  let locationContext = reactExports.useMemo(() => {
+  let location2 = reactExports.useMemo(() => {
     let trailingPathname = stripBasename(pathname, basename);
     if (trailingPathname == null) {
       return null;
     }
     return {
-      location: {
-        pathname: trailingPathname,
-        search,
-        hash,
-        state,
-        key
-      },
+      pathname: trailingPathname,
+      search,
+      hash,
+      state,
+      key
+    };
+  }, [basename, pathname, search, hash, state, key]);
+  if (location2 == null) {
+    return null;
+  }
+  return /* @__PURE__ */ reactExports.createElement(NavigationContext.Provider, {
+    value: navigationContext
+  }, /* @__PURE__ */ reactExports.createElement(LocationContext.Provider, {
+    children,
+    value: {
+      location: location2,
       navigationType
-    };
-  }, [basename, pathname, search, hash, state, key, navigationType]);
-  warning(
-    locationContext != null,
-    `<Router basename="${basename}"> is not able to match the URL "${pathname}${search}${hash}" because it does not start with the basename, so the <Router> won't render anything.`
-  );
-  if (locationContext == null) {
-    return null;
-  }
-  return /* @__PURE__ */ reactExports.createElement(NavigationContext.Provider, { value: navigationContext }, /* @__PURE__ */ reactExports.createElement(LocationContext.Provider, { children, value: locationContext }));
-}
-var defaultMethod = "get";
-var defaultEncType = "application/x-www-form-urlencoded";
-function isHtmlElement(object) {
-  return object != null && typeof object.tagName === "string";
-}
-function isButtonElement(object) {
-  return isHtmlElement(object) && object.tagName.toLowerCase() === "button";
-}
-function isFormElement(object) {
-  return isHtmlElement(object) && object.tagName.toLowerCase() === "form";
-}
-function isInputElement(object) {
-  return isHtmlElement(object) && object.tagName.toLowerCase() === "input";
-}
-function isModifiedEvent(event) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-}
-function shouldProcessLinkClick(event, target) {
-  return event.button === 0 && // Ignore everything but left clicks
-  (!target || target === "_self") && // Let browser handle "target=_blank" etc.
-  !isModifiedEvent(event);
-}
-var _formDataSupportsSubmitter = null;
-function isFormDataSubmitterSupported() {
-  if (_formDataSupportsSubmitter === null) {
-    try {
-      new FormData(
-        document.createElement("form"),
-        // @ts-expect-error if FormData supports the submitter parameter, this will throw
-        0
-      );
-      _formDataSupportsSubmitter = false;
-    } catch (e) {
-      _formDataSupportsSubmitter = true;
     }
-  }
-  return _formDataSupportsSubmitter;
+  }));
 }
-var supportedFormEncTypes = /* @__PURE__ */ new Set([
-  "application/x-www-form-urlencoded",
-  "multipart/form-data",
-  "text/plain"
-]);
-function getFormEncType(encType) {
-  if (encType != null && !supportedFormEncTypes.has(encType)) {
-    warning(
-      false,
-      `"${encType}" is not a valid \`encType\` for \`<Form>\`/\`<fetcher.Form>\` and will default to "${defaultEncType}"`
-    );
-    return null;
-  }
-  return encType;
-}
-function getFormSubmissionInfo(target, basename) {
-  let method;
-  let action;
-  let encType;
-  let formData;
-  let body;
-  if (isFormElement(target)) {
-    let attr = target.getAttribute("action");
-    action = attr ? stripBasename(attr, basename) : null;
-    method = target.getAttribute("method") || defaultMethod;
-    encType = getFormEncType(target.getAttribute("enctype")) || defaultEncType;
-    formData = new FormData(target);
-  } else if (isButtonElement(target) || isInputElement(target) && (target.type === "submit" || target.type === "image")) {
-    let form = target.form;
-    if (form == null) {
-      throw new Error(
-        `Cannot submit a <button> or <input type="submit"> without a <form>`
-      );
-    }
-    let attr = target.getAttribute("formaction") || form.getAttribute("action");
-    action = attr ? stripBasename(attr, basename) : null;
-    method = target.getAttribute("formmethod") || form.getAttribute("method") || defaultMethod;
-    encType = getFormEncType(target.getAttribute("formenctype")) || getFormEncType(form.getAttribute("enctype")) || defaultEncType;
-    formData = new FormData(form, target);
-    if (!isFormDataSubmitterSupported()) {
-      let { name, type, value } = target;
-      if (type === "image") {
-        let prefix = name ? `${name}.` : "";
-        formData.append(`${prefix}x`, "0");
-        formData.append(`${prefix}y`, "0");
-      } else if (name) {
-        formData.append(name, value);
-      }
-    }
-  } else if (isHtmlElement(target)) {
-    throw new Error(
-      `Cannot submit element that is not <form>, <button>, or <input type="submit|image">`
-    );
-  } else {
-    method = defaultMethod;
-    action = null;
-    encType = defaultEncType;
-    body = target;
-  }
-  if (formData && encType === "text/plain") {
-    body = formData;
-    formData = void 0;
-  }
-  return { action, method: method.toLowerCase(), encType, formData, body };
-}
-function invariant2(value, message) {
-  if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message);
-  }
-}
-async function loadRouteModule(route, routeModulesCache) {
-  if (route.id in routeModulesCache) {
-    return routeModulesCache[route.id];
-  }
-  try {
-    let routeModule = await import(
-      /* @vite-ignore */
-      /* webpackIgnore: true */
-      route.module
-    );
-    routeModulesCache[route.id] = routeModule;
-    return routeModule;
-  } catch (error) {
-    console.error(
-      `Error loading route module \`${route.module}\`, reloading page...`
-    );
-    console.error(error);
-    if (window.__reactRouterContext && window.__reactRouterContext.isSpaMode && // @ts-expect-error
-    void 0) ;
-    window.location.reload();
-    return new Promise(() => {
-    });
-  }
-}
-function isHtmlLinkDescriptor(object) {
-  if (object == null) {
-    return false;
-  }
-  if (object.href == null) {
-    return object.rel === "preload" && typeof object.imageSrcSet === "string" && typeof object.imageSizes === "string";
-  }
-  return typeof object.rel === "string" && typeof object.href === "string";
-}
-async function getKeyedPrefetchLinks(matches, manifest, routeModules) {
-  let links = await Promise.all(
-    matches.map(async (match) => {
-      let route = manifest.routes[match.route.id];
-      if (route) {
-        let mod = await loadRouteModule(route, routeModules);
-        return mod.links ? mod.links() : [];
-      }
-      return [];
-    })
-  );
-  return dedupeLinkDescriptors(
-    links.flat(1).filter(isHtmlLinkDescriptor).filter((link) => link.rel === "stylesheet" || link.rel === "preload").map(
-      (link) => link.rel === "stylesheet" ? { ...link, rel: "prefetch", as: "style" } : { ...link, rel: "prefetch" }
-    )
-  );
-}
-function getNewMatchesForLinks(page, nextMatches, currentMatches, manifest, location2, mode) {
-  let isNew = (match, index) => {
-    if (!currentMatches[index]) return true;
-    return match.route.id !== currentMatches[index].route.id;
-  };
-  let matchPathChanged = (match, index) => {
-    var _a2;
-    return (
-      // param change, /users/123 -> /users/456
-      currentMatches[index].pathname !== match.pathname || // splat param changed, which is not present in match.path
-      // e.g. /files/images/avatar.jpg -> files/finances.xls
-      ((_a2 = currentMatches[index].route.path) == null ? void 0 : _a2.endsWith("*")) && currentMatches[index].params["*"] !== match.params["*"]
-    );
-  };
-  if (mode === "assets") {
-    return nextMatches.filter(
-      (match, index) => isNew(match, index) || matchPathChanged(match, index)
-    );
-  }
-  if (mode === "data") {
-    return nextMatches.filter((match, index) => {
-      var _a2;
-      let manifestRoute = manifest.routes[match.route.id];
-      if (!manifestRoute || !manifestRoute.hasLoader) {
-        return false;
-      }
-      if (isNew(match, index) || matchPathChanged(match, index)) {
-        return true;
-      }
-      if (match.route.shouldRevalidate) {
-        let routeChoice = match.route.shouldRevalidate({
-          currentUrl: new URL(
-            location2.pathname + location2.search + location2.hash,
-            window.origin
-          ),
-          currentParams: ((_a2 = currentMatches[0]) == null ? void 0 : _a2.params) || {},
-          nextUrl: new URL(page, window.origin),
-          nextParams: match.params,
-          defaultShouldRevalidate: true
-        });
-        if (typeof routeChoice === "boolean") {
-          return routeChoice;
-        }
-      }
-      return true;
-    });
-  }
-  return [];
-}
-function getModuleLinkHrefs(matches, manifest, { includeHydrateFallback } = {}) {
-  return dedupeHrefs(
-    matches.map((match) => {
-      let route = manifest.routes[match.route.id];
-      if (!route) return [];
-      let hrefs = [route.module];
-      if (route.clientActionModule) {
-        hrefs = hrefs.concat(route.clientActionModule);
-      }
-      if (route.clientLoaderModule) {
-        hrefs = hrefs.concat(route.clientLoaderModule);
-      }
-      if (includeHydrateFallback && route.hydrateFallbackModule) {
-        hrefs = hrefs.concat(route.hydrateFallbackModule);
-      }
-      if (route.imports) {
-        hrefs = hrefs.concat(route.imports);
-      }
-      return hrefs;
-    }).flat(1)
-  );
-}
-function dedupeHrefs(hrefs) {
-  return [...new Set(hrefs)];
-}
-function sortKeys(obj) {
-  let sorted = {};
-  let keys = Object.keys(obj).sort();
-  for (let key of keys) {
-    sorted[key] = obj[key];
-  }
-  return sorted;
-}
-function dedupeLinkDescriptors(descriptors, preloads) {
-  let set = /* @__PURE__ */ new Set();
-  new Set(preloads);
-  return descriptors.reduce((deduped, descriptor) => {
-    let key = JSON.stringify(sortKeys(descriptor));
-    if (!set.has(key)) {
-      set.add(key);
-      deduped.push({ key, link: descriptor });
-    }
-    return deduped;
-  }, []);
-}
-function singleFetchUrl(reqUrl) {
-  let url = typeof reqUrl === "string" ? new URL(
-    reqUrl,
-    // This can be called during the SSR flow via PrefetchPageLinksImpl so
-    // don't assume window is available
-    typeof window === "undefined" ? "server://singlefetch/" : window.location.origin
-  ) : reqUrl;
-  if (url.pathname === "/") {
-    url.pathname = "_root.data";
-  } else {
-    url.pathname = `${url.pathname.replace(/\/$/, "")}.data`;
-  }
-  return url;
-}
-function useDataRouterContext2() {
-  let context = reactExports.useContext(DataRouterContext);
-  invariant2(
-    context,
-    "You must render this element inside a <DataRouterContext.Provider> element"
-  );
-  return context;
-}
-function useDataRouterStateContext() {
-  let context = reactExports.useContext(DataRouterStateContext);
-  invariant2(
-    context,
-    "You must render this element inside a <DataRouterStateContext.Provider> element"
-  );
-  return context;
-}
-var FrameworkContext = reactExports.createContext(void 0);
-FrameworkContext.displayName = "FrameworkContext";
-function useFrameworkContext() {
-  let context = reactExports.useContext(FrameworkContext);
-  invariant2(
-    context,
-    "You must render this element inside a <HydratedRouter> element"
-  );
-  return context;
-}
-function usePrefetchBehavior(prefetch, theirElementProps) {
-  let frameworkContext = reactExports.useContext(FrameworkContext);
-  let [maybePrefetch, setMaybePrefetch] = reactExports.useState(false);
-  let [shouldPrefetch, setShouldPrefetch] = reactExports.useState(false);
-  let { onFocus, onBlur, onMouseEnter, onMouseLeave, onTouchStart } = theirElementProps;
-  let ref = reactExports.useRef(null);
-  reactExports.useEffect(() => {
-    if (prefetch === "render") {
-      setShouldPrefetch(true);
-    }
-    if (prefetch === "viewport") {
-      let callback = (entries) => {
-        entries.forEach((entry) => {
-          setShouldPrefetch(entry.isIntersecting);
-        });
-      };
-      let observer = new IntersectionObserver(callback, { threshold: 0.5 });
-      if (ref.current) observer.observe(ref.current);
-      return () => {
-        observer.disconnect();
-      };
-    }
-  }, [prefetch]);
-  reactExports.useEffect(() => {
-    if (maybePrefetch) {
-      let id = setTimeout(() => {
-        setShouldPrefetch(true);
-      }, 100);
-      return () => {
-        clearTimeout(id);
-      };
-    }
-  }, [maybePrefetch]);
-  let setIntent = () => {
-    setMaybePrefetch(true);
-  };
-  let cancelIntent = () => {
-    setMaybePrefetch(false);
-    setShouldPrefetch(false);
-  };
-  if (!frameworkContext) {
-    return [false, ref, {}];
-  }
-  if (prefetch !== "intent") {
-    return [shouldPrefetch, ref, {}];
-  }
-  return [
-    shouldPrefetch,
-    ref,
-    {
-      onFocus: composeEventHandlers(onFocus, setIntent),
-      onBlur: composeEventHandlers(onBlur, cancelIntent),
-      onMouseEnter: composeEventHandlers(onMouseEnter, setIntent),
-      onMouseLeave: composeEventHandlers(onMouseLeave, cancelIntent),
-      onTouchStart: composeEventHandlers(onTouchStart, setIntent)
-    }
-  ];
-}
-function composeEventHandlers(theirHandler, ourHandler) {
-  return (event) => {
-    theirHandler && theirHandler(event);
-    if (!event.defaultPrevented) {
-      ourHandler(event);
-    }
-  };
-}
-function PrefetchPageLinks({
-  page,
-  ...dataLinkProps
-}) {
-  let { router } = useDataRouterContext2();
-  let matches = reactExports.useMemo(
-    () => matchRoutes(router.routes, page, router.basename),
-    [router.routes, page, router.basename]
-  );
-  if (!matches) {
-    return null;
-  }
-  return /* @__PURE__ */ reactExports.createElement(PrefetchPageLinksImpl, { page, matches, ...dataLinkProps });
-}
-function useKeyedPrefetchLinks(matches) {
-  let { manifest, routeModules } = useFrameworkContext();
-  let [keyedPrefetchLinks, setKeyedPrefetchLinks] = reactExports.useState([]);
-  reactExports.useEffect(() => {
-    let interrupted = false;
-    void getKeyedPrefetchLinks(matches, manifest, routeModules).then(
-      (links) => {
-        if (!interrupted) {
-          setKeyedPrefetchLinks(links);
-        }
-      }
-    );
-    return () => {
-      interrupted = true;
-    };
-  }, [matches, manifest, routeModules]);
-  return keyedPrefetchLinks;
-}
-function PrefetchPageLinksImpl({
-  page,
-  matches: nextMatches,
-  ...linkProps
-}) {
-  let location2 = useLocation();
-  let { manifest, routeModules } = useFrameworkContext();
-  let { loaderData, matches } = useDataRouterStateContext();
-  let newMatchesForData = reactExports.useMemo(
-    () => getNewMatchesForLinks(
-      page,
-      nextMatches,
-      matches,
-      manifest,
-      location2,
-      "data"
-    ),
-    [page, nextMatches, matches, manifest, location2]
-  );
-  let newMatchesForAssets = reactExports.useMemo(
-    () => getNewMatchesForLinks(
-      page,
-      nextMatches,
-      matches,
-      manifest,
-      location2,
-      "assets"
-    ),
-    [page, nextMatches, matches, manifest, location2]
-  );
-  let dataHrefs = reactExports.useMemo(() => {
-    if (page === location2.pathname + location2.search + location2.hash) {
-      return [];
-    }
-    let routesParams = /* @__PURE__ */ new Set();
-    let foundOptOutRoute = false;
-    nextMatches.forEach((m) => {
-      var _a2;
-      let manifestRoute = manifest.routes[m.route.id];
-      if (!manifestRoute || !manifestRoute.hasLoader) {
-        return;
-      }
-      if (!newMatchesForData.some((m2) => m2.route.id === m.route.id) && m.route.id in loaderData && ((_a2 = routeModules[m.route.id]) == null ? void 0 : _a2.shouldRevalidate)) {
-        foundOptOutRoute = true;
-      } else if (manifestRoute.hasClientLoader) {
-        foundOptOutRoute = true;
-      } else {
-        routesParams.add(m.route.id);
-      }
-    });
-    if (routesParams.size === 0) {
-      return [];
-    }
-    let url = singleFetchUrl(page);
-    if (foundOptOutRoute && routesParams.size > 0) {
-      url.searchParams.set(
-        "_routes",
-        nextMatches.filter((m) => routesParams.has(m.route.id)).map((m) => m.route.id).join(",")
-      );
-    }
-    return [url.pathname + url.search];
-  }, [
-    loaderData,
-    location2,
-    manifest,
-    newMatchesForData,
-    nextMatches,
-    page,
-    routeModules
-  ]);
-  let moduleHrefs = reactExports.useMemo(
-    () => getModuleLinkHrefs(newMatchesForAssets, manifest),
-    [newMatchesForAssets, manifest]
-  );
-  let keyedPrefetchLinks = useKeyedPrefetchLinks(newMatchesForAssets);
-  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, dataHrefs.map((href2) => /* @__PURE__ */ reactExports.createElement("link", { key: href2, rel: "prefetch", as: "fetch", href: href2, ...linkProps })), moduleHrefs.map((href2) => /* @__PURE__ */ reactExports.createElement("link", { key: href2, rel: "modulepreload", href: href2, ...linkProps })), keyedPrefetchLinks.map(({ key, link }) => (
-    // these don't spread `linkProps` because they are full link descriptors
-    // already with their own props
-    /* @__PURE__ */ reactExports.createElement("link", { key, ...link })
-  )));
-}
-function mergeRefs(...refs) {
-  return (value) => {
-    refs.forEach((ref) => {
-      if (typeof ref === "function") {
-        ref(value);
-      } else if (ref != null) {
-        ref.current = value;
-      }
-    });
-  };
-}
-var isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
-try {
-  if (isBrowser) {
-    window.__reactRouterVersion = "7.2.0";
-  }
-} catch (e) {
-}
-function BrowserRouter({
-  basename,
-  children,
-  window: window2
-}) {
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+function BrowserRouter(_ref) {
+  let {
+    basename,
+    children,
+    window: window2
+  } = _ref;
   let historyRef = reactExports.useRef();
   if (historyRef.current == null) {
-    historyRef.current = createBrowserHistory({ window: window2, v5Compat: true });
+    historyRef.current = createBrowserHistory({
+      window: window2
+    });
   }
   let history = historyRef.current;
-  let [state, setStateImpl] = reactExports.useState({
+  let [state, setState] = reactExports.useState({
     action: history.action,
     location: history.location
   });
-  let setState = reactExports.useCallback(
-    (newState) => {
-      reactExports.startTransition(() => setStateImpl(newState));
-    },
-    [setStateImpl]
-  );
-  reactExports.useLayoutEffect(() => history.listen(setState), [history, setState]);
-  return /* @__PURE__ */ reactExports.createElement(
-    Router,
-    {
-      basename,
-      children,
-      location: state.location,
-      navigationType: state.action,
-      navigator: history
-    }
-  );
-}
-var ABSOLUTE_URL_REGEX2 = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
-var Link = reactExports.forwardRef(
-  function LinkWithRef({
-    onClick,
-    discover = "render",
-    prefetch = "none",
-    relative,
-    reloadDocument,
-    replace: replace2,
-    state,
-    target,
-    to,
-    preventScrollReset,
-    viewTransition,
-    ...rest
-  }, forwardedRef) {
-    let { basename } = reactExports.useContext(NavigationContext);
-    let isAbsolute = typeof to === "string" && ABSOLUTE_URL_REGEX2.test(to);
-    let absoluteHref;
-    let isExternal = false;
-    if (typeof to === "string" && isAbsolute) {
-      absoluteHref = to;
-      if (isBrowser) {
-        try {
-          let currentUrl = new URL(window.location.href);
-          let targetUrl = to.startsWith("//") ? new URL(currentUrl.protocol + to) : new URL(to);
-          let path = stripBasename(targetUrl.pathname, basename);
-          if (targetUrl.origin === currentUrl.origin && path != null) {
-            to = path + targetUrl.search + targetUrl.hash;
-          } else {
-            isExternal = true;
-          }
-        } catch (e) {
-          warning(
-            false,
-            `<Link to="${to}"> contains an invalid URL which will probably break when clicked - please update to a valid URL path.`
-          );
-        }
-      }
-    }
-    let href2 = useHref(to, { relative });
-    let [shouldPrefetch, prefetchRef, prefetchHandlers] = usePrefetchBehavior(
-      prefetch,
-      rest
-    );
-    let internalOnClick = useLinkClickHandler(to, {
-      replace: replace2,
-      state,
-      target,
-      preventScrollReset,
-      relative,
-      viewTransition
-    });
-    function handleClick(event) {
-      if (onClick) onClick(event);
-      if (!event.defaultPrevented) {
-        internalOnClick(event);
-      }
-    }
-    let link = (
-      // eslint-disable-next-line jsx-a11y/anchor-has-content
-      /* @__PURE__ */ reactExports.createElement(
-        "a",
-        {
-          ...rest,
-          ...prefetchHandlers,
-          href: absoluteHref || href2,
-          onClick: isExternal || reloadDocument ? onClick : handleClick,
-          ref: mergeRefs(forwardedRef, prefetchRef),
-          target,
-          "data-discover": !isAbsolute && discover === "render" ? "true" : void 0
-        }
-      )
-    );
-    return shouldPrefetch && !isAbsolute ? /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, link, /* @__PURE__ */ reactExports.createElement(PrefetchPageLinks, { page: href2 })) : link;
-  }
-);
-Link.displayName = "Link";
-var NavLink = reactExports.forwardRef(
-  function NavLinkWithRef({
-    "aria-current": ariaCurrentProp = "page",
-    caseSensitive = false,
-    className: classNameProp = "",
-    end: end2 = false,
-    style: styleProp,
-    to,
-    viewTransition,
+  reactExports.useLayoutEffect(() => history.listen(setState), [history]);
+  return /* @__PURE__ */ reactExports.createElement(Router, {
+    basename,
     children,
-    ...rest
-  }, ref) {
-    let path = useResolvedPath(to, { relative: rest.relative });
-    let location2 = useLocation();
-    let routerState = reactExports.useContext(DataRouterStateContext);
-    let { navigator: navigator2, basename } = reactExports.useContext(NavigationContext);
-    let isTransitioning = routerState != null && // Conditional usage is OK here because the usage of a data router is static
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useViewTransitionState(path) && viewTransition === true;
-    let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
-    let locationPathname = location2.pathname;
-    let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
-    if (!caseSensitive) {
-      locationPathname = locationPathname.toLowerCase();
-      nextLocationPathname = nextLocationPathname ? nextLocationPathname.toLowerCase() : null;
-      toPathname = toPathname.toLowerCase();
-    }
-    if (nextLocationPathname && basename) {
-      nextLocationPathname = stripBasename(nextLocationPathname, basename) || nextLocationPathname;
-    }
-    const endSlashPosition = toPathname !== "/" && toPathname.endsWith("/") ? toPathname.length - 1 : toPathname.length;
-    let isActive = locationPathname === toPathname || !end2 && locationPathname.startsWith(toPathname) && locationPathname.charAt(endSlashPosition) === "/";
-    let isPending = nextLocationPathname != null && (nextLocationPathname === toPathname || !end2 && nextLocationPathname.startsWith(toPathname) && nextLocationPathname.charAt(toPathname.length) === "/");
-    let renderProps = {
-      isActive,
-      isPending,
-      isTransitioning
-    };
-    let ariaCurrent = isActive ? ariaCurrentProp : void 0;
-    let className;
-    if (typeof classNameProp === "function") {
-      className = classNameProp(renderProps);
-    } else {
-      className = [
-        classNameProp,
-        isActive ? "active" : null,
-        isPending ? "pending" : null,
-        isTransitioning ? "transitioning" : null
-      ].filter(Boolean).join(" ");
-    }
-    let style = typeof styleProp === "function" ? styleProp(renderProps) : styleProp;
-    return /* @__PURE__ */ reactExports.createElement(
-      Link,
-      {
-        ...rest,
-        "aria-current": ariaCurrent,
-        className,
-        ref,
-        style,
-        to,
-        viewTransition
-      },
-      typeof children === "function" ? children(renderProps) : children
+    location: state.location,
+    navigationType: state.action,
+    navigator: history
+  });
+}
+const scriptRel = "modulepreload";
+const assetsURL = function(dep) {
+  return "/" + dep;
+};
+const seen = {};
+const __vitePreload = function preload(baseModule, deps, importerUrl) {
+  let promise = Promise.resolve();
+  if (deps && deps.length > 0) {
+    document.getElementsByTagName("link");
+    const cspNonceMeta = document.querySelector(
+      "meta[property=csp-nonce]"
+    );
+    const cspNonce = (cspNonceMeta == null ? void 0 : cspNonceMeta.nonce) || (cspNonceMeta == null ? void 0 : cspNonceMeta.getAttribute("nonce"));
+    promise = Promise.allSettled(
+      deps.map((dep) => {
+        dep = assetsURL(dep);
+        if (dep in seen) return;
+        seen[dep] = true;
+        const isCss = dep.endsWith(".css");
+        const cssSelector = isCss ? '[rel="stylesheet"]' : "";
+        if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) {
+          return;
+        }
+        const link = document.createElement("link");
+        link.rel = isCss ? "stylesheet" : scriptRel;
+        if (!isCss) {
+          link.as = "script";
+        }
+        link.crossOrigin = "";
+        link.href = dep;
+        if (cspNonce) {
+          link.setAttribute("nonce", cspNonce);
+        }
+        document.head.appendChild(link);
+        if (isCss) {
+          return new Promise((res, rej) => {
+            link.addEventListener("load", res);
+            link.addEventListener(
+              "error",
+              () => rej(new Error(`Unable to preload CSS for ${dep}`))
+            );
+          });
+        }
+      })
     );
   }
-);
-NavLink.displayName = "NavLink";
-var Form = reactExports.forwardRef(
-  ({
-    discover = "render",
-    fetcherKey,
-    navigate,
-    reloadDocument,
-    replace: replace2,
-    state,
-    method = defaultMethod,
-    action,
-    onSubmit,
-    relative,
-    preventScrollReset,
-    viewTransition,
-    ...props
-  }, forwardedRef) => {
-    let submit = useSubmit();
-    let formAction = useFormAction(action, { relative });
-    let formMethod = method.toLowerCase() === "get" ? "get" : "post";
-    let isAbsolute = typeof action === "string" && ABSOLUTE_URL_REGEX2.test(action);
-    let submitHandler = (event) => {
-      onSubmit && onSubmit(event);
-      if (event.defaultPrevented) return;
-      event.preventDefault();
-      let submitter = event.nativeEvent.submitter;
-      let submitMethod = (submitter == null ? void 0 : submitter.getAttribute("formmethod")) || method;
-      submit(submitter || event.currentTarget, {
-        fetcherKey,
-        method: submitMethod,
-        navigate,
-        replace: replace2,
-        state,
-        relative,
-        preventScrollReset,
-        viewTransition
-      });
-    };
-    return /* @__PURE__ */ reactExports.createElement(
-      "form",
-      {
-        ref: forwardedRef,
-        method: formMethod,
-        action: formAction,
-        onSubmit: reloadDocument ? onSubmit : submitHandler,
-        ...props,
-        "data-discover": !isAbsolute && discover === "render" ? "true" : void 0
-      }
-    );
+  function handlePreloadError(err) {
+    const e = new Event("vite:preloadError", {
+      cancelable: true
+    });
+    e.payload = err;
+    window.dispatchEvent(e);
+    if (!e.defaultPrevented) {
+      throw err;
+    }
   }
-);
-Form.displayName = "Form";
-function getDataRouterConsoleError2(hookName) {
-  return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
+  return promise.then((res) => {
+    for (const item of res || []) {
+      if (item.status !== "rejected") continue;
+      handlePreloadError(item.reason);
+    }
+    return baseModule().catch(handlePreloadError);
+  });
+};
+const Route0 = React3.lazy(() => __vitePreload(() => import("./HTTP-BCvRid_a.js"), true ? [] : void 0));
+const Route1 = React3.lazy(() => __vitePreload(() => import("./MySQL--YGcirH1.js"), true ? [] : void 0));
+const Route2 = React3.lazy(() => __vitePreload(() => import("./node.js-B9ySjG4-.js"), true ? [] : void 0));
+const Route3 = React3.lazy(() => __vitePreload(() => import("./vue3笔记（四）-CEx_di8F.js"), true ? [] : void 0));
+const Route4 = React3.lazy(() => __vitePreload(() => import("./vue笔记（一）-Bt_GWtXS.js"), true ? [] : void 0));
+const Route5 = React3.lazy(() => __vitePreload(() => import("./vue笔记（三）-IdOuMqOW.js"), true ? [] : void 0));
+const Route6 = React3.lazy(() => __vitePreload(() => import("./vue笔记（二）-C9lpDLTn.js"), true ? [] : void 0));
+const Route7 = React3.lazy(() => __vitePreload(() => import("./搭建云服务器-DeNsNDar.js"), true ? [] : void 0));
+const Route8 = React3.lazy(() => __vitePreload(() => import("./数组sort()详解-igVIx_uv.js"), true ? [] : void 0));
+const routes = [
+  { path: "/post/HTTP", element: React3.createElement(Route0), preload: () => __vitePreload(() => import("./HTTP-BCvRid_a.js"), true ? [] : void 0) },
+  { path: "/post/MySQL", element: React3.createElement(Route1), preload: () => __vitePreload(() => import("./MySQL--YGcirH1.js"), true ? [] : void 0) },
+  { path: "/post/node", element: React3.createElement(Route2), preload: () => __vitePreload(() => import("./node.js-B9ySjG4-.js"), true ? [] : void 0) },
+  { path: "/post/vue3%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89", element: React3.createElement(Route3), preload: () => __vitePreload(() => import("./vue3笔记（四）-CEx_di8F.js"), true ? [] : void 0) },
+  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89", element: React3.createElement(Route4), preload: () => __vitePreload(() => import("./vue笔记（一）-Bt_GWtXS.js"), true ? [] : void 0) },
+  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89", element: React3.createElement(Route5), preload: () => __vitePreload(() => import("./vue笔记（三）-IdOuMqOW.js"), true ? [] : void 0) },
+  { path: "/post/vue%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89", element: React3.createElement(Route6), preload: () => __vitePreload(() => import("./vue笔记（二）-C9lpDLTn.js"), true ? [] : void 0) },
+  { path: "/post/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8", element: React3.createElement(Route7), preload: () => __vitePreload(() => import("./搭建云服务器-DeNsNDar.js"), true ? [] : void 0) },
+  { path: "/post/%E6%95%B0%E7%BB%84sort()%E8%AF%A6%E8%A7%A3", element: React3.createElement(Route8), preload: () => __vitePreload(() => import("./数组sort()详解-igVIx_uv.js"), true ? [] : void 0) }
+];
+const siteData = { "title": "XXX17的个人博客", "description": "学无止境", "theme": "particle", "themeConfig": { "navMenus": [{ "title": "首页", "path": "/", "icon": "home" }, { "title": "标签", "path": "/tag", "icon": "tag" }, { "title": "分类", "path": "/category", "icon": "folder-open" }, { "title": "关于", "path": "/about", "icon": "heart" }], "banner": { "img": "/background.jpg", "title": "Argvchs の小窝", "subTitle": "Here's an argvchs..." } }, "vite": {}, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "post", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png" };
+function formatDateToYYYYMMDD(dateStr) {
+  const date2 = new Date(dateStr);
+  const year = date2.getFullYear();
+  const month = date2.getMonth() + 1;
+  const day = date2.getDate();
+  const formattedMonth = String(month).padStart(2, "0");
+  const formattedDay = String(day).padStart(2, "0");
+  return `${year}-${formattedMonth}-${formattedDay}`;
 }
-function useDataRouterContext3(hookName) {
-  let ctx = reactExports.useContext(DataRouterContext);
-  invariant$2(ctx, getDataRouterConsoleError2(hookName));
-  return ctx;
+function sortByDate(arr) {
+  return arr.sort((a, b) => {
+    const dateA = new Date(a.date.replace(/-/g, "/"));
+    const dateB = new Date(b.date.replace(/-/g, "/"));
+    return Number(dateB) - Number(dateA);
+  });
 }
-function useLinkClickHandler(to, {
-  target,
-  replace: replaceProp,
-  state,
-  preventScrollReset,
-  relative,
-  viewTransition
-} = {}) {
-  let navigate = useNavigate();
-  let location2 = useLocation();
-  let path = useResolvedPath(to, { relative });
-  return reactExports.useCallback(
-    (event) => {
-      if (shouldProcessLinkClick(event, target)) {
-        event.preventDefault();
-        let replace2 = replaceProp !== void 0 ? replaceProp : createPath(location2) === createPath(path);
-        navigate(to, {
-          replace: replace2,
-          state,
-          preventScrollReset,
-          relative,
-          viewTransition
-        });
-      }
-    },
-    [
-      location2,
-      navigate,
-      path,
-      replaceProp,
-      state,
-      target,
-      to,
-      preventScrollReset,
-      relative,
-      viewTransition
-    ]
-  );
-}
-var fetcherId = 0;
-var getUniqueFetcherId = () => `__${String(++fetcherId)}__`;
-function useSubmit() {
-  let { router } = useDataRouterContext3(
-    "useSubmit"
-    /* UseSubmit */
-  );
-  let { basename } = reactExports.useContext(NavigationContext);
-  let currentRouteId = useRouteId();
-  return reactExports.useCallback(
-    async (target, options = {}) => {
-      let { action, method, encType, formData, body } = getFormSubmissionInfo(
-        target,
-        basename
-      );
-      if (options.navigate === false) {
-        let key = options.fetcherKey || getUniqueFetcherId();
-        await router.fetch(key, currentRouteId, options.action || action, {
-          preventScrollReset: options.preventScrollReset,
-          formData,
-          body,
-          formMethod: options.method || method,
-          formEncType: options.encType || encType,
-          flushSync: options.flushSync
-        });
+async function handleRoutes(routes2) {
+  const articlesList = [];
+  const tags2 = {};
+  const categories = {};
+  for await (const route of routes2) {
+    const moduleInfo = await route.preload();
+    articlesList.push({
+      ...moduleInfo.frontmatter,
+      date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
+      path: route.path,
+      info: moduleInfo.mdInfo
+    });
+    moduleInfo.frontmatter.tags.forEach((tag) => {
+      if (tags2[tag]) {
+        tags2[tag].push(route.path);
       } else {
-        await router.navigate(options.action || action, {
-          preventScrollReset: options.preventScrollReset,
-          formData,
-          body,
-          formMethod: options.method || method,
-          formEncType: options.encType || encType,
-          replace: options.replace,
-          state: options.state,
-          fromRouteId: currentRouteId,
-          flushSync: options.flushSync,
-          viewTransition: options.viewTransition
-        });
+        tags2[tag] = [route.path];
       }
-    },
-    [router, basename, currentRouteId]
-  );
-}
-function useFormAction(action, { relative } = {}) {
-  let { basename } = reactExports.useContext(NavigationContext);
-  let routeContext = reactExports.useContext(RouteContext);
-  invariant$2(routeContext, "useFormAction must be used inside a RouteContext");
-  let [match] = routeContext.matches.slice(-1);
-  let path = { ...useResolvedPath(action ? action : ".", { relative }) };
-  let location2 = useLocation();
-  if (action == null) {
-    path.search = location2.search;
-    let params = new URLSearchParams(path.search);
-    let indexValues = params.getAll("index");
-    let hasNakedIndexParam = indexValues.some((v) => v === "");
-    if (hasNakedIndexParam) {
-      params.delete("index");
-      indexValues.filter((v) => v).forEach((v) => params.append("index", v));
-      let qs = params.toString();
-      path.search = qs ? `?${qs}` : "";
+    });
+    const category2 = moduleInfo.frontmatter.categories;
+    if (category2) {
+      if (categories[category2]) {
+        categories[category2].push(route.path);
+      } else {
+        categories[category2] = [route.path];
+      }
     }
   }
-  if ((!action || action === ".") && match.route.index) {
-    path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
-  }
-  if (basename !== "/") {
-    path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
-  }
-  return createPath(path);
+  return {
+    articlesList,
+    tags: tags2,
+    categories
+  };
 }
-function useViewTransitionState(to, opts = {}) {
-  let vtContext = reactExports.useContext(ViewTransitionContext);
-  invariant$2(
-    vtContext != null,
-    "`useViewTransitionState` must be used within `react-router-dom`'s `RouterProvider`.  Did you accidentally import `RouterProvider` from `react-router`?"
-  );
-  let { basename } = useDataRouterContext3(
-    "useViewTransitionState"
-    /* useViewTransitionState */
-  );
-  let path = useResolvedPath(to, { relative: opts.relative });
-  if (!vtContext.isTransitioning) {
-    return false;
-  }
-  let currentPath = stripBasename(vtContext.currentLocation.pathname, basename) || vtContext.currentLocation.pathname;
-  let nextPath = stripBasename(vtContext.nextLocation.pathname, basename) || vtContext.nextLocation.pathname;
-  return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
-}
-new TextEncoder();
+const DataContext = reactExports.createContext({});
+const usePageData = () => {
+  return reactExports.useContext(DataContext);
+};
+const layout = "_layout_1obw2_1";
+const styles$9 = {
+  layout
+};
 var classnames = { exports: {} };
 /*!
 	Copyright (c) 2018 Jed Watson.
@@ -9206,16 +7819,15 @@ function requireClassnames() {
 }
 var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
-const nav = "_nav_14t1j_1";
-const menus = "_menus_14t1j_27";
-const hide = "_hide_14t1j_53";
-const top = "_top_14t1j_57";
-const styles$d = {
+const nav = "_nav_ixtzq_1";
+const menus = "_menus_ixtzq_27";
+const hide = "_hide_ixtzq_47";
+const styles$8 = {
   nav,
-  "blog-name": "_blog-name_14t1j_15",
+  "blog-name": "_blog-name_ixtzq_12",
   menus,
-  hide,
-  top
+  "nav-blue": "_nav-blue_ixtzq_40",
+  hide
 };
 function debounce(func, delay) {
   let timer = null;
@@ -9286,70 +7898,6 @@ function UseScroll() {
   };
 }
 const scrollManager = UseScroll();
-const scriptRel = "modulepreload";
-const assetsURL = function(dep) {
-  return "/" + dep;
-};
-const seen = {};
-const __vitePreload = function preload(baseModule, deps, importerUrl) {
-  let promise = Promise.resolve();
-  if (deps && deps.length > 0) {
-    document.getElementsByTagName("link");
-    const cspNonceMeta = document.querySelector(
-      "meta[property=csp-nonce]"
-    );
-    const cspNonce = (cspNonceMeta == null ? void 0 : cspNonceMeta.nonce) || (cspNonceMeta == null ? void 0 : cspNonceMeta.getAttribute("nonce"));
-    promise = Promise.allSettled(
-      deps.map((dep) => {
-        dep = assetsURL(dep);
-        if (dep in seen) return;
-        seen[dep] = true;
-        const isCss = dep.endsWith(".css");
-        const cssSelector = isCss ? '[rel="stylesheet"]' : "";
-        if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) {
-          return;
-        }
-        const link = document.createElement("link");
-        link.rel = isCss ? "stylesheet" : scriptRel;
-        if (!isCss) {
-          link.as = "script";
-        }
-        link.crossOrigin = "";
-        link.href = dep;
-        if (cspNonce) {
-          link.setAttribute("nonce", cspNonce);
-        }
-        document.head.appendChild(link);
-        if (isCss) {
-          return new Promise((res, rej) => {
-            link.addEventListener("load", res);
-            link.addEventListener(
-              "error",
-              () => rej(new Error(`Unable to preload CSS for ${dep}`))
-            );
-          });
-        }
-      })
-    );
-  }
-  function handlePreloadError(err) {
-    const e = new Event("vite:preloadError", {
-      cancelable: true
-    });
-    e.payload = err;
-    window.dispatchEvent(e);
-    if (!e.defaultPrevented) {
-      throw err;
-    }
-  }
-  return promise.then((res) => {
-    for (const item2 of res || []) {
-      if (item2.status !== "rejected") continue;
-      handlePreloadError(item2.reason);
-    }
-    return baseModule().catch(handlePreloadError);
-  });
-};
 /*!
  * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -9952,7 +8500,7 @@ function transformForCss(_ref2) {
   return val;
 }
 var baseStyles = ':root, :host {\n  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";\n  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";\n  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";\n  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";\n  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 6 Duotone";\n  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";\n  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";\n  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 6 Sharp Duotone";\n  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 6 Sharp Duotone";\n}\n\nsvg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {\n  overflow: visible;\n  box-sizing: content-box;\n}\n\n.svg-inline--fa {\n  display: var(--fa-display, inline-block);\n  height: 1em;\n  overflow: visible;\n  vertical-align: -0.125em;\n}\n.svg-inline--fa.fa-2xs {\n  vertical-align: 0.1em;\n}\n.svg-inline--fa.fa-xs {\n  vertical-align: 0em;\n}\n.svg-inline--fa.fa-sm {\n  vertical-align: -0.0714285705em;\n}\n.svg-inline--fa.fa-lg {\n  vertical-align: -0.2em;\n}\n.svg-inline--fa.fa-xl {\n  vertical-align: -0.25em;\n}\n.svg-inline--fa.fa-2xl {\n  vertical-align: -0.3125em;\n}\n.svg-inline--fa.fa-pull-left {\n  margin-right: var(--fa-pull-margin, 0.3em);\n  width: auto;\n}\n.svg-inline--fa.fa-pull-right {\n  margin-left: var(--fa-pull-margin, 0.3em);\n  width: auto;\n}\n.svg-inline--fa.fa-li {\n  width: var(--fa-li-width, 2em);\n  top: 0.25em;\n}\n.svg-inline--fa.fa-fw {\n  width: var(--fa-fw-width, 1.25em);\n}\n\n.fa-layers svg.svg-inline--fa {\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.fa-layers-counter, .fa-layers-text {\n  display: inline-block;\n  position: absolute;\n  text-align: center;\n}\n\n.fa-layers {\n  display: inline-block;\n  height: 1em;\n  position: relative;\n  text-align: center;\n  vertical-align: -0.125em;\n  width: 1em;\n}\n.fa-layers svg.svg-inline--fa {\n  transform-origin: center center;\n}\n\n.fa-layers-text {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  transform-origin: center center;\n}\n\n.fa-layers-counter {\n  background-color: var(--fa-counter-background-color, #ff253a);\n  border-radius: var(--fa-counter-border-radius, 1em);\n  box-sizing: border-box;\n  color: var(--fa-inverse, #fff);\n  line-height: var(--fa-counter-line-height, 1);\n  max-width: var(--fa-counter-max-width, 5em);\n  min-width: var(--fa-counter-min-width, 1.5em);\n  overflow: hidden;\n  padding: var(--fa-counter-padding, 0.25em 0.5em);\n  right: var(--fa-right, 0);\n  text-overflow: ellipsis;\n  top: var(--fa-top, 0);\n  transform: scale(var(--fa-counter-scale, 0.25));\n  transform-origin: top right;\n}\n\n.fa-layers-bottom-right {\n  bottom: var(--fa-bottom, 0);\n  right: var(--fa-right, 0);\n  top: auto;\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: bottom right;\n}\n\n.fa-layers-bottom-left {\n  bottom: var(--fa-bottom, 0);\n  left: var(--fa-left, 0);\n  right: auto;\n  top: auto;\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: bottom left;\n}\n\n.fa-layers-top-right {\n  top: var(--fa-top, 0);\n  right: var(--fa-right, 0);\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: top right;\n}\n\n.fa-layers-top-left {\n  left: var(--fa-left, 0);\n  right: auto;\n  top: var(--fa-top, 0);\n  transform: scale(var(--fa-layers-scale, 0.25));\n  transform-origin: top left;\n}\n\n.fa-1x {\n  font-size: 1em;\n}\n\n.fa-2x {\n  font-size: 2em;\n}\n\n.fa-3x {\n  font-size: 3em;\n}\n\n.fa-4x {\n  font-size: 4em;\n}\n\n.fa-5x {\n  font-size: 5em;\n}\n\n.fa-6x {\n  font-size: 6em;\n}\n\n.fa-7x {\n  font-size: 7em;\n}\n\n.fa-8x {\n  font-size: 8em;\n}\n\n.fa-9x {\n  font-size: 9em;\n}\n\n.fa-10x {\n  font-size: 10em;\n}\n\n.fa-2xs {\n  font-size: 0.625em;\n  line-height: 0.1em;\n  vertical-align: 0.225em;\n}\n\n.fa-xs {\n  font-size: 0.75em;\n  line-height: 0.0833333337em;\n  vertical-align: 0.125em;\n}\n\n.fa-sm {\n  font-size: 0.875em;\n  line-height: 0.0714285718em;\n  vertical-align: 0.0535714295em;\n}\n\n.fa-lg {\n  font-size: 1.25em;\n  line-height: 0.05em;\n  vertical-align: -0.075em;\n}\n\n.fa-xl {\n  font-size: 1.5em;\n  line-height: 0.0416666682em;\n  vertical-align: -0.125em;\n}\n\n.fa-2xl {\n  font-size: 2em;\n  line-height: 0.03125em;\n  vertical-align: -0.1875em;\n}\n\n.fa-fw {\n  text-align: center;\n  width: 1.25em;\n}\n\n.fa-ul {\n  list-style-type: none;\n  margin-left: var(--fa-li-margin, 2.5em);\n  padding-left: 0;\n}\n.fa-ul > li {\n  position: relative;\n}\n\n.fa-li {\n  left: calc(-1 * var(--fa-li-width, 2em));\n  position: absolute;\n  text-align: center;\n  width: var(--fa-li-width, 2em);\n  line-height: inherit;\n}\n\n.fa-border {\n  border-color: var(--fa-border-color, #eee);\n  border-radius: var(--fa-border-radius, 0.1em);\n  border-style: var(--fa-border-style, solid);\n  border-width: var(--fa-border-width, 0.08em);\n  padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);\n}\n\n.fa-pull-left {\n  float: left;\n  margin-right: var(--fa-pull-margin, 0.3em);\n}\n\n.fa-pull-right {\n  float: right;\n  margin-left: var(--fa-pull-margin, 0.3em);\n}\n\n.fa-beat {\n  animation-name: fa-beat;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, ease-in-out);\n}\n\n.fa-bounce {\n  animation-name: fa-bounce;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));\n}\n\n.fa-fade {\n  animation-name: fa-fade;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));\n}\n\n.fa-beat-fade {\n  animation-name: fa-beat-fade;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));\n}\n\n.fa-flip {\n  animation-name: fa-flip;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, ease-in-out);\n}\n\n.fa-shake {\n  animation-name: fa-shake;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, linear);\n}\n\n.fa-spin {\n  animation-name: fa-spin;\n  animation-delay: var(--fa-animation-delay, 0s);\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 2s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, linear);\n}\n\n.fa-spin-reverse {\n  --fa-animation-direction: reverse;\n}\n\n.fa-pulse,\n.fa-spin-pulse {\n  animation-name: fa-spin;\n  animation-direction: var(--fa-animation-direction, normal);\n  animation-duration: var(--fa-animation-duration, 1s);\n  animation-iteration-count: var(--fa-animation-iteration-count, infinite);\n  animation-timing-function: var(--fa-animation-timing, steps(8));\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .fa-beat,\n.fa-bounce,\n.fa-fade,\n.fa-beat-fade,\n.fa-flip,\n.fa-pulse,\n.fa-shake,\n.fa-spin,\n.fa-spin-pulse {\n    animation-delay: -1ms;\n    animation-duration: 1ms;\n    animation-iteration-count: 1;\n    transition-delay: 0s;\n    transition-duration: 0s;\n  }\n}\n@keyframes fa-beat {\n  0%, 90% {\n    transform: scale(1);\n  }\n  45% {\n    transform: scale(var(--fa-beat-scale, 1.25));\n  }\n}\n@keyframes fa-bounce {\n  0% {\n    transform: scale(1, 1) translateY(0);\n  }\n  10% {\n    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);\n  }\n  30% {\n    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));\n  }\n  50% {\n    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);\n  }\n  57% {\n    transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));\n  }\n  64% {\n    transform: scale(1, 1) translateY(0);\n  }\n  100% {\n    transform: scale(1, 1) translateY(0);\n  }\n}\n@keyframes fa-fade {\n  50% {\n    opacity: var(--fa-fade-opacity, 0.4);\n  }\n}\n@keyframes fa-beat-fade {\n  0%, 100% {\n    opacity: var(--fa-beat-fade-opacity, 0.4);\n    transform: scale(1);\n  }\n  50% {\n    opacity: 1;\n    transform: scale(var(--fa-beat-fade-scale, 1.125));\n  }\n}\n@keyframes fa-flip {\n  50% {\n    transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));\n  }\n}\n@keyframes fa-shake {\n  0% {\n    transform: rotate(-15deg);\n  }\n  4% {\n    transform: rotate(15deg);\n  }\n  8%, 24% {\n    transform: rotate(-18deg);\n  }\n  12%, 28% {\n    transform: rotate(18deg);\n  }\n  16% {\n    transform: rotate(-22deg);\n  }\n  20% {\n    transform: rotate(22deg);\n  }\n  32% {\n    transform: rotate(-12deg);\n  }\n  36% {\n    transform: rotate(12deg);\n  }\n  40%, 100% {\n    transform: rotate(0deg);\n  }\n}\n@keyframes fa-spin {\n  0% {\n    transform: rotate(0deg);\n  }\n  100% {\n    transform: rotate(360deg);\n  }\n}\n.fa-rotate-90 {\n  transform: rotate(90deg);\n}\n\n.fa-rotate-180 {\n  transform: rotate(180deg);\n}\n\n.fa-rotate-270 {\n  transform: rotate(270deg);\n}\n\n.fa-flip-horizontal {\n  transform: scale(-1, 1);\n}\n\n.fa-flip-vertical {\n  transform: scale(1, -1);\n}\n\n.fa-flip-both,\n.fa-flip-horizontal.fa-flip-vertical {\n  transform: scale(-1, -1);\n}\n\n.fa-rotate-by {\n  transform: rotate(var(--fa-rotate-angle, 0));\n}\n\n.fa-stack {\n  display: inline-block;\n  vertical-align: middle;\n  height: 2em;\n  position: relative;\n  width: 2.5em;\n}\n\n.fa-stack-1x,\n.fa-stack-2x {\n  bottom: 0;\n  left: 0;\n  margin: auto;\n  position: absolute;\n  right: 0;\n  top: 0;\n  z-index: var(--fa-stack-z-index, auto);\n}\n\n.svg-inline--fa.fa-stack-1x {\n  height: 1em;\n  width: 1.25em;\n}\n.svg-inline--fa.fa-stack-2x {\n  height: 2em;\n  width: 2.5em;\n}\n\n.fa-inverse {\n  color: var(--fa-inverse, #fff);\n}\n\n.sr-only,\n.fa-sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.sr-only-focusable:not(:focus),\n.fa-sr-only-focusable:not(:focus) {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border-width: 0;\n}\n\n.svg-inline--fa .fa-primary {\n  fill: var(--fa-primary-color, currentColor);\n  opacity: var(--fa-primary-opacity, 1);\n}\n\n.svg-inline--fa .fa-secondary {\n  fill: var(--fa-secondary-color, currentColor);\n  opacity: var(--fa-secondary-opacity, 0.4);\n}\n\n.svg-inline--fa.fa-swap-opacity .fa-primary {\n  opacity: var(--fa-secondary-opacity, 0.4);\n}\n\n.svg-inline--fa.fa-swap-opacity .fa-secondary {\n  opacity: var(--fa-primary-opacity, 1);\n}\n\n.svg-inline--fa mask .fa-primary,\n.svg-inline--fa mask .fa-secondary {\n  fill: black;\n}';
-function css$1() {
+function css() {
   const dcp = DEFAULT_CSS_PREFIX;
   const drc = DEFAULT_REPLACEMENT_CLASS;
   const fp = config.cssPrefix;
@@ -9969,7 +8517,7 @@ function css$1() {
 let _cssInserted = false;
 function ensureCss() {
   if (config.autoAddCss && !_cssInserted) {
-    insertCss(css$1());
+    insertCss(css());
     _cssInserted = true;
   }
 }
@@ -9977,7 +8525,7 @@ var InjectCSS = {
   mixout() {
     return {
       dom: {
-        css: css$1,
+        css,
         insertCss: ensureCss
       }
     };
@@ -10016,14 +8564,14 @@ function domready(fn) {
 }
 function toHtml(abstractNodes) {
   const {
-    tag: tag2,
+    tag,
     attributes = {},
     children = []
   } = abstractNodes;
   if (typeof abstractNodes === "string") {
     return htmlEscape(abstractNodes);
   } else {
-    return "<".concat(tag2, " ").concat(joinAttributes(attributes), ">").concat(children.map(toHtml).join(""), "</").concat(tag2, ">");
+    return "<".concat(tag, " ").concat(joinAttributes(attributes), ">").concat(children.map(toHtml).join(""), "</").concat(tag, ">");
   }
 }
 function iconFromMapping(mapping, prefix, iconName) {
@@ -10114,7 +8662,7 @@ function defineIcons(prefix, icons) {
   }
 }
 const {
-  styles: styles$c,
+  styles: styles$7,
   shims
 } = namespace;
 const FAMILY_NAMES = Object.keys(PREFIX_TO_LONG_STYLE);
@@ -10128,8 +8676,8 @@ let _byLigature = {};
 let _byOldName = {};
 let _byOldUnicode = {};
 let _byAlias = {};
-function isReserved(name) {
-  return ~RESERVED_CLASSES.indexOf(name);
+function isReserved(name2) {
+  return ~RESERVED_CLASSES.indexOf(name2);
 }
 function getIconName(cssPrefix, cls) {
   const parts = cls.split("-");
@@ -10143,7 +8691,7 @@ function getIconName(cssPrefix, cls) {
 }
 const build = () => {
   const lookup = (reducer) => {
-    return reduce(styles$c, (o$$1, style, prefix) => {
+    return reduce(styles$7, (o$$1, style, prefix) => {
       o$$1[prefix] = reduce(style, reducer, {});
       return o$$1;
     }, {});
@@ -10182,7 +8730,7 @@ const build = () => {
     });
     return acc;
   });
-  const hasRegular = "far" in styles$c || config.autoFetchSvg;
+  const hasRegular = "far" in styles$7 || config.autoFetchSvg;
   const shimLookups = reduce(shims, (acc, shim) => {
     const maybeNameMaybeUnicode = shim[0];
     let prefix = shim[1];
@@ -10228,8 +8776,8 @@ function byLigature(prefix, ligature) {
 function byAlias(prefix, alias) {
   return (_byAlias[prefix] || {})[alias];
 }
-function byOldName(name) {
-  return _byOldName[name] || {
+function byOldName(name2) {
+  return _byOldName[name2] || {
     prefix: null,
     iconName: null
   };
@@ -10326,7 +8874,7 @@ function getCanonicalIcon(values) {
   return _objectSpread2$1(_objectSpread2$1(_objectSpread2$1({}, canonical), getDefaultCanonicalPrefix({
     values,
     family,
-    styles: styles$c,
+    styles: styles$7,
     config,
     canonical,
     givenPrefix
@@ -10347,7 +8895,7 @@ function applyShimAndAlias(skipLookups, givenPrefix, canonical) {
   const aliasIconName = byAlias(prefix, iconName);
   iconName = shim.iconName || aliasIconName || iconName;
   prefix = shim.prefix || prefix;
-  if (prefix === "far" && !styles$c["far"] && styles$c["fas"] && !config.autoFetchSvg) {
+  if (prefix === "far" && !styles$7["far"] && styles$7["fas"] && !config.autoFetchSvg) {
     prefix = "fas";
   }
   return {
@@ -10628,17 +9176,17 @@ function domVariants(val, abstractCreator) {
 function asIcon(_ref) {
   let {
     children,
-    main: main2,
+    main,
     mask,
     attributes,
     styles: styles2,
     transform
   } = _ref;
-  if (transformIsMeaningful(transform) && main2.found && !mask.found) {
+  if (transformIsMeaningful(transform) && main.found && !mask.found) {
     const {
       width,
       height
-    } = main2;
+    } = main;
     const offset = {
       x: width / height / 2,
       y: 0.5
@@ -10679,7 +9227,7 @@ function asSymbol(_ref) {
 function makeInlineSvgAbstract(params) {
   const {
     icons: {
-      main: main2,
+      main,
       mask
     },
     prefix,
@@ -10695,10 +9243,10 @@ function makeInlineSvgAbstract(params) {
   const {
     width,
     height
-  } = mask.found ? mask : main2;
+  } = mask.found ? mask : main;
   const isUploadedIcon = Lt.includes(prefix);
   const attrClass = [config.replacementClass, iconName ? "".concat(config.cssPrefix, "-").concat(iconName) : ""].filter((c$$1) => extra.classes.indexOf(c$$1) === -1).filter((c$$1) => c$$1 !== "" || !!c$$1).concat(extra.classes).join(" ");
-  let content2 = {
+  let content = {
     children: [],
     attributes: _objectSpread2$1(_objectSpread2$1({}, extra.attributes), {}, {
       "data-prefix": prefix,
@@ -10713,22 +9261,22 @@ function makeInlineSvgAbstract(params) {
     width: "".concat(width / height * 16 * 0.0625, "em")
   } : {};
   if (watchable) {
-    content2.attributes[DATA_FA_I2SVG] = "";
+    content.attributes[DATA_FA_I2SVG] = "";
   }
   if (title2) {
-    content2.children.push({
+    content.children.push({
       tag: "title",
       attributes: {
-        id: content2.attributes["aria-labelledby"] || "title-".concat(titleId || nextUniqueId())
+        id: content.attributes["aria-labelledby"] || "title-".concat(titleId || nextUniqueId())
       },
       children: [title2]
     });
-    delete content2.attributes.title;
+    delete content.attributes.title;
   }
-  const args = _objectSpread2$1(_objectSpread2$1({}, content2), {}, {
+  const args = _objectSpread2$1(_objectSpread2$1({}, content), {}, {
     prefix,
     iconName,
-    main: main2,
+    main,
     mask,
     maskId,
     transform,
@@ -10738,7 +9286,7 @@ function makeInlineSvgAbstract(params) {
   const {
     children,
     attributes
-  } = mask.found && main2.found ? callProvided("generateAbstractMask", args) || {
+  } = mask.found && main.found ? callProvided("generateAbstractMask", args) || {
     children: [],
     attributes: {}
   } : callProvided("generateAbstractIcon", args) || {
@@ -10755,7 +9303,7 @@ function makeInlineSvgAbstract(params) {
 }
 function makeLayersTextAbstract(params) {
   const {
-    content: content2,
+    content,
     width,
     height,
     transform,
@@ -10789,7 +9337,7 @@ function makeLayersTextAbstract(params) {
   val.push({
     tag: "span",
     attributes,
-    children: [content2]
+    children: [content]
   });
   if (title2) {
     val.push({
@@ -10804,7 +9352,7 @@ function makeLayersTextAbstract(params) {
 }
 function makeLayersCounterAbstract(params) {
   const {
-    content: content2,
+    content,
     title: title2,
     extra
   } = params;
@@ -10821,7 +9369,7 @@ function makeLayersCounterAbstract(params) {
   val.push({
     tag: "span",
     attributes,
-    children: [content2]
+    children: [content]
   });
   if (title2) {
     val.push({
@@ -10918,13 +9466,13 @@ const p$2 = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERF
   measure: noop$1
 };
 const preamble = 'FA "6.7.2"';
-const begin = (name) => {
-  p$2.mark("".concat(preamble, " ").concat(name, " begins"));
-  return () => end(name);
+const begin = (name2) => {
+  p$2.mark("".concat(preamble, " ").concat(name2, " begins"));
+  return () => end(name2);
 };
-const end = (name) => {
-  p$2.mark("".concat(preamble, " ").concat(name, " ends"));
-  p$2.measure("".concat(preamble, " ").concat(name), "".concat(preamble, " ").concat(name, " begins"), "".concat(preamble, " ").concat(name, " ends"));
+const end = (name2) => {
+  p$2.mark("".concat(preamble, " ").concat(name2, " ends"));
+  p$2.measure("".concat(preamble, " ").concat(name2), "".concat(preamble, " ").concat(name2, " begins"), "".concat(preamble, " ").concat(name2, " ends"));
 };
 var perf = {
   begin,
@@ -10951,11 +9499,11 @@ function getMutator() {
   const mutator = mutators[config.autoReplaceSvg];
   return mutator || mutators.replace;
 }
-function createElementNS(tag2) {
-  return DOCUMENT.createElementNS("http://www.w3.org/2000/svg", tag2);
+function createElementNS(tag) {
+  return DOCUMENT.createElementNS("http://www.w3.org/2000/svg", tag);
 }
-function createElement(tag2) {
-  return DOCUMENT.createElement(tag2);
+function createElement(tag) {
+  return DOCUMENT.createElement(tag);
 }
 function convertSVG(abstractObj) {
   let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
@@ -10965,17 +9513,17 @@ function convertSVG(abstractObj) {
   if (typeof abstractObj === "string") {
     return DOCUMENT.createTextNode(abstractObj);
   }
-  const tag2 = ceFn(abstractObj.tag);
+  const tag = ceFn(abstractObj.tag);
   Object.keys(abstractObj.attributes || []).forEach(function(key) {
-    tag2.setAttribute(key, abstractObj.attributes[key]);
+    tag.setAttribute(key, abstractObj.attributes[key]);
   });
   const children = abstractObj.children || [];
   children.forEach(function(child) {
-    tag2.appendChild(convertSVG(child, {
+    tag.appendChild(convertSVG(child, {
       ceFn
     }));
   });
-  return tag2;
+  return tag;
 }
 function nodeAsComment(node) {
   let comment = " ".concat(node.outerHTML, " ");
@@ -11419,10 +9967,10 @@ var ReplaceElements = {
           height: 512,
           icon: {}
         })]).then((_ref) => {
-          let [main2, mask2] = _ref;
+          let [main, mask2] = _ref;
           resolve([node, makeInlineSvgAbstract({
             icons: {
-              main: main2,
+              main,
               mask: mask2
             },
             prefix,
@@ -11442,7 +9990,7 @@ var ReplaceElements = {
       let {
         children,
         attributes,
-        main: main2,
+        main,
         transform,
         styles: styles2
       } = _ref2;
@@ -11453,13 +10001,13 @@ var ReplaceElements = {
       let nextChild;
       if (transformIsMeaningful(transform)) {
         nextChild = callProvided("generateAbstractTransformGrouping", {
-          main: main2,
+          main,
           transform,
-          containerWidth: main2.width,
-          iconWidth: main2.width
+          containerWidth: main.width,
+          iconWidth: main.width
         });
       }
-      children.push(nextChild || main2.icon);
+      children.push(nextChild || main.icon);
       return {
         children,
         attributes
@@ -11503,7 +10051,7 @@ var Layers = {
 var LayersCounter = {
   mixout() {
     return {
-      counter(content2) {
+      counter(content) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           title: title2 = null,
@@ -11513,14 +10061,14 @@ var LayersCounter = {
         } = params;
         return domVariants({
           type: "counter",
-          content: content2
+          content
         }, () => {
           callHooks("beforeDOMElementCreation", {
-            content: content2,
+            content,
             params
           });
           return makeLayersCounterAbstract({
-            content: content2.toString(),
+            content: content.toString(),
             title: title2,
             extra: {
               attributes,
@@ -11536,7 +10084,7 @@ var LayersCounter = {
 var LayersText = {
   mixout() {
     return {
-      text(content2) {
+      text(content) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           transform = meaninglessTransform,
@@ -11547,14 +10095,14 @@ var LayersText = {
         } = params;
         return domVariants({
           type: "text",
-          content: content2
+          content
         }, () => {
           callHooks("beforeDOMElementCreation", {
-            content: content2,
+            content,
             params
           });
           return makeLayersTextAbstract({
-            content: content2,
+            content,
             transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform),
             title: title2,
             extra: {
@@ -11614,8 +10162,8 @@ const FONT_FAMILY_WEIGHT_FALLBACK = Object.keys(FONT_FAMILY_WEIGHT_TO_PREFIX).re
   acc[fontFamily] = weights[900] || [...Object.entries(weights)][0][1];
   return acc;
 }, {});
-function hexValueFromContent(content2) {
-  const cleaned = content2.replace(CLEAN_CONTENT_PATTERN, "");
+function hexValueFromContent(content) {
+  const cleaned = content.replace(CLEAN_CONTENT_PATTERN, "");
   const codePoint = codePointAt(cleaned, 0);
   const isPrependTen = codePoint >= SECONDARY_UNICODE_RANGE[0] && codePoint <= SECONDARY_UNICODE_RANGE[1];
   const isDoubled = cleaned.length === 2 ? cleaned[0] === cleaned[1] : false;
@@ -11642,17 +10190,17 @@ function replaceForPosition(node, position) {
     const fontFamily = styles2.getPropertyValue("font-family");
     const fontFamilyMatch = fontFamily.match(FONT_FAMILY_PATTERN);
     const fontWeight = styles2.getPropertyValue("font-weight");
-    const content2 = styles2.getPropertyValue("content");
+    const content = styles2.getPropertyValue("content");
     if (alreadyProcessedPseudoElement && !fontFamilyMatch) {
       node.removeChild(alreadyProcessedPseudoElement);
       return resolve();
-    } else if (fontFamilyMatch && content2 !== "none" && content2 !== "") {
-      const content22 = styles2.getPropertyValue("content");
+    } else if (fontFamilyMatch && content !== "none" && content !== "") {
+      const content2 = styles2.getPropertyValue("content");
       let prefix = getPrefix(fontFamily, fontWeight);
       const {
         value: hexValue,
         isSecondary
-      } = hexValueFromContent(content22);
+      } = hexValueFromContent(content2);
       const isV4 = fontFamilyMatch[0].startsWith("FontAwesome");
       let iconName = byUnicode(prefix, hexValue);
       let iconIdentifier = iconName;
@@ -11668,15 +10216,15 @@ function replaceForPosition(node, position) {
         if (alreadyProcessedPseudoElement) {
           node.removeChild(alreadyProcessedPseudoElement);
         }
-        const meta2 = blankMeta();
+        const meta = blankMeta();
         const {
           extra
-        } = meta2;
+        } = meta;
         extra.attributes[DATA_FA_PSEUDO_ELEMENT] = position;
-        findIcon(iconName, prefix).then((main2) => {
-          const abstract = makeInlineSvgAbstract(_objectSpread2$1(_objectSpread2$1({}, meta2), {}, {
+        findIcon(iconName, prefix).then((main) => {
+          const abstract = makeInlineSvgAbstract(_objectSpread2$1(_objectSpread2$1({}, meta), {}, {
             icons: {
-              main: main2,
+              main,
               mask: emptyCanonicalIcon()
             },
             prefix,
@@ -11855,7 +10403,7 @@ var PowerTransforms = {
   provides(providers2) {
     providers2.generateAbstractTransformGrouping = function(_ref) {
       let {
-        main: main2,
+        main,
         transform,
         containerWidth,
         iconWidth
@@ -11884,9 +10432,9 @@ var PowerTransforms = {
           tag: "g",
           attributes: _objectSpread2$1({}, operations.inner),
           children: [{
-            tag: main2.icon.tag,
-            children: main2.icon.children,
-            attributes: _objectSpread2$1(_objectSpread2$1({}, main2.icon.attributes), operations.path)
+            tag: main.icon.tag,
+            children: main.icon.children,
+            attributes: _objectSpread2$1(_objectSpread2$1({}, main.icon.attributes), operations.path)
           }]
         }]
       };
@@ -11933,7 +10481,7 @@ var Masks = {
       let {
         children,
         attributes,
-        main: main2,
+        main,
         mask,
         maskId: explicitMaskId,
         transform
@@ -11941,7 +10489,7 @@ var Masks = {
       const {
         width: mainWidth,
         icon: mainPath
-      } = main2;
+      } = main;
       const {
         width: maskWidth,
         icon: maskPath
@@ -12240,7 +10788,7 @@ function _defineProperty(obj, key, value) {
   }
   return obj;
 }
-function _objectWithoutPropertiesLoose$1(source, excluded) {
+function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
@@ -12254,7 +10802,7 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
 }
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose$1(source, excluded);
+  var target = _objectWithoutPropertiesLoose(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -12549,14 +11097,13 @@ const Icon = (props) => {
   );
 };
 function Nav(props) {
-  const { title: title2 = "", menus: menus2 = [], children } = props;
-  if (children) return children;
+  const { title: title2 = "", menus: menus2 = [], navBlue = true } = props;
   const [isHide, setIsHide] = reactExports.useState(false);
-  const [isTop, setIsTop] = reactExports.useState(true);
+  const [isBlue, setIsBlue] = reactExports.useState(true);
   reactExports.useEffect(() => {
-    const scroll = (direction, isTop2) => {
+    setIsBlue(navBlue);
+    const scroll = (direction) => {
       setIsHide(direction == "down");
-      setIsTop(isTop2);
     };
     scrollManager.add(scroll);
     return () => {
@@ -12566,13 +11113,13 @@ function Nav(props) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "nav",
     {
-      className: classNames(styles$d.nav, {
-        [styles$d.hide]: isHide,
-        [styles$d.top]: isTop
+      className: classNames(styles$8.nav, {
+        [styles$8.hide]: isHide,
+        [styles$8["nav-blue"]]: isBlue
       }),
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$d["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: title2 }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$d.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: title2 }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
           return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: items.path, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: items.icon }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: items.title })
@@ -12582,2269 +11129,366 @@ function Nav(props) {
     }
   );
 }
-function _objectWithoutPropertiesLoose(r2, e) {
-  if (null == r2) return {};
-  var t2 = {};
-  for (var n in r2) if ({}.hasOwnProperty.call(r2, n)) {
-    if (-1 !== e.indexOf(n)) continue;
-    t2[n] = r2[n];
-  }
-  return t2;
-}
-function _extends$1() {
-  return _extends$1 = Object.assign ? Object.assign.bind() : function(n) {
-    for (var e = 1; e < arguments.length; e++) {
-      var t2 = arguments[e];
-      for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n[r2] = t2[r2]);
-    }
-    return n;
-  }, _extends$1.apply(null, arguments);
-}
-function _assertThisInitialized(e) {
-  if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  return e;
-}
-function _setPrototypeOf(t2, e) {
-  return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function(t3, e2) {
-    return t3.__proto__ = e2, t3;
-  }, _setPrototypeOf(t2, e);
-}
-function _inheritsLoose(t2, o2) {
-  t2.prototype = Object.create(o2.prototype), t2.prototype.constructor = t2, _setPrototypeOf(t2, o2);
-}
-var reactIs = { exports: {} };
-var reactIs_production_min = {};
-/** @license React v16.13.1
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var hasRequiredReactIs_production_min;
-function requireReactIs_production_min() {
-  if (hasRequiredReactIs_production_min) return reactIs_production_min;
-  hasRequiredReactIs_production_min = 1;
-  var b = "function" === typeof Symbol && Symbol.for, c = b ? Symbol.for("react.element") : 60103, d = b ? Symbol.for("react.portal") : 60106, e = b ? Symbol.for("react.fragment") : 60107, f = b ? Symbol.for("react.strict_mode") : 60108, g2 = b ? Symbol.for("react.profiler") : 60114, h = b ? Symbol.for("react.provider") : 60109, k = b ? Symbol.for("react.context") : 60110, l = b ? Symbol.for("react.async_mode") : 60111, m = b ? Symbol.for("react.concurrent_mode") : 60111, n = b ? Symbol.for("react.forward_ref") : 60112, p2 = b ? Symbol.for("react.suspense") : 60113, q = b ? Symbol.for("react.suspense_list") : 60120, r2 = b ? Symbol.for("react.memo") : 60115, t2 = b ? Symbol.for("react.lazy") : 60116, v = b ? Symbol.for("react.block") : 60121, w2 = b ? Symbol.for("react.fundamental") : 60117, x2 = b ? Symbol.for("react.responder") : 60118, y = b ? Symbol.for("react.scope") : 60119;
-  function z(a) {
-    if ("object" === typeof a && null !== a) {
-      var u = a.$$typeof;
-      switch (u) {
-        case c:
-          switch (a = a.type, a) {
-            case l:
-            case m:
-            case e:
-            case g2:
-            case f:
-            case p2:
-              return a;
-            default:
-              switch (a = a && a.$$typeof, a) {
-                case k:
-                case n:
-                case t2:
-                case r2:
-                case h:
-                  return a;
-                default:
-                  return u;
-              }
-          }
-        case d:
-          return u;
-      }
-    }
-  }
-  function A2(a) {
-    return z(a) === m;
-  }
-  reactIs_production_min.AsyncMode = l;
-  reactIs_production_min.ConcurrentMode = m;
-  reactIs_production_min.ContextConsumer = k;
-  reactIs_production_min.ContextProvider = h;
-  reactIs_production_min.Element = c;
-  reactIs_production_min.ForwardRef = n;
-  reactIs_production_min.Fragment = e;
-  reactIs_production_min.Lazy = t2;
-  reactIs_production_min.Memo = r2;
-  reactIs_production_min.Portal = d;
-  reactIs_production_min.Profiler = g2;
-  reactIs_production_min.StrictMode = f;
-  reactIs_production_min.Suspense = p2;
-  reactIs_production_min.isAsyncMode = function(a) {
-    return A2(a) || z(a) === l;
-  };
-  reactIs_production_min.isConcurrentMode = A2;
-  reactIs_production_min.isContextConsumer = function(a) {
-    return z(a) === k;
-  };
-  reactIs_production_min.isContextProvider = function(a) {
-    return z(a) === h;
-  };
-  reactIs_production_min.isElement = function(a) {
-    return "object" === typeof a && null !== a && a.$$typeof === c;
-  };
-  reactIs_production_min.isForwardRef = function(a) {
-    return z(a) === n;
-  };
-  reactIs_production_min.isFragment = function(a) {
-    return z(a) === e;
-  };
-  reactIs_production_min.isLazy = function(a) {
-    return z(a) === t2;
-  };
-  reactIs_production_min.isMemo = function(a) {
-    return z(a) === r2;
-  };
-  reactIs_production_min.isPortal = function(a) {
-    return z(a) === d;
-  };
-  reactIs_production_min.isProfiler = function(a) {
-    return z(a) === g2;
-  };
-  reactIs_production_min.isStrictMode = function(a) {
-    return z(a) === f;
-  };
-  reactIs_production_min.isSuspense = function(a) {
-    return z(a) === p2;
-  };
-  reactIs_production_min.isValidElementType = function(a) {
-    return "string" === typeof a || "function" === typeof a || a === e || a === m || a === g2 || a === f || a === p2 || a === q || "object" === typeof a && null !== a && (a.$$typeof === t2 || a.$$typeof === r2 || a.$$typeof === h || a.$$typeof === k || a.$$typeof === n || a.$$typeof === w2 || a.$$typeof === x2 || a.$$typeof === y || a.$$typeof === v);
-  };
-  reactIs_production_min.typeOf = z;
-  return reactIs_production_min;
-}
-var hasRequiredReactIs;
-function requireReactIs() {
-  if (hasRequiredReactIs) return reactIs.exports;
-  hasRequiredReactIs = 1;
-  {
-    reactIs.exports = requireReactIs_production_min();
-  }
-  return reactIs.exports;
-}
-var hoistNonReactStatics_cjs;
-var hasRequiredHoistNonReactStatics_cjs;
-function requireHoistNonReactStatics_cjs() {
-  if (hasRequiredHoistNonReactStatics_cjs) return hoistNonReactStatics_cjs;
-  hasRequiredHoistNonReactStatics_cjs = 1;
-  var reactIs2 = requireReactIs();
-  var REACT_STATICS = {
-    childContextTypes: true,
-    contextType: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    getDerivedStateFromError: true,
-    getDerivedStateFromProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-  };
-  var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    callee: true,
-    arguments: true,
-    arity: true
-  };
-  var FORWARD_REF_STATICS = {
-    "$$typeof": true,
-    render: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true
-  };
-  var MEMO_STATICS = {
-    "$$typeof": true,
-    compare: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true,
-    type: true
-  };
-  var TYPE_STATICS = {};
-  TYPE_STATICS[reactIs2.ForwardRef] = FORWARD_REF_STATICS;
-  TYPE_STATICS[reactIs2.Memo] = MEMO_STATICS;
-  function getStatics(component) {
-    if (reactIs2.isMemo(component)) {
-      return MEMO_STATICS;
-    }
-    return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
-  }
-  var defineProperty = Object.defineProperty;
-  var getOwnPropertyNames = Object.getOwnPropertyNames;
-  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-  var getPrototypeOf = Object.getPrototypeOf;
-  var objectPrototype = Object.prototype;
-  function hoistNonReactStatics2(targetComponent, sourceComponent, blacklist) {
-    if (typeof sourceComponent !== "string") {
-      if (objectPrototype) {
-        var inheritedComponent = getPrototypeOf(sourceComponent);
-        if (inheritedComponent && inheritedComponent !== objectPrototype) {
-          hoistNonReactStatics2(targetComponent, inheritedComponent, blacklist);
-        }
-      }
-      var keys = getOwnPropertyNames(sourceComponent);
-      if (getOwnPropertySymbols) {
-        keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-      }
-      var targetStatics = getStatics(targetComponent);
-      var sourceStatics = getStatics(sourceComponent);
-      for (var i = 0; i < keys.length; ++i) {
-        var key = keys[i];
-        if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-          var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-          try {
-            defineProperty(targetComponent, key, descriptor);
-          } catch (e) {
-          }
-        }
-      }
-    }
-    return targetComponent;
-  }
-  hoistNonReactStatics_cjs = hoistNonReactStatics2;
-  return hoistNonReactStatics_cjs;
-}
-var hoistNonReactStatics_cjsExports = requireHoistNonReactStatics_cjs();
-const hoistNonReactStatics = /* @__PURE__ */ getDefaultExportFromCjs(hoistNonReactStatics_cjsExports);
-function invariant$1(condition, message) {
-  if (condition) return;
-  var error = new Error("loadable: " + message);
-  error.framesToPop = 1;
-  error.name = "Invariant Violation";
-  throw error;
-}
-var Context$1 = /* @__PURE__ */ React3.createContext();
-var LOADABLE_SHARED = {
-  initialChunks: {}
+const homeLayout = "_homeLayout_n55af_1";
+const loop = "_loop_n55af_22";
+const info$2 = "_info_n55af_57";
+const avatar = "_avatar_n55af_108";
+const name = "_name_n55af_121";
+const description$1 = "_description_n55af_126";
+const styles$6 = {
+  homeLayout,
+  "home-info": "_home-info_n55af_16",
+  loop,
+  info: info$2,
+  "home-posts-wrap": "_home-posts-wrap_n55af_77",
+  "home-posts": "_home-posts_n55af_77",
+  "home-card": "_home-card_n55af_89",
+  "home-card-inner": "_home-card-inner_n55af_92",
+  avatar,
+  name,
+  description: description$1,
+  "friend-links": "_friend-links_n55af_131",
+  "icon-links": "_icon-links_n55af_132",
+  "icon-link": "_icon-link_n55af_132"
 };
-var STATUS_PENDING = "PENDING";
-var STATUS_RESOLVED = "RESOLVED";
-var STATUS_REJECTED = "REJECTED";
-function resolveConstructor(ctor) {
-  if (typeof ctor === "function") {
-    return {
-      requireAsync: ctor,
-      resolve: function resolve() {
-        return void 0;
-      },
-      chunkName: function chunkName() {
-        return void 0;
-      }
-    };
-  }
-  return ctor;
-}
-var withChunkExtractor = function withChunkExtractor2(Component) {
-  var LoadableWithChunkExtractor = function LoadableWithChunkExtractor2(props) {
-    return React3.createElement(Context$1.Consumer, null, function(extractor) {
-      return React3.createElement(Component, Object.assign({
-        __chunkExtractor: extractor
-      }, props));
-    });
-  };
-  if (Component.displayName) {
-    LoadableWithChunkExtractor.displayName = Component.displayName + "WithChunkExtractor";
-  }
-  return LoadableWithChunkExtractor;
+const post = "_post_1657o_1";
+const category = "_category_1657o_19";
+const date = "_date_1657o_33";
+const description = "_description_1657o_36";
+const styles$5 = {
+  post,
+  "category-and-date": "_category-and-date_1657o_19",
+  category,
+  date,
+  description,
+  "post-tags": "_post-tags_1657o_39",
+  "go-post": "_go-post_1657o_48"
 };
-var identity = function identity2(v) {
-  return v;
-};
-function createLoadable(_ref) {
-  var _ref$defaultResolveCo = _ref.defaultResolveComponent, defaultResolveComponent2 = _ref$defaultResolveCo === void 0 ? identity : _ref$defaultResolveCo, _render = _ref.render, onLoad2 = _ref.onLoad;
-  function loadable2(loadableConstructor, options) {
-    if (options === void 0) {
-      options = {};
-    }
-    var ctor = resolveConstructor(loadableConstructor);
-    var cache = {};
-    function _getCacheKey(props) {
-      if (options.cacheKey) {
-        return options.cacheKey(props);
-      }
-      if (ctor.resolve) {
-        return ctor.resolve(props);
-      }
-      return "static";
-    }
-    function resolve(module, props, Loadable2) {
-      var Component = options.resolveComponent ? options.resolveComponent(module, props) : defaultResolveComponent2(module);
-      hoistNonReactStatics(Loadable2, Component, {
-        preload: true
-      });
-      return Component;
-    }
-    var cachedLoad = function cachedLoad2(props) {
-      var cacheKey = _getCacheKey(props);
-      var promise = cache[cacheKey];
-      if (!promise || promise.status === STATUS_REJECTED) {
-        promise = ctor.requireAsync(props);
-        promise.status = STATUS_PENDING;
-        cache[cacheKey] = promise;
-        promise.then(function() {
-          promise.status = STATUS_RESOLVED;
-        }, function(error) {
-          console.error("loadable-components: failed to asynchronously load component", {
-            fileName: ctor.resolve(props),
-            chunkName: ctor.chunkName(props),
-            error: error ? error.message : error
-          });
-          promise.status = STATUS_REJECTED;
-        });
-      }
-      return promise;
-    };
-    var InnerLoadable = /* @__PURE__ */ function(_React$Component) {
-      _inheritsLoose(InnerLoadable2, _React$Component);
-      InnerLoadable2.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-        var cacheKey = _getCacheKey(props);
-        return _extends$1({}, state, {
-          cacheKey,
-          // change of a key triggers loading state automatically
-          loading: state.loading || state.cacheKey !== cacheKey
-        });
-      };
-      function InnerLoadable2(props) {
-        var _this;
-        _this = _React$Component.call(this, props) || this;
-        _this.state = {
-          result: null,
-          error: null,
-          loading: true,
-          cacheKey: _getCacheKey(props)
-        };
-        invariant$1(!props.__chunkExtractor || ctor.requireSync, "SSR requires `@loadable/babel-plugin`, please install it");
-        if (props.__chunkExtractor) {
-          if (options.ssr === false) {
-            return _assertThisInitialized(_this);
-          }
-          ctor.requireAsync(props)["catch"](function() {
-            return null;
-          });
-          _this.loadSync();
-          props.__chunkExtractor.addChunk(ctor.chunkName(props));
-          return _assertThisInitialized(_this);
-        }
-        if (options.ssr !== false && // is ready - was loaded in this session
-        (ctor.isReady && ctor.isReady(props) || // is ready - was loaded during SSR process
-        ctor.chunkName && LOADABLE_SHARED.initialChunks[ctor.chunkName(props)])) {
-          _this.loadSync();
-        }
-        return _this;
-      }
-      var _proto = InnerLoadable2.prototype;
-      _proto.componentDidMount = function componentDidMount() {
-        this.mounted = true;
-        var cachedPromise = this.getCache();
-        if (cachedPromise && cachedPromise.status === STATUS_REJECTED) {
-          this.setCache();
-        }
-        if (this.state.loading) {
-          this.loadAsync();
-        }
-      };
-      _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
-        if (prevState.cacheKey !== this.state.cacheKey) {
-          this.loadAsync();
-        }
-      };
-      _proto.componentWillUnmount = function componentWillUnmount() {
-        this.mounted = false;
-      };
-      _proto.safeSetState = function safeSetState(nextState, callback) {
-        if (this.mounted) {
-          this.setState(nextState, callback);
-        }
-      };
-      _proto.getCacheKey = function getCacheKey() {
-        return _getCacheKey(this.props);
-      };
-      _proto.getCache = function getCache() {
-        return cache[this.getCacheKey()];
-      };
-      _proto.setCache = function setCache(value) {
-        if (value === void 0) {
-          value = void 0;
-        }
-        cache[this.getCacheKey()] = value;
-      };
-      _proto.triggerOnLoad = function triggerOnLoad() {
-        var _this2 = this;
-        if (onLoad2) {
-          setTimeout(function() {
-            onLoad2(_this2.state.result, _this2.props);
-          });
-        }
-      };
-      _proto.loadSync = function loadSync() {
-        if (!this.state.loading) return;
-        try {
-          var loadedModule = ctor.requireSync(this.props);
-          var result = resolve(loadedModule, this.props, Loadable);
-          this.state.result = result;
-          this.state.loading = false;
-        } catch (error) {
-          console.error("loadable-components: failed to synchronously load component, which expected to be available", {
-            fileName: ctor.resolve(this.props),
-            chunkName: ctor.chunkName(this.props),
-            error: error ? error.message : error
-          });
-          this.state.error = error;
-        }
-      };
-      _proto.loadAsync = function loadAsync() {
-        var _this3 = this;
-        var promise = this.resolveAsync();
-        promise.then(function(loadedModule) {
-          var result = resolve(loadedModule, _this3.props, Loadable);
-          _this3.safeSetState({
-            result,
-            loading: false
-          }, function() {
-            return _this3.triggerOnLoad();
-          });
-        })["catch"](function(error) {
-          return _this3.safeSetState({
-            error,
-            loading: false
-          });
-        });
-        return promise;
-      };
-      _proto.resolveAsync = function resolveAsync() {
-        var _this$props = this.props;
-        _this$props.__chunkExtractor;
-        _this$props.forwardedRef;
-        var props = _objectWithoutPropertiesLoose(_this$props, ["__chunkExtractor", "forwardedRef"]);
-        return cachedLoad(props);
-      };
-      _proto.render = function render4() {
-        var _this$props2 = this.props, forwardedRef = _this$props2.forwardedRef, propFallback = _this$props2.fallback;
-        _this$props2.__chunkExtractor;
-        var props = _objectWithoutPropertiesLoose(_this$props2, ["forwardedRef", "fallback", "__chunkExtractor"]);
-        var _this$state = this.state, error = _this$state.error, loading = _this$state.loading, result = _this$state.result;
-        if (options.suspense) {
-          var cachedPromise = this.getCache() || this.loadAsync();
-          if (cachedPromise.status === STATUS_PENDING) {
-            throw this.loadAsync();
-          }
-        }
-        if (error) {
-          throw error;
-        }
-        var fallback = propFallback || options.fallback || null;
-        if (loading) {
-          return fallback;
-        }
-        return _render({
-          fallback,
-          result,
-          options,
-          props: _extends$1({}, props, {
-            ref: forwardedRef
-          })
-        });
-      };
-      return InnerLoadable2;
-    }(React3.Component);
-    var EnhancedInnerLoadable = withChunkExtractor(InnerLoadable);
-    var Loadable = React3.forwardRef(function(props, ref) {
-      return React3.createElement(EnhancedInnerLoadable, Object.assign({
-        forwardedRef: ref
-      }, props));
-    });
-    Loadable.displayName = "Loadable";
-    Loadable.preload = function(props) {
-      Loadable.load(props);
-    };
-    Loadable.load = function(props) {
-      return cachedLoad(props);
-    };
-    return Loadable;
-  }
-  function lazy2(ctor, options) {
-    return loadable2(ctor, _extends$1({}, options, {
-      suspense: true
-    }));
-  }
-  return {
-    loadable: loadable2,
-    lazy: lazy2
-  };
-}
-function defaultResolveComponent(loadedModule) {
-  return loadedModule.__esModule ? loadedModule["default"] : loadedModule["default"] || loadedModule;
-}
-var _createLoadable = /* @__PURE__ */ createLoadable({
-  defaultResolveComponent,
-  render: function render2(_ref) {
-    var Component = _ref.result, props = _ref.props;
-    return React3.createElement(Component, props);
-  }
-}), loadable = _createLoadable.loadable, lazy = _createLoadable.lazy;
-var _createLoadable$1 = /* @__PURE__ */ createLoadable({
-  onLoad: function onLoad(result, props) {
-    if (result && props.forwardedRef) {
-      if (typeof props.forwardedRef === "function") {
-        props.forwardedRef(result);
-      } else {
-        props.forwardedRef.current = result;
-      }
-    }
-  },
-  render: function render3(_ref) {
-    var result = _ref.result, props = _ref.props;
-    if (props.children) {
-      return props.children(result);
-    }
-    return null;
-  }
-}), loadable$1 = _createLoadable$1.loadable, lazy$1 = _createLoadable$1.lazy;
-var loadable$2 = loadable;
-loadable$2.lib = loadable$1;
-var lazy$2 = lazy;
-lazy$2.lib = lazy$1;
-const Route0 = loadable$2(() => __vitePreload(() => import("./HTTP-CXVKelZY.js"), true ? [] : void 0));
-const Route1 = loadable$2(() => __vitePreload(() => import("./MySQL-Co2XmTLF.js"), true ? [] : void 0));
-const Route2 = loadable$2(() => __vitePreload(() => import("./node.js-BqbnUYzF.js"), true ? [] : void 0));
-const Route3 = loadable$2(() => __vitePreload(() => import("./vue3笔记（四）-CdhPm0QB.js"), true ? [] : void 0));
-const Route4 = loadable$2(() => __vitePreload(() => import("./vue笔记（一）-D7SHhhOW.js"), true ? [] : void 0));
-const Route5 = loadable$2(() => __vitePreload(() => import("./vue笔记（三）-Dtr5a1pO.js"), true ? [] : void 0));
-const Route6 = loadable$2(() => __vitePreload(() => import("./vue笔记（二）-D5c_R_Tc.js"), true ? [] : void 0));
-const Route7 = loadable$2(() => __vitePreload(() => import("./搭建云服务器-CZQRHDuO.js"), true ? [] : void 0));
-const Route8 = loadable$2(() => __vitePreload(() => import("./数组sort()详解-N-xa0RrS.js"), true ? [] : void 0));
-const routes = [
-  { path: "/post/HTTP", element: React3.createElement(Route0), preload: () => __vitePreload(() => import("./HTTP-CXVKelZY.js"), true ? [] : void 0) },
-  { path: "/post/MySQL", element: React3.createElement(Route1), preload: () => __vitePreload(() => import("./MySQL-Co2XmTLF.js"), true ? [] : void 0) },
-  { path: "/post/node", element: React3.createElement(Route2), preload: () => __vitePreload(() => import("./node.js-BqbnUYzF.js"), true ? [] : void 0) },
-  { path: "/post/vue3笔记（四）", element: React3.createElement(Route3), preload: () => __vitePreload(() => import("./vue3笔记（四）-CdhPm0QB.js"), true ? [] : void 0) },
-  { path: "/post/vue笔记（一）", element: React3.createElement(Route4), preload: () => __vitePreload(() => import("./vue笔记（一）-D7SHhhOW.js"), true ? [] : void 0) },
-  { path: "/post/vue笔记（三）", element: React3.createElement(Route5), preload: () => __vitePreload(() => import("./vue笔记（三）-Dtr5a1pO.js"), true ? [] : void 0) },
-  { path: "/post/vue笔记（二）", element: React3.createElement(Route6), preload: () => __vitePreload(() => import("./vue笔记（二）-D5c_R_Tc.js"), true ? [] : void 0) },
-  { path: "/post/搭建云服务器", element: React3.createElement(Route7), preload: () => __vitePreload(() => import("./搭建云服务器-CZQRHDuO.js"), true ? [] : void 0) },
-  { path: "/post/数组sort()详解", element: React3.createElement(Route8), preload: () => __vitePreload(() => import("./数组sort()详解-N-xa0RrS.js"), true ? [] : void 0) }
+const colors = [
+  "#03a9f4",
+  "#00bcd4",
+  "#00a596",
+  "#ff7d73",
+  "#00bcd4",
+  "#ffa2c4"
 ];
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
+const Post = (props) => {
+  console.log(props);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.post, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: props.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: props.title }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["category-and-date"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$5.category, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${props.categories}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "folder-open" }),
+        props.categories
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: styles$5.date, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar" }),
+        props.date
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5.description, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { dangerouslySetInnerHTML: { __html: props.info } }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["post-tags"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
+      props.tags.map((tag, index) => {
+        return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag}`, style: { color: getRandomColor() }, children: tag }) }, index);
+      })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: props.path, className: styles$5["go-post"], children: "阅读全文" })
+  ] });
+};
+function HomeLayout(props) {
+  const { siteData: siteData2, title: title2, articlesList } = props.pageData;
+  const { themeConfig, author, avatar: avatar2, description: description2 } = siteData2;
+  const { banner } = themeConfig;
+  console.log(themeConfig);
+  const iconList = ["github", "qq", "envelope"];
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.homeLayout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: banner.img, alt: "" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-info"], children: [
+        Array.from({ length: 4 }).map((_, i) => {
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6.loop }, i);
+        }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.info, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title2 }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: banner.subTitle })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-posts-wrap"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-posts"], children: articlesList.map((article, index) => {
+        return /* @__PURE__ */ reactExports.createElement(Post, { ...article, key: index });
+      }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-card"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-card-inner"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.avatar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: avatar2, alt: "avatar" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.name, children: author }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6.description, children: description2 }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["icon-links"], children: iconList.map((item, index) => {
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$6["icon-link"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: item }) }) }, index);
+        }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["friend-links"] })
+      ] }) })
+    ] })
+  ] });
+}
+const footer = "_footer_dfym6_1";
+const styles$4 = {
+  footer,
+  "footer-wrap": "_footer-wrap_dfym6_9"
+};
+const Footer = (props) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: styles$4.footer, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["footer-wrap"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      "© 2022 - 2024 ",
+      props.title,
+      " | @",
+      props.author
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      "Based on the",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/GitHubxxx17/fispo", children: "Fispo Engine" }),
+      "|",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/GitHubxxx17/fispo", children: "Particle Theme" })
+    ] })
+  ] }) });
+};
 const Content = () => {
   console.log(routes);
   const routeElement = useRoutes(routes);
   return routeElement;
 };
-const DataContext = reactExports.createContext({});
-const usePageData = () => {
-  return reactExports.useContext(DataContext);
+const articleLayout = "_articleLayout_1v93v_1";
+const header = "_header_1v93v_9";
+const info$1 = "_info_1v93v_12";
+const styles$3 = {
+  articleLayout,
+  header,
+  info: info$1
 };
-const articleList = "_articleList_lrpq1_1";
-const item = "_item_lrpq1_1";
-const left$1 = "_left_lrpq1_16";
-const right$1 = "_right_lrpq1_25";
-const content$1 = "_content_lrpq1_31";
-const meta$1 = "_meta_lrpq1_41";
-const info = "_info_lrpq1_66";
-const styles$b = {
-  articleList,
-  item,
-  left: left$1,
-  right: right$1,
-  content: content$1,
-  meta: meta$1,
-  info,
-  "content-tag": "_content-tag_lrpq1_71",
-  "multiline-ellipsis": "_multiline-ellipsis_lrpq1_75"
-};
-const pagination = "_pagination_1rhmf_1";
-const block = "_block_1rhmf_8";
-const active$1 = "_active_1rhmf_21";
-const number = "_number_1rhmf_28";
-const styles$a = {
-  pagination,
-  block,
-  active: active$1,
-  number
-};
-function Pagination(props) {
-  const { currentPage = 1, pageCount = 1, onChange: onChange2 } = props;
-  const [selectPage, setSelectPage] = reactExports.useState(currentPage);
-  const renderPages = reactExports.useMemo(() => {
-    if (pageCount < 8) {
-      return Array.from({ length: pageCount }).map((_, i) => i + 1);
-    } else {
-      const pages = [];
-      let min = Math.max(selectPage - 2, 1);
-      let max = Math.min(selectPage + 2, pageCount);
-      if (selectPage - 2 <= 0) {
-        max = 5;
-      }
-      if (selectPage + 2 >= pageCount) {
-        min = pageCount - 4;
-      }
-      for (let i = min; i <= max; i++) {
-        pages.push(i);
-      }
-      if (pages[0] != 1) {
-        if (pages[0] > 2) {
-          pages.unshift(0);
-        }
-        pages.unshift(1);
-      }
-      if (pages.at(-1) != pageCount) {
-        if (pages.at(-1) < pageCount - 1) {
-          pages.push(0);
-        }
-        pages.push(pageCount);
-      }
-      return pages;
-    }
-  }, [pageCount, selectPage]);
-  const setPage = reactExports.useCallback(
-    (val) => {
-      if (val < 1) val = 1;
-      if (val > pageCount) val = pageCount;
-      setSelectPage(val);
-      onChange2 == null ? void 0 : onChange2(val);
-    },
-    [onChange2]
-  );
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$a.pagination, children: [
-    selectPage !== 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "div",
-      {
-        className: classNames(styles$a.block),
-        onClick: () => setPage(selectPage - 1),
-        children: "<"
-      }
-    ),
-    renderPages.map((val, index) => {
-      if (val === 0) {
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: classNames(styles$a.block),
-            onClick: () => setPage(selectPage + (index == 1 ? -5 : 5)),
-            title: `${index == 1 ? "后退 5 页" : "前进 5 页"}`,
-            children: "···"
-          },
-          `${val}-${index}`
-        );
-      } else {
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: classNames(styles$a.block, styles$a.number, {
-              [styles$a.active]: val === selectPage
-            }),
-            onClick: () => {
-              setPage(val);
-            },
-            children: val
-          },
-          `page-${val}`
-        );
-      }
-    }),
-    selectPage !== pageCount && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "div",
-      {
-        className: classNames(styles$a.block),
-        onClick: () => setPage(selectPage + 1),
-        children: ">"
-      }
-    )
-  ] });
+function convertDateString(dateStr) {
+  const date2 = new Date(dateStr);
+  const year = date2.getFullYear();
+  const month = String(date2.getMonth() + 1).padStart(2, "0");
+  const day = String(date2.getDate()).padStart(2, "0");
+  return `${year}/${month}/${day}`;
 }
-function ArticleList(props) {
-  const { step = 5, children, filter } = props;
-  if (children) return children;
-  const [currentPage, setCurrentPage] = reactExports.useState(1);
-  const articleList2 = reactExports.useMemo(
-    () => props.articleList.map((aritcle) => {
-      if ((filter == null ? void 0 : filter.type) == "tag" && !aritcle.tags.includes(filter == null ? void 0 : filter.keyword)) {
-        return;
-      }
-      if ((filter == null ? void 0 : filter.type) == "category" && aritcle.categories !== (filter == null ? void 0 : filter.keyword)) {
-        return;
-      }
-      return aritcle;
-    }).filter(Boolean),
-    [props.articleList, filter]
-  );
-  const currentArtcleList = reactExports.useMemo(() => {
-    return articleList2.slice((currentPage - 1) * step, currentPage * step);
-  }, [currentPage]);
-  const paginationOptions = {
-    pageCount: Math.ceil(articleList2.length / step),
-    currentPage,
-    onChange: (page) => {
-      setCurrentPage(page);
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$b.articleList, children: currentArtcleList.map((item2, index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$b.item, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$b.left, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: item2.cover, alt: "" }) }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$b.right, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$b.content, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item2.title }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: styles$b.meta, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar-alt" }),
-              "发表于 ",
-              item2.date
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "inbox" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/category/${item2.categories}`, children: item2.categories })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: styles$b["content-tag"], children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tag" }),
-              item2.tags.map((tag2, index2) => {
-                return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag2}`, children: tag2 }, `${tag2}-${index2}`);
-              })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "p",
-            {
-              className: classNames(
-                styles$b.info,
-                styles$b["multiline-ellipsis"]
-              ),
-              children: item2.info
-            }
-          )
-        ] }) })
-      ] }, `${item2.title}-${index}`);
-    }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: articleList2.length && /* @__PURE__ */ jsxRuntimeExports.jsx(Pagination, { ...paginationOptions }) })
-  ] });
-}
-function HomeLayout(props) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleList, { articleList: props.pageData.articlesList });
-}
-const layout = "_layout_1g63m_1";
-const header$1 = "_header_1g63m_9";
-const main = "_main_1g63m_18";
-const mainInner = "_mainInner_1g63m_24";
-const mainLeft = "_mainLeft_1g63m_33";
-const mainRight = "_mainRight_1g63m_38";
-const sidebarLeft = "_sidebarLeft_1g63m_43";
-const sidebarHide = "_sidebarHide_1g63m_47";
-const styles$9 = {
-  layout,
-  header: header$1,
-  "not-home-page": "_not-home-page_1g63m_15",
-  main,
-  mainInner,
-  mainLeft,
-  mainRight,
-  sidebarLeft,
-  sidebarHide
-};
-const banner = "_banner_1hwpr_1";
-const meta = "_meta_1hwpr_33";
-const styles$8 = {
-  banner,
-  "banner-site-info": "_banner-site-info_1hwpr_20",
-  "banner-site-title": "_banner-site-title_1hwpr_25",
-  meta,
-  "content-tag": "_content-tag_1hwpr_60",
-  "not-home-page": "_not-home-page_1hwpr_64"
-};
-function formatDateToYYYYMMDD(dateStr) {
-  const date = new Date(dateStr);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const formattedMonth = String(month).padStart(2, "0");
-  const formattedDay = String(day).padStart(2, "0");
-  return `${year}-${formattedMonth}-${formattedDay}`;
-}
-function sortByDate(arr) {
-  return arr.sort((a, b) => {
-    const dateA = new Date(a.date.replace(/-/g, "/"));
-    const dateB = new Date(b.date.replace(/-/g, "/"));
-    return Number(dateB) - Number(dateA);
-  });
-}
-function Banner(props) {
-  const {
-    children,
-    isHomePage,
-    isArticlePage,
-    title: title2,
-    bannerData = { img: "" },
-    articleData
-  } = props;
-  if (children) return children;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      className: classNames(styles$8.banner, {
-        [styles$8["not-home-page"]]: !isHomePage
-      }),
-      style: {
-        backgroundImage: `url(${isArticlePage ? articleData.cover : bannerData.img})`
-      },
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8["banner-site-info"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["banner-site-title"], children: title2 }),
-        isArticlePage && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8.meta, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar-alt" }),
-            "发表于 ",
-            formatDateToYYYYMMDD(articleData.date)
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "inbox" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/category/${articleData.categories}`, children: articleData.categories })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: styles$8["content-tag"], children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tag" }),
-            articleData.tags.map((tag2, index) => {
-              return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag2}`, children: tag2 }, `${tag2}-${index}`);
-            })
-          ] })
+const ArticleLayout = (props) => {
+  const { title: title2, frontmatter } = props.pageData;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.articleLayout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.header, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title2 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.info, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "calendar" }),
+          convertDateString(frontmatter.date)
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${frontmatter.categories}`, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "folder-open" }),
+          frontmatter.categories
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
+          frontmatter.tags.map((tag, index) => {
+            return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: getRandomColor() }, children: tag }) }, index);
+          })
         ] })
       ] })
-    }
-  );
-}
-const footer = "_footer_iuxfi_1";
-const footerInner = "_footerInner_iuxfi_8";
-const styles$7 = {
-  footer,
-  footerInner,
-  "framework-info": "_framework-info_iuxfi_32"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Content, {})
+  ] });
 };
-function Footer(props) {
-  const { children } = props;
-  if (children) return children;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: styles$7.footer, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      className: styles$7.footerInner,
-      style: {
-        backgroundImage: `url(${props.footerImg})`
-      },
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "©2020 - 2023 By XXX17" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: styles$7["framework-info"], children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "框架" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "a",
-            {
-              href: "https://github.com/GitHubxxx17/fispo",
-              target: "_blank",
-              rel: "noreferrer",
-              children: "Fispo"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "|" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "主题" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "a",
-            {
-              href: "https://github.com/GitHubxxx17/fispo",
-              target: "_blank",
-              rel: "noreferrer",
-              children: "fish-in-pool"
-            }
-          )
-        ] })
-      ]
-    }
-  ) });
-}
-const sidebar = "_sidebar_18neh_1";
-const stickyLayout = "_stickyLayout_18neh_8";
-const styles$6 = {
-  sidebar,
-  stickyLayout
+const tags = "_tags_1cyzc_1";
+const styles$2 = {
+  tags,
+  "categories-tags": "_categories-tags_1cyzc_4"
 };
-const card = "_card_5w79l_1";
-const avatar = "_avatar_5w79l_12";
-const author = "_author_5w79l_21";
-const header = "_header_5w79l_75";
-const list = "_list_5w79l_112";
-const left = "_left_5w79l_118";
-const right = "_right_5w79l_131";
-const title = "_title_5w79l_137";
-const time = "_time_5w79l_146";
-const progress = "_progress_5w79l_155";
-const content = "_content_5w79l_162";
-const active = "_active_5w79l_178";
-const styles$5 = {
-  card,
-  avatar,
-  author,
-  "author-name": "_author-name_5w79l_26",
-  "author-description": "_author-description_5w79l_31",
-  "author-data": "_author-data_5w79l_34",
-  "follow-btn": "_follow-btn_5w79l_53",
-  header,
-  "card-announcement": "_card-announcement_5w79l_84",
-  "card-article": "_card-article_5w79l_87",
-  "card-list": "_card-list_5w79l_93",
-  list,
-  left,
-  right,
+const articleCard = "_articleCard_7qrok_1";
+const title = "_title_7qrok_9";
+const time = "_time_7qrok_15";
+const info = "_info_7qrok_23";
+const styles$1 = {
+  articleCard,
   title,
   time,
-  "card-toc": "_card-toc_5w79l_151",
-  progress,
-  content,
-  active,
-  "card-tag-cloud": "_card-tag-cloud_5w79l_187"
+  info
 };
-const AuthorCard = (props) => {
-  var _a2, _b2, _c, _d;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.author, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5.avatar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: props.avatar }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: styles$5["author-name"], children: props == null ? void 0 : props.author }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: styles$5["author-description"], children: props == null ? void 0 : props.description }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["author-data"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "文章" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: props == null ? void 0 : props.articleNums })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/tag", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "标签" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: props == null ? void 0 : props.tagsNums })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/category", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "分类" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: props == null ? void 0 : props.categorizeNums })
-      ] })
-    ] }),
-    ((_a2 = props == null ? void 0 : props.button) == null ? void 0 : _a2.enable) && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: styles$5["follow-btn"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: (_b2 = props == null ? void 0 : props.button) == null ? void 0 : _b2.link, target: "_blank", rel: "noreferrer", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (_c = props == null ? void 0 : props.button) == null ? void 0 : _c.icon }),
-      (_d = props == null ? void 0 : props.button) == null ? void 0 : _d.text
-    ] }) })
-  ] });
-};
-const AuthorCard$1 = reactExports.memo(AuthorCard);
-const AnnouncementCard = (props) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["card-announcement"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.header, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "history", shake: true }),
-      props == null ? void 0 : props.title
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: props.content })
-  ] });
-};
-const AnnouncementCard$1 = reactExports.memo(AnnouncementCard);
 const ArticleCard = (props) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["card-article"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.header, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "history" }),
-      props == null ? void 0 : props.title
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: styles$5.list, children: props == null ? void 0 : props.data.map((item2, index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5.left, children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: item2.cover, alt: "" }) }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.right, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: item2.path, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$5.title, children: item2.title }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$5.time, children: item2.date })
-        ] })
-      ] }, `${item2.title}-${index}`);
-    }) })
-  ] });
-};
-const ArticleCard$1 = reactExports.memo(ArticleCard);
-const ListCard = (props) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["card-list"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.header, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "folder-open" }),
-      props == null ? void 0 : props.title
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: styles$5.list, children: Object.entries(props == null ? void 0 : props.data).slice(0, props == null ? void 0 : props.limit).map(([name, value], index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: props.hover ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${name}`, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: name }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: Array.isArray(value) ? value.length : value })
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: name }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: Array.isArray(value) ? value.length : value })
-      ] }) }, `${name}-${index}`);
-    }) })
-  ] });
-};
-const ListCard$1 = reactExports.memo(ListCard);
-const TocCard = (props) => {
-  const [activeIndex, setActiveIndex] = reactExports.useState(0);
-  const [progress2, setProgress] = reactExports.useState(0);
-  const tocList = reactExports.useRef([]);
-  const tocScroller = reactExports.useRef(null);
-  const newTocData = reactExports.useMemo(() => {
-    const serialNumberArr = [];
-    return props.data.map((item2) => {
-      if (item2.depth > serialNumberArr.length) {
-        while (item2.depth > serialNumberArr.length) {
-          serialNumberArr.push(1);
-        }
-      } else if (item2.depth < serialNumberArr.length) {
-        while (item2.depth < serialNumberArr.length) {
-          serialNumberArr.pop();
-        }
-        serialNumberArr[item2.depth - 1]++;
-      } else {
-        serialNumberArr[item2.depth - 1]++;
-      }
-      return { ...item2, serialNumber: serialNumberArr.join(".") };
-    });
-  }, [props]);
-  const tocActive = reactExports.useCallback(
-    (index, isScrollIntoView = true) => {
-      setActiveIndex(index);
-      const targetItem = tocList.current[index];
-      if (!isScrollIntoView && !targetItem && tocScroller.current.scrollHeight === tocScroller.current.offsetHeight)
-        return;
-      const itemTop = targetItem.offsetTop;
-      const itemBottom = itemTop + targetItem.offsetHeight;
-      const containerTop = tocScroller.current.scrollTop;
-      const containerBottom = containerTop + tocScroller.current.offsetHeight;
-      if (itemTop < containerTop || itemBottom > containerBottom) {
-        targetItem.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }
-    },
-    []
-  );
-  reactExports.useLayoutEffect(() => {
-    let headers = [];
-    const NAV_HEIGHT2 = 60;
-    const isBottom = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight;
-    let articleTop = 0;
-    const scrollToToc = (direction) => {
-      if (headers.length == 0) {
-        headers = Array.from(document.getElementsByClassName("header-anchor"));
-        articleTop = headers[0].parentElement.offsetTop;
-      }
-      let scrollTop = Math.ceil(window.scrollY);
-      if (scrollTop > articleTop) {
-        setProgress(
-          Math.ceil(
-            (scrollTop - articleTop) / (document.documentElement.scrollHeight - articleTop) * 100
-          )
-        );
-      } else {
-        setProgress(0);
-      }
-      if (isBottom) {
-        tocActive(headers.length - 1);
-        return;
-      }
-      if (direction == "up") {
-        scrollTop += NAV_HEIGHT2;
-      }
-      for (let i = 0; i < headers.length; i++) {
-        const currentAnchor = headers[i];
-        const nextAnchor = headers[i + 1];
-        const currentTop = currentAnchor.parentElement.offsetTop;
-        if (!nextAnchor) {
-          tocActive(i);
-          break;
-        }
-        if (i === 0 && scrollTop < currentTop || scrollTop == 0) {
-          tocActive(0);
-          break;
-        }
-        const nextTop = nextAnchor.parentElement.offsetTop;
-        if (currentTop <= scrollTop && scrollTop < nextTop) {
-          tocActive(i);
-          break;
-        }
-      }
-    };
-    scrollManager.add(scrollToToc);
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["card-toc"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.header, children: [
+  var _a2;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.articleCard, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$1.time, children: props.date }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: props.path, className: styles$1.title, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: props.title }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.info, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: `/category/${props.categories}`, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "folder-open" }),
+        props.categories
+      ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: (props == null ? void 0 : props.icon) || "stream" }),
-        props == null ? void 0 : props.title
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$5.progress, children: progress2 })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5.content, ref: tocScroller, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: newTocData == null ? void 0 : newTocData.map(({ id, text, depth, serialNumber }, index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "li",
-        {
-          className: classNames({
-            [styles$5.active]: index == activeIndex
-          }),
-          style: {
-            marginLeft: `${(depth - 1) * 20}px`
-          },
-          children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "a",
-            {
-              ref: (el) => {
-                if (el) {
-                  tocList.current.push(el);
-                }
-              },
-              href: `#${id}`,
-              onClick: (e) => {
-                e.preventDefault();
-                const target = document.getElementById(id);
-                if (target) {
-                  scrollManager.scrollToTarget(target, true);
-                }
-                tocActive(index, false);
-              },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: `${serialNumber}. ` }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: text })
-              ]
-            }
-          )
-        },
-        `${text}-${index}`
-      );
-    }) }) })
-  ] });
-};
-const TocCard$1 = reactExports.memo(TocCard);
-const getRandomColor = () => {
-  const hue = Math.floor(Math.random() * 360);
-  const saturation = 70;
-  const minLightness = 30;
-  const maxLightness = 70;
-  const lightness = Math.floor(Math.random() * (maxLightness - minLightness + 1)) + minLightness;
-  const hslToHex = (h, s2, l) => {
-    l /= 100;
-    const a = s2 * Math.min(l, 1 - l) / 100;
-    const f = (n) => {
-      const k = (n + h / 30) % 12;
-      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-      return Math.round(255 * color).toString(16).padStart(2, "0");
-    };
-    return `#${f(0)}${f(8)}${f(4)}`;
-  };
-  return hslToHex(hue, saturation, lightness);
-};
-const getRandomTextSize = (size) => {
-  return `${Math.min(size, 20) / 20 + 1}rem`;
-};
-const TagCard = (props) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["card-tag"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.header, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
-      props == null ? void 0 : props.title
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["card-tag-cloud"], children: Object.entries(props.data).map(([tag2, tagArr], index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "a",
-        {
-          href: `tag/${tag2}`,
-          style: {
-            color: getRandomColor(),
-            fontSize: getRandomTextSize(tagArr.length)
-          },
-          children: tag2
-        }
-      ) }, `${tag2}-${index}`);
-    }) })
-  ] });
-};
-const TagCard$1 = reactExports.memo(TagCard);
-function Card(props) {
-  const {
-    type,
-    authorData,
-    listData,
-    articleData,
-    tocData,
-    announcementData,
-    tagData
-  } = props;
-  const getContent = () => {
-    switch (type) {
-      case "author":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(AuthorCard$1, { ...authorData });
-      case "announcement":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(AnnouncementCard$1, { ...announcementData });
-      case "list":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(ListCard$1, { ...listData });
-      case "article":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleCard$1, { ...articleData });
-      case "toc":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(TocCard$1, { ...tocData });
-      case "tag":
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(TagCard$1, { ...tagData });
-      default:
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5.card, children: getContent() });
-}
-function Sidebar(props) {
-  const { children, pageData, isArticlePage = false } = props;
-  const { siteData: siteData2 } = pageData;
-  const { sidebar: sidebar2 } = siteData2.themeConfig;
-  const {
-    card_author,
-    card_categories,
-    card_recent_post,
-    card_announcement,
-    card_tags,
-    card_webinfo
-  } = sidebar2;
-  if (children) return children;
-  const [isUp, setIsUp] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    console.log(sidebar2);
-    const scroll = (direction) => {
-      setIsUp(direction == "up");
-    };
-    scrollManager.add(scroll);
-    return () => {
-      scrollManager.remove(scroll);
-    };
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.sidebar, children: [
-    card_author.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Card,
-      {
-        type: "author",
-        authorData: {
-          author: siteData2.author,
-          avatar: siteData2.avatar,
-          description: (card_author == null ? void 0 : card_author.description) || siteData2.description,
-          articleNums: pageData.articlesList.length,
-          tagsNums: Object.keys(pageData.tags).length,
-          categorizeNums: Object.keys(pageData.categories).length,
-          button: card_author.button
-        }
-      }
-    ),
-    card_announcement.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Card,
-      {
-        type: "announcement",
-        announcementData: {
-          title: "公告",
-          icon: "bullhorn",
-          content: card_announcement.content
-        }
-      }
-    ),
-    !isArticlePage && card_categories.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Card,
-      {
-        type: "list",
-        listData: {
-          title: "分类",
-          data: pageData.categories,
-          limit: card_categories.limit,
-          hover: true
-        }
-      }
-    ),
-    !isArticlePage && card_tags.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Card,
-      {
-        type: "tag",
-        tagData: {
-          title: "标签",
-          data: pageData.tags
-        }
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "div",
-      {
-        className: styles$6.stickyLayout,
-        style: { top: isUp ? "70px" : "20px" },
-        children: [
-          isArticlePage && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Card,
-            {
-              type: "toc",
-              tocData: {
-                title: "目录",
-                data: pageData.toc
-              }
-            }
-          ),
-          card_recent_post.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Card,
-            {
-              type: "article",
-              articleData: {
-                title: "最新文章",
-                data: pageData.articlesList.slice(0, card_recent_post.limit)
-              }
-            }
-          ),
-          !isArticlePage && card_webinfo.enable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Card,
-            {
-              type: "list",
-              listData: {
-                title: "网站资讯",
-                icon: "chart-line",
-                data: {
-                  "文章数目：": pageData.articlesList.length,
-                  "已运行时间 :": `1 天`,
-                  "最后更新时间 :": `2025-03-${(/* @__PURE__ */ new Date()).getDay()}`
-                }
-              }
-            }
-          )
-        ]
-      }
-    )
-  ] });
-}
-const styles$4 = {
-  "article-layout": "_article-layout_zsltx_1",
-  "article-content": "_article-content_zsltx_10",
-  "post-copyright": "_post-copyright_zsltx_103",
-  "post-copyright-item": "_post-copyright-item_zsltx_125",
-  "article-tag": "_article-tag_zsltx_138",
-  "article-pagination": "_article-pagination_zsltx_158",
-  "pagination-left": "_pagination-left_zsltx_166",
-  "pagination-right": "_pagination-right_zsltx_167",
-  "pagination-info": "_pagination-info_zsltx_171",
-  "article-recommend": "_article-recommend_zsltx_183",
-  "recommend-title": "_recommend-title_zsltx_186",
-  "recommend-list": "_recommend-list_zsltx_191",
-  "recommend-info": "_recommend-info_zsltx_203",
-  "article-img-hover": "_article-img-hover_zsltx_214"
-};
-/*! medium-zoom 1.1.0 | MIT License | https://github.com/francoischalifour/medium-zoom */
-var _extends = Object.assign || function(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-  return target;
-};
-var isSupported = function isSupported2(node) {
-  return node.tagName === "IMG";
-};
-var isNodeList = function isNodeList2(selector) {
-  return NodeList.prototype.isPrototypeOf(selector);
-};
-var isNode = function isNode2(selector) {
-  return selector && selector.nodeType === 1;
-};
-var isSvg = function isSvg2(image) {
-  var source = image.currentSrc || image.src;
-  return source.substr(-4).toLowerCase() === ".svg";
-};
-var getImagesFromSelector = function getImagesFromSelector2(selector) {
-  try {
-    if (Array.isArray(selector)) {
-      return selector.filter(isSupported);
-    }
-    if (isNodeList(selector)) {
-      return [].slice.call(selector).filter(isSupported);
-    }
-    if (isNode(selector)) {
-      return [selector].filter(isSupported);
-    }
-    if (typeof selector === "string") {
-      return [].slice.call(document.querySelectorAll(selector)).filter(isSupported);
-    }
-    return [];
-  } catch (err) {
-    throw new TypeError("The provided selector is invalid.\nExpects a CSS selector, a Node element, a NodeList or an array.\nSee: https://github.com/francoischalifour/medium-zoom");
-  }
-};
-var createOverlay = function createOverlay2(background) {
-  var overlay = document.createElement("div");
-  overlay.classList.add("medium-zoom-overlay");
-  overlay.style.background = background;
-  return overlay;
-};
-var cloneTarget = function cloneTarget2(template) {
-  var _template$getBounding = template.getBoundingClientRect(), top2 = _template$getBounding.top, left2 = _template$getBounding.left, width = _template$getBounding.width, height = _template$getBounding.height;
-  var clone = template.cloneNode();
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-  clone.removeAttribute("id");
-  clone.style.position = "absolute";
-  clone.style.top = top2 + scrollTop + "px";
-  clone.style.left = left2 + scrollLeft + "px";
-  clone.style.width = width + "px";
-  clone.style.height = height + "px";
-  clone.style.transform = "";
-  return clone;
-};
-var createCustomEvent = function createCustomEvent2(type, params) {
-  var eventParams = _extends({
-    bubbles: false,
-    cancelable: false,
-    detail: void 0
-  }, params);
-  if (typeof window.CustomEvent === "function") {
-    return new CustomEvent(type, eventParams);
-  }
-  var customEvent = document.createEvent("CustomEvent");
-  customEvent.initCustomEvent(type, eventParams.bubbles, eventParams.cancelable, eventParams.detail);
-  return customEvent;
-};
-var mediumZoom = function mediumZoom2(selector) {
-  var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-  var Promise2 = window.Promise || function Promise3(fn) {
-    function noop2() {
-    }
-    fn(noop2, noop2);
-  };
-  var _handleClick = function _handleClick2(event) {
-    var target = event.target;
-    if (target === overlay) {
-      close();
-      return;
-    }
-    if (images.indexOf(target) === -1) {
-      return;
-    }
-    toggle({ target });
-  };
-  var _handleScroll = function _handleScroll2() {
-    if (isAnimating || !active2.original) {
-      return;
-    }
-    var currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (Math.abs(scrollTop - currentScroll) > zoomOptions.scrollOffset) {
-      setTimeout(close, 150);
-    }
-  };
-  var _handleKeyUp = function _handleKeyUp2(event) {
-    var key = event.key || event.keyCode;
-    if (key === "Escape" || key === "Esc" || key === 27) {
-      close();
-    }
-  };
-  var update = function update2() {
-    var options2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-    var newOptions = options2;
-    if (options2.background) {
-      overlay.style.background = options2.background;
-    }
-    if (options2.container && options2.container instanceof Object) {
-      newOptions.container = _extends({}, zoomOptions.container, options2.container);
-    }
-    if (options2.template) {
-      var template = isNode(options2.template) ? options2.template : document.querySelector(options2.template);
-      newOptions.template = template;
-    }
-    zoomOptions = _extends({}, zoomOptions, newOptions);
-    images.forEach(function(image) {
-      image.dispatchEvent(createCustomEvent("medium-zoom:update", {
-        detail: { zoom }
-      }));
-    });
-    return zoom;
-  };
-  var clone = function clone2() {
-    var options2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-    return mediumZoom2(_extends({}, zoomOptions, options2));
-  };
-  var attach = function attach2() {
-    for (var _len = arguments.length, selectors = Array(_len), _key = 0; _key < _len; _key++) {
-      selectors[_key] = arguments[_key];
-    }
-    var newImages = selectors.reduce(function(imagesAccumulator, currentSelector) {
-      return [].concat(imagesAccumulator, getImagesFromSelector(currentSelector));
-    }, []);
-    newImages.filter(function(newImage) {
-      return images.indexOf(newImage) === -1;
-    }).forEach(function(newImage) {
-      images.push(newImage);
-      newImage.classList.add("medium-zoom-image");
-    });
-    eventListeners.forEach(function(_ref) {
-      var type = _ref.type, listener2 = _ref.listener, options2 = _ref.options;
-      newImages.forEach(function(image) {
-        image.addEventListener(type, listener2, options2);
-      });
-    });
-    return zoom;
-  };
-  var detach = function detach2() {
-    for (var _len2 = arguments.length, selectors = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      selectors[_key2] = arguments[_key2];
-    }
-    if (active2.zoomed) {
-      close();
-    }
-    var imagesToDetach = selectors.length > 0 ? selectors.reduce(function(imagesAccumulator, currentSelector) {
-      return [].concat(imagesAccumulator, getImagesFromSelector(currentSelector));
-    }, []) : images;
-    imagesToDetach.forEach(function(image) {
-      image.classList.remove("medium-zoom-image");
-      image.dispatchEvent(createCustomEvent("medium-zoom:detach", {
-        detail: { zoom }
-      }));
-    });
-    images = images.filter(function(image) {
-      return imagesToDetach.indexOf(image) === -1;
-    });
-    return zoom;
-  };
-  var on = function on2(type, listener2) {
-    var options2 = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
-    images.forEach(function(image) {
-      image.addEventListener("medium-zoom:" + type, listener2, options2);
-    });
-    eventListeners.push({ type: "medium-zoom:" + type, listener: listener2, options: options2 });
-    return zoom;
-  };
-  var off = function off2(type, listener2) {
-    var options2 = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
-    images.forEach(function(image) {
-      image.removeEventListener("medium-zoom:" + type, listener2, options2);
-    });
-    eventListeners = eventListeners.filter(function(eventListener) {
-      return !(eventListener.type === "medium-zoom:" + type && eventListener.listener.toString() === listener2.toString());
-    });
-    return zoom;
-  };
-  var open = function open2() {
-    var _ref2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, target = _ref2.target;
-    var _animate = function _animate2() {
-      var container = {
-        width: document.documentElement.clientWidth,
-        height: document.documentElement.clientHeight,
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0
-      };
-      var viewportWidth = void 0;
-      var viewportHeight = void 0;
-      if (zoomOptions.container) {
-        if (zoomOptions.container instanceof Object) {
-          container = _extends({}, container, zoomOptions.container);
-          viewportWidth = container.width - container.left - container.right - zoomOptions.margin * 2;
-          viewportHeight = container.height - container.top - container.bottom - zoomOptions.margin * 2;
-        } else {
-          var zoomContainer = isNode(zoomOptions.container) ? zoomOptions.container : document.querySelector(zoomOptions.container);
-          var _zoomContainer$getBou = zoomContainer.getBoundingClientRect(), _width = _zoomContainer$getBou.width, _height = _zoomContainer$getBou.height, _left = _zoomContainer$getBou.left, _top = _zoomContainer$getBou.top;
-          container = _extends({}, container, {
-            width: _width,
-            height: _height,
-            left: _left,
-            top: _top
-          });
-        }
-      }
-      viewportWidth = viewportWidth || container.width - zoomOptions.margin * 2;
-      viewportHeight = viewportHeight || container.height - zoomOptions.margin * 2;
-      var zoomTarget = active2.zoomedHd || active2.original;
-      var naturalWidth = isSvg(zoomTarget) ? viewportWidth : zoomTarget.naturalWidth || viewportWidth;
-      var naturalHeight = isSvg(zoomTarget) ? viewportHeight : zoomTarget.naturalHeight || viewportHeight;
-      var _zoomTarget$getBoundi = zoomTarget.getBoundingClientRect(), top2 = _zoomTarget$getBoundi.top, left2 = _zoomTarget$getBoundi.left, width = _zoomTarget$getBoundi.width, height = _zoomTarget$getBoundi.height;
-      var scaleX = Math.min(Math.max(width, naturalWidth), viewportWidth) / width;
-      var scaleY = Math.min(Math.max(height, naturalHeight), viewportHeight) / height;
-      var scale = Math.min(scaleX, scaleY);
-      var translateX = (-left2 + (viewportWidth - width) / 2 + zoomOptions.margin + container.left) / scale;
-      var translateY = (-top2 + (viewportHeight - height) / 2 + zoomOptions.margin + container.top) / scale;
-      var transform = "scale(" + scale + ") translate3d(" + translateX + "px, " + translateY + "px, 0)";
-      active2.zoomed.style.transform = transform;
-      if (active2.zoomedHd) {
-        active2.zoomedHd.style.transform = transform;
-      }
-    };
-    return new Promise2(function(resolve) {
-      if (target && images.indexOf(target) === -1) {
-        resolve(zoom);
-        return;
-      }
-      var _handleOpenEnd = function _handleOpenEnd2() {
-        isAnimating = false;
-        active2.zoomed.removeEventListener("transitionend", _handleOpenEnd2);
-        active2.original.dispatchEvent(createCustomEvent("medium-zoom:opened", {
-          detail: { zoom }
-        }));
-        resolve(zoom);
-      };
-      if (active2.zoomed) {
-        resolve(zoom);
-        return;
-      }
-      if (target) {
-        active2.original = target;
-      } else if (images.length > 0) {
-        var _images = images;
-        active2.original = _images[0];
-      } else {
-        resolve(zoom);
-        return;
-      }
-      active2.original.dispatchEvent(createCustomEvent("medium-zoom:open", {
-        detail: { zoom }
-      }));
-      scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      isAnimating = true;
-      active2.zoomed = cloneTarget(active2.original);
-      document.body.appendChild(overlay);
-      if (zoomOptions.template) {
-        var template = isNode(zoomOptions.template) ? zoomOptions.template : document.querySelector(zoomOptions.template);
-        active2.template = document.createElement("div");
-        active2.template.appendChild(template.content.cloneNode(true));
-        document.body.appendChild(active2.template);
-      }
-      if (active2.original.parentElement && active2.original.parentElement.tagName === "PICTURE" && active2.original.currentSrc) {
-        active2.zoomed.src = active2.original.currentSrc;
-      }
-      document.body.appendChild(active2.zoomed);
-      window.requestAnimationFrame(function() {
-        document.body.classList.add("medium-zoom--opened");
-      });
-      active2.original.classList.add("medium-zoom-image--hidden");
-      active2.zoomed.classList.add("medium-zoom-image--opened");
-      active2.zoomed.addEventListener("click", close);
-      active2.zoomed.addEventListener("transitionend", _handleOpenEnd);
-      if (active2.original.getAttribute("data-zoom-src")) {
-        active2.zoomedHd = active2.zoomed.cloneNode();
-        active2.zoomedHd.removeAttribute("srcset");
-        active2.zoomedHd.removeAttribute("sizes");
-        active2.zoomedHd.removeAttribute("loading");
-        active2.zoomedHd.src = active2.zoomed.getAttribute("data-zoom-src");
-        active2.zoomedHd.onerror = function() {
-          clearInterval(getZoomTargetSize);
-          console.warn("Unable to reach the zoom image target " + active2.zoomedHd.src);
-          active2.zoomedHd = null;
-          _animate();
-        };
-        var getZoomTargetSize = setInterval(function() {
-          if (active2.zoomedHd.complete) {
-            clearInterval(getZoomTargetSize);
-            active2.zoomedHd.classList.add("medium-zoom-image--opened");
-            active2.zoomedHd.addEventListener("click", close);
-            document.body.appendChild(active2.zoomedHd);
-            _animate();
-          }
-        }, 10);
-      } else if (active2.original.hasAttribute("srcset")) {
-        active2.zoomedHd = active2.zoomed.cloneNode();
-        active2.zoomedHd.removeAttribute("sizes");
-        active2.zoomedHd.removeAttribute("loading");
-        var loadEventListener = active2.zoomedHd.addEventListener("load", function() {
-          active2.zoomedHd.removeEventListener("load", loadEventListener);
-          active2.zoomedHd.classList.add("medium-zoom-image--opened");
-          active2.zoomedHd.addEventListener("click", close);
-          document.body.appendChild(active2.zoomedHd);
-          _animate();
-        });
-      } else {
-        _animate();
-      }
-    });
-  };
-  var close = function close2() {
-    return new Promise2(function(resolve) {
-      if (isAnimating || !active2.original) {
-        resolve(zoom);
-        return;
-      }
-      var _handleCloseEnd = function _handleCloseEnd2() {
-        active2.original.classList.remove("medium-zoom-image--hidden");
-        document.body.removeChild(active2.zoomed);
-        if (active2.zoomedHd) {
-          document.body.removeChild(active2.zoomedHd);
-        }
-        document.body.removeChild(overlay);
-        active2.zoomed.classList.remove("medium-zoom-image--opened");
-        if (active2.template) {
-          document.body.removeChild(active2.template);
-        }
-        isAnimating = false;
-        active2.zoomed.removeEventListener("transitionend", _handleCloseEnd2);
-        active2.original.dispatchEvent(createCustomEvent("medium-zoom:closed", {
-          detail: { zoom }
-        }));
-        active2.original = null;
-        active2.zoomed = null;
-        active2.zoomedHd = null;
-        active2.template = null;
-        resolve(zoom);
-      };
-      isAnimating = true;
-      document.body.classList.remove("medium-zoom--opened");
-      active2.zoomed.style.transform = "";
-      if (active2.zoomedHd) {
-        active2.zoomedHd.style.transform = "";
-      }
-      if (active2.template) {
-        active2.template.style.transition = "opacity 150ms";
-        active2.template.style.opacity = 0;
-      }
-      active2.original.dispatchEvent(createCustomEvent("medium-zoom:close", {
-        detail: { zoom }
-      }));
-      active2.zoomed.addEventListener("transitionend", _handleCloseEnd);
-    });
-  };
-  var toggle = function toggle2() {
-    var _ref3 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, target = _ref3.target;
-    if (active2.original) {
-      return close();
-    }
-    return open({ target });
-  };
-  var getOptions = function getOptions2() {
-    return zoomOptions;
-  };
-  var getImages = function getImages2() {
-    return images;
-  };
-  var getZoomedImage = function getZoomedImage2() {
-    return active2.original;
-  };
-  var images = [];
-  var eventListeners = [];
-  var isAnimating = false;
-  var scrollTop = 0;
-  var zoomOptions = options;
-  var active2 = {
-    original: null,
-    zoomed: null,
-    zoomedHd: null,
-    template: null
-    // If the selector is omitted, it's replaced by the options
-  };
-  if (Object.prototype.toString.call(selector) === "[object Object]") {
-    zoomOptions = selector;
-  } else if (selector || typeof selector === "string") {
-    attach(selector);
-  }
-  zoomOptions = _extends({
-    margin: 0,
-    background: "#fff",
-    scrollOffset: 40,
-    container: null,
-    template: null
-  }, zoomOptions);
-  var overlay = createOverlay(zoomOptions.background);
-  document.addEventListener("click", _handleClick);
-  document.addEventListener("keyup", _handleKeyUp);
-  document.addEventListener("scroll", _handleScroll);
-  window.addEventListener("resize", close);
-  var zoom = {
-    open,
-    close,
-    toggle,
-    update,
-    clone,
-    attach,
-    detach,
-    on,
-    off,
-    getOptions,
-    getImages,
-    getZoomedImage
-  };
-  return zoom;
-};
-function styleInject(css2, ref) {
-  if (ref === void 0) ref = {};
-  var insertAt = ref.insertAt;
-  if (typeof document === "undefined") {
-    return;
-  }
-  var head = document.head || document.getElementsByTagName("head")[0];
-  var style = document.createElement("style");
-  style.type = "text/css";
-  if (insertAt === "top") {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css2;
-  } else {
-    style.appendChild(document.createTextNode(css2));
-  }
-}
-var css = ".medium-zoom-overlay{position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}.medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}.medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}.medium-zoom-image--hidden{visibility:hidden}.medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}";
-styleInject(css);
-function ArticleLayout(props) {
-  const { articlesList, pagePath, frontmatter, categories, siteData: siteData2 } = props.pageData;
-  const { title: title2, author: author2 } = siteData2;
-  const [currIndex, setCurrIndex] = reactExports.useState(0);
-  const copyrightText = reactExports.useMemo(() => {
-    const locationObj = typeof location === "undefined" ? {
-      href: "",
-      origin: ""
-    } : location;
-    return [
-      { meta: "文章作者：", value: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "", children: author2 }) },
-      {
-        meta: "文章链接：",
-        value: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: locationObj.href, children: locationObj.href })
-      },
-      {
-        meta: "版权声明：",
-        value: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          "本博客所有文章除特别声明外，均采用",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://creativecommons.org/licenses/by-nc-sa/4.0/", children: "CC BY-NC-SA 4.0" }),
-          "许可协议。转载请注明来自",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: locationObj.origin, children: title2 }),
-          "！"
-        ] })
-      }
-    ];
-  }, []);
-  const recmmendList = reactExports.useMemo(() => {
-    const category2 = frontmatter.categories;
-    return articlesList.filter((article) => {
-      return categories[category2].includes(article.path) && article.path !== decodeURIComponent(pagePath);
-    });
-  }, [frontmatter, articlesList]);
-  reactExports.useEffect(() => {
-    setCurrIndex(
-      articlesList.findIndex(
-        (article) => article.path === decodeURIComponent(pagePath)
-      )
-    );
-  }, [articlesList]);
-  reactExports.useLayoutEffect(() => {
-    setTimeout(() => {
-      mediumZoom(".article-img");
-    }, 500);
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["article-layout"], children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["article-content"], children: /* @__PURE__ */ jsxRuntimeExports.jsx(Content, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["post-copyright"], children: copyrightText.map((item2, index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          className: styles$4["post-copyright-item"],
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2.meta }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item2.value })
-          ]
-        },
-        `post-copyright-${index}`
-      );
-    }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["article-tag"], children: frontmatter.tags.map((item2, index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${item2}`, children: item2 }) }, `${item2}-${index}`);
-    }) }),
-    currIndex !== 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["article-pagination"], children: [
-      currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          className: classNames(
-            styles$4["pagination-left"],
-            styles$4["article-img-hover"]
-          ),
-          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: articlesList[currIndex - 1].path, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: articlesList[currIndex - 1].cover, alt: "" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["pagination-info"], children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "上一篇" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articlesList[currIndex - 1].title })
-            ] })
-          ] })
-        }
-      ),
-      currIndex < articlesList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          className: classNames(
-            styles$4["pagination-right"],
-            styles$4["article-img-hover"]
-          ),
-          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: articlesList[currIndex + 1].path, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: articlesList[currIndex + 1].cover, alt: "" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["pagination-info"], children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "下一篇" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articlesList[currIndex + 1].title })
-            ] })
-          ] })
-        }
-      )
-    ] }),
-    recmmendList.length !== 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["article-recommend"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["recommend-title"], children: "相关推荐" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["recommend-list"], children: recmmendList.map((recmmend, index) => {
-        return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: styles$4["article-img-hover"],
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: recmmend.path, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: recmmend.cover, alt: "" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["recommend-info"], children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: recmmend.date }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: recmmend.title })
-              ] })
-            ] })
-          },
-          `${recmmend.title}-${index}`
-        );
-      }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "tags" }),
+        (_a2 = props.tags) == null ? void 0 : _a2.map((tag, index) => {
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `/tag/${tag}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: getRandomColor() }, children: tag }) }, index);
+        })
+      ] })
     ] })
   ] });
-}
-const tag = "_tag_1k45l_1";
-const tagItem = "_tagItem_1k45l_10";
-const styles$3 = {
-  tag,
-  tagItem
 };
-function Tags(props) {
-  const { tags = [] } = props;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.tag, children: Object.keys(tags).map((name, index) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "a",
-      {
-        className: styles$3.tagItem,
-        style: { color: getRandomColor() },
-        href: `tag/${name}`,
-        children: name
-      },
-      `${name}-${index}`
-    );
-  }) });
-}
-const category = "_category_1l5ig_1";
-const styles$2 = {
-  category
-};
-function Categories(props) {
-  const { categories } = props;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.category, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: Object.entries(categories).map(([name, value], index) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `category/${name}`, children: name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: `(${value.length})` })
-    ] }, `${name}-${index}`);
-  }) }) });
-}
-function CustomLayout(props) {
-  const { pagePath, tags, articlesList, categories } = props.pageData;
-  const pathList = pagePath.split("/").filter(Boolean);
-  console.log(pathList);
-  const type = pathList[0];
-  if (type == "tag") {
-    return pathList.length == 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Tags, { tags }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ArticleList,
-      {
-        articleList: articlesList,
-        filter: { type: "tag", keyword: decodeURIComponent(pathList.at(-1)) }
-      }
-    );
-  } else if (type === "category") {
-    return pathList.length == 1 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Categories, { categories }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ArticleList,
-      {
-        articleList: articlesList,
-        filter: {
-          type: "category",
-          keyword: decodeURIComponent(pathList.at(-1))
-        }
-      }
-    );
-  } else {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", {});
-  }
-}
-const rightSide = "_rightSide_g11mb_1";
-const styles$1 = {
-  rightSide,
-  "rightSide-settings": "_rightSide-settings_g11mb_8",
-  "rightSide-item": "_rightSide-item_g11mb_14",
-  "rightSide-hide": "_rightSide-hide_g11mb_30"
-};
-function localGetData(name) {
-  if (typeof localStorage === "undefined") {
-    return null;
-  }
-  const data = localStorage.getItem(name);
-  if (data !== null) {
-    return JSON.parse(data);
-  } else {
-    return null;
-  }
-}
-function localSaveData(name, data) {
-  localStorage.setItem(name, JSON.stringify(data));
-}
-const THEME = "THEME";
-function RightSide(props) {
-  const { setSideBarHide } = props;
-  const [isTop, setIsTop] = reactExports.useState(true);
-  const [settingsIsHide, setSettingsIsHide] = reactExports.useState(true);
-  const rightSideSettings = reactExports.useMemo(
-    () => [
-      {
-        icon: "adjust",
-        text: "深色和浅色模式切换",
-        click: () => {
-          const classList2 = document.documentElement.classList;
-          if (classList2.contains("dark")) {
-            localSaveData(THEME, "light");
-          } else {
-            localSaveData(THEME, "dark");
-          }
-          classList2.toggle("dark");
-        }
-      },
-      {
-        icon: "arrows-alt-h",
-        text: "单栏和双栏的切换",
-        click: () => {
-          setSideBarHide();
-        }
-      }
-    ],
-    []
-  );
-  const rightSideOptions = reactExports.useMemo(
-    () => [
-      {
-        icon: "cog",
-        text: "设置",
-        isSpin: true,
-        click: () => {
-          setSettingsIsHide((pre) => !pre);
-        }
-      },
-      {
-        icon: "arrow-up",
-        text: "回到顶部",
-        click: () => {
-          scrollManager.scrollToTarget(document.body, true);
-        }
-      }
-    ],
-    []
-  );
-  const setClassList = reactExports.useCallback((isDark = false) => {
-    const classList2 = document.documentElement.classList;
-    if (isDark) {
-      classList2.add("dark");
+const Tags = (props) => {
+  const { tags: tags2 = [], type, articleList, keyword } = props;
+  const iconType = type === "tag" ? "tags" : "folder-open";
+  const currBg = "linear-gradient(120deg, rgb(154, 187, 247) 0px, rgb(255, 187, 244) 100%)";
+  const articles = reactExports.useMemo(() => {
+    if (!keyword) return [];
+    if (type == "tag") {
+      return articleList.filter((article) => {
+        var _a2;
+        return (_a2 = article.tags) == null ? void 0 : _a2.includes(keyword);
+      });
     } else {
-      classList2.remove("dark");
+      return articleList.filter((article) => {
+        return article.categories === keyword;
+      });
     }
-  }, []);
-  const updateTheme = reactExports.useCallback(() => {
-    const theme = localGetData(THEME);
-    setClassList(theme === "dark");
-  }, []);
-  reactExports.useEffect(() => {
-    const showRightSide = (_, isTop2) => {
-      setIsTop(isTop2);
-    };
-    scrollManager.add(showRightSide);
-    updateTheme();
-    window.addEventListener("storage", updateTheme);
-    return () => {
-      scrollManager.remove(showRightSide);
-      window.removeEventListener("storage", updateTheme);
-    };
-  }, []);
-  const rightSideItemRender = reactExports.useCallback(
-    (item2, index) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
+  }, [articleList]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.tags, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2["categories-tags"], children: Object.entries(tags2).map(([tag], index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "a",
         {
-          className: styles$1["rightSide-item"],
-          title: item2.text,
-          onClick: () => {
-            var _a2;
-            (_a2 = item2.click) == null ? void 0 : _a2.call(item2);
+          href: `/${type}/${tag}`,
+          style: {
+            background: tag === keyword ? currBg : getRandomColor()
           },
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: item2.icon, isSpin: item2 == null ? void 0 : item2.isSpin })
-        },
-        `${item2}-${index}`
-      );
-    },
-    []
-  );
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      className: classNames(styles$1.rightSide, {
-        [styles$1["rightSide-hide"]]: isTop
-      }),
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: classNames(styles$1["rightSide-settings"], {
-              [styles$1["rightSide-hide"]]: settingsIsHide
-            }),
-            children: rightSideSettings.map(rightSideItemRender)
-          }
-        ),
-        rightSideOptions.map(rightSideItemRender)
-      ]
-    }
-  );
-}
-var reactFastCompare;
-var hasRequiredReactFastCompare;
-function requireReactFastCompare() {
-  if (hasRequiredReactFastCompare) return reactFastCompare;
-  hasRequiredReactFastCompare = 1;
-  var hasElementType = typeof Element !== "undefined";
-  var hasMap = typeof Map === "function";
-  var hasSet = typeof Set === "function";
-  var hasArrayBuffer = typeof ArrayBuffer === "function" && !!ArrayBuffer.isView;
-  function equal(a, b) {
-    if (a === b) return true;
-    if (a && b && typeof a == "object" && typeof b == "object") {
-      if (a.constructor !== b.constructor) return false;
-      var length, i, keys;
-      if (Array.isArray(a)) {
-        length = a.length;
-        if (length != b.length) return false;
-        for (i = length; i-- !== 0; )
-          if (!equal(a[i], b[i])) return false;
-        return true;
-      }
-      var it;
-      if (hasMap && a instanceof Map && b instanceof Map) {
-        if (a.size !== b.size) return false;
-        it = a.entries();
-        while (!(i = it.next()).done)
-          if (!b.has(i.value[0])) return false;
-        it = a.entries();
-        while (!(i = it.next()).done)
-          if (!equal(i.value[1], b.get(i.value[0]))) return false;
-        return true;
-      }
-      if (hasSet && a instanceof Set && b instanceof Set) {
-        if (a.size !== b.size) return false;
-        it = a.entries();
-        while (!(i = it.next()).done)
-          if (!b.has(i.value[0])) return false;
-        return true;
-      }
-      if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
-        length = a.length;
-        if (length != b.length) return false;
-        for (i = length; i-- !== 0; )
-          if (a[i] !== b[i]) return false;
-        return true;
-      }
-      if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-      if (a.valueOf !== Object.prototype.valueOf && typeof a.valueOf === "function" && typeof b.valueOf === "function") return a.valueOf() === b.valueOf();
-      if (a.toString !== Object.prototype.toString && typeof a.toString === "function" && typeof b.toString === "function") return a.toString() === b.toString();
-      keys = Object.keys(a);
-      length = keys.length;
-      if (length !== Object.keys(b).length) return false;
-      for (i = length; i-- !== 0; )
-        if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
-      if (hasElementType && a instanceof Element) return false;
-      for (i = length; i-- !== 0; ) {
-        if ((keys[i] === "_owner" || keys[i] === "__v" || keys[i] === "__o") && a.$$typeof) {
-          continue;
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: iconType }),
+            tag
+          ]
         }
-        if (!equal(a[keys[i]], b[keys[i]])) return false;
-      }
-      return true;
+      ) }, index);
+    }) }),
+    articles.map((article, index) => {
+      return /* @__PURE__ */ reactExports.createElement(ArticleCard, { ...article, key: index });
+    })
+  ] });
+};
+const customLayout = "_customLayout_taknp_1";
+const styles = {
+  customLayout
+};
+const CustomLayout = (props) => {
+  const { pagePath, tags: tags2, categories, articlesList } = props.pageData;
+  const pathList = pagePath.split("/").filter(Boolean);
+  const type = pathList[0];
+  const keyword = decodeURI(pathList.at(-1));
+  const render2 = (type2) => {
+    switch (type2) {
+      case "tag":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Tags,
+          {
+            type: "tag",
+            tags: tags2,
+            articleList: articlesList,
+            keyword
+          }
+        );
+      case "category":
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Tags,
+          {
+            type: "category",
+            tags: categories,
+            articleList: articlesList,
+            keyword
+          }
+        );
+      default:
+        return;
     }
-    return a !== a && b !== b;
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.customLayout, children: render2(type) });
+};
+const Layout = (props) => {
+  const { pageData } = props;
+  const { pageType, siteData: siteData2 } = pageData;
+  const { title: siteTitle, themeConfig, author } = siteData2;
+  const { navMenus } = themeConfig;
+  const isHomePage = pageType === "home";
+  const isArticlePage = pageType === "article";
+  console.log(pageData);
+  const getCurrentLayout = () => {
+    if (isHomePage) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
+    } else if (isArticlePage) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleLayout, { pageData });
+    } else if (pageType === "custom") {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CustomLayout, { pageData });
+    } else {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "404" });
+    }
+  };
+  reactExports.useEffect(() => {
+    scrollManager.init();
+    return () => {
+      scrollManager.destory();
+    };
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.layout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus, navBlue: !isHomePage }),
+    getCurrentLayout(),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, { author, title: siteTitle })
+  ] });
+};
+async function initPageData(routePath) {
+  const pathList = routePath.split("/").filter(Boolean);
+  const isHomeOrCustom = pathList.length === 0 || siteData.themeConfig.navMenus.find(
+    (item) => item.path == `/${pathList[0]}`
+  );
+  const { articlesList, tags: tags2, categories } = await handleRoutes(routes);
+  sortByDate(articlesList);
+  const getPageData = (pageType, frontmatter, title2, toc) => {
+    return {
+      pageType,
+      siteData,
+      frontmatter,
+      pagePath: routePath,
+      title: title2,
+      articlesList,
+      tags: tags2,
+      categories,
+      toc
+    };
+  };
+  if (isHomeOrCustom) {
+    let bannerTitle = siteData.title;
+    if (pathList.length == 1) {
+      bannerTitle = siteData.themeConfig.navMenus.find(
+        (item) => item.path == `/${pathList[0]}`
+      ).title;
+    } else if (pathList.length > 1) {
+      bannerTitle = decodeURIComponent(pathList.at(-1));
+    }
+    return getPageData(routePath === "/" ? "home" : "custom", {}, bannerTitle);
   }
-  reactFastCompare = function isEqual(a, b) {
-    try {
-      return equal(a, b);
-    } catch (error) {
-      if ((error.message || "").match(/stack|recursion/i)) {
-        console.warn("react-fast-compare cannot handle circular refs");
-        return false;
-      }
-      throw error;
-    }
-  };
-  return reactFastCompare;
+  const matched = matchRoutes(routes, routePath);
+  if (matched) {
+    const moduleInfo = await matched[0].route.preload();
+    return getPageData(
+      "article",
+      moduleInfo.frontmatter,
+      moduleInfo.frontmatter.title || "",
+      moduleInfo.toc
+    );
+  }
+  return getPageData("404", {}, "404");
 }
-var reactFastCompareExports = requireReactFastCompare();
-const fastCompare = /* @__PURE__ */ getDefaultExportFromCjs(reactFastCompareExports);
-var browser;
-var hasRequiredBrowser;
-function requireBrowser() {
-  if (hasRequiredBrowser) return browser;
-  hasRequiredBrowser = 1;
-  var invariant3 = function(condition, format, a, b, c, d, e, f) {
-    if (!condition) {
-      var error;
-      if (format === void 0) {
-        error = new Error(
-          "Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings."
-        );
-      } else {
-        var args = [a, b, c, d, e, f];
-        var argIndex = 0;
-        error = new Error(
-          format.replace(/%s/g, function() {
-            return args[argIndex++];
-          })
-        );
-        error.name = "Invariant Violation";
-      }
-      error.framesToPop = 1;
-      throw error;
-    }
-  };
-  browser = invariant3;
-  return browser;
+function App() {
+  const pageData = usePageData();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Loading..." }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { pageData }) });
 }
-var browserExports = requireBrowser();
-const invariant = /* @__PURE__ */ getDefaultExportFromCjs(browserExports);
-var shallowequal;
-var hasRequiredShallowequal;
-function requireShallowequal() {
-  if (hasRequiredShallowequal) return shallowequal;
-  hasRequiredShallowequal = 1;
-  shallowequal = function shallowEqual2(objA, objB, compare, compareContext) {
-    var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
-    if (ret !== void 0) {
-      return !!ret;
-    }
-    if (objA === objB) {
-      return true;
-    }
-    if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
-      return false;
-    }
-    var keysA = Object.keys(objA);
-    var keysB = Object.keys(objB);
-    if (keysA.length !== keysB.length) {
-      return false;
-    }
-    var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
-    for (var idx = 0; idx < keysA.length; idx++) {
-      var key = keysA[idx];
-      if (!bHasOwnProperty(key)) {
-        return false;
-      }
-      var valueA = objA[key];
-      var valueB = objB[key];
-      ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
-      if (ret === false || ret === void 0 && valueA !== valueB) {
-        return false;
-      }
-    }
-    return true;
-  };
-  return shallowequal;
-}
-var shallowequalExports = requireShallowequal();
-const shallowEqual = /* @__PURE__ */ getDefaultExportFromCjs(shallowequalExports);
 var TAG_NAMES = /* @__PURE__ */ ((TAG_NAMES2) => {
   TAG_NAMES2["BASE"] = "base";
   TAG_NAMES2["BODY"] = "body";
@@ -14882,7 +11526,7 @@ var SEO_PRIORITY_TAGS = {
     ]
   }
 };
-var VALID_TAG_NAMES = Object.values(TAG_NAMES);
+Object.values(TAG_NAMES);
 var REACT_TAG_MAP = {
   accesskey: "accessKey",
   charset: "charSet",
@@ -14893,7 +11537,7 @@ var REACT_TAG_MAP = {
   itemprop: "itemProp",
   tabindex: "tabIndex"
 };
-var HTML_TAG_MAP = Object.entries(REACT_TAG_MAP).reduce(
+Object.entries(REACT_TAG_MAP).reduce(
   (carry, [key, value]) => {
     carry[value] = key;
     return carry;
@@ -14901,180 +11545,6 @@ var HTML_TAG_MAP = Object.entries(REACT_TAG_MAP).reduce(
   {}
 );
 var HELMET_ATTRIBUTE = "data-rh";
-var HELMET_PROPS = {
-  DEFAULT_TITLE: "defaultTitle",
-  DEFER: "defer",
-  ENCODE_SPECIAL_CHARACTERS: "encodeSpecialCharacters",
-  ON_CHANGE_CLIENT_STATE: "onChangeClientState",
-  TITLE_TEMPLATE: "titleTemplate",
-  PRIORITIZE_SEO_TAGS: "prioritizeSeoTags"
-};
-var getInnermostProperty = (propsList, property) => {
-  for (let i = propsList.length - 1; i >= 0; i -= 1) {
-    const props = propsList[i];
-    if (Object.prototype.hasOwnProperty.call(props, property)) {
-      return props[property];
-    }
-  }
-  return null;
-};
-var getTitleFromPropsList = (propsList) => {
-  let innermostTitle = getInnermostProperty(
-    propsList,
-    "title"
-    /* TITLE */
-  );
-  const innermostTemplate = getInnermostProperty(propsList, HELMET_PROPS.TITLE_TEMPLATE);
-  if (Array.isArray(innermostTitle)) {
-    innermostTitle = innermostTitle.join("");
-  }
-  if (innermostTemplate && innermostTitle) {
-    return innermostTemplate.replace(/%s/g, () => innermostTitle);
-  }
-  const innermostDefaultTitle = getInnermostProperty(propsList, HELMET_PROPS.DEFAULT_TITLE);
-  return innermostTitle || innermostDefaultTitle || void 0;
-};
-var getOnChangeClientState = (propsList) => getInnermostProperty(propsList, HELMET_PROPS.ON_CHANGE_CLIENT_STATE) || (() => {
-});
-var getAttributesFromPropsList = (tagType, propsList) => propsList.filter((props) => typeof props[tagType] !== "undefined").map((props) => props[tagType]).reduce((tagAttrs, current) => ({ ...tagAttrs, ...current }), {});
-var getBaseTagFromPropsList = (primaryAttributes, propsList) => propsList.filter((props) => typeof props[
-  "base"
-  /* BASE */
-] !== "undefined").map((props) => props[
-  "base"
-  /* BASE */
-]).reverse().reduce((innermostBaseTag, tag2) => {
-  if (!innermostBaseTag.length) {
-    const keys = Object.keys(tag2);
-    for (let i = 0; i < keys.length; i += 1) {
-      const attributeKey = keys[i];
-      const lowerCaseAttributeKey = attributeKey.toLowerCase();
-      if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && tag2[lowerCaseAttributeKey]) {
-        return innermostBaseTag.concat(tag2);
-      }
-    }
-  }
-  return innermostBaseTag;
-}, []);
-var warn = (msg) => console && typeof console.warn === "function" && console.warn(msg);
-var getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
-  const approvedSeenTags = {};
-  return propsList.filter((props) => {
-    if (Array.isArray(props[tagName])) {
-      return true;
-    }
-    if (typeof props[tagName] !== "undefined") {
-      warn(
-        `Helmet: ${tagName} should be of type "Array". Instead found type "${typeof props[tagName]}"`
-      );
-    }
-    return false;
-  }).map((props) => props[tagName]).reverse().reduce((approvedTags, instanceTags) => {
-    const instanceSeenTags = {};
-    instanceTags.filter((tag2) => {
-      let primaryAttributeKey;
-      const keys2 = Object.keys(tag2);
-      for (let i = 0; i < keys2.length; i += 1) {
-        const attributeKey = keys2[i];
-        const lowerCaseAttributeKey = attributeKey.toLowerCase();
-        if (primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 && !(primaryAttributeKey === "rel" && tag2[primaryAttributeKey].toLowerCase() === "canonical") && !(lowerCaseAttributeKey === "rel" && tag2[lowerCaseAttributeKey].toLowerCase() === "stylesheet")) {
-          primaryAttributeKey = lowerCaseAttributeKey;
-        }
-        if (primaryAttributes.indexOf(attributeKey) !== -1 && (attributeKey === "innerHTML" || attributeKey === "cssText" || attributeKey === "itemprop")) {
-          primaryAttributeKey = attributeKey;
-        }
-      }
-      if (!primaryAttributeKey || !tag2[primaryAttributeKey]) {
-        return false;
-      }
-      const value = tag2[primaryAttributeKey].toLowerCase();
-      if (!approvedSeenTags[primaryAttributeKey]) {
-        approvedSeenTags[primaryAttributeKey] = {};
-      }
-      if (!instanceSeenTags[primaryAttributeKey]) {
-        instanceSeenTags[primaryAttributeKey] = {};
-      }
-      if (!approvedSeenTags[primaryAttributeKey][value]) {
-        instanceSeenTags[primaryAttributeKey][value] = true;
-        return true;
-      }
-      return false;
-    }).reverse().forEach((tag2) => approvedTags.push(tag2));
-    const keys = Object.keys(instanceSeenTags);
-    for (let i = 0; i < keys.length; i += 1) {
-      const attributeKey = keys[i];
-      const tagUnion = {
-        ...approvedSeenTags[attributeKey],
-        ...instanceSeenTags[attributeKey]
-      };
-      approvedSeenTags[attributeKey] = tagUnion;
-    }
-    return approvedTags;
-  }, []).reverse();
-};
-var getAnyTrueFromPropsList = (propsList, checkedTag) => {
-  if (Array.isArray(propsList) && propsList.length) {
-    for (let index = 0; index < propsList.length; index += 1) {
-      const prop = propsList[index];
-      if (prop[checkedTag]) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
-var reducePropsToState = (propsList) => ({
-  baseTag: getBaseTagFromPropsList([
-    "href"
-    /* HREF */
-  ], propsList),
-  bodyAttributes: getAttributesFromPropsList("bodyAttributes", propsList),
-  defer: getInnermostProperty(propsList, HELMET_PROPS.DEFER),
-  encode: getInnermostProperty(propsList, HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS),
-  htmlAttributes: getAttributesFromPropsList("htmlAttributes", propsList),
-  linkTags: getTagsFromPropsList(
-    "link",
-    [
-      "rel",
-      "href"
-      /* HREF */
-    ],
-    propsList
-  ),
-  metaTags: getTagsFromPropsList(
-    "meta",
-    [
-      "name",
-      "charset",
-      "http-equiv",
-      "property",
-      "itemprop"
-      /* ITEM_PROP */
-    ],
-    propsList
-  ),
-  noscriptTags: getTagsFromPropsList("noscript", [
-    "innerHTML"
-    /* INNER_HTML */
-  ], propsList),
-  onChangeClientState: getOnChangeClientState(propsList),
-  scriptTags: getTagsFromPropsList(
-    "script",
-    [
-      "src",
-      "innerHTML"
-      /* INNER_HTML */
-    ],
-    propsList
-  ),
-  styleTags: getTagsFromPropsList("style", [
-    "cssText"
-    /* CSS_TEXT */
-  ], propsList),
-  title: getTitleFromPropsList(propsList),
-  titleAttributes: getAttributesFromPropsList("titleAttributes", propsList),
-  prioritizeSeoTags: getAnyTrueFromPropsList(propsList, HELMET_PROPS.PRIORITIZE_SEO_TAGS)
-});
 var flattenArray = (possibleArray) => Array.isArray(possibleArray) ? possibleArray.join("") : possibleArray;
 var checkIfPropsMatch = (props, toMatch) => {
   const keys = Object.keys(props);
@@ -15100,12 +11570,6 @@ var prioritizer = (elementsList, propsToMatch) => {
     );
   }
   return { default: elementsList, priority: [] };
-};
-var without = (obj, key) => {
-  return {
-    ...obj,
-    [key]: void 0
-  };
 };
 var SELF_CLOSING_TAGS = [
   "noscript",
@@ -15134,15 +11598,15 @@ var generateTitleAsString = (type, title2, attributes, encode) => {
     encode
   )}</${type}>`;
 };
-var generateTagsAsString = (type, tags, encode = true) => tags.reduce((str, t2) => {
-  const tag2 = t2;
-  const attributeHtml = Object.keys(tag2).filter(
+var generateTagsAsString = (type, tags2, encode = true) => tags2.reduce((str, t2) => {
+  const tag = t2;
+  const attributeHtml = Object.keys(tag).filter(
     (attribute) => !(attribute === "innerHTML" || attribute === "cssText")
   ).reduce((string, attribute) => {
-    const attr = typeof tag2[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag2[attribute], encode)}"`;
+    const attr = typeof tag[attribute] === "undefined" ? attribute : `${attribute}="${encodeSpecialCharacters(tag[attribute], encode)}"`;
     return string ? `${string} ${attr}` : attr;
   }, "");
-  const tagContent = tag2.innerHTML || tag2.cssText || "";
+  const tagContent = tag.innerHTML || tag.cssText || "";
   const isSelfClosing = SELF_CLOSING_TAGS.indexOf(type) === -1;
   return `${str}<${type} ${HELMET_ATTRIBUTE}="true" ${attributeHtml}${isSelfClosing ? `/>` : `>${tagContent}</${type}>`}`;
 }, "");
@@ -15159,56 +11623,56 @@ var generateTitleAsReactComponent = (_type, title2, attributes) => {
   const props = convertElementAttributesToReactProps(attributes, initProps);
   return [React3.createElement("title", props, title2)];
 };
-var generateTagsAsReactComponent = (type, tags) => tags.map((tag2, i) => {
+var generateTagsAsReactComponent = (type, tags2) => tags2.map((tag, i) => {
   const mappedTag = {
     key: i,
     [HELMET_ATTRIBUTE]: true
   };
-  Object.keys(tag2).forEach((attribute) => {
+  Object.keys(tag).forEach((attribute) => {
     const mapped = REACT_TAG_MAP[attribute];
     const mappedAttribute = mapped || attribute;
     if (mappedAttribute === "innerHTML" || mappedAttribute === "cssText") {
-      const content2 = tag2.innerHTML || tag2.cssText;
-      mappedTag.dangerouslySetInnerHTML = { __html: content2 };
+      const content = tag.innerHTML || tag.cssText;
+      mappedTag.dangerouslySetInnerHTML = { __html: content };
     } else {
-      mappedTag[mappedAttribute] = tag2[attribute];
+      mappedTag[mappedAttribute] = tag[attribute];
     }
   });
   return React3.createElement(type, mappedTag);
 });
-var getMethodsForTag = (type, tags, encode = true) => {
+var getMethodsForTag = (type, tags2, encode = true) => {
   switch (type) {
     case "title":
       return {
-        toComponent: () => generateTitleAsReactComponent(type, tags.title, tags.titleAttributes),
-        toString: () => generateTitleAsString(type, tags.title, tags.titleAttributes, encode)
+        toComponent: () => generateTitleAsReactComponent(type, tags2.title, tags2.titleAttributes),
+        toString: () => generateTitleAsString(type, tags2.title, tags2.titleAttributes, encode)
       };
     case "bodyAttributes":
     case "htmlAttributes":
       return {
-        toComponent: () => convertElementAttributesToReactProps(tags),
-        toString: () => generateElementAttributesAsString(tags)
+        toComponent: () => convertElementAttributesToReactProps(tags2),
+        toString: () => generateElementAttributesAsString(tags2)
       };
     default:
       return {
-        toComponent: () => generateTagsAsReactComponent(type, tags),
-        toString: () => generateTagsAsString(type, tags, encode)
+        toComponent: () => generateTagsAsReactComponent(type, tags2),
+        toString: () => generateTagsAsString(type, tags2, encode)
       };
   }
 };
 var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode }) => {
-  const meta2 = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
+  const meta = prioritizer(metaTags, SEO_PRIORITY_TAGS.meta);
   const link = prioritizer(linkTags, SEO_PRIORITY_TAGS.link);
   const script = prioritizer(scriptTags, SEO_PRIORITY_TAGS.script);
   const priorityMethods = {
     toComponent: () => [
-      ...generateTagsAsReactComponent("meta", meta2.priority),
+      ...generateTagsAsReactComponent("meta", meta.priority),
       ...generateTagsAsReactComponent("link", link.priority),
       ...generateTagsAsReactComponent("script", script.priority)
     ],
     toString: () => (
       // generate all the tags as strings and concatenate them
-      `${getMethodsForTag("meta", meta2.priority, encode)} ${getMethodsForTag(
+      `${getMethodsForTag("meta", meta.priority, encode)} ${getMethodsForTag(
         "link",
         link.priority,
         encode
@@ -15217,7 +11681,7 @@ var getPriorityMethods = ({ metaTags, linkTags, scriptTags, encode }) => {
   };
   return {
     priorityMethods,
-    metaTags: meta2.default,
+    metaTags: meta.default,
     linkTags: link.default,
     scriptTags: script.default
   };
@@ -15309,558 +11773,6 @@ var HelmetProvider = (_a = class extends reactExports.Component {
     return /* @__PURE__ */ React3.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
   }
 }, __publicField(_a, "canUseDOM", isDocument), _a);
-var updateTags = (type, tags) => {
-  const headElement = document.head || document.querySelector(
-    "head"
-    /* HEAD */
-  );
-  const tagNodes = headElement.querySelectorAll(`${type}[${HELMET_ATTRIBUTE}]`);
-  const oldTags = [].slice.call(tagNodes);
-  const newTags = [];
-  let indexToDelete;
-  if (tags && tags.length) {
-    tags.forEach((tag2) => {
-      const newElement = document.createElement(type);
-      for (const attribute in tag2) {
-        if (Object.prototype.hasOwnProperty.call(tag2, attribute)) {
-          if (attribute === "innerHTML") {
-            newElement.innerHTML = tag2.innerHTML;
-          } else if (attribute === "cssText") {
-            if (newElement.styleSheet) {
-              newElement.styleSheet.cssText = tag2.cssText;
-            } else {
-              newElement.appendChild(document.createTextNode(tag2.cssText));
-            }
-          } else {
-            const attr = attribute;
-            const value = typeof tag2[attr] === "undefined" ? "" : tag2[attr];
-            newElement.setAttribute(attribute, value);
-          }
-        }
-      }
-      newElement.setAttribute(HELMET_ATTRIBUTE, "true");
-      if (oldTags.some((existingTag, index) => {
-        indexToDelete = index;
-        return newElement.isEqualNode(existingTag);
-      })) {
-        oldTags.splice(indexToDelete, 1);
-      } else {
-        newTags.push(newElement);
-      }
-    });
-  }
-  oldTags.forEach((tag2) => {
-    var _a2;
-    return (_a2 = tag2.parentNode) == null ? void 0 : _a2.removeChild(tag2);
-  });
-  newTags.forEach((tag2) => headElement.appendChild(tag2));
-  return {
-    oldTags,
-    newTags
-  };
-};
-var updateAttributes = (tagName, attributes) => {
-  const elementTag = document.getElementsByTagName(tagName)[0];
-  if (!elementTag) {
-    return;
-  }
-  const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
-  const helmetAttributes = helmetAttributeString ? helmetAttributeString.split(",") : [];
-  const attributesToRemove = [...helmetAttributes];
-  const attributeKeys = Object.keys(attributes);
-  for (const attribute of attributeKeys) {
-    const value = attributes[attribute] || "";
-    if (elementTag.getAttribute(attribute) !== value) {
-      elementTag.setAttribute(attribute, value);
-    }
-    if (helmetAttributes.indexOf(attribute) === -1) {
-      helmetAttributes.push(attribute);
-    }
-    const indexToSave = attributesToRemove.indexOf(attribute);
-    if (indexToSave !== -1) {
-      attributesToRemove.splice(indexToSave, 1);
-    }
-  }
-  for (let i = attributesToRemove.length - 1; i >= 0; i -= 1) {
-    elementTag.removeAttribute(attributesToRemove[i]);
-  }
-  if (helmetAttributes.length === attributesToRemove.length) {
-    elementTag.removeAttribute(HELMET_ATTRIBUTE);
-  } else if (elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(",")) {
-    elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(","));
-  }
-};
-var updateTitle = (title2, attributes) => {
-  if (typeof title2 !== "undefined" && document.title !== title2) {
-    document.title = flattenArray(title2);
-  }
-  updateAttributes("title", attributes);
-};
-var commitTagChanges = (newState, cb) => {
-  const {
-    baseTag,
-    bodyAttributes,
-    htmlAttributes,
-    linkTags,
-    metaTags,
-    noscriptTags,
-    onChangeClientState,
-    scriptTags,
-    styleTags,
-    title: title2,
-    titleAttributes
-  } = newState;
-  updateAttributes("body", bodyAttributes);
-  updateAttributes("html", htmlAttributes);
-  updateTitle(title2, titleAttributes);
-  const tagUpdates = {
-    baseTag: updateTags("base", baseTag),
-    linkTags: updateTags("link", linkTags),
-    metaTags: updateTags("meta", metaTags),
-    noscriptTags: updateTags("noscript", noscriptTags),
-    scriptTags: updateTags("script", scriptTags),
-    styleTags: updateTags("style", styleTags)
-  };
-  const addedTags = {};
-  const removedTags = {};
-  Object.keys(tagUpdates).forEach((tagType) => {
-    const { newTags, oldTags } = tagUpdates[tagType];
-    if (newTags.length) {
-      addedTags[tagType] = newTags;
-    }
-    if (oldTags.length) {
-      removedTags[tagType] = tagUpdates[tagType].oldTags;
-    }
-  });
-  if (cb) {
-    cb();
-  }
-  onChangeClientState(newState, addedTags, removedTags);
-};
-var _helmetCallback = null;
-var handleStateChangeOnClient = (newState) => {
-  if (_helmetCallback) {
-    cancelAnimationFrame(_helmetCallback);
-  }
-  if (newState.defer) {
-    _helmetCallback = requestAnimationFrame(() => {
-      commitTagChanges(newState, () => {
-        _helmetCallback = null;
-      });
-    });
-  } else {
-    commitTagChanges(newState);
-    _helmetCallback = null;
-  }
-};
-var client_default = handleStateChangeOnClient;
-var HelmetDispatcher = class extends reactExports.Component {
-  constructor() {
-    super(...arguments);
-    __publicField(this, "rendered", false);
-  }
-  shouldComponentUpdate(nextProps) {
-    return !shallowEqual(nextProps, this.props);
-  }
-  componentDidUpdate() {
-    this.emitChange();
-  }
-  componentWillUnmount() {
-    const { helmetInstances } = this.props.context;
-    helmetInstances.remove(this);
-    this.emitChange();
-  }
-  emitChange() {
-    const { helmetInstances, setHelmet } = this.props.context;
-    let serverState = null;
-    const state = reducePropsToState(
-      helmetInstances.get().map((instance) => {
-        const props = { ...instance.props };
-        delete props.context;
-        return props;
-      })
-    );
-    if (HelmetProvider.canUseDOM) {
-      client_default(state);
-    } else if (server_default) {
-      serverState = server_default(state);
-    }
-    setHelmet(serverState);
-  }
-  // componentWillMount will be deprecated
-  // for SSR, initialize on first render
-  // constructor is also unsafe in StrictMode
-  init() {
-    if (this.rendered) {
-      return;
-    }
-    this.rendered = true;
-    const { helmetInstances } = this.props.context;
-    helmetInstances.add(this);
-    this.emitChange();
-  }
-  render() {
-    this.init();
-    return null;
-  }
-};
-var Helmet = (_b = class extends reactExports.Component {
-  shouldComponentUpdate(nextProps) {
-    return !fastCompare(without(this.props, "helmetData"), without(nextProps, "helmetData"));
-  }
-  mapNestedChildrenToProps(child, nestedChildren) {
-    if (!nestedChildren) {
-      return null;
-    }
-    switch (child.type) {
-      case "script":
-      case "noscript":
-        return {
-          innerHTML: nestedChildren
-        };
-      case "style":
-        return {
-          cssText: nestedChildren
-        };
-      default:
-        throw new Error(
-          `<${child.type} /> elements are self-closing and can not contain children. Refer to our API for more information.`
-        );
-    }
-  }
-  flattenArrayTypeChildren(child, arrayTypeChildren, newChildProps, nestedChildren) {
-    return {
-      ...arrayTypeChildren,
-      [child.type]: [
-        ...arrayTypeChildren[child.type] || [],
-        {
-          ...newChildProps,
-          ...this.mapNestedChildrenToProps(child, nestedChildren)
-        }
-      ]
-    };
-  }
-  mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren) {
-    switch (child.type) {
-      case "title":
-        return {
-          ...newProps,
-          [child.type]: nestedChildren,
-          titleAttributes: { ...newChildProps }
-        };
-      case "body":
-        return {
-          ...newProps,
-          bodyAttributes: { ...newChildProps }
-        };
-      case "html":
-        return {
-          ...newProps,
-          htmlAttributes: { ...newChildProps }
-        };
-      default:
-        return {
-          ...newProps,
-          [child.type]: { ...newChildProps }
-        };
-    }
-  }
-  mapArrayTypeChildrenToProps(arrayTypeChildren, newProps) {
-    let newFlattenedProps = { ...newProps };
-    Object.keys(arrayTypeChildren).forEach((arrayChildName) => {
-      newFlattenedProps = {
-        ...newFlattenedProps,
-        [arrayChildName]: arrayTypeChildren[arrayChildName]
-      };
-    });
-    return newFlattenedProps;
-  }
-  warnOnInvalidChildren(child, nestedChildren) {
-    invariant(
-      VALID_TAG_NAMES.some((name) => child.type === name),
-      typeof child.type === "function" ? `You may be attempting to nest <Helmet> components within each other, which is not allowed. Refer to our API for more information.` : `Only elements types ${VALID_TAG_NAMES.join(
-        ", "
-      )} are allowed. Helmet does not support rendering <${child.type}> elements. Refer to our API for more information.`
-    );
-    invariant(
-      !nestedChildren || typeof nestedChildren === "string" || Array.isArray(nestedChildren) && !nestedChildren.some((nestedChild) => typeof nestedChild !== "string"),
-      `Helmet expects a string as a child of <${child.type}>. Did you forget to wrap your children in braces? ( <${child.type}>{\`\`}</${child.type}> ) Refer to our API for more information.`
-    );
-    return true;
-  }
-  mapChildrenToProps(children, newProps) {
-    let arrayTypeChildren = {};
-    React3.Children.forEach(children, (child) => {
-      if (!child || !child.props) {
-        return;
-      }
-      const { children: nestedChildren, ...childProps } = child.props;
-      const newChildProps = Object.keys(childProps).reduce((obj, key) => {
-        obj[HTML_TAG_MAP[key] || key] = childProps[key];
-        return obj;
-      }, {});
-      let { type } = child;
-      if (typeof type === "symbol") {
-        type = type.toString();
-      } else {
-        this.warnOnInvalidChildren(child, nestedChildren);
-      }
-      switch (type) {
-        case "Symbol(react.fragment)":
-          newProps = this.mapChildrenToProps(nestedChildren, newProps);
-          break;
-        case "link":
-        case "meta":
-        case "noscript":
-        case "script":
-        case "style":
-          arrayTypeChildren = this.flattenArrayTypeChildren(
-            child,
-            arrayTypeChildren,
-            newChildProps,
-            nestedChildren
-          );
-          break;
-        default:
-          newProps = this.mapObjectTypeChildren(child, newProps, newChildProps, nestedChildren);
-          break;
-      }
-    });
-    return this.mapArrayTypeChildrenToProps(arrayTypeChildren, newProps);
-  }
-  render() {
-    const { children, ...props } = this.props;
-    let newProps = { ...props };
-    let { helmetData } = props;
-    if (children) {
-      newProps = this.mapChildrenToProps(children, newProps);
-    }
-    if (helmetData && !(helmetData instanceof HelmetData)) {
-      const data = helmetData;
-      helmetData = new HelmetData(data.context, true);
-      delete newProps.helmetData;
-    }
-    return helmetData ? /* @__PURE__ */ React3.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ React3.createElement(Context.Consumer, null, (context) => /* @__PURE__ */ React3.createElement(HelmetDispatcher, { ...newProps, context }));
-  }
-}, __publicField(_b, "defaultProps", {
-  defer: true,
-  encodeSpecialCharacters: true,
-  prioritizeSeoTags: false
-}), _b);
-const notFoundLayout = "_notFoundLayout_18laa_1";
-const notFoundImg = "_notFoundImg_18laa_15";
-const errorInfo = "_errorInfo_18laa_30";
-const styles = {
-  notFoundLayout,
-  notFoundImg,
-  errorInfo
-};
-const NotFoundLayout = (props) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.notFoundLayout, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.notFoundImg, children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: props.notFoundImg, alt: "404" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.errorInfo, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "404" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "页面没有找到" })
-    ] })
-  ] });
-};
-function Layout() {
-  const pageData = usePageData();
-  const { pageType, title: title2, siteData: siteData2, frontmatter } = pageData;
-  const { title: siteTitle, themeConfig } = siteData2;
-  const { sidebar: sidebar2, navMenus, banner: banner2 } = themeConfig;
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
-  const is404 = pageType === "404";
-  const [sidebarEnable, setSidebarEnable] = reactExports.useState(() => {
-    if (is404) return false;
-    const hide2 = localGetData("sidebarHide");
-    if (hide2 !== null) {
-      return !hide2;
-    }
-    return sidebar2.enable;
-  });
-  const [sideBarHide, setSideBarHide] = reactExports.useState(sidebar2.hide);
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
-    } else if (isArticlePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(ArticleLayout, { pageData });
-    } else if (pageType === "custom") {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(CustomLayout, { pageData });
-    } else {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(NotFoundLayout, { notFoundImg: siteData2.notFoundImg });
-    }
-  };
-  reactExports.useEffect(() => {
-    scrollManager.init();
-    const hide2 = localGetData("sidebarHide");
-    if (hide2 !== null) {
-      setSideBarHide(hide2);
-    }
-    return () => {
-      scrollManager.destory();
-    };
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "div",
-    {
-      className: styles$9.layout,
-      style: {
-        backgroundImage: `url(${siteData2.backgroundImg})`
-      },
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Helmet, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: isHomePage ? title2 : `${title2} | ${siteData2.title}` }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "header",
-          {
-            className: classNames(styles$9.header, {
-              [styles$9["not-home-page"]]: !isHomePage
-            }),
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Banner,
-                {
-                  isHomePage,
-                  isArticlePage,
-                  title: title2,
-                  bannerData: banner2,
-                  articleData: frontmatter
-                }
-              )
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: styles$9.main, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.mainInner, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: styles$9.mainLeft,
-              style: {
-                width: sideBarHide ? "80%" : ""
-              },
-              children: getCurrentLayout()
-            }
-          ),
-          sidebarEnable && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              className: classNames(styles$9.mainRight, {
-                [styles$9.sidebarLeft]: sidebar2.position === "left",
-                [styles$9.sidebarHide]: sideBarHide
-              }),
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Sidebar,
-                {
-                  pageData,
-                  isArticlePage
-                }
-              )
-            }
-          )
-        ] }) }),
-        !is404 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-          RightSide,
-          {
-            pageData,
-            setSideBarHide: () => {
-              setSideBarHide((pre) => {
-                if (sidebarEnable === false) {
-                  setSidebarEnable(true);
-                }
-                localSaveData("sidebarHide", !pre);
-                return !pre;
-              });
-            }
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, { footerImg: banner2.img })
-      ]
-    }
-  );
-}
-const siteData = { "title": "XXX17的个人博客", "description": "学无止境", "themeConfig": { "navMenus": [{ "title": "首页", "path": "/", "icon": "home" }, { "title": "标签", "path": "/tag", "icon": "tag" }, { "title": "分类", "path": "/category", "icon": "folder-open" }, { "title": "关于", "path": "/about", "icon": "heart" }], "banner": { "img": "/banner.png", "subtitle": "" }, "sidebar": { "enable": true, "hide": false, "position": "right", "card_author": { "enable": true, "description": "", "button": { "enable": true, "icon": "github", "text": "Follow me", "link": "https://github.com/GitHubxxx17/fispo" } }, "card_announcement": { "enable": true, "content": "网站正在更新中······" }, "card_recent_post": { "enable": true, "limit": 5, "sort": "date" }, "card_categories": { "enable": true, "limit": 1 }, "card_tags": { "enable": true, "limit": 10 }, "card_webinfo": { "enable": true, "post_count": true, "last_push_date": true, "run_time": true } }, "footer": { "message": "", "copyright": "" } }, "vite": {}, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "post", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png" };
-async function handleRoutes(routes2) {
-  const articlesList = [];
-  const tags = {};
-  const categories = {};
-  for await (const route of routes2) {
-    const moduleInfo = await route.preload();
-    articlesList.push({
-      ...moduleInfo.frontmatter,
-      date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
-      path: route.path,
-      info: moduleInfo.mdInfo
-    });
-    moduleInfo.frontmatter.tags.forEach((tag2) => {
-      if (tags[tag2]) {
-        tags[tag2].push(route.path);
-      } else {
-        tags[tag2] = [route.path];
-      }
-    });
-    const category2 = moduleInfo.frontmatter.categories;
-    if (category2) {
-      if (categories[category2]) {
-        categories[category2].push(route.path);
-      } else {
-        categories[category2] = [route.path];
-      }
-    }
-  }
-  return {
-    articlesList,
-    tags,
-    categories
-  };
-}
-async function initPageData(routePath) {
-  const pathList = routePath.split("/").filter(Boolean);
-  const isHomeOrCustom = pathList.length === 0 || siteData.themeConfig.navMenus.find(
-    (item2) => item2.path == `/${pathList[0]}`
-  );
-  const { articlesList, tags, categories } = await handleRoutes(routes);
-  sortByDate(articlesList);
-  const getPageData = (pageType, frontmatter, title2, toc) => {
-    return {
-      pageType,
-      siteData,
-      frontmatter,
-      pagePath: routePath,
-      title: title2,
-      articlesList,
-      tags,
-      categories,
-      toc
-    };
-  };
-  if (isHomeOrCustom) {
-    let bannerTitle = siteData.title;
-    if (pathList.length == 1) {
-      bannerTitle = siteData.themeConfig.navMenus.find(
-        (item2) => item2.path == `/${pathList[0]}`
-      ).title;
-    } else if (pathList.length > 1) {
-      bannerTitle = decodeURIComponent(pathList.at(-1));
-    }
-    return getPageData(routePath === "/" ? "home" : "custom", {}, bannerTitle);
-  }
-  const matched = matchRoutes(routes, routePath);
-  if (matched) {
-    const moduleInfo = await matched[0].route.preload();
-    return getPageData(
-      "article",
-      moduleInfo.frontmatter,
-      moduleInfo.frontmatter.title || "",
-      moduleInfo.toc
-    );
-  }
-  return getPageData("404", {}, "404");
-}
-function App() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, {});
-}
 async function renderInBrowser() {
   const containerEl = document.getElementById("root");
   if (!containerEl) {

@@ -1,12 +1,12 @@
 import { matchRoutes } from "react-router-dom";
-// import { Layout } from "../theme-default";
 import { routes } from "virtual:routes";
 import { PageData, Route } from "shared/types";
 import siteData from "fispo:site-data";
 import { handleRoutes } from "../shared/utils/handleRoutes";
 import { sortByDate } from "../shared/utils/date";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { usePageData } from "./hooks";
+import ThemeLayout from "fispo:theme";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   const pathList = routePath.split("/").filter(Boolean);
@@ -72,13 +72,6 @@ export async function initPageData(routePath: string): Promise<PageData> {
 
 export function App() {
   const pageData = usePageData();
-  // if (siteData.theme === "") {
-  //   return <Layout pageData={pageData} />;
-  // }
-  const ThemeLayout = lazy(
-    () => import(`@fispo/${siteData.theme}/src/Layout/index.tsx`)
-  );
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ThemeLayout pageData={pageData} />
