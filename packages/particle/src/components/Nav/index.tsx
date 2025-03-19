@@ -8,12 +8,16 @@ import { Icon } from "fispo-core/theme";
 interface NavProps {
   title?: string;
   menus?: navMenuItem[];
+  navBlue?: boolean;
 }
 
 function Nav(props: NavProps) {
-  const { title = "", menus = [] } = props;
+  const { title = "", menus = [], navBlue = true } = props;
   const [isHide, setIsHide] = useState(false);
+  const [isBlue, setIsBlue] = useState(true);
   useEffect(() => {
+    setIsBlue(navBlue);
+
     const scroll: ScrollCallback = (direction) => {
       setIsHide(direction == "down");
     };
@@ -28,6 +32,7 @@ function Nav(props: NavProps) {
     <nav
       className={classNames(styles.nav, {
         [styles.hide]: isHide,
+        [styles["nav-blue"]]: isBlue,
       })}
     >
       <div className={styles["blog-name"]}>

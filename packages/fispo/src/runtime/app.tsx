@@ -1,5 +1,5 @@
 import { matchRoutes } from "react-router-dom";
-import { Layout } from "../theme-default";
+// import { Layout } from "../theme-default";
 import { routes } from "virtual:routes";
 import { PageData, Route } from "shared/types";
 import siteData from "fispo:site-data";
@@ -72,9 +72,9 @@ export async function initPageData(routePath: string): Promise<PageData> {
 
 export function App() {
   const pageData = usePageData();
-  if (siteData.theme === "") {
-    return <Layout pageData={pageData} />;
-  }
+  // if (siteData.theme === "") {
+  //   return <Layout pageData={pageData} />;
+  // }
   const ThemeLayout = lazy(
     () => import(`@fispo/${siteData.theme}/src/Layout/index.tsx`)
   );

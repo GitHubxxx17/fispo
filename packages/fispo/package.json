@@ -23,7 +23,7 @@
       "default": "./src/theme-default/index.ts"
     },
     "./runtime": {
-      "type": "./runtime.d.ts",
+      "types": "./runtime.d.ts",
       "default": "./src/runtime/index.ts"
     }
   },
