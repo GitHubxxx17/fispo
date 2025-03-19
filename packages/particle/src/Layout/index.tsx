@@ -8,6 +8,7 @@ import scrollManager from "../helper/scroll";
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import ArticleLayout from "./ArticleLayout";
+import CustomLayout from "./CustomLayout";
 
 interface LayoutProps {
   pageData: PageData;
@@ -29,6 +30,8 @@ const Layout = (props: LayoutProps) => {
       return <HomeLayout pageData={pageData} />;
     } else if (isArticlePage) {
       return <ArticleLayout pageData={pageData} />;
+    } else if (pageType === "custom") {
+      return <CustomLayout pageData={pageData} />;
     } else {
       return <div>404</div>;
     }
