@@ -1,6 +1,6 @@
 {
   "name": "@fispo/plugin-preloader",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "description": "loading animation of blog",
   "type": "module",
   "main": "dist/index.cjs",
@@ -19,7 +19,11 @@
     "start": "tsup --watch --format=cjs,esm",
     "build": "tsup --format=cjs,esm"
   },
-  "keywords": ["plugin","animation","fispo"],
+  "keywords": [
+    "plugin",
+    "animation",
+    "fispo"
+  ],
   "author": "XXX17",
   "license": "ISC"
 }

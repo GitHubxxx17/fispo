@@ -8,7 +8,7 @@ import { usePageData } from "./hooks";
 import ThemeLayout from "fispo:theme";
 import { useEffect, useState } from "react";
 import Preloader from "fispo:preloader";
-import { baseUrl, checkAllAssetsLoaded, removeBase } from "./util";
+import { checkAllAssetsLoaded, removeBase } from "./util";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   routePath = removeBase(routePath);
@@ -21,10 +21,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
       (item) => item.path == `/${pathList[0]}`
     );
 
-  const { articlesList, tags, categories } = await handleRoutes(
-    routes,
-    siteData.base
-  );
+  const { articlesList, tags, categories } = await handleRoutes(routes);
 
   sortByDate(articlesList);
 
@@ -63,7 +60,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
   }
 
   // 文章：获取路由组件编译后的模块内容
-  const matched = matchRoutes(routes, baseUrl(routePath));
+  const matched = matchRoutes(routes, routePath);
   if (matched) {
     const moduleInfo = await (matched[0].route as Route).preload();
 

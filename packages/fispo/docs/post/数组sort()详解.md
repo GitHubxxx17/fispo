@@ -4,7 +4,7 @@ categories: "笔记"
 date: 2023-4-15 00:08:45
 tags:
   - 笔记
-cover: /cover/b.png
+cover: /cover/b.jpg
 ---
 
 # 数组sort()

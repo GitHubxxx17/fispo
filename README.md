@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noopener noreferrer">
-    <img width="180" src="/public/logo.png" alt="fispo logo">
+    <img width="180" src="/docs/public/logo.png" alt="fispo logo">
   </a>
 </p>
 <br/>

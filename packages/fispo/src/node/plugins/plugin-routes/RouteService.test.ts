@@ -5,7 +5,7 @@ import { normalizePath } from "vite";
 
 describe("RouteService", async () => {
   const testDir = normalizePath(path.join(__dirname, "fixtures"));
-  const routeService = new RouteService(testDir);
+  const routeService = new RouteService(testDir, "");
   await routeService.init();
 
   test("conventional route by file structure", async () => {

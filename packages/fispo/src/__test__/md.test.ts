@@ -8,12 +8,14 @@ import { remarkPluginToc } from "../node/plugins/plugin-mdx/remarkPlugins/toc";
 import shiki from "shiki";
 import remarkMdx from "remark-mdx";
 import remarkStringify from "remark-stringify";
+import { rehypePluginPreWrapper } from "../node/plugins/plugin-mdx/rehypePlugins/preWrapper";
 
 describe("Markdown compile cases", async () => {
   // 初始化 processor
   const processor = unified()
     .use(remarkParse)
     .use(remarkRehype)
+    .use(rehypePluginPreWrapper)
     .use(rehypePluginShiki, {
       highlighter: await shiki.getHighlighter({ theme: "nord" }),
     })
@@ -37,8 +39,8 @@ describe("Markdown compile cases", async () => {
     const mdContent = "```js\nconsole.log(123);\n```";
     const result = await processor.process(mdContent);
     expect(result.value).toMatchInlineSnapshot(`
-      "<pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">console</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">log</span><span style="color: #D8DEE9FF">(</span><span style="color: #B48EAD">123</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
-      <span class="line"></span></code></pre>"
+      "<div class="language-js"><div class="highlight-tools"><span class="lang">js</span></div><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">console</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">log</span><span style="color: #D8DEE9FF">(</span><span style="color: #B48EAD">123</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+      <span class="line"></span></code></pre></div>"
     `);
   });
 
@@ -60,9 +62,8 @@ describe("Markdown compile cases", async () => {
       .use(remarkStringify);
 
     const result = remarkProcessor.processSync(mdContent);
-    expect(
-      result.value.toString().replace(mdContent, "")
-    ).toMatchInlineSnapshot(`
+    expect(result.value.toString().replace(mdContent, ""))
+      .toMatchInlineSnapshot(`
       "
       export const toc = [
         {

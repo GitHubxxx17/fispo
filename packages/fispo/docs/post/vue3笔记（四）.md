@@ -5,7 +5,7 @@ date: 2023-2-27 00:00:00
 tags:
   - 笔记
   - vue
-cover: /cover/f.png
+cover: /cover/f.jpg
 ---
 
 # Vue3简介

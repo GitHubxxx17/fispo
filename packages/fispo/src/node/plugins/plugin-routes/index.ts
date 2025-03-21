@@ -5,13 +5,14 @@ import { RouteService } from "./RouteService";
 interface PluginOptions {
   prefix: string;
   root: string;
+  postDir: string;
   isSSR: boolean;
 }
 
 export const CONVENTIONAL_ROUTE_ID = "virtual:routes";
 
 export function pluginRoutes(options: PluginOptions): Plugin {
-  const routeService = new RouteService(options.prefix, options.root);
+  const routeService = new RouteService(options.root, options.postDir);
   return {
     name: "fispo:vite-plugin-routes",
     async configResolved() {

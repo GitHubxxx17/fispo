@@ -26,19 +26,20 @@ export async function createVitePlugins(
     .flat();
 
   return [
-    pluginIndexHtml(config),
+    pluginConfig(config, restartServer),
     {
       enforce: "pre" as enforceType,
       ...pluginMdx({ remarkPlugins, rehypePlugins }),
     },
+    pluginIndexHtml(config),
     pluginReact({
       jsxRuntime: "automatic",
       include: /\.(mdx|js|jsx|ts|tsx)$/,
     }),
-    pluginConfig(config, restartServer),
     pluginRoutes({
       prefix: config.base || "/",
       root: config.root,
+      postDir: config.postDir,
       isSSR,
     }),
     pluginTheme(config),

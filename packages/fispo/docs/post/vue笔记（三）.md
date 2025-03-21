@@ -5,7 +5,7 @@ date: 2023-1-5 00:00:00
 tags:
   - 笔记
   - vue
-cover: /cover/h.png
+cover: /cover/h.jpg
 ---
 
 

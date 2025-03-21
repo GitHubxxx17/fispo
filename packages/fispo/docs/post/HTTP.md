@@ -5,7 +5,7 @@ date: 2022-07-15 10:00:00
 tags: 
     - 笔记
     - HTTP
-cover: /cover/c.png
+cover: /cover/c.jpg
 ---
 
 # HTTP起源

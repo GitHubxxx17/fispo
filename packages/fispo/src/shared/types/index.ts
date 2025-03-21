@@ -22,11 +22,16 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
   root?: string;
   postDir?: string;
   public?: string;
+  build?: string;
   notFoundImg?: string;
   logo?: string;
   markdown?: MarkdownOptions;
   plugins?: FispoPlugin[];
   preloader?: boolean;
+  deploy?: {
+    repo: string;
+    branch: string;
+  };
 }
 
 export interface SiteConfig {
@@ -35,8 +40,13 @@ export interface SiteConfig {
   configPath: string;
   siteData: UserConfig;
   postDir: string;
+  build: string;
   public: string;
   logo: string;
+  deploy?: {
+    repo: string;
+    branch: string;
+  };
 }
 
 export type PageType = "home" | "article" | "custom" | "404";

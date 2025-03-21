@@ -16,3 +16,4 @@ vendors
 package-lock.json
 .turbo
 docs/build
+build

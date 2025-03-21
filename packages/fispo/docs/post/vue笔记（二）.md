@@ -5,7 +5,7 @@ date: 2022-12-30 00:00:00
 tags:
   - 笔记
   - vue
-cover: /cover/g.png
+cover: /cover/g.jpg
 ---
 
 

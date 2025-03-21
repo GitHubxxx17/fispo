@@ -2,7 +2,7 @@ import { defineConfig } from "fispo-core";
 import { preloaderPlugin } from "./../plugin-preloader/src/index";
 
 export default defineConfig({
-  base: "",
+  base: "/testblog",
   title: "XXX17的个人博客",
   author: "XXX17",
   description: "学无止境",
@@ -33,4 +33,8 @@ export default defineConfig({
   },
   preloader: true,
   plugins: [preloaderPlugin()],
+  deploy: {
+    repo: "https://github.com/GitHubxxx17/testblog.git",
+    branch: "gh-page",
+  },
 });

@@ -1,3 +1,27 @@
+# [0.3.0](https://github.com/GitHubxxx17/fispo/compare/v0.1.13...v0.3.0) (2025-03-21)
+
+
+### Bug Fixes
+
+* 开发和线上主题路径 ([721133d](https://github.com/GitHubxxx17/fispo/commit/721133df7032492f96c816a0b36921e51d4c2de4))
+* 命令行工具依赖包 ([0c27fd9](https://github.com/GitHubxxx17/fispo/commit/0c27fd97808f7efebc189b29f15ce6a2b4c19b2c))
+* 修复打包bug ([cc39782](https://github.com/GitHubxxx17/fispo/commit/cc397821bf63afc5485423cc81e3f4222f50a9b9))
+* 修复生产环境下部分bug ([db87f95](https://github.com/GitHubxxx17/fispo/commit/db87f95c166bd6943b85e764fc9c41df29a8262f))
+
+
+### Features
+
+* 封装全局组件Link和新增base配置项 ([1a9c3e5](https://github.com/GitHubxxx17/fispo/commit/1a9c3e59480cff1b8124cd27aa17016fcdc31b68))
+* 新增particle主题 ([f2897d2](https://github.com/GitHubxxx17/fispo/commit/f2897d25bd684d0741e2ef7d1e329d889ae042b2))
+* 新增particle主题包 ([b34c0a8](https://github.com/GitHubxxx17/fispo/commit/b34c0a8fdcee96051af5eebbd6ba2f243c46b549))
+* 自定义插件初始配置 ([3aed6c0](https://github.com/GitHubxxx17/fispo/commit/3aed6c0387c7e1588ceee0f52fd8b82437e6c321))
+* fispo命令行创建模板工具 ([5480d4d](https://github.com/GitHubxxx17/fispo/commit/5480d4dac08841cff0b7c4993c378846e8ff2c61))
+* particle标签页和分类页 ([8eb3137](https://github.com/GitHubxxx17/fispo/commit/8eb3137b10b71366d4989abb8bb32caa2c8048a4))
+* particle主题文章页 ([88e0864](https://github.com/GitHubxxx17/fispo/commit/88e0864d91042954a55bf6b33925cac4cf647bc6))
+* preloader插件 ([e4d318e](https://github.com/GitHubxxx17/fispo/commit/e4d318ea5fdf5f9c6d01fc95e162a931807ac960))
+
+
+
 ## [0.2.4](https://github.com/GitHubxxx17/fispo/compare/v0.2.3...v0.2.4) (2025-03-12)
 
 

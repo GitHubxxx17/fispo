@@ -117,10 +117,7 @@ export async function build(root: string, config: SiteConfig) {
   const { render, routes } = await import(
     pathToFileURL(serverEntryPath).toString()
   );
-  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(
-    routes,
-    config.base
-  );
+  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(routes);
   const newRoutes = [
     ...routes,
     ...config.siteData.themeConfig.navMenus,

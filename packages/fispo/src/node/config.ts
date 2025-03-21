@@ -81,12 +81,14 @@ export async function resolveSiteData(
     backgroundImg: userConfig.backgroundImg || "/bg.png",
     root: userConfig.root || "docs",
     postDir: userConfig.postDir || "post",
+    build: userConfig.build || "build",
     public: userConfig.public || "public",
     notFoundImg: userConfig.notFoundImg || "/404.png",
     logo: userConfig.logo || "/logo.png",
     markdown: userConfig.markdown || {},
     plugins: userConfig.plugins || [],
     preloader: userConfig.preloader || false,
+    deploy: userConfig.deploy || { branch: "master", repo: "" },
   };
 }
 
@@ -100,10 +102,12 @@ export async function resolveConfig(
     base: siteData.base,
     root: siteData.root,
     postDir: siteData.postDir,
+    build: siteData.build,
     public: siteData.public,
     configPath: configPath,
     siteData: siteData,
     logo: siteData.logo,
+    deploy: siteData.deploy,
   };
   return siteConfig;
 }

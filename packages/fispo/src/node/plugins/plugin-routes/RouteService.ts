@@ -1,7 +1,6 @@
 import fastGlob from "fast-glob";
 import { normalizePath } from "vite";
-import path from "path";
-import { withBase } from "shared/utils";
+import path, { join } from "path";
 
 interface RouteMeta {
   routePath: string;
@@ -9,12 +8,12 @@ interface RouteMeta {
 }
 
 export class RouteService {
-  #base: string;
+  #root: string;
   #scanDir: string;
   #routeData: RouteMeta[] = [];
-  constructor(prefix: string, scanDir: string) {
-    this.#scanDir = scanDir;
-    this.#base = prefix;
+  constructor(root: string, postDir: string) {
+    this.#root = root;
+    this.#scanDir = join(root, postDir);
   }
 
   async init() {
@@ -27,9 +26,7 @@ export class RouteService {
       .sort();
     files.forEach((file) => {
       // 统一路径
-      const fileRelativePath = normalizePath(
-        path.relative(this.#scanDir, file)
-      );
+      const fileRelativePath = normalizePath(path.relative(this.#root, file));
       // 1. 路由路径
       const routePath = this.normalizeRoutePath(fileRelativePath);
       // 2. 文件绝对路径
@@ -66,7 +63,7 @@ ${this.#routeData
 export const routes = [
   ${this.#routeData
     .map((route, index) => {
-      return `{ path: '${withBase(encodeURI(route.routePath), this.#base)}', element: React.createElement(Route${index}), preload: () => import('${route.absolutePath}') }`;
+      return `{ path: '${encodeURI(route.routePath)}', element: React.createElement(Route${index}), preload: () => import('${route.absolutePath}') }`;
     })
     .join(",\n")}
 ];
