@@ -1,6 +1,6 @@
 {
   "name": "@fispo/plugin-preloader",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "loading animation of blog",
   "type": "module",
   "main": "dist/index.cjs",

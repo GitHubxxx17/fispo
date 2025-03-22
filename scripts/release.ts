@@ -38,7 +38,11 @@ const releaseTags = ["none", "alpha", "beta", "rc"];
 const packages = fs
   .readdirSync(path.resolve(__dirname, "../packages"))
   .filter((p) => !p.endsWith(".ts") && !p.startsWith("."));
-const skippedPackages: string[] = [];
+const skippedPackages: string[] = [
+  "create-fispo",
+  "particle",
+  "plugin-preloader",
+];
 const directRun = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: "inherit", ...opts });
 const dryRun = (bin, args, opts = {}) =>
@@ -184,6 +188,7 @@ function updateDeps(pkg, depType, version) {
 
 async function publishPackage(pkgName: string, version: string, runIfNotDry) {
   if (skippedPackages.includes(pkgName)) {
+    step(`skip publish packages: ${pkgName}...`);
     return;
   }
   const pkgRoot = getPkgRoot(pkgName);
