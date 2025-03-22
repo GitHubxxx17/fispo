@@ -4,7 +4,7 @@ import { PageData } from "shared/types";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import mediumZoom from "medium-zoom";
-import { Link } from "shared/components";
+import { Image, Link } from "shared/components";
 
 interface ArticleLayoutProps {
   pageData: PageData;
@@ -99,7 +99,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
         })}
       </div>
 
-      {currIndex !== 0 && (
+      {articlesList.length > 1 && (
         <div className={styles["article-pagination"]}>
           {currIndex > 0 && (
             <div
@@ -109,7 +109,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
               )}
             >
               <Link href={articlesList[currIndex - 1].path}>
-                <img src={articlesList[currIndex - 1].cover} alt="" />
+                <Image src={articlesList[currIndex - 1].cover} alt="" />
                 <div className={styles["pagination-info"]}>
                   <span>上一篇</span>
                   <span>{articlesList[currIndex - 1].title}</span>
@@ -125,7 +125,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
               )}
             >
               <Link href={articlesList[currIndex + 1].path}>
-                <img src={articlesList[currIndex + 1].cover} alt="" />
+                <Image src={articlesList[currIndex + 1].cover} alt="" />
                 <div className={styles["pagination-info"]}>
                   <span>下一篇</span>
                   <span>{articlesList[currIndex + 1].title}</span>
@@ -147,7 +147,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
                   key={`${recmmend.title}-${index}`}
                 >
                   <Link href={recmmend.path}>
-                    <img src={recmmend.cover} alt="" />
+                    <Image src={recmmend.cover} alt="" />
                     <div className={styles["recommend-info"]}>
                       <span>{recmmend.date}</span>
                       <span>{recmmend.title}</span>

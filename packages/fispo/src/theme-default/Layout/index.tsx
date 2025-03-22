@@ -17,6 +17,7 @@ import { localGetData, localSaveData } from "../helper/storage";
 import { Helmet } from "react-helmet-async";
 import NotFoundLayout from "./NotFoundLayout";
 import { PageData } from "shared/types";
+import { baseUrl } from "@runtime/util";
 
 interface LayoutProps {
   pageData: PageData;
@@ -69,7 +70,7 @@ export default function Layout(props: LayoutProps) {
     <div
       className={styles.layout}
       style={{
-        backgroundImage: `url(${siteData.backgroundImg})`,
+        backgroundImage: `url(${baseUrl(siteData.backgroundImg)})`,
       }}
     >
       <Helmet>

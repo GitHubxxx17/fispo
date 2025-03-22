@@ -74,6 +74,7 @@ export function pluginConfig(
               "@fortawesome/free-brands-svg-icons",
               "classnames",
             ],
+            exclude: ["@fispo", "@theme-default", "@runtime", "shared"],
           },
           resolve: {
             alias: {
@@ -92,7 +93,7 @@ export function pluginConfig(
     configureServer(server) {
       const publicDir = join(config.root, config.public);
       if (fs.pathExistsSync(publicDir)) {
-        server.middlewares.use(sirv(publicDir));
+        server.middlewares.use(config.base, sirv(publicDir));
       }
 
       [...configFiles, ...(watchFilesFromPlugins || [])].forEach((file) => {

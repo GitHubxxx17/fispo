@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { Link } from "shared/components";
+import { baseUrl } from "@runtime/util";
 interface FooterProps {
   children?: React.ReactNode;
   footerImg: string;
@@ -15,7 +16,7 @@ function Footer(props: FooterProps) {
       <div
         className={styles.footerInner}
         style={{
-          backgroundImage: `url(${props.footerImg})`,
+          backgroundImage: `url(${baseUrl(props.footerImg)})`,
         }}
       >
         <p>©2020 - 2023 By XXX17</p>

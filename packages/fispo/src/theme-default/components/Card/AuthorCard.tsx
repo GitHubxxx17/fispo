@@ -2,7 +2,7 @@ import { IconName } from "@fortawesome/fontawesome-svg-core";
 import styles from "./index.module.scss";
 import { memo } from "react";
 import Icon from "shared/components/Icon";
-import { Link } from "shared/components";
+import { Image, Link } from "shared/components";
 
 export interface AuthorCardProps {
   author?: string;
@@ -23,7 +23,7 @@ const AuthorCard = (props: AuthorCardProps) => {
   return (
     <div className={styles.author}>
       <div className={styles.avatar}>
-        <img src={props.avatar}></img>
+        <Image src={props.avatar}></Image>
       </div>
       <h2 className={styles["author-name"]}>{props?.author}</h2>
       <p className={styles["author-description"]}>{props?.description}</p>

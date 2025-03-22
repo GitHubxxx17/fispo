@@ -2,7 +2,7 @@ import { PageData } from "fispo-core/types";
 import styles from "./index.module.scss";
 import { ThemeConfig } from "types";
 import Post from "../../components/Post";
-import { Icon, IconName, Link } from "fispo-core/theme";
+import { Icon, IconName, Image, Link } from "fispo-core/theme";
 
 interface HomeLayoutProps {
   pageData: PageData;
@@ -18,7 +18,7 @@ export function HomeLayout(props: HomeLayoutProps) {
   return (
     <div className={styles.homeLayout}>
       <header>
-        <img src={banner.img} alt="" />
+        <Image src={banner.img} alt="" />
         <div className={styles["home-info"]}>
           {Array.from({ length: 4 }).map((_, i) => {
             return <span key={i} className={styles.loop}></span>;
@@ -38,7 +38,7 @@ export function HomeLayout(props: HomeLayoutProps) {
         <div className={styles["home-card"]}>
           <div className={styles["home-card-inner"]}>
             <div className={styles.avatar}>
-              <img src={avatar} alt="avatar" />
+              <Image src={avatar} alt="avatar" />
             </div>
             <div className={styles.name}>{author}</div>
             <div className={styles.description}>{description}</div>

@@ -1,3 +1,4 @@
+import { Image } from "shared/components";
 import styles from "./index.module.scss";
 
 interface NotFoundLayoutProps {
@@ -8,7 +9,7 @@ const NotFoundLayout = (props: NotFoundLayoutProps) => {
   return (
     <div className={styles.notFoundLayout}>
       <div className={styles.notFoundImg}>
-        <img src={props.notFoundImg} alt="404" />
+        <Image src={props.notFoundImg} alt="404" />
       </div>
       <div className={styles.errorInfo}>
         <h1>404</h1>

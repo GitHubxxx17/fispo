@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 import Pagination, { PaginationProps } from "../Pagination";
 import { ArticleData } from "shared/types";
 import Icon from "shared/components/Icon";
-import { Link } from "shared/components";
+import { Image, Link } from "shared/components";
 
 interface ArticleListProps {
   articleList?: ArticleData[];
@@ -65,7 +65,7 @@ function ArticleList(props: ArticleListProps) {
             <div className={styles.item} key={`${item.title}-${index}`}>
               <div className={styles.left}>
                 <Link href={item.path}>
-                  <img src={item.cover} alt="" />
+                  <Image src={item.cover} alt="" />
                 </Link>
               </div>
               <div className={styles.right}>

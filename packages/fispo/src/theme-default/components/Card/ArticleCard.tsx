@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import { memo } from "react";
 import Icon from "shared/components/Icon";
 import { ArticleData } from "shared/types";
-import { Link } from "shared/components";
+import { Image, Link } from "shared/components";
 
 export interface ArticleCardProps {
   icon?: IconName;
@@ -24,7 +24,7 @@ const ArticleCard = (props: ArticleCardProps) => {
             <li key={`${item.title}-${index}`}>
               <div className={styles.left}>
                 <Link href={item.path}>
-                  <img src={item.cover} alt="" />
+                  <Image src={item.cover} alt="" />
                 </Link>
               </div>
               <div className={styles.right}>

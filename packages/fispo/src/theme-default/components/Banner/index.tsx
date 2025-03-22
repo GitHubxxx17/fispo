@@ -6,6 +6,7 @@ import { formatDateToYYYYMMDD } from "../../../shared/utils/date";
 import Icon from "shared/components/Icon";
 import { Link } from "shared/components";
 import { BannerData } from "shared/types/default-theme";
+import { baseUrl } from "@runtime/util";
 interface BannerProps {
   isHomePage?: boolean;
   isArticlePage?: boolean;
@@ -32,7 +33,7 @@ function Banner(props: BannerProps) {
         [styles["not-home-page"]]: !isHomePage,
       })}
       style={{
-        backgroundImage: `url(${isArticlePage ? articleData.cover : bannerData.img})`,
+        backgroundImage: `url(${baseUrl(isArticlePage ? articleData.cover : bannerData.img)})`,
       }}
     >
       <div className={styles["banner-site-info"]}>
