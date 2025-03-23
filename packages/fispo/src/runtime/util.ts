@@ -3,8 +3,16 @@ import siteData from "fispo:site-data";
 
 const checkDomReady = () => {
   return new Promise((resolve) => {
-    if (document.readyState === "complete") resolve(0);
-    else window.addEventListener("load", resolve, { once: true });
+    if (
+      document.readyState === "interactive" ||
+      document.readyState === "complete"
+    ) {
+      // 若 DOM 已解析完成或页面完全加载，则立即 resolve
+      resolve(0);
+    } else {
+      // 否则监听 DOMContentLoaded 事件（DOM 解析完成时触发）
+      document.addEventListener("DOMContentLoaded", resolve, { once: true });
+    }
   });
 };
 

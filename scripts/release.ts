@@ -38,7 +38,11 @@ const releaseTags = ["none", "alpha", "beta", "rc"];
 const packages = fs
   .readdirSync(path.resolve(__dirname, "../packages"))
   .filter((p) => !p.endsWith(".ts") && !p.startsWith("."));
-const skippedPackages: string[] = ["create-fispo", "plugin-preloader"];
+const skippedPackages: string[] = [
+  "create-fispo",
+  "plugin-preloader",
+  "particle",
+];
 const directRun = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: "inherit", ...opts });
 const dryRun = (bin, args, opts = {}) =>
