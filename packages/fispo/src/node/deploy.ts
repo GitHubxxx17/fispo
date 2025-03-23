@@ -7,14 +7,19 @@ export function deploy(config: SiteConfig, dry = false) {
   if (!config.deploy || !config.deploy.repo) {
     return console.log("请在配置文件中添加deploy.repo");
   }
+  let isPush = false;
 
   // 封装执行命令的方法
-  const execute = (command: string, allowFailure = false) => {
+  const execute = (
+    command: string,
+    allowStdio = true,
+    allowFailure = false
+  ) => {
     console.log(`\n▶️  执行命令: ${command}`);
     if (dry) return;
 
     try {
-      const output = execSync(command, { stdio: "inherit" });
+      const output = execSync(command, allowStdio ? { stdio: "inherit" } : {});
       return output?.toString();
     } catch (error) {
       if (!allowFailure) throw error;
@@ -42,7 +47,8 @@ export function deploy(config: SiteConfig, dry = false) {
       }
     } else {
       try {
-        branchName = execute("git branch --show-current")?.trim() || "main";
+        branchName =
+          execute("git branch --show-current", false)?.trim() || "main";
       } catch {
         console.log("使用默认分支 main");
         branchName = "main";
@@ -52,6 +58,7 @@ export function deploy(config: SiteConfig, dry = false) {
     // 创建GitHub Actions工作流
     const workflowDir = join(".github", "workflows");
     const workflowPath = join(workflowDir, "gh-pages.yml");
+    const publishBranch = config.deploy?.branch || "gh-pages";
     // 生成工作流文件内容
     const workflowContent = `name: Deploy to GitHub Pages
 on:
@@ -70,7 +77,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: \${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${config.root}/${config.build}`;
+          publish_dir: ${config.root}/${config.build}
+          publish_branch: ${publishBranch}`;
 
     if (dry) {
       dryFileOps("创建目录", workflowDir);
@@ -99,6 +107,7 @@ jobs:
         execute(`git remote add origin ${config.deploy.repo}`);
       }
 
+      isPush = true;
       execute(`git push -u origin ${branchName}`);
     } else {
       console.log("\n📦 模拟Git操作:");
@@ -115,6 +124,9 @@ jobs:
     );
   } catch (error) {
     console.error("\n❌ 发生错误:", error);
+    if (isPush) {
+      execute(`git reset --soft HEAD~1`);
+    }
     if (dry) console.log("注意：上述错误发生在模拟执行阶段");
   }
 }
