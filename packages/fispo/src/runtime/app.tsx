@@ -75,7 +75,7 @@ export async function initPageData(routePath: string): Promise<PageData> {
   return getPageData("404", {}, "404");
 }
 
-export function App() {
+export function App({ ssr = false }: { ssr?: boolean }) {
   const pageData = usePageData();
   const [finishLoading, setFinishLoading] = useState(false);
   useEffect(() => {
@@ -91,7 +91,7 @@ export function App() {
     <>
       {siteData.preloader && <Preloader finishLoading={finishLoading} />}
       <ThemeLayout pageData={pageData} />
-      <GlobalComponents />
+      {!ssr && <GlobalComponents />}
     </>
   );
 }

@@ -41,7 +41,7 @@ export async function preview({ port }: { port?: number }) {
   };
 
   polka({ onNoMatch })
-    .use(compress, serve)
+    .use(config.base || "/", compress, serve)
     .listen(listenPort, (err) => {
       if (err) {
         throw err;

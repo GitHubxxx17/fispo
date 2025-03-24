@@ -12,7 +12,6 @@ declare global {
 }
 
 const MetingPlayer = (props: aplayerPluginOptions) => {
-  console.log(props);
   const { fixed, ...rest } = props;
   const innerFixed = fixed ?? true;
 

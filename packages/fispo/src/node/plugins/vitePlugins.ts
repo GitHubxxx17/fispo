@@ -19,12 +19,6 @@ export async function createVitePlugins(
   const highlighter = await shiki.getHighlighter({ theme: "nord" });
   const { rehypePlugins, remarkPlugins } = createPluginMdx(config, highlighter);
 
-  const pluginsFromFispoPlugins = config.siteData?.plugins
-    ?.map((item) => item.vite)
-    .filter(Boolean)
-    .map((item) => item?.plugins || [])
-    .flat();
-
   return [
     pluginConfig(config, restartServer),
     {
@@ -44,6 +38,5 @@ export async function createVitePlugins(
     }),
     pluginTheme(config),
     ...createFispoPlugins(config),
-    ...(pluginsFromFispoPlugins || []),
   ];
 }

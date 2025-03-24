@@ -10,7 +10,6 @@ interface CustomLayoutProps {
 export function CustomLayout(props: CustomLayoutProps) {
   const { pagePath, tags, articlesList, categories } = props.pageData;
   const pathList = pagePath.split("/").filter(Boolean);
-  console.log(pathList);
   const type = pathList[0];
 
   if (type == "tag") {

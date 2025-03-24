@@ -3,7 +3,6 @@ import { vitePlugin } from "fispo-core/plugin";
 export function vitePluginPlayer(): vitePlugin {
   return {
     name: "fispo:plugin-player",
-    apply: "serve",
     transformIndexHtml(html) {
       return {
         html,
