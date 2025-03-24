@@ -20,3 +20,11 @@ declare module "fispo:preloader" {
   const Preloader: React.ElementType;
   export default Preloader;
 }
+
+declare module "fispo:globalComponents" {
+  interface GlobalComponents {
+    element: React.ReactElement;
+    data: any;
+  }
+  export const globalComponents: GlobalComponents[];
+}

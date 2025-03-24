@@ -40,11 +40,6 @@ export function preloaderPlugin(config: SiteConfig): Plugin {
           `;
         } catch (error) {
           console.error("插件加载失败:", error);
-          throw new Error(`
-            Failed to load plugin: ${config.siteData.theme}
-            请确保已安装该插件并包含正确的动画组件
-            运行命令: npm install ${config.siteData.theme}
-          `);
         }
       }
     },

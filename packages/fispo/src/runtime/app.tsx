@@ -9,6 +9,7 @@ import ThemeLayout from "fispo:theme";
 import { useEffect, useState } from "react";
 import Preloader from "fispo:preloader";
 import { checkAllAssetsLoaded, removeBase } from "./util";
+import { GlobalComponents } from "shared/components";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   routePath = removeBase(routePath);
@@ -90,6 +91,7 @@ export function App() {
     <>
       {siteData.preloader && <Preloader finishLoading={finishLoading} />}
       <ThemeLayout pageData={pageData} />
+      <GlobalComponents />
     </>
   );
 }

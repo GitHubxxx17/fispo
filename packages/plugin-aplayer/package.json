@@ -1,0 +1,33 @@
+{
+  "name": "@fispo/plugin-aplayer",
+  "version": "1.0.0",
+  "description": "Fispo plug-in based on aplayer",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "start": "tsup --watch --format=cjs,esm",
+    "build": "tsup --format=cjs,esm"
+  },
+  "keywords": [
+    "fispo",
+    "plugin",
+    "aplayer"
+  ],
+  "author": "XXX17",
+  "license": "ISC",
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}

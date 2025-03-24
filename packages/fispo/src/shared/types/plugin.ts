@@ -2,6 +2,11 @@ import { UserConfig } from "vite";
 import type { PluggableList } from "unified";
 import { PageDataContext, PageData } from ".";
 
+export interface componentProps {
+  path: string;
+  props: any;
+}
+
 export interface FispoPlugin {
   /**
    * 插件的名称
@@ -69,28 +74,29 @@ export interface FispoPlugin {
   preloader?: string;
 
   /**
-   * 可选的全局组件配置函数，用于根据页面数据生成全局组件。
-   * 该函数接收一个 PageData 类型的参数，并返回一个 React 组件节点。
-   * 可以在这个函数中根据页面数据动态生成全局组件。
+   * 可选的全局组件配置，用于指定全局组件的模块路径。
    */
-  golbalComponents?: (config: PageData) => React.ReactNode;
+  globalComponents?: {
+    path: string;
+    props: any;
+  };
 
   /**
    * 可选的钩子函数，在页面渲染之前执行。
    * 此函数接收一个 PageData 类型的参数，可用于在页面渲染前对页面数据进行修改、数据准备等操作，
    */
-  beforeRenderpage?: (config: PageData) => void;
+  beforeRenderpage?: (pageData: PageData) => void;
 
   /**
    * 可选的钩子函数，在页面渲染完成后执行。
    * 此函数接收一个 PageData 类型的参数，可用于在页面渲染完成后进行一些后续处理，
    */
-  afterRenderPage?: (config: PageData) => void;
+  afterRenderPage?: (pageData: PageData) => void;
 
   /**
    * 可选的钩子函数，在页面关闭时执行。
    * 此函数接收一个 PageData 类型的参数，可用于在页面关闭时进行资源清理、数据保存等操作，
    * 例如释放占用的内存、保存用户未提交的表单数据等。
    */
-  pageClosed?: (config: PageData) => void;
+  pageClosed?: (pageData: PageData) => void;
 }

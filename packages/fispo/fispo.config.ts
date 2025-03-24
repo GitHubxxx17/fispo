@@ -1,5 +1,6 @@
 import { defineConfig } from "fispo-core";
 import { preloaderPlugin } from "./../plugin-preloader/src/index";
+import { aplayerPlugin } from "./../plugin-aplayer/src/index";
 
 export default defineConfig({
   base: "/testblog",
@@ -32,7 +33,15 @@ export default defineConfig({
     ],
   },
   preloader: true,
-  plugins: [preloaderPlugin()],
+  plugins: [
+    preloaderPlugin(),
+    aplayerPlugin({
+      server: "netease",
+      id: "2540031947",
+      type: "playlist",
+      mini: true,
+    }),
+  ],
   deploy: {
     repo: "https://github.com/GitHubxxx17/testblog.git",
     branch: "gh-page",
