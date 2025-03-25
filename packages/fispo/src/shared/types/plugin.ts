@@ -7,6 +7,14 @@ export interface componentProps {
   props: any;
 }
 
+export interface LifecycleList {
+  configBeforeResolved?: Array<string>;
+  configResolved?: Array<string>;
+  beforeRenderpage?: Array<string>;
+  afterRenderPage?: Array<string>;
+  pageClosed?: Array<string>;
+}
+
 export interface FispoPlugin {
   /**
    * 插件的名称
@@ -66,7 +74,7 @@ export interface FispoPlugin {
    * 该函数接收一个 PageDataContext 类型的参数，并返回一个 PageData 类型的值。
    * 可以在这个函数中对解析后的配置进行进一步的处理和修改。
    */
-  configResolved?: (config: PageDataContext) => PageData;
+  configResolved?: (config: PageDataContext) => void;
 
   /**
    * 可选的预加载动画配置，用于指定预加载动画的模块路径。

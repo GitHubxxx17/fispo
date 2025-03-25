@@ -18,7 +18,6 @@ const checkDomReady = () => {
 
 const checkAllImagesLoaded = () => {
   const images = Array.from(document.querySelectorAll("img"));
-  console.log(images);
   return Promise.all(
     images.map((img) => {
       return new Promise((resolve) => {
@@ -76,3 +75,24 @@ export function removeBase(url: string): string {
   const normalizedUrl = url.replace(normalizedBase, "") || "/";
   return normalizedUrl;
 }
+
+export const executeFunctionFromString = (
+  functionString: string,
+  config?: any
+) => {
+  const funString =
+    functionString.charAt(0) !== "("
+      ? `function ${functionString}`
+      : functionString;
+
+  try {
+    const func = new Function(`return ${funString}`)();
+    if (typeof func === "function") {
+      func(config);
+    } else {
+      console.log("传入的字符串不是有效的函数");
+    }
+  } catch (error) {
+    console.error("执行函数时出错:", error);
+  }
+};

@@ -8,8 +8,13 @@ import { usePageData } from "./hooks";
 import ThemeLayout from "fispo:theme";
 import { useEffect, useState } from "react";
 import Preloader from "fispo:preloader";
-import { checkAllAssetsLoaded, removeBase } from "./util";
+import {
+  checkAllAssetsLoaded,
+  executeFunctionFromString,
+  removeBase,
+} from "./util";
 import { GlobalComponents } from "shared/components";
+import { LifecycleList } from "shared/types/plugin";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   routePath = removeBase(routePath);
@@ -75,16 +80,36 @@ export async function initPageData(routePath: string): Promise<PageData> {
   return getPageData("404", {}, "404");
 }
 
-export function App({ ssr = false }: { ssr?: boolean }) {
+export function App({
+  ssr = false,
+  lifecycleList,
+}: {
+  ssr?: boolean;
+  lifecycleList?: LifecycleList;
+}) {
   const pageData = usePageData();
   const [finishLoading, setFinishLoading] = useState(false);
+
   useEffect(() => {
+    lifecycleList.beforeRenderpage.forEach((fn) =>
+      executeFunctionFromString(fn, pageData)
+    );
+
     const unmountLoading = () => {
       checkAllAssetsLoaded().then(() => {
         setFinishLoading(true);
+        lifecycleList.afterRenderPage.forEach((fn) =>
+          executeFunctionFromString(fn, pageData)
+        );
       });
     };
     if (siteData.preloader) unmountLoading();
+
+    return () => {
+      lifecycleList.pageClosed.forEach((fn) =>
+        executeFunctionFromString(fn, pageData)
+      );
+    };
   }, []);
 
   return (

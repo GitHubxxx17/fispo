@@ -28,3 +28,8 @@ declare module "fispo:globalComponents" {
   }
   export const globalComponents: GlobalComponents[];
 }
+
+declare module "fispo:lifecycle" {
+  import type { LifecycleList } from "shared/types/plugin";
+  export const lifecycleList: LifecycleList;
+}
