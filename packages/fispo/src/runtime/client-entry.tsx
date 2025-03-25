@@ -5,6 +5,7 @@ import { DataContext } from "./hooks";
 import { HelmetProvider } from "react-helmet-async";
 import { lifecycleList } from "fispo:lifecycle";
 import { executeFunctionFromString } from "./util";
+import "fispo:custom-css";
 
 async function renderInBrowser() {
   const containerEl = document.getElementById("root");

@@ -3,6 +3,7 @@ import { Plugin } from "vite";
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from "../constants";
 import { SiteConfig } from "shared/types";
 import { withBase } from "shared/utils";
+import { EXTERNAL_URL_RE } from "shared/constants";
 
 export function pluginIndexHtml(config: SiteConfig): Plugin {
   return {
@@ -10,6 +11,29 @@ export function pluginIndexHtml(config: SiteConfig): Plugin {
     apply: "serve",
     // 插入入口 script 标签
     transformIndexHtml(html) {
+      const htmlTags = config.siteData.htmlTags
+        .map((item) => {
+          if (
+            item.tag === "link" &&
+            !EXTERNAL_URL_RE.test(item.attrs.href as string)
+          )
+            return;
+          const { attrs, ...rest } = item;
+          const newAttrs = { ...attrs };
+          if (newAttrs.href && !EXTERNAL_URL_RE.test(newAttrs.href as string)) {
+            newAttrs.href = withBase(`@fs/${attrs.href}`, config.base);
+          }
+          if (newAttrs.src && !EXTERNAL_URL_RE.test(newAttrs.src as string)) {
+            newAttrs.src = withBase(`@fs/${attrs.src}`, config.base);
+          }
+
+          return {
+            attrs: newAttrs,
+            ...rest,
+          };
+        })
+        .filter(Boolean);
+
       return {
         html,
         tags: [
@@ -30,6 +54,7 @@ export function pluginIndexHtml(config: SiteConfig): Plugin {
             },
             injectTo: "body",
           },
+          ...htmlTags,
         ],
       };
     },

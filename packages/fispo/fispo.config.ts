@@ -46,4 +46,14 @@ export default defineConfig({
     repo: "https://github.com/GitHubxxx17/testblog.git",
     branch: "gh-page",
   },
+  htmlTags: [
+    {
+      tag: "link",
+      attrs: {
+        rel: "stylesheet",
+        href: "/.fispo/custom.css",
+      },
+      injectTo: "head",
+    },
+  ],
 });

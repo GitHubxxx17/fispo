@@ -16,6 +16,7 @@ import { HelmetData } from "react-helmet-async";
 import { getTagsAndCategoriesRoutes } from "shared/utils/handleRoutes";
 import { withBase } from "shared/utils";
 import { renderResultOptions } from "@runtime/ssr-entry";
+import { EXTERNAL_URL_RE } from "shared/constants";
 
 let extractedTags: HtmlTagDescriptor[] = [];
 
@@ -127,6 +128,48 @@ export async function bundle(root: string, config: SiteConfig) {
   }
 }
 
+// 生成标签的HTML字符串，根据 "head" | "body" 分类
+const generateTagsHtml = (tags: HtmlTagDescriptor[], base: string) => {
+  const headTags: string[] = [];
+  const headPrependTags: string[] = [];
+  const bodyTags: string[] = [];
+  const bodyPrependTags: string[] = [];
+  const withBaseUrl = (url: string) => withBase(url, base || "/");
+  tags.forEach((tag) => {
+    if (tag.tag === "link" && !EXTERNAL_URL_RE.test(tag.attrs.href as string))
+      return;
+    const attrs = Object.entries(tag.attrs)
+      .map(([k, v]) => {
+        if (v === true) {
+          return k;
+        }
+        if (k == "href" || k == "src") {
+          v = withBaseUrl(v as string);
+        }
+        return `${k}="${v}"`;
+      })
+      .join(" ");
+    const tagHtml = `<${tag.tag} ${attrs}></${tag.tag}>`;
+
+    if (tag.injectTo === "head") {
+      headTags.push(tagHtml);
+    } else if (tag.injectTo === "body") {
+      bodyTags.push(tagHtml);
+    } else if (tag.injectTo === "head-prepend") {
+      headPrependTags.push(tagHtml);
+    } else if (tag.injectTo === "body-prepend") {
+      bodyPrependTags.push(tagHtml);
+    }
+  });
+
+  return {
+    headTagsHtml: headTags.join("\n    "),
+    bodyTagsHtml: bodyTags.join("\n    "),
+    headPrependTagsHtml: headPrependTags.join("\n    "),
+    bodyPrependTagsHtml: bodyPrependTags.join("\n    "),
+  };
+};
+
 export async function renderPage(
   render: (url: string, helmetContext: object) => Promise<renderResultOptions>,
   routes: Route[],
@@ -140,19 +183,16 @@ export async function renderPage(
   const withBaseUrl = (url: string) => withBase(url, config.base || "/");
 
   // 生成标签的HTML字符串
-  const tagsHtml = extractedTags
-    .map((tag) => {
-      const attrs = Object.entries(tag.attrs)
-        .map(([k, v]) => {
-          if (v === true) {
-            return k;
-          }
-          return `${k}="${v}"`;
-        })
-        .join(" ");
-      return `<${tag.tag} ${attrs}></${tag.tag}>`;
-    })
-    .join("\n    ");
+  const {
+    headTagsHtml,
+    bodyTagsHtml,
+    headPrependTagsHtml,
+    bodyPrependTagsHtml,
+  } = generateTagsHtml(
+    [...extractedTags, ...config.siteData.htmlTags],
+    config.base
+  );
+
   console.log(`Rendering page in server side...`);
   return Promise.all(
     routes.map(async (route) => {
@@ -173,25 +213,28 @@ export async function renderPage(
 <!DOCTYPE html>
 <html>
   <head>
+    ${headPrependTagsHtml}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="${config.siteData.description}">
     ${helmet?.title?.toString() || ""}
     ${helmet?.meta?.toString() || ""}
     ${helmet?.link?.toString() || ""}
     ${helmet?.style?.toString() || ""}
-    ${tagsHtml}
     <link rel="icon" href="${withBaseUrl(config.logo)}" type="image/png">
-    <meta name="description" content="${config.siteData.description}">
     ${styleAssets
       .map(
         (item) => `<link rel="stylesheet" href="${withBaseUrl(item.fileName)}">`
       )
       .join("\n")}
+    ${headTagsHtml}
   </head>
   <body>
+  ${bodyPrependTagsHtml}
     <div id="root">${appHtml}</div>
       ${globalComponentsHtml}
     <script type="module" src="${withBaseUrl(clientChunk?.fileName)}"></script>
+  ${bodyTagsHtml}
   </body>
 </html>`.trim();
       const fileName = routePath.endsWith("/")

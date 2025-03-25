@@ -1,4 +1,4 @@
-import { UserConfig as ViteConfiguration } from "vite";
+import { HtmlTagDescriptor, UserConfig as ViteConfiguration } from "vite";
 import { ComponentType } from "react";
 import { DefaultThemeConfig } from "./default-theme";
 import type { PluggableList } from "unified";
@@ -109,6 +109,11 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
      */
     branch: string;
   };
+  /**
+   * 要插入到 HTML 文档中的标签描述符数组。
+   * 可用于添加自定义的元标签、脚本标签或样式标签等。
+   */
+  htmlTags?: HtmlTagDescriptor[];
 }
 
 /**

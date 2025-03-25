@@ -89,6 +89,7 @@ export async function resolveSiteData(
     plugins: userConfig.plugins || [],
     preloader: userConfig.preloader || false,
     deploy: userConfig.deploy || { branch: "master", repo: "" },
+    htmlTags: userConfig.htmlTags || [],
   };
 }
 
