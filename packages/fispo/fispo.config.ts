@@ -27,7 +27,7 @@ export default defineConfig({
       },
       {
         title: "关于",
-        path: "/about",
+        path: "/about/",
         icon: "heart",
       },
     ],

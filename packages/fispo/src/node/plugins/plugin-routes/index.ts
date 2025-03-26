@@ -12,7 +12,7 @@ interface PluginOptions {
 export const CONVENTIONAL_ROUTE_ID = "virtual:routes";
 
 export function pluginRoutes(options: PluginOptions): Plugin {
-  const routeService = new RouteService(options.root, options.postDir);
+  const routeService = new RouteService(options.root);
   return {
     name: "fispo:vite-plugin-routes",
     async configResolved() {

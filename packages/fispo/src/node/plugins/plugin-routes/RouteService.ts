@@ -11,9 +11,9 @@ export class RouteService {
   #root: string;
   #scanDir: string;
   #routeData: RouteMeta[] = [];
-  constructor(root: string, postDir: string) {
+  constructor(root: string) {
     this.#root = root;
-    this.#scanDir = join(root, postDir);
+    this.#scanDir = join(root);
   }
 
   async init() {

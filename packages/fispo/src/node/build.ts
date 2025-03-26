@@ -253,7 +253,10 @@ export async function build(root: string, config: SiteConfig) {
     pathToFileURL(serverEntryPath).toString()
   );
 
-  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(routes);
+  const tagsAndCategoriesRoutes = await getTagsAndCategoriesRoutes(
+    routes,
+    config.postDir
+  );
   const newRoutes = [
     ...routes,
     ...config.siteData.themeConfig.navMenus,

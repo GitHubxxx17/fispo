@@ -1,7 +1,7 @@
 import { Route } from "shared/types";
 import { formatDateToYYYYMMDD } from "./date";
 
-export async function handleRoutes(routes: Route[]) {
+export async function handleRoutes(routes: Route[], postDir: string) {
   // 处理文章frontmatter数据
   const articlesList = [];
   // 标签
@@ -10,7 +10,14 @@ export async function handleRoutes(routes: Route[]) {
   const categories = {};
   for await (const route of routes) {
     const moduleInfo = await route.preload();
+    if (!moduleInfo?.frontmatter) continue;
+    moduleInfo.frontmatter.tags = moduleInfo.frontmatter.tags ?? [];
+    moduleInfo.frontmatter.categories = moduleInfo.frontmatter.categories ?? "";
 
+    if (!route.path.startsWith(postDir)) continue;
+
+    moduleInfo.frontmatter.date =
+      moduleInfo.frontmatter.date ?? new Date().toLocaleString();
     articlesList.push({
       ...moduleInfo.frontmatter,
       date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
@@ -33,6 +40,7 @@ export async function handleRoutes(routes: Route[]) {
       }
     }
   }
+
   return {
     articlesList,
     tags,
@@ -40,8 +48,11 @@ export async function handleRoutes(routes: Route[]) {
   };
 }
 
-export async function getTagsAndCategoriesRoutes(routes: Route[]) {
-  const { tags, categories } = await handleRoutes(routes);
+export async function getTagsAndCategoriesRoutes(
+  routes: Route[],
+  postDir: string
+) {
+  const { tags, categories } = await handleRoutes(routes, postDir);
   const tagsRoutes = Object.keys(tags).map((tag) => {
     return {
       path: `tag/${tag}`,

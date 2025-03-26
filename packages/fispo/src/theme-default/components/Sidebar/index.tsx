@@ -91,7 +91,7 @@ function Sidebar(props: SidebarProps) {
         className={styles.stickyLayout}
         style={{ top: isUp ? "70px" : "20px" }}
       >
-        {isArticlePage && (
+        {isArticlePage && pageData.toc.length > 0 && (
           <Card
             type="toc"
             tocData={{

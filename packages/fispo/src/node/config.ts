@@ -80,7 +80,7 @@ export async function resolveSiteData(
     avatar: userConfig.avatar || "/avatar.jpg",
     backgroundImg: userConfig.backgroundImg || "/bg.png",
     root: userConfig.root || "docs",
-    postDir: userConfig.postDir || "post",
+    postDir: userConfig.postDir || "/post",
     build: userConfig.build || "build",
     public: userConfig.public || "public",
     notFoundImg: userConfig.notFoundImg || "/404.png",

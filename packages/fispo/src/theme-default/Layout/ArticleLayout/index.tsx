@@ -1,4 +1,4 @@
-import { Content } from "../../../runtime";
+import { Content } from "@runtime/index";
 import styles from "./index.module.scss";
 import { PageData } from "shared/types";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
@@ -49,6 +49,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
   // 推荐列表
   const recmmendList = useMemo(() => {
     const category = frontmatter.categories;
+    if (!category) return [];
     return articlesList.filter((article) => {
       return (
         categories[category].includes(article.path) &&

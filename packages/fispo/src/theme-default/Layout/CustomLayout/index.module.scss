@@ -1,0 +1,9 @@
+.custom-layout {
+  background-color: var(--fispo-c-card-bg);
+  border-radius: var(--default-border-radius);
+  padding: 50px 40px;
+  box-shadow: var(--box-shadow);
+  line-height: 2;
+  transition: all 0.3s;
+  color: var(--fispo-c-card-text);
+}

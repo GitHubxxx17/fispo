@@ -44,22 +44,26 @@ function Banner(props: BannerProps) {
               <Icon icon="calendar-alt" />
               发表于 {formatDateToYYYYMMDD(articleData.date)}
             </span>
-            <span>
-              <Icon icon="inbox" />
-              <Link href={`/category/${articleData.categories}`}>
-                {articleData.categories}
-              </Link>
-            </span>
-            <span className={styles["content-tag"]}>
-              <Icon icon="tag" />
-              {articleData.tags.map((tag, index) => {
-                return (
-                  <Link href={`/tag/${tag}`} key={`${tag}-${index}`}>
-                    {tag}
-                  </Link>
-                );
-              })}
-            </span>
+            {articleData.categories !== "" && (
+              <span>
+                <Icon icon="inbox" />
+                <Link href={`/category/${articleData.categories}`}>
+                  {articleData.categories}
+                </Link>
+              </span>
+            )}
+            {articleData.tags.length > 0 && (
+              <span className={styles["content-tag"]}>
+                <Icon icon="tag" />
+                {articleData.tags.map((tag, index) => {
+                  return (
+                    <Link href={`/tag/${tag}`} key={`${tag}-${index}`}>
+                      {tag}
+                    </Link>
+                  );
+                })}
+              </span>
+            )}
           </div>
         )}
       </div>

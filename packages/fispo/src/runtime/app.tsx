@@ -21,13 +21,16 @@ export async function initPageData(routePath: string): Promise<PageData> {
   const pathList = routePath.split("/").filter(Boolean);
 
   //  判断是否为nav的路径
-  const isHomeOrCustom =
+  const isNav =
     pathList.length === 0 ||
     siteData.themeConfig.navMenus.find(
-      (item) => item.path == `/${pathList[0]}`
+      (item) => item.path == `/${pathList[0]}` || item.path == routePath
     );
 
-  const { articlesList, tags, categories } = await handleRoutes(routes);
+  const { articlesList, tags, categories } = await handleRoutes(
+    routes,
+    siteData.postDir
+  );
 
   sortByDate(articlesList);
 
@@ -52,11 +55,11 @@ export async function initPageData(routePath: string): Promise<PageData> {
   };
 
   // 导航栏页面
-  if (isHomeOrCustom) {
+  if (isNav) {
     let bannerTitle = siteData.title;
     if (pathList.length == 1) {
       bannerTitle = siteData.themeConfig.navMenus.find(
-        (item) => item.path == `/${pathList[0]}`
+        (item) => item.path == `/${pathList[0]}` || item.path == routePath
       ).title;
     } else if (pathList.length > 1) {
       bannerTitle = decodeURIComponent(pathList.at(-1));

@@ -2,6 +2,8 @@ import { PageData } from "shared/types";
 import Tags from "../../components/Tags";
 import ArticleList from "../../components/ArticleList";
 import Categories from "../../components/Categories";
+import { Content } from "@runtime/index";
+import styles from "./index.module.scss";
 
 interface CustomLayoutProps {
   pageData: PageData;
@@ -34,6 +36,10 @@ export function CustomLayout(props: CustomLayoutProps) {
       />
     );
   } else {
-    return <div></div>;
+    return (
+      <div className={styles["custom-layout"]}>
+        <Content />
+      </div>
+    );
   }
 }
