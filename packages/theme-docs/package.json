@@ -1,0 +1,34 @@
+{
+  "name": "@fispo/theme-docs",
+  "version": "0.3.4",
+  "description": "themes of fispo",
+  "main": "./src/index.ts",
+  "types": "./src/types/index.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/types/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json",
+    "./config": "./src/config.js"
+  },
+  "keywords": [
+    "react",
+    "theme",
+    "fispo"
+  ],
+  "author": "XXX17",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sass": "^1.85.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1"
+  }
+}

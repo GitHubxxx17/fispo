@@ -54,6 +54,10 @@ export async function initPageData(routePath: string): Promise<PageData> {
     };
   };
 
+  // 文章：获取路由组件编译后的模块内容
+  const matched = matchRoutes(routes, routePath);
+  const moduleInfo = await (matched[0].route as Route).preload();
+
   // 导航栏页面
   if (isNav) {
     let bannerTitle = siteData.title;
@@ -65,17 +69,17 @@ export async function initPageData(routePath: string): Promise<PageData> {
       bannerTitle = decodeURIComponent(pathList.at(-1));
     }
 
-    return getPageData(routePath === "/" ? "home" : "custom", {}, bannerTitle);
+    return getPageData(
+      routePath === "/" ? "home" : "custom",
+      moduleInfo.frontmatter ?? {},
+      bannerTitle
+    );
   }
 
-  // 文章：获取路由组件编译后的模块内容
-  const matched = matchRoutes(routes, routePath);
   if (matched) {
-    const moduleInfo = await (matched[0].route as Route).preload();
-
     return getPageData(
       "article",
-      moduleInfo.frontmatter,
+      moduleInfo.frontmatter ?? {},
       moduleInfo.frontmatter.title || "",
       moduleInfo.toc
     );

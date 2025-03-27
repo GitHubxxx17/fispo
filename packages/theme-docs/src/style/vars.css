@@ -1,0 +1,65 @@
+/**
+ * Colors Base
+ *
+ * These are the pure base color presets. Most of the time, you should not be
+ * using these colors directly in the theme but rather use "Colors Theme"
+ * instead because those are "Theme (light or dark)" dependant.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --fispo-c-white: #ffffff;
+  --fispo-c-white-1: #f6f8fa;
+  --fispo-c-white-2: #f6f8fa46;
+  --fispo-c-white-3: #efefef;
+
+  --fispo-c-gray: #4c4948;
+  --fispo-c-gray-1: #a9adb3;
+  --fispo-c-gray-2: #4f5866;
+  --fispo-c-gray-3: #dfdfd6;
+  --fispo-c-gray-4: #eee;
+
+  --fispo-c-blue: #49b1f5;
+  --fispo-c-blue-1: #5da6d6;
+  --fispo-text-highlight-color: #1f2d3d;
+
+  --fispo-c-orange: #ff7242;
+
+  --fispo-c-dark: #1c1c1c;
+  --fispo-c-dark-1: #050709;
+  --fispo-c-dark-2: #05070991;
+  --fispo-c-dark-3: #3c3c43;
+  --fispo-c-dark-4: #202127;
+
+  --fispo-c-dark-5: #121212;
+  --fispo-c-dark-6: rgba(0, 0, 0, 0.3);
+  --fispo-c-dark-7: #2c2c2c;
+  --fispo-c-dark-8: #1f1f1f;
+
+  --fispo-c-green-1: #00c4b6;
+}
+
+/**
+ * Colors Theme
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --fispo-c-bg: var(--fispo-c-white-1);
+  --fispo-nav-c-bg: var(--fispo-c-white-2);
+  --fispo-nav-c-text: var(--fispo-c-gray-2);
+  --fispo-c-text: var(--fispo-c-dark);
+
+  --fispo-hero-c-title: var(--fispo-c-blue);
+  --fispo-hero-c-text: var(--fispo-c-dark-3);
+  --fispo-block-c-bg: var(--fispo-c-gray-4);
+}
+
+.dark {
+  --fispo-c-bg: var(--fispo-c-dark-1);
+  --fispo-nav-c-bg: var(--fispo-c-dark-2);
+  --fispo-nav-c-text: var(--fispo-c-gray-1);
+  --fispo-c-text: var(--fispo-c-white-3);
+
+  --fispo-hero-c-title: var(--fispo-c-blue-1);
+  --fispo-hero-c-text: var(--fispo-c-gray-3);
+  --fispo-block-c-bg: var(--fispo-c-dark-4);
+}

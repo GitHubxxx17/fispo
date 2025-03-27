@@ -44,7 +44,7 @@ function Nav(props: NavProps) {
             return (
               <li key={items.title}>
                 <Link href={items.path}>
-                  <Icon icon={items.icon} />
+                  {items.icon && <Icon icon={items.icon} />}
                   <span>{items.title}</span>
                 </Link>
               </li>

@@ -1,49 +1,29 @@
 import { defineConfig } from "fispo-core";
 
 export default defineConfig({
-  title: "XXX17的个人博客",
+  title: "Fispo",
   author: "XXX17",
-  description: "学无止境",
+  description: "专为构建现代化博客而设计的静态站点生成器",
   notFoundImg: "/404.png",
+  theme: "theme-docs",
   themeConfig: {
     navMenus: [
       {
-        title: "首页",
-        path: "/",
-        icon: "home",
+        title: "指南",
+        path: "/guide",
       },
       {
-        title: "标签",
-        path: "/tag",
-        icon: "tag",
+        title: "配置项",
+        path: "/config",
       },
       {
-        title: "分类",
-        path: "/category",
-        icon: "folder-open",
+        title: "主题",
+        path: "/theme",
       },
       {
-        title: "关于",
-        path: "/about",
-        icon: "heart",
+        title: "插件",
+        path: "/plugin",
       },
     ],
-    sidebar: {
-      card_author: {
-        button: {
-          link: "https://github.com/GitHubxxx17/fispo",
-        },
-      },
-      card_categories: {
-        limit: 1,
-      },
-      card_recent_post: {
-        sort: "date",
-      },
-      card_announcement: {
-        enable: true,
-        content: "网站正在更新中······",
-      },
-    },
   },
 });

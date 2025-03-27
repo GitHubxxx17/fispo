@@ -15,5 +15,3 @@ vendors
 .eslintcache
 package-lock.json
 .turbo
-docs/build
-build
