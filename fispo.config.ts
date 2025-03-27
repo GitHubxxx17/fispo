@@ -1,6 +1,7 @@
 import { defineConfig } from "fispo-core";
 
 export default defineConfig({
+  base: "/fispo",
   title: "Fispo",
   author: "XXX17",
   description: "专为构建现代化博客而设计的静态站点生成器",

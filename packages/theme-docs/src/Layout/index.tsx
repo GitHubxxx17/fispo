@@ -6,6 +6,7 @@ import "../style/vars.css";
 import { HomeLayout } from "./HomeLayout";
 import { useEffect } from "react";
 import scrollManager from "../helper/scroll";
+import { Helmet } from "react-helmet-async";
 
 interface LayoutProps {
   pageData: PageData;
@@ -42,6 +43,9 @@ const Layout = (props: LayoutProps) => {
 
   return (
     <div className={styles.layout}>
+      <Helmet>
+        <title>{isHomePage ? title : `${title} | ${siteData.title}`}</title>
+      </Helmet>
       <Nav title={title} menus={navMenus} logo={logo}></Nav>
       {getCurrentLayout()}
     </div>
