@@ -56,12 +56,17 @@ export async function initPageData(routePath: string): Promise<PageData> {
 
   // 文章：获取路由组件编译后的模块内容
   const matched = matchRoutes(routes, routePath);
-  const moduleInfo = await (matched[0].route as Route).preload();
+  const moduleInfo = await (matched?.[0].route as Route)?.preload();
 
   // 导航栏页面
   if (isNav) {
     let bannerTitle = siteData.title;
-    if (pathList.length == 1) {
+    const title = moduleInfo?.frontmatter?.title;
+
+    console.log(title);
+    if (title) {
+      bannerTitle = title;
+    } else if (pathList.length == 1) {
       bannerTitle = siteData.themeConfig.navMenus.find(
         (item) => item.path == `/${pathList[0]}` || item.path == routePath
       ).title;
@@ -71,17 +76,18 @@ export async function initPageData(routePath: string): Promise<PageData> {
 
     return getPageData(
       routePath === "/" ? "home" : "custom",
-      moduleInfo.frontmatter ?? {},
-      bannerTitle
+      moduleInfo?.frontmatter ?? {},
+      bannerTitle,
+      moduleInfo?.toc ?? []
     );
   }
 
   if (matched) {
     return getPageData(
       "article",
-      moduleInfo.frontmatter ?? {},
-      moduleInfo.frontmatter.title || "",
-      moduleInfo.toc
+      moduleInfo?.frontmatter ?? {},
+      moduleInfo?.frontmatter?.title || "",
+      moduleInfo?.toc
     );
   }
   return getPageData("404", {}, "404");

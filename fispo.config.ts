@@ -1,6 +1,7 @@
 import { defineConfig } from "fispo-core";
+import { ThemeConfig } from "./packages/theme-docs/src/types/index";
 
-export default defineConfig({
+export default defineConfig<ThemeConfig>({
   base: "/fispo",
   title: "Fispo",
   author: "XXX17",
@@ -15,7 +16,7 @@ export default defineConfig({
       },
       {
         title: "配置项",
-        path: "/config",
+        path: "/guide/introduction/config",
       },
       {
         title: "主题",
@@ -26,5 +27,26 @@ export default defineConfig({
         path: "/plugin",
       },
     ],
+    sidebar: {
+      "/guide": [
+        {
+          text: "简介",
+          items: [
+            {
+              text: "什么是Fispo",
+              link: "/guide",
+            },
+            {
+              text: "建站",
+              link: "/guide/introduction/setup",
+            },
+            {
+              text: "配置项",
+              link: "/guide/introduction/config",
+            },
+          ],
+        },
+      ],
+    },
   },
 });

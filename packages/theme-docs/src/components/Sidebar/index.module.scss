@@ -1,0 +1,30 @@
+.sidebar {
+  width: 200px;
+  height: calc(100vh - 60px);
+  position: fixed;
+  top: 60px;
+  left: 10%;
+
+  .sidebarTitle {
+    h2 {
+      font-size: 1rem;
+    }
+  }
+
+  .sidebarContent {
+    margin-bottom: 10px;
+  }
+
+  .sidebarItem {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .active {
+    font-weight: 700;
+
+    a {
+      color: #1b9bf0;
+    }
+  }
+}

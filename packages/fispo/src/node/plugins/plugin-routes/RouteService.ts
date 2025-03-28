@@ -1,6 +1,6 @@
 import fastGlob from "fast-glob";
 import { normalizePath } from "vite";
-import path, { join } from "path";
+import path from "path";
 
 interface RouteMeta {
   routePath: string;
@@ -8,33 +8,24 @@ interface RouteMeta {
 }
 
 export class RouteService {
-  #root: string;
   #scanDir: string;
   #routeData: RouteMeta[] = [];
+  #extensions: string[] = [];
+
   constructor(root: string) {
-    this.#root = root;
-    this.#scanDir = join(root);
+    this.#scanDir = root;
+    this.#extensions = ["js", "jsx", "ts", "tsx", "md", "mdx"];
   }
 
   async init() {
     const files = fastGlob
-      .sync(["**/*.{js,jsx,ts,tsx,md,mdx}"], {
+      .sync([`**/*.{${this.#extensions.join(",")}}`], {
         cwd: this.#scanDir,
         absolute: true,
-        ignore: ["**/node_modules/**", "**/build/**", "config.ts"],
+        ignore: ["**/build/**"],
       })
       .sort();
-    files.forEach((file) => {
-      // 统一路径
-      const fileRelativePath = normalizePath(path.relative(this.#root, file));
-      // 1. 路由路径
-      const routePath = this.normalizeRoutePath(fileRelativePath);
-      // 2. 文件绝对路径
-      this.#routeData.push({
-        routePath,
-        absolutePath: file,
-      });
-    });
+    files.forEach((file) => this.addRoute(file));
   }
 
   // 获取路由数据，方便测试
@@ -47,6 +38,28 @@ export class RouteService {
     // 去除文件扩展名、index
     const routePath = rawPath.replace(/\.(.*)?$/, "").replace(/index$/, "");
     return routePath.startsWith("/") ? routePath : `/${routePath}`;
+  }
+
+  addRoute(filePath: string) {
+    const fileRelativePath = normalizePath(
+      path.relative(this.#scanDir, filePath)
+    );
+    const routePath = this.normalizeRoutePath(fileRelativePath);
+
+    this.#routeData.push({
+      routePath,
+      absolutePath: filePath,
+    });
+  }
+
+  removeRoute(filePath: string) {
+    const fileRelativePath = normalizePath(
+      path.relative(this.#scanDir, filePath)
+    );
+    const routePath = this.normalizeRoutePath(fileRelativePath);
+    this.#routeData = this.#routeData.filter(
+      (route) => route.routePath !== routePath
+    );
   }
 
   generateRoutesCode(ssr = false) {
@@ -68,5 +81,9 @@ export const routes = [
     .join(",\n")}
 ];
 `;
+  }
+
+  getExtensions() {
+    return this.#extensions;
   }
 }

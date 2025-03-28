@@ -1,7 +1,7 @@
-import { loadConfigFromFile } from "vite";
+import { loadConfigFromFile, mergeConfig } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "shared/types";
-import { mergeConfig, defaultConfig } from "shared/utils/defaultConfig";
+import { defaultConfig } from "shared/utils/defaultConfig";
 import { configFiles, THEME_PATH } from "./constants";
 import { DefaultThemeConfig } from "shared/types/default-theme";
 import { join } from "path";

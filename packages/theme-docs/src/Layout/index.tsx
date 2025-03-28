@@ -3,10 +3,12 @@ import styles from "./index.module.scss";
 import Nav from "../components/Nav";
 import "../style/base.css";
 import "../style/vars.css";
+import "../style/docs.css";
 import { HomeLayout } from "./HomeLayout";
 import { useEffect } from "react";
 import scrollManager from "../helper/scroll";
 import { Helmet } from "react-helmet-async";
+import DocLayout from "./DocLayout";
 
 interface LayoutProps {
   pageData: PageData;
@@ -14,8 +16,8 @@ interface LayoutProps {
 
 const Layout = (props: LayoutProps) => {
   const { pageData } = props;
-  const { pageType, siteData } = pageData;
-  const { themeConfig, title, logo } = siteData;
+  const { pageType, siteData, title } = pageData;
+  const { themeConfig, title: siteTitle, logo } = siteData;
   const { navMenus } = themeConfig;
   // 获取 pageType
   const isHomePage = pageType === "home";
@@ -24,11 +26,11 @@ const Layout = (props: LayoutProps) => {
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
     if (isHomePage) {
-      return <HomeLayout pageData={pageData}></HomeLayout>;
+      return <HomeLayout pageData={pageData} />;
     } else if (isArticlePage) {
-      return <div>article</div>;
+      return <DocLayout pageData={pageData} />;
     } else if (pageType === "custom") {
-      return <div>custom</div>;
+      return <DocLayout pageData={pageData} />;
     } else {
       return <div>404</div>;
     }
@@ -46,7 +48,7 @@ const Layout = (props: LayoutProps) => {
       <Helmet>
         <title>{isHomePage ? title : `${title} | ${siteData.title}`}</title>
       </Helmet>
-      <Nav title={title} menus={navMenus} logo={logo}></Nav>
+      <Nav title={siteTitle} menus={navMenus} logo={logo}></Nav>
       {getCurrentLayout()}
     </div>
   );

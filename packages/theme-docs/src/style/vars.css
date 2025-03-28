@@ -51,6 +51,8 @@
   --fispo-hero-c-title: var(--fispo-c-blue);
   --fispo-hero-c-text: var(--fispo-c-dark-3);
   --fispo-block-c-bg: var(--fispo-c-gray-4);
+
+  --fispo-doc-c-bg: var(--fispo-c-white);
 }
 
 .dark {
@@ -62,4 +64,6 @@
   --fispo-hero-c-title: var(--fispo-c-blue-1);
   --fispo-hero-c-text: var(--fispo-c-gray-3);
   --fispo-block-c-bg: var(--fispo-c-dark-4);
+
+  --fispo-doc-c-bg: var(--fispo-c-dark);
 }

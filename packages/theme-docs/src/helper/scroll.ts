@@ -51,10 +51,8 @@ function UseScroll() {
 
     const targetTop = target.getBoundingClientRect().top;
 
-    let scrollTop = window.scrollY + targetTop + targetPadding;
-    if (targetTop < 0) {
-      scrollTop -= NAV_HEIGHT;
-    }
+    const scrollTop = window.scrollY + targetTop + targetPadding - NAV_HEIGHT;
+
     window.scrollTo({
       left: 0,
       top: scrollTop,

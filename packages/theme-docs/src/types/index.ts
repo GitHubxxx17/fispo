@@ -9,15 +9,22 @@ export interface navMenuItem {
   children?: navMenuItem[];
 }
 
-export interface Banner {
-  img?: string;
-  title?: string;
-  subTitle?: string;
+export interface Sidebar {
+  [path: string]: SidebarGroup[];
 }
+
+export interface SidebarGroup {
+  text?: string;
+  items: SidebarItem[];
+}
+
+export type SidebarItem =
+  | { text: string; link: string }
+  | { text: string; link?: string; items: SidebarItem[] };
 
 export interface ThemeConfig {
   navMenus?: navMenuItem[];
-  banner?: Banner;
+  sidebar?: Sidebar;
 }
 
 export interface Feature {

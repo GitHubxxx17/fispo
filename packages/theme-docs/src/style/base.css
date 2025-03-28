@@ -26,12 +26,13 @@ body {
   background: var(--fispo-c-bg);
   position: relative;
   color: var(--fispo-c-text);
+  font-size: 1rem;
   font:
     500 14px Lexend,
     "Noto Sans SC",
     sans-serif;
 
-  transition: all 0.3s;
+  transition: background 0.3s;
 }
 
 img {
@@ -81,6 +82,7 @@ p,
 ul {
   line-height: 1.7;
   margin: 15px 0;
+  font-size: 1rem;
 }
 
 .mobile-nav {

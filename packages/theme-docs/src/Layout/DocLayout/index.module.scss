@@ -1,0 +1,65 @@
+.docLayout {
+  position: relative;
+  width: 100%;
+  padding: 80px 10% 0;
+
+  .content {
+    background-color: var(--fispo-doc-c-bg);
+    box-shadow: var(--box-shadow);
+    margin-left: 200px;
+    width: calc(100% - 440px);
+    padding: 20px 30px;
+    border-radius: 10px;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  blockquote {
+    background: #d9e8ff6b;
+    border-left: 3px solid #1e3e3f;
+    border-radius: 3px;
+    margin: 15px 0;
+    overflow: auto;
+    padding: 0 15px;
+  }
+
+  code {
+    background: #bddcf76b;
+    border-radius: 4px;
+    line-height: 2.5;
+    padding: 4px 8px;
+  }
+
+  ol,
+  ul {
+    list-style: auto;
+    padding: 0 0 0 40px;
+  }
+
+  ol li,
+  ul li {
+    margin: 8px 0;
+  }
+
+  table {
+    display: table;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    empty-cells: show;
+    margin-bottom: 20px;
+
+    thead {
+      background: rgba(153, 169, 191, 0.1);
+    }
+
+    th,
+    td {
+      padding: 6px 12px;
+      border: 1px solid #eee;
+      vertical-align: middle;
+    }
+  }
+}
