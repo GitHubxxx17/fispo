@@ -1,43 +1,44 @@
 div[class*="language-"] {
-  border: 1px solid #ebeef5;
-  border-radius: 15px;
   box-shadow: 0 2px 12px 0 #0000001a;
-  margin: 25px 0;
+  border-radius: 5px;
+  margin: 15px 0;
   overflow: hidden;
   white-space: normal;
   position: relative;
-  padding: 50px 30px 10px;
-  background-color: rgb(46, 52, 64);
+}
+
+.highlight-tools .lang {
+  display: none;
 }
 
 .highlight-tools {
-  background: linear-gradient(to right, #876eed 0, #69b4ec 100%);
-  border-radius: 0 0 10px 10px;
-  box-shadow: 1px 1px 0.75rem #856eed4d;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  left: 30px;
-  padding: 10px 15px;
   position: absolute;
-  top: 0;
+  right: 0;
+  padding: 6px 10px 6px 0;
+  z-index: 100;
+}
+
+div[class*="language-"]:hover #copy-button {
+  opacity: 1;
 }
 
 .shiki {
-  background-color: transparent !important;
+  position: relative;
+  padding: 15px;
+  background-color: var(--fispo-code-block-c-bg) !important;
 }
 
 [class*="language-"] .shiki code {
   background-color: transparent;
   line-height: 1.5;
   padding: 0;
+  font-size: 14px;
 }
 
 [class*="language-"] pre {
   position: relative;
   z-index: 1;
   margin: 0;
-  padding-bottom: 16px;
   overflow-x: auto;
   scrollbar-color: #a1a1a1 transparent;
 }

@@ -90,6 +90,7 @@ export async function resolveSiteData(
     preloader: userConfig.preloader || false,
     deploy: userConfig.deploy || { branch: "master", repo: "" },
     htmlTags: userConfig.htmlTags || [],
+    highlighter: userConfig.highlighter || { theme: "nord" },
   };
 }
 

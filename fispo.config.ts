@@ -49,4 +49,7 @@ export default defineConfig<ThemeConfig>({
       ],
     },
   },
+  highlighter: {
+    theme: "min-light",
+  },
 });

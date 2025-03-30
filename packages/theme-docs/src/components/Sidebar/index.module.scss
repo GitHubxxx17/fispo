@@ -4,6 +4,7 @@
   position: fixed;
   top: 60px;
   left: 10%;
+  transition: all 0.3s;
 
   .sidebarTitle {
     h2 {
@@ -26,5 +27,11 @@
     a {
       color: #1b9bf0;
     }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .sidebar {
+    left: 5%;
   }
 }

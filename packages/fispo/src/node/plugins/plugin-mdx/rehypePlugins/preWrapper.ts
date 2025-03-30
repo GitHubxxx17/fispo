@@ -18,7 +18,8 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         !(node.data as unknown as dataType)?.isVisited
       ) {
         const codeNode = node.children[0];
-        const codeClassName = codeNode.properties?.className?.toString() || "";
+        const codeClassName =
+          codeNode.properties?.className?.toString() || "language-md";
         // language-xxx
         const lang = codeClassName.split("-")[1];
 
@@ -58,6 +59,12 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
                     value: lang,
                   },
                 ],
+              },
+              {
+                type: "element",
+                tagName: "CopyButton",
+                properties: {},
+                children: [],
               },
             ],
           },

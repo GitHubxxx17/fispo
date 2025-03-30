@@ -1,0 +1,23 @@
+.copy-button {
+  transition: all 0.3s;
+  opacity: 0;
+
+  svg {
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:first-child {
+      color: #98a3aa;
+      transition: all 0.3s;
+    }
+
+    &:hover {
+      color: #696a6a;
+    }
+
+    &:last-child {
+      display: none;
+      color: #208a41;
+    }
+  }
+}

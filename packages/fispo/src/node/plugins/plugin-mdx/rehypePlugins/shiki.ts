@@ -20,7 +20,8 @@ export const rehypePluginShiki: Plugin<[Options], Root> = ({ highlighter }) => {
       ) {
         const codeNode = node.children[0];
         const codeContent = (codeNode.children[0] as Text).value;
-        const codeClassName = codeNode.properties?.className?.toString() || "";
+        const codeClassName =
+          codeNode.properties?.className?.toString() || "language-md";
 
         const lang = codeClassName.split("-")[1];
         if (!lang) {

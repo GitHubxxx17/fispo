@@ -16,7 +16,7 @@ export async function createVitePlugins(
   restartServer?: () => Promise<void>,
   isSSR = false
 ) {
-  const highlighter = await shiki.getHighlighter({ theme: "nord" });
+  const highlighter = await shiki.getHighlighter(config.siteData.highlighter);
   const { rehypePlugins, remarkPlugins } = createPluginMdx(config, highlighter);
 
   const pluginsFromIslandPlugins = config.siteData.plugins
@@ -29,7 +29,11 @@ export async function createVitePlugins(
     pluginConfig(config, restartServer),
     {
       enforce: "pre" as enforceType,
-      ...pluginMdx({ remarkPlugins, rehypePlugins }),
+      ...pluginMdx({
+        providerImportSource: "@mdx-js/react",
+        remarkPlugins,
+        rehypePlugins,
+      }),
     },
     pluginIndexHtml(config),
     pluginReact({

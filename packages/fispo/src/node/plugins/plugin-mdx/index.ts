@@ -11,8 +11,6 @@ import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
 import { remarkPluginInfo } from "./remarkPlugins/info";
 import rehypeRaw from "rehype-raw";
-import rehypeReact from "rehype-react";
-import React from "react";
 import { SiteConfig } from "shared/types";
 
 export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
@@ -50,12 +48,6 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
       [rehypePluginShiki, { highlighter }],
       ...(config.siteData.markdown.rehypePlugins ?? []),
       ...plugins.map((plugin) => plugin.markdown?.rehypePlugins || []).flat(),
-      [
-        rehypeReact,
-        {
-          createElement: React.createElement,
-        },
-      ],
     ] as PluggableList,
   };
 }

@@ -100,6 +100,7 @@ const Aside = (props: AsideProps) => {
             style={{
               marginLeft: `${(depth - 1) * 10}px`,
             }}
+            ref={tocScroller}
           >
             <Link
               ref={(el) => {

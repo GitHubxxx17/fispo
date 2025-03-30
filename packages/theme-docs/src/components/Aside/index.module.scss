@@ -6,6 +6,7 @@
   padding: 0 20px;
   margin-left: 20px;
   border-left: 1px solid #d3d3d3;
+  transition: all 0.3s;
 
   h2 {
     margin-top: 0;
@@ -26,5 +27,17 @@
     line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .aside {
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .aside {
+    display: none;
   }
 }

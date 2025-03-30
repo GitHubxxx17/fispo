@@ -3,6 +3,7 @@ import { ComponentType } from "react";
 import { DefaultThemeConfig } from "./default-theme";
 import type { PluggableList } from "unified";
 import { FispoPlugin } from "./plugin";
+import { HighlighterOptions } from "shiki";
 
 /**
  * 定义 Markdown 配置选项的接口
@@ -114,6 +115,10 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
    * 可用于添加自定义的元标签、脚本标签或样式标签等。
    */
   htmlTags?: HtmlTagDescriptor[];
+  /**
+   * markdown 代码高亮配置
+   */
+  highlighter?: HighlighterOptions;
 }
 
 /**
