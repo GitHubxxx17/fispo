@@ -3,7 +3,6 @@ import { preloaderPlugin } from "./../plugin-preloader/src/index";
 import { aplayerPlugin } from "./../plugin-aplayer/src/index";
 
 export default defineConfig({
-  base: "/testblog",
   title: "XXX17的个人博客",
   author: "XXX17",
   description: "学无止境",

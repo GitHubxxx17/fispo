@@ -73,6 +73,7 @@ export function pluginConfig(
               "@fortawesome/free-solid-svg-icons",
               "@fortawesome/free-brands-svg-icons",
               "classnames",
+              "@mdx-js/react",
             ],
             exclude: ["@fispo", "@theme-default", "@runtime", "shared"],
           },

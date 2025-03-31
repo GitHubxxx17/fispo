@@ -82,17 +82,18 @@ export async function bundle(root: string, config: SiteConfig) {
     root: join(process.cwd(), root),
     plugins: await createVitePlugins(config, undefined, isServer),
     ssr: {
-      // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，因为 react-router-dom 的产物为 ESM 格式
-      noExternal: ["react-router-dom"],
+      noExternal: ["react-router-dom", "react-helmet-async"],
     },
     build: {
       minify: false,
       ssr: isServer,
       outDir: isServer ? join(root, ".temp") : join(root, "build"),
+      emptyOutDir: true,
       rollupOptions: {
         input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
         output: {
-          format: isServer ? "cjs" : "esm",
+          entryFileNames: isServer ? "[name].mjs" : undefined,
+          format: "es",
         },
         plugins: [
           {
@@ -248,7 +249,7 @@ export async function renderPage(
 
 export async function build(root: string, config: SiteConfig) {
   const [clientBundle] = await bundle(root, config);
-  const serverEntryPath = join(root, ".temp", "ssr-entry.cjs");
+  const serverEntryPath = join(root, ".temp", "ssr-entry.mjs");
   const { render, routes } = await import(
     pathToFileURL(serverEntryPath).toString()
   );

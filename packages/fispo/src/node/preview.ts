@@ -47,7 +47,7 @@ export async function preview({ port }: { port?: number }) {
         throw err;
       }
       console.log(
-        `> Preview server is running at http://localhost:${listenPort}`
+        `> Preview server is running at http://localhost:${listenPort}${config.base}`
       );
     });
 }

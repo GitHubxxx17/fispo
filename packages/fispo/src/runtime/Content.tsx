@@ -4,6 +4,7 @@ import { baseUrl } from "./util";
 import { memo, useMemo } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import CopyButton from "shared/components/CopyButton";
+import { inBrowser } from "shared/utils";
 
 export interface ContentProps {
   components?: {
@@ -15,7 +16,7 @@ const Content = (props: ContentProps) => {
   const { components } = props;
   const handleRoutes = useMemo(() => {
     return routes.map((route) => {
-      return { ...route, path: baseUrl(route.path) };
+      return { ...route, path: inBrowser() ? baseUrl(route.path) : route.path };
     });
   }, [routes]);
   const routeElement = useRoutes(handleRoutes);

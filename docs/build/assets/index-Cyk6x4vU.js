@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports } from "./client-entry-DrQUHd3R.js";
+import { u as useMDXComponents, j as jsxRuntimeExports } from "../client-entry.js";
 const frontmatter = {
   "title": "什么是Fispo"
 };
@@ -43,6 +43,7 @@ function _createMdxContent(props) {
     span: "span",
     strong: "strong",
     ul: "ul",
+    ...useMDXComponents(),
     ...props.components
   };
   return jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, {
@@ -159,7 +160,10 @@ function _createMdxContent(props) {
   });
 }
 function MDXContent(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
+  const { wrapper: MDXLayout } = {
+    ...useMDXComponents(),
+    ...props.components
+  };
   return MDXLayout ? jsxRuntimeExports.jsx(MDXLayout, {
     ...props,
     children: jsxRuntimeExports.jsx(_createMdxContent, {

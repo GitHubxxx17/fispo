@@ -63,7 +63,6 @@ export async function initPageData(routePath: string): Promise<PageData> {
     let bannerTitle = siteData.title;
     const title = moduleInfo?.frontmatter?.title;
 
-    console.log(title);
     if (title) {
       bannerTitle = title;
     } else if (pathList.length == 1) {
@@ -101,6 +100,7 @@ export function App({
   lifecycleList?: LifecycleList;
 }) {
   const pageData = usePageData();
+  pageData.ssr = ssr;
   const [finishLoading, setFinishLoading] = useState(false);
 
   useEffect(() => {
