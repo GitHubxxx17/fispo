@@ -7022,7 +7022,7 @@ function requireClient() {
 }
 var clientExports = requireClient();
 var reactExports = requireReact();
-const React3 = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const React = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
 function _extends() {
   return _extends = Object.assign ? Object.assign.bind() : function(n) {
     for (var e = 1; e < arguments.length; e++) {
@@ -7269,6 +7269,10 @@ function parsePath(path) {
  */
 const NavigationContext = /* @__PURE__ */ reactExports.createContext(null);
 const LocationContext = /* @__PURE__ */ reactExports.createContext(null);
+const RouteContext = /* @__PURE__ */ reactExports.createContext({
+  outlet: null,
+  matches: []
+});
 function invariant$1(cond, message) {
   throw new Error(message);
 }
@@ -7474,6 +7478,51 @@ const normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\
 function useInRouterContext() {
   return reactExports.useContext(LocationContext) != null;
 }
+function useLocation() {
+  !useInRouterContext() ? invariant$1() : void 0;
+  return reactExports.useContext(LocationContext).location;
+}
+function useRoutes(routes2, locationArg) {
+  !useInRouterContext() ? invariant$1() : void 0;
+  let {
+    matches: parentMatches
+  } = reactExports.useContext(RouteContext);
+  let routeMatch = parentMatches[parentMatches.length - 1];
+  let parentParams = routeMatch ? routeMatch.params : {};
+  routeMatch ? routeMatch.pathname : "/";
+  let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+  routeMatch && routeMatch.route;
+  let locationFromContext = useLocation();
+  let location2;
+  {
+    location2 = locationFromContext;
+  }
+  let pathname = location2.pathname || "/";
+  let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+  let matches = matchRoutes(routes2, {
+    pathname: remainingPathname
+  });
+  return _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
+    params: Object.assign({}, parentParams, match.params),
+    pathname: joinPaths([parentPathnameBase, match.pathname]),
+    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+  })), parentMatches);
+}
+function _renderMatches(matches, parentMatches) {
+  if (parentMatches === void 0) {
+    parentMatches = [];
+  }
+  if (matches == null) return null;
+  return matches.reduceRight((outlet, match, index) => {
+    return /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, {
+      children: match.route.element !== void 0 ? match.route.element : outlet,
+      value: {
+        outlet,
+        matches: parentMatches.concat(matches.slice(0, index + 1))
+      }
+    });
+  }, null);
+}
 function Router(_ref3) {
   let {
     basename: basenameProp = "/",
@@ -7564,7 +7613,7 @@ function BrowserRouter(_ref) {
 }
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
-  return "/" + dep;
+  return "/fispo/" + dep;
 };
 const seen = {};
 const __vitePreload = function preload(baseModule, deps, importerUrl) {
@@ -7626,13 +7675,17 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-const Route0 = React3.lazy(() => __vitePreload(() => import("./index-B4y_O9Ja.js"), true ? [] : void 0));
-const Route1 = React3.lazy(() => __vitePreload(() => import("./helloworld-D8zyqnLn.js"), true ? [] : void 0));
+const Route0 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
+const Route1 = React.lazy(() => __vitePreload(() => import("./assets/config-Cs4VAVBh.js"), true ? [] : void 0));
+const Route2 = React.lazy(() => __vitePreload(() => import("./assets/setup-Ou9FmrYS.js"), true ? [] : void 0));
+const Route3 = React.lazy(() => __vitePreload(() => import("./assets/index-BkAds40F.js"), true ? [] : void 0));
 const routes = [
-  { path: "/", element: React3.createElement(Route0), preload: () => __vitePreload(() => import("./index-B4y_O9Ja.js"), true ? [] : void 0) },
-  { path: "/post/helloworld", element: React3.createElement(Route1), preload: () => __vitePreload(() => import("./helloworld-D8zyqnLn.js"), true ? [] : void 0) }
+  { path: "/guide/", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/config", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/config-Cs4VAVBh.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/setup", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/setup-Ou9FmrYS.js"), true ? [] : void 0) },
+  { path: "/", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/index-BkAds40F.js"), true ? [] : void 0) }
 ];
-const siteData = { "base": "", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "banner": { "img": "/banner.png", "title": "", "subTitle": "" } }, "vite": { "base": "/" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "master", "repo": "" }, "htmlTags": [] };
+const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "master", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
 function formatDateToYYYYMMDD(dateStr) {
   const date = new Date(dateStr);
   const year = date.getFullYear();
@@ -7692,8 +7745,8 @@ const DataContext = reactExports.createContext({});
 const usePageData = () => {
   return reactExports.useContext(DataContext);
 };
-const layout = "_layout_1obw2_1";
-const styles$4 = {
+const layout = "_layout_luyrs_1";
+const styles$8 = {
   layout
 };
 var classnames = { exports: {} };
@@ -7761,21 +7814,21 @@ function requireClassnames() {
 }
 var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
-const nav = "_nav_1jt90_1";
-const menus = "_menus_1jt90_38";
-const styles$3 = {
+const nav = "_nav_1wfjm_1";
+const menus = "_menus_1wfjm_38";
+const styles$7 = {
   nav,
-  "blog-name": "_blog-name_1jt90_16",
+  "blog-name": "_blog-name_1wfjm_16",
   menus,
-  "nav-left": "_nav-left_1jt90_51",
-  "nav-right": "_nav-right_1jt90_55",
-  "nav-right-tools": "_nav-right-tools_1jt90_58",
-  "nav-right-menus": "_nav-right-menus_1jt90_61",
-  "nav-tools-item": "_nav-tools-item_1jt90_75",
-  "nav-menus": "_nav-menus_1jt90_91",
-  "nav-menus-show": "_nav-menus-show_1jt90_121",
-  "nav-menus-tools": "_nav-menus-tools_1jt90_124",
-  "nav-top": "_nav-top_1jt90_132"
+  "nav-left": "_nav-left_1wfjm_51",
+  "nav-right": "_nav-right_1wfjm_55",
+  "nav-right-tools": "_nav-right-tools_1wfjm_58",
+  "nav-right-menus": "_nav-right-menus_1wfjm_61",
+  "nav-tools-item": "_nav-tools-item_1wfjm_75",
+  "nav-menus": "_nav-menus_1wfjm_91",
+  "nav-menus-show": "_nav-menus-show_1wfjm_121",
+  "nav-menus-tools": "_nav-menus-tools_1wfjm_124",
+  "nav-top": "_nav-top_1wfjm_132"
 };
 function debounce(func, delay) {
   let timer = null;
@@ -7827,10 +7880,7 @@ function UseScroll() {
       10
     );
     const targetTop = target.getBoundingClientRect().top;
-    let scrollTop = window.scrollY + targetTop + targetPadding;
-    if (targetTop < 0) {
-      scrollTop -= NAV_HEIGHT;
-    }
+    const scrollTop = window.scrollY + targetTop + targetPadding - NAV_HEIGHT;
     window.scrollTo({
       left: 0,
       top: scrollTop,
@@ -8610,7 +8660,7 @@ function defineIcons(prefix, icons) {
   }
 }
 const {
-  styles: styles$1,
+  styles: styles$6,
   shims
 } = namespace;
 const FAMILY_NAMES = Object.keys(PREFIX_TO_LONG_STYLE);
@@ -8639,7 +8689,7 @@ function getIconName(cssPrefix, cls) {
 }
 const build = () => {
   const lookup = (reducer) => {
-    return reduce(styles$1, (o$$1, style, prefix) => {
+    return reduce(styles$6, (o$$1, style, prefix) => {
       o$$1[prefix] = reduce(style, reducer, {});
       return o$$1;
     }, {});
@@ -8678,7 +8728,7 @@ const build = () => {
     });
     return acc;
   });
-  const hasRegular = "far" in styles$1 || config.autoFetchSvg;
+  const hasRegular = "far" in styles$6 || config.autoFetchSvg;
   const shimLookups = reduce(shims, (acc, shim) => {
     const maybeNameMaybeUnicode = shim[0];
     let prefix = shim[1];
@@ -8822,7 +8872,7 @@ function getCanonicalIcon(values) {
   return _objectSpread2$1(_objectSpread2$1(_objectSpread2$1({}, canonical), getDefaultCanonicalPrefix({
     values,
     family,
-    styles: styles$1,
+    styles: styles$6,
     config,
     canonical,
     givenPrefix
@@ -8843,7 +8893,7 @@ function applyShimAndAlias(skipLookups, givenPrefix, canonical) {
   const aliasIconName = byAlias(prefix, iconName);
   iconName = shim.iconName || aliasIconName || iconName;
   prefix = shim.prefix || prefix;
-  if (prefix === "far" && !styles$1["far"] && styles$1["fas"] && !config.autoFetchSvg) {
+  if (prefix === "far" && !styles$6["far"] && styles$6["fas"] && !config.autoFetchSvg) {
     prefix = "fas";
   }
   return {
@@ -9194,7 +9244,7 @@ function makeInlineSvgAbstract(params) {
   } = mask.found ? mask : main;
   const isUploadedIcon = Lt.includes(prefix);
   const attrClass = [config.replacementClass, iconName ? "".concat(config.cssPrefix, "-").concat(iconName) : ""].filter((c$$1) => extra.classes.indexOf(c$$1) === -1).filter((c$$1) => c$$1 !== "" || !!c$$1).concat(extra.classes).join(" ");
-  let content = {
+  let content2 = {
     children: [],
     attributes: _objectSpread2$1(_objectSpread2$1({}, extra.attributes), {}, {
       "data-prefix": prefix,
@@ -9209,19 +9259,19 @@ function makeInlineSvgAbstract(params) {
     width: "".concat(width / height * 16 * 0.0625, "em")
   } : {};
   if (watchable) {
-    content.attributes[DATA_FA_I2SVG] = "";
+    content2.attributes[DATA_FA_I2SVG] = "";
   }
   if (title) {
-    content.children.push({
+    content2.children.push({
       tag: "title",
       attributes: {
-        id: content.attributes["aria-labelledby"] || "title-".concat(titleId || nextUniqueId())
+        id: content2.attributes["aria-labelledby"] || "title-".concat(titleId || nextUniqueId())
       },
       children: [title]
     });
-    delete content.attributes.title;
+    delete content2.attributes.title;
   }
-  const args = _objectSpread2$1(_objectSpread2$1({}, content), {}, {
+  const args = _objectSpread2$1(_objectSpread2$1({}, content2), {}, {
     prefix,
     iconName,
     main,
@@ -9251,7 +9301,7 @@ function makeInlineSvgAbstract(params) {
 }
 function makeLayersTextAbstract(params) {
   const {
-    content,
+    content: content2,
     width,
     height,
     transform,
@@ -9285,7 +9335,7 @@ function makeLayersTextAbstract(params) {
   val.push({
     tag: "span",
     attributes,
-    children: [content]
+    children: [content2]
   });
   if (title) {
     val.push({
@@ -9300,7 +9350,7 @@ function makeLayersTextAbstract(params) {
 }
 function makeLayersCounterAbstract(params) {
   const {
-    content,
+    content: content2,
     title,
     extra
   } = params;
@@ -9317,7 +9367,7 @@ function makeLayersCounterAbstract(params) {
   val.push({
     tag: "span",
     attributes,
-    children: [content]
+    children: [content2]
   });
   if (title) {
     val.push({
@@ -9718,7 +9768,7 @@ function parseMeta(node) {
   }, pluginMeta);
 }
 const {
-  styles: styles$2
+  styles: styles$2$1
 } = namespace;
 function generateMutation(node) {
   const nodeMeta = config.autoReplaceSvg === "nest" ? parseMeta(node, {
@@ -9739,7 +9789,7 @@ function onTree(root) {
   const htmlClassList = DOCUMENT.documentElement.classList;
   const hclAdd = (suffix) => htmlClassList.add("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(suffix));
   const hclRemove = (suffix) => htmlClassList.remove("".concat(HTML_CLASS_I2SVG_BASE_CLASS, "-").concat(suffix));
-  const prefixes = config.autoFetchSvg ? getKnownPrefixes() : P.concat(Object.keys(styles$2));
+  const prefixes = config.autoFetchSvg ? getKnownPrefixes() : P.concat(Object.keys(styles$2$1));
   if (!prefixes.includes("fa")) {
     prefixes.push("fa");
   }
@@ -9999,7 +10049,7 @@ var Layers = {
 var LayersCounter = {
   mixout() {
     return {
-      counter(content) {
+      counter(content2) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           title = null,
@@ -10009,14 +10059,14 @@ var LayersCounter = {
         } = params;
         return domVariants({
           type: "counter",
-          content
+          content: content2
         }, () => {
           callHooks("beforeDOMElementCreation", {
-            content,
+            content: content2,
             params
           });
           return makeLayersCounterAbstract({
-            content: content.toString(),
+            content: content2.toString(),
             title,
             extra: {
               attributes,
@@ -10032,7 +10082,7 @@ var LayersCounter = {
 var LayersText = {
   mixout() {
     return {
-      text(content) {
+      text(content2) {
         let params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
         const {
           transform = meaninglessTransform,
@@ -10043,14 +10093,14 @@ var LayersText = {
         } = params;
         return domVariants({
           type: "text",
-          content
+          content: content2
         }, () => {
           callHooks("beforeDOMElementCreation", {
-            content,
+            content: content2,
             params
           });
           return makeLayersTextAbstract({
-            content,
+            content: content2,
             transform: _objectSpread2$1(_objectSpread2$1({}, meaninglessTransform), transform),
             title,
             extra: {
@@ -10110,8 +10160,8 @@ const FONT_FAMILY_WEIGHT_FALLBACK = Object.keys(FONT_FAMILY_WEIGHT_TO_PREFIX).re
   acc[fontFamily] = weights[900] || [...Object.entries(weights)][0][1];
   return acc;
 }, {});
-function hexValueFromContent(content) {
-  const cleaned = content.replace(CLEAN_CONTENT_PATTERN, "");
+function hexValueFromContent(content2) {
+  const cleaned = content2.replace(CLEAN_CONTENT_PATTERN, "");
   const codePoint = codePointAt(cleaned, 0);
   const isPrependTen = codePoint >= SECONDARY_UNICODE_RANGE[0] && codePoint <= SECONDARY_UNICODE_RANGE[1];
   const isDoubled = cleaned.length === 2 ? cleaned[0] === cleaned[1] : false;
@@ -10138,17 +10188,17 @@ function replaceForPosition(node, position) {
     const fontFamily = styles2.getPropertyValue("font-family");
     const fontFamilyMatch = fontFamily.match(FONT_FAMILY_PATTERN);
     const fontWeight = styles2.getPropertyValue("font-weight");
-    const content = styles2.getPropertyValue("content");
+    const content2 = styles2.getPropertyValue("content");
     if (alreadyProcessedPseudoElement && !fontFamilyMatch) {
       node.removeChild(alreadyProcessedPseudoElement);
       return resolve();
-    } else if (fontFamilyMatch && content !== "none" && content !== "") {
-      const content2 = styles2.getPropertyValue("content");
+    } else if (fontFamilyMatch && content2 !== "none" && content2 !== "") {
+      const content22 = styles2.getPropertyValue("content");
       let prefix = getPrefix(fontFamily, fontWeight);
       const {
         value: hexValue,
         isSecondary
-      } = hexValueFromContent(content2);
+      } = hexValueFromContent(content22);
       const isV4 = fontFamilyMatch[0].startsWith("FontAwesome");
       let iconName = byUnicode(prefix, hexValue);
       let iconIdentifier = iconName;
@@ -10947,7 +10997,7 @@ var defaultProps = {
   transform: null,
   swapOpacity: false
 };
-var FontAwesomeIcon = /* @__PURE__ */ React3.forwardRef(function(props, ref) {
+var FontAwesomeIcon = /* @__PURE__ */ React.forwardRef(function(props, ref) {
   var allProps = _objectSpread2(_objectSpread2({}, defaultProps), props);
   var iconArgs = allProps.icon, maskArgs = allProps.mask, symbol = allProps.symbol, className = allProps.className, title = allProps.title, titleId = allProps.titleId, maskId = allProps.maskId;
   var iconLookup = normalizeIconArgs(iconArgs);
@@ -11005,7 +11055,7 @@ FontAwesomeIcon.propTypes = {
   transform: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   swapOpacity: PropTypes.bool
 };
-var convertCurry = convert.bind(null, React3.createElement);
+var convertCurry = convert.bind(null, React.createElement);
 function toCamelCase(str) {
   const parts = str.split("-");
   return "fa" + parts.map((part) => {
@@ -11013,19 +11063,20 @@ function toCamelCase(str) {
   }).join("");
 }
 const Icon = (props) => {
-  const iconName = toCamelCase(props.icon || "spinner");
+  const { icon: customIcon, isSpin, shake, className, ...rest } = props;
+  const iconName = toCamelCase(customIcon || "spinner");
   const [icon2, setIcon] = reactExports.useState(null);
   reactExports.useEffect(() => {
     try {
       __vitePreload(() => import(
         /* @vite-ignore */
-        "./index-BA6LthB-.js"
+        "./assets/index-BA6LthB-.js"
       ), true ? [] : void 0).then((module) => {
         if (module[iconName]) setIcon(module[iconName]);
       });
       __vitePreload(() => import(
         /* @vite-ignore */
-        "./index-Nlr43-Fd.js"
+        "./assets/index-Nlr43-Fd.js"
       ), true ? [] : void 0).then((module) => {
         if (module[iconName]) setIcon(module[iconName]);
       });
@@ -11037,14 +11088,16 @@ const Icon = (props) => {
     FontAwesomeIcon,
     {
       icon: icon2,
-      className: classNames({
-        ["fa-solid fa-spinner fa-spin"]: props.isSpin,
-        ["fa-shake"]: props.shake
-      })
+      className: classNames(className, {
+        ["fa-solid fa-spinner fa-spin"]: isSpin,
+        ["fa-shake"]: shake
+      }),
+      ...rest
     }
   );
 };
 const EXTERNAL_URL_RE = /^(https?:|http:)?\/\//;
+const inBrowser = () => typeof window !== "undefined";
 function addLeadingSlash(url) {
   return url.charAt(0) === "/" || url.startsWith("https") ? url : "/" + url;
 }
@@ -11185,31 +11238,31 @@ function Nav(props) {
   }, [menus2]);
   const renderTools = reactExports.useMemo(() => {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "切换黑白主题", onClick: clickToChangeTheme, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: curTheme === "light" ? "sun" : "moon" }) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "github", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: "https://github.com/GitHubxxx17/fispo", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "github" }) }) }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "切换黑白主题", onClick: clickToChangeTheme, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: curTheme === "light" ? "sun" : "moon" }) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "github", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: "https://github.com/GitHubxxx17/fispo", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "github" }) }) }) })
     ] });
   }, [curTheme]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "nav",
       {
-        className: classNames(styles$3.nav, {
-          [styles$3["nav-top"]]: isTop
+        className: classNames(styles$7.nav, {
+          [styles$7["nav-top"]]: isTop
         }),
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["nav-left"], children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: "/", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$7["nav-left"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: "/", children: [
               logo && /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { src: logo }),
               title
             ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: renderMenus }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: renderMenus }) })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["nav-right"], children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["nav-right-tools"], children: renderTools }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$7["nav-right"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-right-tools"], children: renderTools }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "div",
               {
-                className: styles$3["nav-right-menus"],
+                className: styles$7["nav-right-menus"],
                 onClick: () => {
                   setIsShowMenus((v) => {
                     document.body.classList.toggle("mobile-nav");
@@ -11226,48 +11279,48 @@ function Nav(props) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        className: classNames(styles$3["nav-menus"], {
-          [styles$3["nav-menus-show"]]: isShowMenus
+        className: classNames(styles$7["nav-menus"], {
+          [styles$7["nav-menus-show"]]: isShowMenus
         }),
         children: [
           renderMenus,
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["nav-menus-tools"], children: renderTools })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-menus-tools"], children: renderTools })
         ]
       }
     )
   ] });
 }
-const homeLayout = "_homeLayout_ea3wb_1";
-const styles = {
+const homeLayout = "_homeLayout_i4l93_1";
+const styles$5 = {
   homeLayout,
-  "home-hero": "_home-hero_ea3wb_5",
-  "home-hero-left": "_home-hero-left_ea3wb_11",
-  "home-hero-button": "_home-hero-button_ea3wb_29",
-  "home-hero-right": "_home-hero-right_ea3wb_45",
-  "home-hero-right-img-bg": "_home-hero-right-img-bg_ea3wb_54",
-  "home-feature": "_home-feature_ea3wb_63",
-  "home-feature-item": "_home-feature-item_ea3wb_69"
+  "home-hero": "_home-hero_i4l93_5",
+  "home-hero-left": "_home-hero-left_i4l93_11",
+  "home-hero-button": "_home-hero-button_i4l93_29",
+  "home-hero-right": "_home-hero-right_i4l93_45",
+  "home-hero-right-img-bg": "_home-hero-right-img-bg_i4l93_54",
+  "home-feature": "_home-feature_i4l93_63",
+  "home-feature-item": "_home-feature-item_i4l93_69"
 };
 function HomeLayout(props) {
   const { siteData: siteData2, title } = props.pageData;
   const frontmatter = props.pageData.frontmatter;
   const { description, logo } = siteData2;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.homeLayout, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles["home-hero"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles["home-hero-left"], children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.homeLayout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-hero"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-hero-left"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: description }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["home-hero-button"], children: frontmatter.buttons.map((button, key) => {
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["home-hero-button"], children: frontmatter.buttons.map((button, key) => {
           return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: button.link, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: button.text }) }, key);
         }) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles["home-hero-right"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["home-hero-right-img-bg"] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-hero-right"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["home-hero-right-img-bg"] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { src: logo })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles["home-feature"], children: frontmatter.features.map((item, key) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles["home-feature-item"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["home-feature"], children: frontmatter.features.map((item, key) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-feature-item"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: item.icon }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: item.title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: item.details })
@@ -11738,7 +11791,7 @@ var generateTitleAsReactComponent = (_type, title, attributes) => {
     [HELMET_ATTRIBUTE]: true
   };
   const props = convertElementAttributesToReactProps(attributes, initProps);
-  return [React3.createElement("title", props, title)];
+  return [React.createElement("title", props, title)];
 };
 var generateTagsAsReactComponent = (type, tags) => tags.map((tag, i) => {
   const mappedTag = {
@@ -11749,13 +11802,13 @@ var generateTagsAsReactComponent = (type, tags) => tags.map((tag, i) => {
     const mapped = REACT_TAG_MAP[attribute];
     const mappedAttribute = mapped || attribute;
     if (mappedAttribute === "innerHTML" || mappedAttribute === "cssText") {
-      const content = tag.innerHTML || tag.cssText;
-      mappedTag.dangerouslySetInnerHTML = { __html: content };
+      const content2 = tag.innerHTML || tag.cssText;
+      mappedTag.dangerouslySetInnerHTML = { __html: content2 };
     } else {
       mappedTag[mappedAttribute] = tag[attribute];
     }
   });
-  return React3.createElement(type, mappedTag);
+  return React.createElement(type, mappedTag);
 });
 var getMethodsForTag = (type, tags, encode = true) => {
   switch (type) {
@@ -11879,7 +11932,7 @@ var HelmetData = class {
   }
 };
 var defaultValue = {};
-var Context = React3.createContext(defaultValue);
+var Context = React.createContext(defaultValue);
 var HelmetProvider = (_a = class extends reactExports.Component {
   constructor(props) {
     super(props);
@@ -11887,7 +11940,7 @@ var HelmetProvider = (_a = class extends reactExports.Component {
     this.helmetData = new HelmetData(this.props.context || {}, _a.canUseDOM);
   }
   render() {
-    return /* @__PURE__ */ React3.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
+    return /* @__PURE__ */ React.createElement(Context.Provider, { value: this.helmetData.value }, this.props.children);
   }
 }, __publicField(_a, "canUseDOM", isDocument), _a);
 var updateTags = (type, tags) => {
@@ -12171,7 +12224,7 @@ var Helmet = (_b = class extends reactExports.Component {
   }
   mapChildrenToProps(children, newProps) {
     let arrayTypeChildren = {};
-    React3.Children.forEach(children, (child) => {
+    React.Children.forEach(children, (child) => {
       if (!child || !child.props) {
         return;
       }
@@ -12221,17 +12274,320 @@ var Helmet = (_b = class extends reactExports.Component {
       helmetData = new HelmetData(data.context, true);
       delete newProps.helmetData;
     }
-    return helmetData ? /* @__PURE__ */ React3.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ React3.createElement(Context.Consumer, null, (context) => /* @__PURE__ */ React3.createElement(HelmetDispatcher, { ...newProps, context }));
+    return helmetData ? /* @__PURE__ */ React.createElement(HelmetDispatcher, { ...newProps, context: helmetData.value }) : /* @__PURE__ */ React.createElement(Context.Consumer, null, (context) => /* @__PURE__ */ React.createElement(HelmetDispatcher, { ...newProps, context }));
   }
 }, __publicField(_b, "defaultProps", {
   defer: true,
   encodeSpecialCharacters: true,
   prioritizeSeoTags: false
 }), _b);
+const emptyComponents = {};
+const MDXContext = React.createContext(emptyComponents);
+function useMDXComponents(components) {
+  const contextComponents = React.useContext(MDXContext);
+  return React.useMemo(
+    function() {
+      if (typeof components === "function") {
+        return components(contextComponents);
+      }
+      return { ...contextComponents, ...components };
+    },
+    [contextComponents, components]
+  );
+}
+function MDXProvider(properties) {
+  let allComponents;
+  if (properties.disableParentContext) {
+    allComponents = typeof properties.components === "function" ? properties.components(emptyComponents) : properties.components || emptyComponents;
+  } else {
+    allComponents = useMDXComponents(properties.components);
+  }
+  return React.createElement(
+    MDXContext.Provider,
+    { value: allComponents },
+    properties.children
+  );
+}
+const styles$4 = {
+  "copy-button": "_copy-button_ab8rs_1"
+};
+const CopyButton = () => {
+  const [isCopy, setIsCopy] = reactExports.useState(false);
+  const handleCopy = reactExports.useCallback(
+    async (e) => {
+      if (isCopy) return;
+      const target = e.currentTarget;
+      const code = target.parentNode.nextSibling.childNodes[0];
+      const text = code.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+      setIsCopy(true);
+      const timer = setTimeout(() => {
+        setIsCopy(false);
+      }, 3e3);
+      return () => {
+        clearTimeout(timer);
+      };
+    },
+    [isCopy]
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "span",
+    {
+      className: styles$4["copy-button"],
+      id: "copy-button",
+      onClick: (e) => handleCopy(e),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Icon,
+          {
+            icon: "copy",
+            style: {
+              display: isCopy ? "none" : "inline-block"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Icon,
+          {
+            icon: "check",
+            style: {
+              display: isCopy ? "inline-block" : "none"
+            }
+          }
+        )
+      ]
+    }
+  );
+};
+const Content = (props) => {
+  const { components } = props;
+  const handleRoutes2 = reactExports.useMemo(() => {
+    return routes.map((route) => {
+      return { ...route, path: inBrowser() ? baseUrl(route.path) : route.path };
+    });
+  }, [routes]);
+  const routeElement = useRoutes(handleRoutes2);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, ...components }, children: routeElement });
+};
+const Content$1 = reactExports.memo(Content);
+const docLayout = "_docLayout_1qcnq_1";
+const content = "_content_1qcnq_7";
+const styles$3 = {
+  docLayout,
+  content,
+  "content-footer": "_content-footer_1qcnq_15",
+  "content-footer-pre": "_content-footer-pre_1qcnq_25",
+  "content-footer-next": "_content-footer-next_1qcnq_26"
+};
+const sidebar = "_sidebar_t67y8_1";
+const sidebarTitle = "_sidebarTitle_t67y8_9";
+const sidebarContent = "_sidebarContent_t67y8_12";
+const sidebarItem = "_sidebarItem_t67y8_15";
+const active$1 = "_active_t67y8_19";
+const styles$2 = {
+  sidebar,
+  sidebarTitle,
+  sidebarContent,
+  sidebarItem,
+  active: active$1
+};
+const SideBar = (props) => {
+  const { sidebarData, pathname } = props;
+  const renderGroup = (item) => {
+    var _a2;
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarTitle, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item.text }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarContent, children: (_a2 = item.items) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: classNames(styles$2.sidebarItem, {
+            [styles$2.active]: pathname === item2.link
+          }),
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: item2.link, children: item2.text })
+        },
+        item2.link
+      )) })
+    ] }, item.text);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$2.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
+};
+const aside = "_aside_1pbvy_1";
+const active = "_active_1pbvy_15";
+const styles$1 = {
+  aside,
+  active,
+  "toc-item": "_toc-item_1pbvy_18"
+};
+const Aside = (props) => {
+  const { asideData } = props;
+  const [activeIndex, setActiveIndex] = reactExports.useState(0);
+  const tocList = reactExports.useRef([]);
+  const tocScroller = reactExports.useRef(null);
+  const tocActive = reactExports.useCallback(
+    (index, isScrollIntoView = true) => {
+      setActiveIndex(index);
+      const targetItem = tocList.current[index];
+      if (!isScrollIntoView && !targetItem && tocScroller.current.scrollHeight === tocScroller.current.offsetHeight)
+        return;
+      const itemTop = targetItem.offsetTop;
+      const itemBottom = itemTop + targetItem.offsetHeight;
+      const containerTop = tocScroller.current.scrollTop;
+      const containerBottom = containerTop + tocScroller.current.offsetHeight;
+      if (itemTop < containerTop || itemBottom > containerBottom) {
+        targetItem.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+    },
+    []
+  );
+  reactExports.useLayoutEffect(() => {
+    let headers = [];
+    const NAV_HEIGHT2 = 60;
+    const isBottom = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight;
+    const scrollToToc = () => {
+      if (headers.length == 0) {
+        headers = Array.from(document.getElementsByClassName("header-anchor"));
+      }
+      const scrollTop = Math.ceil(window.scrollY) + NAV_HEIGHT2;
+      if (isBottom) {
+        tocActive(headers.length - 1);
+        return;
+      }
+      for (let i = 0; i < headers.length; i++) {
+        const currentAnchor = headers[i];
+        const nextAnchor = headers[i + 1];
+        const currentTop = currentAnchor.parentElement.offsetTop;
+        if (!nextAnchor) {
+          tocActive(i);
+          break;
+        }
+        if (i === 0 && scrollTop < currentTop || scrollTop == 0) {
+          tocActive(0);
+          break;
+        }
+        const nextTop = nextAnchor.parentElement.offsetTop;
+        if (currentTop <= scrollTop && scrollTop < nextTop) {
+          tocActive(i);
+          break;
+        }
+      }
+    };
+    scrollManager.add(scrollToToc);
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.aside, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "目录" }),
+    asideData.map(({ text, id, depth }, index) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: classNames(styles$1["toc-item"], {
+            [styles$1.active]: index == activeIndex
+          }),
+          style: {
+            marginLeft: `${(depth - 1) * 10}px`
+          },
+          ref: tocScroller,
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Link,
+            {
+              ref: (el) => {
+                if (el) {
+                  tocList.current.push(el);
+                }
+              },
+              href: `#${id}`,
+              onClick: (e) => {
+                e.preventDefault();
+                const target = document.getElementById(id);
+                if (target) {
+                  scrollManager.scrollToTarget(target, true);
+                }
+                tocActive(index, false);
+              },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: text })
+            }
+          )
+        },
+        `${text}-${index}`
+      );
+    })
+  ] });
+};
+const footer = "_footer_1up7z_1";
+const styles = {
+  footer
+};
+const Footer = () => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: styles.footer, children: [
+    "Copyright © 2019-present fispo ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "All rights reserved."
+  ] });
+};
+const DocLayout = (props) => {
+  const { siteData: siteData2, pagePath, toc } = props.pageData;
+  const themeConfig = siteData2.themeConfig;
+  const [currIndex, setCurrIndex] = reactExports.useState(0);
+  const matchedSidebar = reactExports.useMemo(() => {
+    const matchedSidebarKey = Object.keys(themeConfig.sidebar).find((key) => {
+      if (pagePath.startsWith(key)) {
+        return true;
+      }
+    });
+    return themeConfig.sidebar[matchedSidebarKey] || [];
+  }, [themeConfig, pagePath]);
+  const articleList = reactExports.useMemo(() => {
+    return matchedSidebar.map((item) => {
+      return item.items;
+    }).flat();
+  }, [matchedSidebar]);
+  reactExports.useEffect(() => {
+    setCurrIndex(
+      articleList.findIndex(
+        (item) => decodeURI(item.link) === decodeURI(pagePath)
+      )
+    );
+  }, [articleList]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.docLayout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(SideBar, { sidebarData: matchedSidebar, pathname: pagePath }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.content, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["content-footer"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-left" }),
+            "上一页"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex - 1].text })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+            "下一页",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-right" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex + 1].text })
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Aside, { asideData: toc })
+  ] });
+};
 const Layout = (props) => {
   const { pageData } = props;
-  const { pageType, siteData: siteData2 } = pageData;
-  const { themeConfig, title, logo } = siteData2;
+  const { pageType, siteData: siteData2, title } = pageData;
+  const { themeConfig, title: siteTitle, logo } = siteData2;
   const { navMenus } = themeConfig;
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
@@ -12239,9 +12595,9 @@ const Layout = (props) => {
     if (isHomePage) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
     } else if (isArticlePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "article" });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
     } else if (pageType === "custom") {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "custom" });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
     } else {
       return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "404" });
     }
@@ -12252,13 +12608,14 @@ const Layout = (props) => {
       scrollManager.destory();
     };
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4.layout, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8.layout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Helmet, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: isHomePage ? title : `${title} | ${siteData2.title}` }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title, menus: navMenus, logo }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus, logo }),
     getCurrentLayout()
   ] });
 };
 async function initPageData(routePath) {
+  var _a2, _b2, _c;
   routePath = removeBase(routePath);
   const pathList = routePath.split("/").filter(Boolean);
   const isNav = pathList.length === 0 || siteData.themeConfig.navMenus.find(
@@ -12283,10 +12640,13 @@ async function initPageData(routePath) {
     };
   };
   const matched = matchRoutes(routes, routePath);
-  const moduleInfo = await matched[0].route.preload();
+  const moduleInfo = await ((_a2 = matched == null ? void 0 : matched[0].route) == null ? void 0 : _a2.preload());
   if (isNav) {
     let bannerTitle = siteData.title;
-    if (pathList.length == 1) {
+    const title = (_b2 = moduleInfo == null ? void 0 : moduleInfo.frontmatter) == null ? void 0 : _b2.title;
+    if (title) {
+      bannerTitle = title;
+    } else if (pathList.length == 1) {
       bannerTitle = siteData.themeConfig.navMenus.find(
         (item) => item.path == `/${pathList[0]}` || item.path == routePath
       ).title;
@@ -12295,16 +12655,17 @@ async function initPageData(routePath) {
     }
     return getPageData(
       routePath === "/" ? "home" : "custom",
-      moduleInfo.frontmatter ?? {},
-      bannerTitle
+      (moduleInfo == null ? void 0 : moduleInfo.frontmatter) ?? {},
+      bannerTitle,
+      (moduleInfo == null ? void 0 : moduleInfo.toc) ?? []
     );
   }
   if (matched) {
     return getPageData(
       "article",
-      moduleInfo.frontmatter ?? {},
-      moduleInfo.frontmatter.title || "",
-      moduleInfo.toc
+      (moduleInfo == null ? void 0 : moduleInfo.frontmatter) ?? {},
+      ((_c = moduleInfo == null ? void 0 : moduleInfo.frontmatter) == null ? void 0 : _c.title) || "",
+      moduleInfo == null ? void 0 : moduleInfo.toc
     );
   }
   return getPageData("404", {}, "404");
@@ -12314,6 +12675,7 @@ function App({
   lifecycleList: lifecycleList2
 }) {
   const pageData = usePageData();
+  pageData.ssr = ssr;
   const [finishLoading, setFinishLoading] = reactExports.useState(false);
   reactExports.useEffect(() => {
     lifecycleList2.beforeRenderpage.forEach(
@@ -12348,5 +12710,6 @@ async function renderInBrowser() {
 }
 renderInBrowser();
 export {
-  jsxRuntimeExports as j
+  jsxRuntimeExports as j,
+  useMDXComponents as u
 };

@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports } from "./client-entry-ItAf0CZj.js";
+import { u as useMDXComponents, j as jsxRuntimeExports } from "../client-entry.js";
 const frontmatter = {
   "buttons": [{
     "text": "立即上手",
@@ -31,7 +31,10 @@ function _createMdxContent(props) {
   return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
 }
 function MDXContent(props = {}) {
-  const { wrapper: MDXLayout } = props.components || {};
+  const { wrapper: MDXLayout } = {
+    ...useMDXComponents(),
+    ...props.components
+  };
   return MDXLayout ? jsxRuntimeExports.jsx(MDXLayout, {
     ...props,
     children: jsxRuntimeExports.jsx(_createMdxContent, {
