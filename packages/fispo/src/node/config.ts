@@ -67,9 +67,9 @@ export async function resolveSiteData(
   }
 
   return {
-    base: userConfig.base || "",
+    base: userConfig.base || "/",
     title: userConfig.title || "fispo",
-    description: userConfig.description || "SSG Framework",
+    description: userConfig.description || "fispo",
     theme: userConfig.theme || "",
     themeConfig: mergeConfig(deConfig, targetConfig),
     vite: {
@@ -88,7 +88,7 @@ export async function resolveSiteData(
     markdown: userConfig.markdown || {},
     plugins: userConfig.plugins || [],
     preloader: userConfig.preloader || false,
-    deploy: userConfig.deploy || { branch: "master", repo: "" },
+    deploy: userConfig.deploy || { branch: "gh-pages", repo: "" },
     htmlTags: userConfig.htmlTags || [],
     highlighter: userConfig.highlighter || { theme: "nord" },
   };

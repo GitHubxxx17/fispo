@@ -1,12 +1,14 @@
 .aside {
   width: 220px;
+  height: calc(100vh - 100px);
   position: fixed;
   top: 75px;
   right: 10%;
-  padding: 0 20px;
+  padding: 10px 20px;
   margin-left: 20px;
   border-left: 1px solid #d3d3d3;
   transition: all 0.3s;
+  overflow-y: scroll;
 
   h2 {
     margin-top: 0;
@@ -21,12 +23,14 @@
 
   .toc-item {
     margin-bottom: 8px;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    line-clamp: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    span {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      line-clamp: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

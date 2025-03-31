@@ -7,10 +7,11 @@ import scrollManager, { ScrollCallback } from "../../helper/scroll";
 
 export interface AsideProps {
   asideData: Toc[];
+  pagePath: string;
 }
 
 const Aside = (props: AsideProps) => {
-  const { asideData } = props;
+  const { asideData, pagePath } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const tocList = useRef<HTMLAnchorElement[]>([]);
   const tocScroller = useRef<HTMLDivElement>(null);
@@ -108,13 +109,9 @@ const Aside = (props: AsideProps) => {
                   tocList.current.push(el);
                 }
               }}
-              href={`#${id}`}
+              href={`${pagePath}#${id}`}
               onClick={(e) => {
                 e.preventDefault();
-                const target = document.getElementById(id);
-                if (target) {
-                  scrollManager.scrollToTarget(target, true);
-                }
                 tocActive(index, false);
               }}
             >

@@ -1,7 +1,7 @@
 ---
 buttons:
   - text: 立即上手
-    link: /guide/getting-started
+    link: /guide/
   - text: GitHub
     link: https://github.com/GitHubxxx17/fispo
 

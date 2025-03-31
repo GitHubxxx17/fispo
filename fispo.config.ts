@@ -46,6 +46,36 @@ export default defineConfig<ThemeConfig>({
             },
           ],
         },
+        {
+          text: "写作",
+          items: [
+            {
+              text: "markdown 扩展",
+              link: "/guide/writing/markdown",
+            },
+            {
+              text: "frontmatter",
+              link: "/guide/writing/frontmatter",
+            },
+            {
+              text: "资源处理",
+              link: "/guide/writing/source",
+            },
+          ],
+        },
+        {
+          text: "部署",
+          items: [
+            {
+              text: "GitHub Pages",
+              link: "/guide/deploy/githubPages",
+            },
+            {
+              text: "一键部署",
+              link: "/guide/deploy/oneClickDeployment",
+            },
+          ],
+        },
       ],
     },
   },

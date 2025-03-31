@@ -67,6 +67,7 @@ export const checkAllAssetsLoaded = async () => {
 };
 
 export const baseUrl = (url = "/") => {
+  if (url.startsWith("#")) return url;
   return withBase(url, siteData.base);
 };
 

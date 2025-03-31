@@ -27,6 +27,7 @@ function UseScroll() {
     console.log("滚动模块初始化");
     const newBind = debounce(bind, 10);
     window.addEventListener("scroll", newBind);
+    bindingWindowScroll();
   }
 
   function add(callback: ScrollCallback) {
@@ -51,12 +52,57 @@ function UseScroll() {
 
     const targetTop = target.getBoundingClientRect().top;
 
-    const scrollTop = window.scrollY + targetTop + targetPadding - NAV_HEIGHT;
+    const scrollTop =
+      window.scrollY + targetTop + targetPadding - NAV_HEIGHT + 1;
 
     window.scrollTo({
       left: 0,
       top: scrollTop,
       behavior: isSmooth ? "smooth" : "auto",
+    });
+  }
+
+  function bindingWindowScroll() {
+    function scrollTo(el: HTMLElement, hash: string, isSmooth = false) {
+      let target: HTMLElement | null = null;
+      try {
+        target = el.classList.contains("header-anchor")
+          ? el
+          : document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch (e) {
+        console.warn(e);
+      }
+      if (target) {
+        scrollToTarget(target, isSmooth);
+      }
+    }
+
+    window.addEventListener(
+      "click",
+      (e) => {
+        const link = (e.target as Element).closest("a");
+        if (link) {
+          const { origin, hash, target, pathname, search } = link;
+          const currentUrl = window.location;
+          if (hash && target !== "_blank" && origin === currentUrl.origin) {
+            if (
+              pathname === currentUrl.pathname &&
+              search === currentUrl.search &&
+              hash &&
+              hash !== currentUrl.hash
+            ) {
+              e.preventDefault();
+              history.pushState(null, "", hash);
+              scrollTo(link, hash, true);
+              window.dispatchEvent(new Event("hashchange"));
+            }
+          }
+        }
+      },
+      { capture: true }
+    );
+    window.addEventListener("hashchange", (e) => {
+      e.preventDefault();
     });
   }
 

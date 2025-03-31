@@ -13,7 +13,7 @@ const SideBar = (props: SidebarProps) => {
 
   const renderGroup = (item: SidebarGroup) => {
     return (
-      <section key={item.text}>
+      <section key={item.text} className={styles.sidebarGroup}>
         <div className={styles.sidebarTitle}>
           <h2>{item.text}</h2>
         </div>

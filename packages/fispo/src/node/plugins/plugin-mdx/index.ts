@@ -10,7 +10,6 @@ import { remarkPluginToc } from "./remarkPlugins/toc";
 import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
 import { remarkPluginInfo } from "./remarkPlugins/info";
-import rehypeRaw from "rehype-raw";
 import { SiteConfig } from "shared/types";
 
 export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
@@ -28,13 +27,6 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
       ...plugins.map((plugin) => plugin.markdown?.remarkPlugins || []).flat(),
     ] as PluggableList,
     rehypePlugins: [
-      [
-        rehypeRaw,
-        {
-          // 配置 passThrough 选项，忽略 mdxjsEsm 节点
-          passThrough: ["mdxjsEsm"],
-        },
-      ],
       rehypePluginSlug,
       [
         rehypePluginAutolinkHeadings,

@@ -73,7 +73,7 @@ const DocLayout = (props: DocLayoutProps) => {
         </div>
         <Footer />
       </div>
-      <Aside asideData={toc} />
+      <Aside asideData={toc} pagePath={pagePath} />
     </div>
   );
 };

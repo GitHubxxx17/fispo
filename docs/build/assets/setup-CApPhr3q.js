@@ -2,18 +2,22 @@ import { u as useMDXComponents, j as jsxRuntimeExports } from "../client-entry.j
 const frontmatter = {
   "title": "建站"
 };
-const mdInfo = "安装前置要求Node.js 18 及以上版本。Git。支持 Markdown 语法的编辑器。推荐使用 VSCode 。安装 Fispo所有必备的应用程序安装完成后，即可使用 npm 安装 Fispo 的初始化工具包npm install -g create-fispo安装 Fispo 完成后，请执行";
+const mdInfo = "安装环境准备在开始搭建Fispo博客系统前，请确保已完成以下工具的安装：Node.js运行环境要求版本：18.0.0及以上官方下载地址：Node.jsGit版本控制工具官方下载地址：GitMarkdown编辑器推荐使用：VSCode（需安装Markdown插件）其他支持 Markdown 语法的编辑";
 const toc = [{
   "id": "安装",
   "text": "安装",
   "depth": 1
 }, {
-  "id": "前置要求",
-  "text": "前置要求",
+  "id": "环境准备",
+  "text": "环境准备",
   "depth": 2
 }, {
-  "id": "安装-fispo",
-  "text": "安装 Fispo",
+  "id": "安装-fispo-初始化工具",
+  "text": "安装 Fispo 初始化工具",
+  "depth": 2
+}, {
+  "id": "初始化项目",
+  "text": "初始化项目",
   "depth": 2
 }, {
   "id": "文件结构",
@@ -31,14 +35,17 @@ const toc = [{
 function _createMdxContent(props) {
   const _components = {
     a: "a",
+    blockquote: "blockquote",
     code: "code",
     div: "div",
     h1: "h1",
     h2: "h2",
     li: "li",
+    ol: "ol",
     p: "p",
     pre: "pre",
     span: "span",
+    strong: "strong",
     ul: "ul",
     ...useMDXComponents(),
     ...props.components
@@ -55,49 +62,66 @@ function _createMdxContent(props) {
         })
       }), "安装"]
     }), "\n", jsxRuntimeExports.jsxs(_components.h2, {
-      id: "前置要求",
+      id: "环境准备",
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
-        href: "#前置要求",
+        href: "#环境准备",
         children: jsxRuntimeExports.jsx(_components.span, {
           className: "icon icon-link"
         })
-      }), "前置要求"]
-    }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
+      }), "环境准备"]
+    }), "\n", jsxRuntimeExports.jsx(_components.p, {
+      children: "在开始搭建Fispo博客系统前，请确保已完成以下工具的安装："
+    }), "\n", jsxRuntimeExports.jsxs(_components.ol, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: [jsxRuntimeExports.jsx(_components.a, {
-          href: "https://nodejs.org/zh-cn",
-          children: "Node.js"
-        }), " 18 及以上版本。"]
+        children: [jsxRuntimeExports.jsx(_components.strong, {
+          children: "Node.js运行环境"
+        }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
+          children: ["\n", jsxRuntimeExports.jsx(_components.li, {
+            children: "要求版本：18.0.0及以上"
+          }), "\n", jsxRuntimeExports.jsxs(_components.li, {
+            children: ["官方下载地址：", jsxRuntimeExports.jsx(_components.a, {
+              href: "https://nodejs.org/zh-cn",
+              children: "Node.js"
+            })]
+          }), "\n"]
+        }), "\n"]
       }), "\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: [jsxRuntimeExports.jsx(_components.a, {
-          href: "https://git-scm.com/",
-          children: "Git"
-        }), "。"]
-      }), "\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: ["支持 ", jsxRuntimeExports.jsx(_components.a, {
-          href: "https://markdown.p2hp.com/",
-          children: "Markdown"
-        }), " 语法的编辑器。\n", jsxRuntimeExports.jsxs(_components.ul, {
+        children: [jsxRuntimeExports.jsx(_components.strong, {
+          children: "Git版本控制工具"
+        }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
           children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
-            children: ["推荐使用 ", jsxRuntimeExports.jsx(_components.a, {
+            children: ["官方下载地址：", jsxRuntimeExports.jsx(_components.a, {
+              href: "https://git-scm.com/",
+              children: "Git"
+            })]
+          }), "\n"]
+        }), "\n"]
+      }), "\n", jsxRuntimeExports.jsxs(_components.li, {
+        children: [jsxRuntimeExports.jsx(_components.strong, {
+          children: "Markdown编辑器"
+        }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
+          children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
+            children: ["推荐使用：", jsxRuntimeExports.jsx(_components.a, {
               href: "https://code.visualstudio.com/",
               children: "VSCode"
-            }), " 。"]
+            }), "（需安装Markdown插件）"]
+          }), "\n", jsxRuntimeExports.jsx(_components.li, {
+            children: "其他支持 Markdown 语法的编辑器也可使用"
           }), "\n"]
         }), "\n"]
       }), "\n"]
     }), "\n", jsxRuntimeExports.jsxs(_components.h2, {
-      id: "安装-fispo",
+      id: "安装-fispo-初始化工具",
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
-        href: "#安装-fispo",
+        href: "#安装-fispo-初始化工具",
         children: jsxRuntimeExports.jsx(_components.span, {
           className: "icon icon-link"
         })
-      }), "安装 Fispo"]
+      }), "安装 Fispo 初始化工具"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {
-      children: "所有必备的应用程序安装完成后，即可使用 npm 安装 Fispo 的初始化工具包"
+      children: "完成环境配置后，通过 npm 全局安装 Fispo 初始化工具："
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-sh",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -156,15 +180,24 @@ function _createMdxContent(props) {
           })]
         })
       })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.h2, {
+      id: "初始化项目",
+      children: [jsxRuntimeExports.jsx(_components.a, {
+        className: "header-anchor",
+        href: "#初始化项目",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
+      }), "初始化项目"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {
-      children: "安装 Fispo 完成后，请执行下列命令，Fispo 将会在指定文件夹中新建所需要的文件。"
+      children: "执行以下命令创建博客项目："
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
-      className: "language-sh",
+      className: "language-bash",
       children: [jsxRuntimeExports.jsxs(_components.div, {
         className: "highlight-tools",
         children: [jsxRuntimeExports.jsx(_components.span, {
           className: "lang",
-          children: "sh"
+          children: "bash"
         }), jsxRuntimeExports.jsx(CopyButton, {})]
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki min-light",
@@ -194,12 +227,12 @@ function _createMdxContent(props) {
               style: {
                 color: "#2B5581"
               },
-              children: "folde"
+              children: "项目目录"
             }), jsxRuntimeExports.jsx(_components.span, {
               style: {
                 color: "#24292EFF"
               },
-              children: "r"
+              children: "名"
             }), jsxRuntimeExports.jsx(_components.span, {
               style: {
                 color: "#D32F2F"
@@ -332,16 +365,16 @@ function _createMdxContent(props) {
         })
       }), "配置文件"]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
-      children: ["配置文件 ", jsxRuntimeExports.jsx(_components.code, {
-        children: ".fispo.config.ts"
-      }), " 让你能够自定义 Fispo 站点的各个方面，最基本的选项是站点的标题和描述："]
+      children: ["通过", jsxRuntimeExports.jsx(_components.code, {
+        children: "fispo.config.ts"
+      }), "文件进行站点配置，基础配置示例如下："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
-      className: "language-ts",
+      className: "language-typescript",
       children: [jsxRuntimeExports.jsxs(_components.div, {
         className: "highlight-tools",
         children: [jsxRuntimeExports.jsx(_components.span, {
           className: "lang",
-          children: "ts"
+          children: "typescript"
         }), jsxRuntimeExports.jsx(CopyButton, {})]
       }), jsxRuntimeExports.jsx(_components.pre, {
         className: "shiki min-light",
@@ -417,6 +450,19 @@ function _createMdxContent(props) {
                 color: "#24292EFF"
               },
               children: "({"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#C2C3C5"
+              },
+              children: "// 站点基础信息"
             })]
           }), "\n", jsxRuntimeExports.jsxs(_components.span, {
             className: "line",
@@ -502,6 +548,14 @@ function _createMdxContent(props) {
               },
               children: ","
             })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  "
+            })
           }), "\n", jsxRuntimeExports.jsxs(_components.span, {
             className: "line",
             children: [jsxRuntimeExports.jsx(_components.span, {
@@ -1011,12 +1065,10 @@ function _createMdxContent(props) {
         })
       })]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
-      children: ["还可以通过 ", jsxRuntimeExports.jsx(_components.code, {
-        children: "themeConfig"
-      }), " 选项配置主题的行为。有关所有配置选项的完整详细信息，请参见", jsxRuntimeExports.jsx(_components.a, {
-        href: "",
-        children: "配置参考"
-      }), "。"]
+      children: ["完整配置说明请参考：", jsxRuntimeExports.jsx(_components.a, {
+        href: "/fispo/guide/introduction/config",
+        children: "配置项"
+      })]
     }), "\n", jsxRuntimeExports.jsxs(_components.h2, {
       id: "启动项目",
       children: [jsxRuntimeExports.jsx(_components.a, {
@@ -1027,11 +1079,9 @@ function _createMdxContent(props) {
         })
       }), "启动项目"]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
-      children: ["该工具还应该将以下 ", jsxRuntimeExports.jsx(_components.code, {
-        children: "npm"
-      }), " 脚本注入到 ", jsxRuntimeExports.jsx(_components.code, {
+      children: ["工具已自动在", jsxRuntimeExports.jsx(_components.code, {
         children: "package.json"
-      }), " 中："]
+      }), "中注入以下脚本："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-json",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -1054,14 +1104,6 @@ function _createMdxContent(props) {
                 color: "#24292EFF"
               },
               children: "{"
-            })
-          }), "\n", jsxRuntimeExports.jsx(_components.span, {
-            className: "line",
-            children: jsxRuntimeExports.jsx(_components.span, {
-              style: {
-                color: "#24292EFF"
-              },
-              children: "  ..."
             })
           }), "\n", jsxRuntimeExports.jsxs(_components.span, {
             className: "line",
@@ -1118,6 +1160,16 @@ function _createMdxContent(props) {
                 color: "#212121"
               },
               children: ","
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#C2C3C5"
+              },
+              children: "// 开发服务器（含热更新）"
             })]
           }), "\n", jsxRuntimeExports.jsxs(_components.span, {
             className: "line",
@@ -1151,6 +1203,16 @@ function _createMdxContent(props) {
                 color: "#212121"
               },
               children: ","
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#C2C3C5"
+              },
+              children: "// 生产环境构建"
             })]
           }), "\n", jsxRuntimeExports.jsxs(_components.span, {
             className: "line",
@@ -1184,6 +1246,16 @@ function _createMdxContent(props) {
                 color: "#212121"
               },
               children: ","
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#C2C3C5"
+              },
+              children: "// 构建后预览"
             })]
           }), "\n", jsxRuntimeExports.jsxs(_components.span, {
             className: "line",
@@ -1212,19 +1284,16 @@ function _createMdxContent(props) {
                 color: "#22863A"
               },
               children: '"fispo deploy"'
-            })]
-          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
-            className: "line",
-            children: [jsxRuntimeExports.jsx(_components.span, {
+            }), jsxRuntimeExports.jsx(_components.span, {
               style: {
                 color: "#24292EFF"
               },
-              children: "  }"
+              children: " "
             }), jsxRuntimeExports.jsx(_components.span, {
               style: {
-                color: "#212121"
+                color: "#C2C3C5"
               },
-              children: ","
+              children: "// 部署到服务器"
             })]
           }), "\n", jsxRuntimeExports.jsx(_components.span, {
             className: "line",
@@ -1232,7 +1301,7 @@ function _createMdxContent(props) {
               style: {
                 color: "#24292EFF"
               },
-              children: "  ..."
+              children: "  }"
             })
           }), "\n", jsxRuntimeExports.jsx(_components.span, {
             className: "line",
@@ -1299,12 +1368,8 @@ function _createMdxContent(props) {
           })]
         })
       })]
-    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
-      children: ["除了 ", jsxRuntimeExports.jsx(_components.code, {
-        children: "npm"
-      }), " 脚本，还可以直接调用 ", jsxRuntimeExports.jsx(_components.code, {
-        children: "Fispo"
-      }), ":"]
+    }), "\n", jsxRuntimeExports.jsx(_components.p, {
+      children: "除了 npm 脚本，还可以直接调用 Fispo:"
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-sh",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -1353,12 +1418,12 @@ function _createMdxContent(props) {
           })]
         })
       })]
-    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
-      children: ["开发服务器默认会运行在 ", jsxRuntimeExports.jsx(_components.code, {
-        children: "http://localhost:5173"
-      }), " 上。在浏览器中访问 ", jsxRuntimeExports.jsx(_components.code, {
-        children: "URL"
-      }), " 以查看新站点的运行情况吧！"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.blockquote, {
+      children: ["\n", jsxRuntimeExports.jsxs(_components.p, {
+        children: ["开发服务器默认会运行在 ", jsxRuntimeExports.jsx(_components.code, {
+          children: "http://localhost:5173"
+        }), " 上。在浏览器中访问 URL 以查看新站点的运行情况吧！"]
+      }), "\n"]
     })]
   });
 }
