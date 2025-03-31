@@ -7169,7 +7169,7 @@ function createBrowserHistory(options) {
   function go(delta) {
     globalHistory.go(delta);
   }
-  var history = {
+  var history2 = {
     get action() {
       return action;
     },
@@ -7202,7 +7202,7 @@ function createBrowserHistory(options) {
       };
     }
   };
-  return history;
+  return history2;
 }
 function promptBeforeUnload(event) {
   event.preventDefault();
@@ -7597,18 +7597,18 @@ function BrowserRouter(_ref) {
       window: window2
     });
   }
-  let history = historyRef.current;
+  let history2 = historyRef.current;
   let [state, setState] = reactExports.useState({
-    action: history.action,
-    location: history.location
+    action: history2.action,
+    location: history2.location
   });
-  reactExports.useLayoutEffect(() => history.listen(setState), [history]);
+  reactExports.useLayoutEffect(() => history2.listen(setState), [history2]);
   return /* @__PURE__ */ reactExports.createElement(Router, {
     basename,
     children,
     location: state.location,
     navigationType: state.action,
-    navigator: history
+    navigator: history2
   });
 }
 const scriptRel = "modulepreload";
@@ -7675,17 +7675,27 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-const Route0 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
-const Route1 = React.lazy(() => __vitePreload(() => import("./assets/config-Cs4VAVBh.js"), true ? [] : void 0));
-const Route2 = React.lazy(() => __vitePreload(() => import("./assets/setup-Ou9FmrYS.js"), true ? [] : void 0));
-const Route3 = React.lazy(() => __vitePreload(() => import("./assets/index-BkAds40F.js"), true ? [] : void 0));
+const Route0 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0));
+const Route1 = React.lazy(() => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0));
+const Route2 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
+const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-DSBkHHg4.js"), true ? [] : void 0));
+const Route4 = React.lazy(() => __vitePreload(() => import("./assets/setup-CApPhr3q.js"), true ? [] : void 0));
+const Route5 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-DznZqeXI.js"), true ? [] : void 0));
+const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-BMqJRq0T.js"), true ? [] : void 0));
+const Route7 = React.lazy(() => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0));
+const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
 const routes = [
-  { path: "/guide/", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/config", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/config-Cs4VAVBh.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/setup", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/setup-Ou9FmrYS.js"), true ? [] : void 0) },
-  { path: "/", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/index-BkAds40F.js"), true ? [] : void 0) }
+  { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0) },
+  { path: "/guide/deploy/oneClickDeployment", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0) },
+  { path: "/guide/", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-DSBkHHg4.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/setup", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/setup-CApPhr3q.js"), true ? [] : void 0) },
+  { path: "/guide/writing/frontmatter", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/frontmatter-DznZqeXI.js"), true ? [] : void 0) },
+  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-BMqJRq0T.js"), true ? [] : void 0) },
+  { path: "/guide/writing/source", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0) },
+  { path: "/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) }
 ];
-const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "master", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
+const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }, { "text": "一键部署", "link": "/guide/deploy/oneClickDeployment" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
 function formatDateToYYYYMMDD(dateStr) {
   const date = new Date(dateStr);
   const year = date.getFullYear();
@@ -7862,6 +7872,7 @@ function UseScroll() {
     console.log("滚动模块初始化");
     const newBind = debounce(bind, 10);
     window.addEventListener("scroll", newBind);
+    bindingWindowScroll();
   }
   function add(callback) {
     callbackList.push(callback);
@@ -7880,11 +7891,46 @@ function UseScroll() {
       10
     );
     const targetTop = target.getBoundingClientRect().top;
-    const scrollTop = window.scrollY + targetTop + targetPadding - NAV_HEIGHT;
+    const scrollTop = window.scrollY + targetTop + targetPadding - NAV_HEIGHT + 1;
     window.scrollTo({
       left: 0,
       top: scrollTop,
       behavior: isSmooth ? "smooth" : "auto"
+    });
+  }
+  function bindingWindowScroll() {
+    function scrollTo(el, hash, isSmooth = false) {
+      let target = null;
+      try {
+        target = el.classList.contains("header-anchor") ? el : document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch (e) {
+        console.warn(e);
+      }
+      if (target) {
+        scrollToTarget(target, isSmooth);
+      }
+    }
+    window.addEventListener(
+      "click",
+      (e) => {
+        const link = e.target.closest("a");
+        if (link) {
+          const { origin, hash, target, pathname, search } = link;
+          const currentUrl = window.location;
+          if (hash && target !== "_blank" && origin === currentUrl.origin) {
+            if (pathname === currentUrl.pathname && search === currentUrl.search && hash && hash !== currentUrl.hash) {
+              e.preventDefault();
+              history.pushState(null, "", hash);
+              scrollTo(link, hash, true);
+              window.dispatchEvent(new Event("hashchange"));
+            }
+          }
+        }
+      },
+      { capture: true }
+    );
+    window.addEventListener("hashchange", (e) => {
+      e.preventDefault();
     });
   }
   return {
@@ -11116,6 +11162,7 @@ function withBase(url, base) {
   return normalizedBase ? `${normalizedBase}${normalizedUrl}` : normalizedUrl;
 }
 const baseUrl = (url = "/") => {
+  if (url.startsWith("#")) return url;
   return withBase(url, siteData.base);
 };
 function removeBase(url) {
@@ -12379,22 +12426,24 @@ const Content = (props) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, ...components }, children: routeElement });
 };
 const Content$1 = reactExports.memo(Content);
-const docLayout = "_docLayout_1qcnq_1";
-const content = "_content_1qcnq_7";
+const docLayout = "_docLayout_shl0c_1";
+const content = "_content_shl0c_7";
 const styles$3 = {
   docLayout,
   content,
-  "content-footer": "_content-footer_1qcnq_15",
-  "content-footer-pre": "_content-footer-pre_1qcnq_25",
-  "content-footer-next": "_content-footer-next_1qcnq_26"
+  "content-footer": "_content-footer_shl0c_15",
+  "content-footer-pre": "_content-footer-pre_shl0c_25",
+  "content-footer-next": "_content-footer-next_shl0c_26"
 };
-const sidebar = "_sidebar_t67y8_1";
-const sidebarTitle = "_sidebarTitle_t67y8_9";
-const sidebarContent = "_sidebarContent_t67y8_12";
-const sidebarItem = "_sidebarItem_t67y8_15";
-const active$1 = "_active_t67y8_19";
+const sidebar = "_sidebar_w0fjt_1";
+const sidebarGroup = "_sidebarGroup_w0fjt_10";
+const sidebarTitle = "_sidebarTitle_w0fjt_14";
+const sidebarContent = "_sidebarContent_w0fjt_17";
+const sidebarItem = "_sidebarItem_w0fjt_20";
+const active$1 = "_active_w0fjt_24";
 const styles$2 = {
   sidebar,
+  sidebarGroup,
   sidebarTitle,
   sidebarContent,
   sidebarItem,
@@ -12404,7 +12453,7 @@ const SideBar = (props) => {
   const { sidebarData, pathname } = props;
   const renderGroup = (item) => {
     var _a2;
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: styles$2.sidebarGroup, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarTitle, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item.text }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarContent, children: (_a2 = item.items) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
@@ -12420,15 +12469,15 @@ const SideBar = (props) => {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$2.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
 };
-const aside = "_aside_1pbvy_1";
-const active = "_active_1pbvy_15";
+const aside = "_aside_1aks1_1";
+const active = "_active_1aks1_17";
 const styles$1 = {
   aside,
   active,
-  "toc-item": "_toc-item_1pbvy_18"
+  "toc-item": "_toc-item_1aks1_20"
 };
 const Aside = (props) => {
-  const { asideData } = props;
+  const { asideData, pagePath } = props;
   const [activeIndex, setActiveIndex] = reactExports.useState(0);
   const tocList = reactExports.useRef([]);
   const tocScroller = reactExports.useRef(null);
@@ -12506,13 +12555,9 @@ const Aside = (props) => {
                   tocList.current.push(el);
                 }
               },
-              href: `#${id}`,
+              href: `${pagePath}#${id}`,
               onClick: (e) => {
                 e.preventDefault();
-                const target = document.getElementById(id);
-                if (target) {
-                  scrollManager.scrollToTarget(target, true);
-                }
                 tocActive(index, false);
               },
               children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: text })
@@ -12581,7 +12626,7 @@ const DocLayout = (props) => {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Aside, { asideData: toc })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Aside, { asideData: toc, pagePath })
   ] });
 };
 const Layout = (props) => {
