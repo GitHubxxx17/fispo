@@ -11,6 +11,7 @@ import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
 import { remarkPluginInfo } from "./remarkPlugins/info";
 import { SiteConfig } from "shared/types";
+import { rehypePluginLink } from "./rehypePlugins/link";
 
 export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
   const plugins = config.siteData.plugins || [];
@@ -36,6 +37,7 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
           },
         },
       ],
+      [rehypePluginLink, { base: config.base }],
       rehypePluginPreWrapper,
       [rehypePluginShiki, { highlighter }],
       ...(config.siteData.markdown.rehypePlugins ?? []),

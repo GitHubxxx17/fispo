@@ -7678,20 +7678,20 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 const Route0 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0));
 const Route1 = React.lazy(() => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0));
 const Route2 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
-const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-DSBkHHg4.js"), true ? [] : void 0));
-const Route4 = React.lazy(() => __vitePreload(() => import("./assets/setup-CApPhr3q.js"), true ? [] : void 0));
+const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-BjNxx3bm.js"), true ? [] : void 0));
+const Route4 = React.lazy(() => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0));
 const Route5 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-DznZqeXI.js"), true ? [] : void 0));
-const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-BMqJRq0T.js"), true ? [] : void 0));
+const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-Cf9k7MZH.js"), true ? [] : void 0));
 const Route7 = React.lazy(() => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0));
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
 const routes = [
   { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0) },
   { path: "/guide/deploy/oneClickDeployment", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0) },
   { path: "/guide/", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-DSBkHHg4.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/setup", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/setup-CApPhr3q.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-BjNxx3bm.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/setup", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0) },
   { path: "/guide/writing/frontmatter", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/frontmatter-DznZqeXI.js"), true ? [] : void 0) },
-  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-BMqJRq0T.js"), true ? [] : void 0) },
+  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-Cf9k7MZH.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0) },
   { path: "/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) }
 ];
@@ -11145,7 +11145,7 @@ const Icon = (props) => {
 const EXTERNAL_URL_RE = /^(https?:|http:)?\/\//;
 const inBrowser = () => typeof window !== "undefined";
 function addLeadingSlash(url) {
-  return url.charAt(0) === "/" || url.startsWith("https") ? url : "/" + url;
+  return url.charAt(0) === "/" || EXTERNAL_URL_RE.test(url) ? url : "/" + url;
 }
 function removeTrailingSlash(url) {
   return url.charAt(url.length - 1) === "/" ? url.slice(0, -1) : url;
@@ -12469,12 +12469,12 @@ const SideBar = (props) => {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$2.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
 };
-const aside = "_aside_1aks1_1";
-const active = "_active_1aks1_17";
+const aside = "_aside_ru1ok_1";
+const active = "_active_ru1ok_17";
 const styles$1 = {
   aside,
   active,
-  "toc-item": "_toc-item_1aks1_20"
+  "toc-item": "_toc-item_ru1ok_20"
 };
 const Aside = (props) => {
   const { asideData, pagePath } = props;

@@ -330,7 +330,9 @@ function _createMdxContent(props) {
       }), "：", jsxRuntimeExports.jsx(_components.code, {
         children: "<DefaultThemeConfig>"
       }), " ", jsxRuntimeExports.jsx(_components.a, {
-        href: "/fispo/guide/introduction/config#title",
+        href: "./config#%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE",
+        target: "",
+        rel: "",
         children: "默认主题配置"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
@@ -758,6 +760,8 @@ function _createMdxContent(props) {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["支持所有 ", jsxRuntimeExports.jsx(_components.a, {
           href: "https://vitejs.dev/config/",
+          target: "_blank",
+          rel: "noopener noreferrer",
           children: "Vite 配置项"
         })]
       }), "\n", jsxRuntimeExports.jsxs(_components.li, {
@@ -2974,6 +2978,8 @@ function _createMdxContent(props) {
       children: ["\n", jsxRuntimeExports.jsxs(_components.p, {
         children: ["Fispo集成了 ", jsxRuntimeExports.jsx(_components.a, {
           href: "https://fontawesome.com.cn/v5",
+          target: "_blank",
+          rel: "noopener noreferrer",
           children: "fontawesome"
         }), " 图标库，您可以在该图标库的网站查找需要的图标。"]
       }), "\n"]

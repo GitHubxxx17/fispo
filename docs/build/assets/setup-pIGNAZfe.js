@@ -82,6 +82,8 @@ function _createMdxContent(props) {
           }), "\n", jsxRuntimeExports.jsxs(_components.li, {
             children: ["官方下载地址：", jsxRuntimeExports.jsx(_components.a, {
               href: "https://nodejs.org/zh-cn",
+              target: "_blank",
+              rel: "noopener noreferrer",
               children: "Node.js"
             })]
           }), "\n"]
@@ -93,6 +95,8 @@ function _createMdxContent(props) {
           children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
             children: ["官方下载地址：", jsxRuntimeExports.jsx(_components.a, {
               href: "https://git-scm.com/",
+              target: "_blank",
+              rel: "noopener noreferrer",
               children: "Git"
             })]
           }), "\n"]
@@ -104,6 +108,8 @@ function _createMdxContent(props) {
           children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
             children: ["推荐使用：", jsxRuntimeExports.jsx(_components.a, {
               href: "https://code.visualstudio.com/",
+              target: "_blank",
+              rel: "noopener noreferrer",
               children: "VSCode"
             }), "（需安装Markdown插件）"]
           }), "\n", jsxRuntimeExports.jsx(_components.li, {
@@ -1066,7 +1072,9 @@ function _createMdxContent(props) {
       })]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
       children: ["完整配置说明请参考：", jsxRuntimeExports.jsx(_components.a, {
-        href: "/fispo/guide/introduction/config",
+        href: "./config",
+        target: "",
+        rel: "",
         children: "配置项"
       })]
     }), "\n", jsxRuntimeExports.jsxs(_components.h2, {

@@ -1,3 +1,44 @@
 ---
 title: markdown 扩展
 ---
+
+# Markdown 扩展
+Fispo 带有内置的 Markdown 扩展。
+
+## 链接
+
+外部链接和内部链接都会被处理。
+
+### 外部链接
+
+所有的外部链接都会被加上`target="_blank" rel="noreferrer"`，点击会在新标签页打开外部网站，例如：
+- [react](https://react.docschina.org/)
+- [vite](https://vitejs.cn/vite3-cn/)
+
+
+### 内部链接
+内部链接将转换为单页导航的路由链接。
+例如，给定以下目录结构：
+``` md
+.
+├─ index.md
+├─ foo
+│  ├─ index.md
+│  ├─ a.md
+│  └─ b.md
+└─ bar
+   ├─ index.md
+   ├─ a.md
+   └─ b.md
+```
+
+假设现在处于 foo/a.md 文件中：
+``` md
+[Home](/) <!-- 将用户导航至根目录下的 index.html -->
+[foo](/foo/) <!-- 将用户导航至目录 foo 下的 index.html -->
+[foo heading](./#heading) <!-- 将用户锚定到目录 foo 下的index文件中的一个标题上 -->
+[foo a - heading](#heading) <!-- 将用户锚定到当前文件中的一个标题上 -->
+[bar - three](../bar/three) <!-- 可以省略扩展名 -->
+[bar - three](../bar/a.md) <!-- 可以添加 .md -->
+[bar - four](../bar/b.html) <!-- 或者可以添加 .html -->
+````

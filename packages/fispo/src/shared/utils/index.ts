@@ -9,7 +9,7 @@ export const cleanUrl = (url: string): string =>
 export const inBrowser = () => typeof window !== "undefined";
 
 export function addLeadingSlash(url: string) {
-  return url.charAt(0) === "/" || url.startsWith("https") ? url : "/" + url;
+  return url.charAt(0) === "/" || EXTERNAL_URL_RE.test(url) ? url : "/" + url;
 }
 
 export function removeTrailingSlash(url: string) {
@@ -32,4 +32,12 @@ export function withBase(url: string, base: string) {
 export function removeBase(url: string, base: string): string {
   const normalizedBase = normalizeSlash(base);
   return url.replace(normalizedBase, "");
+}
+
+export function isRelativePath(path: string) {
+  return path.startsWith("./") || path.startsWith("../");
+}
+
+export function isHashPath(path: string) {
+  return path.startsWith("#");
 }
