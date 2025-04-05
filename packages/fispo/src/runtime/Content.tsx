@@ -5,6 +5,7 @@ import { memo, useMemo } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import CopyButton from "shared/components/CopyButton";
 import { inBrowser } from "shared/utils";
+import Icon from "shared/components/Icon";
 
 export interface ContentProps {
   components?: {
@@ -21,7 +22,7 @@ const Content = (props: ContentProps) => {
   }, [routes]);
   const routeElement = useRoutes(handleRoutes);
   return (
-    <MDXProvider components={{ CopyButton, ...components }}>
+    <MDXProvider components={{ CopyButton, Icon, ...components }}>
       {routeElement}
     </MDXProvider>
   );

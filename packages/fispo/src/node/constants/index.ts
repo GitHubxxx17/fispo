@@ -27,3 +27,5 @@ export const THEME_PATH = join(
   PACKAGE_ROOT,
   isTsupWatch() ? ".." : "../@fispo"
 );
+
+export const EXTENDED_TAGS = ["tip", "note"];

@@ -42,3 +42,208 @@ div[class*="language-"]:hover #copy-button {
   overflow-x: auto;
   scrollbar-color: #a1a1a1 transparent;
 }
+
+/**
+ * note
+ * 外挂标签样式
+ * -------------------------------------------------------------------------- */
+
+.note {
+  position: relative;
+  margin-bottom: 15px;
+  padding: 15px 15px 15px 44px;
+  border-radius: 3px;
+}
+
+.note > :nth-child(2) {
+  margin-top: 0 !important;
+}
+
+.note > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.note.no-icon {
+  padding-left: 15px;
+}
+
+.note .note-icon {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 15px;
+  font-size: 1rem;
+}
+
+/* note simple */
+
+.note.simple {
+  border: 1px solid rgb(238, 238, 238);
+  border-left: 5px solid rgb(238, 238, 238);
+}
+
+.note.simple p {
+  color: rgb(76, 73, 72);
+  font-size: small;
+}
+
+.note.default.simple {
+  border-left-color: rgb(119, 119, 119);
+}
+
+.note.default.simple .note-icon {
+  color: rgb(119, 119, 119);
+}
+
+.note.primary.simple {
+  border-left-color: rgb(111, 66, 193);
+}
+
+.note.primary.simple .note-icon {
+  color: rgb(111, 66, 193);
+}
+
+.note.success.simple {
+  border-left-color: rgb(92, 184, 92);
+}
+
+.note.success.simple .note-icon {
+  color: rgb(92, 184, 92);
+}
+
+.note.info.simple {
+  border-left-color: rgb(66, 139, 202);
+}
+
+.note.info.simple .note-icon {
+  color: rgb(66, 139, 202);
+}
+
+.note.warning.simple {
+  border-left-color: rgb(240, 173, 78);
+}
+
+.note.warning.simple .note-icon {
+  color: rgb(240, 173, 78);
+}
+
+.note.danger.simple {
+  border-left-color: rgb(217, 83, 79);
+}
+
+.note.danger.simple .note-icon {
+  color: rgb(217, 83, 79);
+}
+
+/* note simple */
+
+/* note modern */
+.note.modern p {
+  font-size: small;
+}
+
+.note.modern {
+  background: rgb(245, 245, 245);
+  color: #666;
+}
+
+.note.default.modern {
+  background: #f3f3f3;
+  color: #666;
+}
+
+.note.primary.modern {
+  background: #f3daff;
+  color: #6f42c1;
+}
+
+.note.success.modern {
+  background: #dff0d8;
+  color: #3c763d;
+}
+
+.note.info.modern {
+  background: #d9edf7;
+  color: #31708f;
+}
+
+.note.warning.modern {
+  background: #fcf4e3;
+  color: #8a6d3b;
+}
+
+.note.danger.modern {
+  background: #f2dfdf;
+  color: #a94442;
+}
+/* note modern */
+
+/* note flat */
+
+.note.flat {
+  background-color: rgb(249, 249, 249);
+  border: 1px solid rgb(238, 238, 238);
+  border-left: 5px solid rgb(238, 238, 238);
+}
+
+.note.flat p {
+  color: rgb(76, 73, 72);
+  font-size: small;
+}
+
+.note.default.flat {
+  background: rgb(247, 247, 247);
+  border-left-color: rgb(119, 119, 119);
+}
+
+.note.default.flat .note-icon {
+  color: rgb(119, 119, 119);
+}
+
+.note.primary.flat {
+  background: rgb(245, 240, 250);
+  border-left-color: rgb(111, 66, 193);
+}
+
+.note.primary.flat .note-icon {
+  color: rgb(111, 66, 193);
+}
+
+.note.success.flat {
+  background: rgb(239, 248, 240);
+  border-left-color: rgb(92, 184, 92);
+}
+
+.note.success.flat .note-icon {
+  color: rgb(92, 184, 92);
+}
+
+.note.info.flat {
+  background: rgb(238, 247, 250);
+  border-left-color: rgb(66, 139, 202);
+}
+
+.note.info.flat .note-icon {
+  color: rgb(66, 139, 202);
+}
+
+.note.warning.flat {
+  background: rgb(253, 248, 234);
+  border-left-color: rgb(240, 173, 78);
+}
+
+.note.warning.flat .note-icon {
+  color: rgb(240, 173, 78);
+}
+
+.note.danger.flat {
+  background: rgb(252, 241, 242);
+  border-left-color: rgb(217, 83, 79);
+}
+
+.note.danger.flat .note-icon {
+  color: rgb(217, 83, 79);
+}
+
+/* note flat */
+
+/* note */

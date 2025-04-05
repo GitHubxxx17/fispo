@@ -7678,20 +7678,20 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 const Route0 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0));
 const Route1 = React.lazy(() => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0));
 const Route2 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
-const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-BjNxx3bm.js"), true ? [] : void 0));
+const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0));
 const Route4 = React.lazy(() => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0));
-const Route5 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-DznZqeXI.js"), true ? [] : void 0));
-const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-Cf9k7MZH.js"), true ? [] : void 0));
+const Route5 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-C8Jk2br_.js"), true ? [] : void 0));
+const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CyAD5DaX.js"), true ? [] : void 0));
 const Route7 = React.lazy(() => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0));
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
 const routes = [
   { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0) },
   { path: "/guide/deploy/oneClickDeployment", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0) },
   { path: "/guide/", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-BjNxx3bm.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0) },
   { path: "/guide/introduction/setup", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0) },
-  { path: "/guide/writing/frontmatter", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/frontmatter-DznZqeXI.js"), true ? [] : void 0) },
-  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-Cf9k7MZH.js"), true ? [] : void 0) },
+  { path: "/guide/writing/frontmatter", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/frontmatter-C8Jk2br_.js"), true ? [] : void 0) },
+  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-CyAD5DaX.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0) },
   { path: "/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) }
 ];
@@ -12423,17 +12423,17 @@ const Content = (props) => {
     });
   }, [routes]);
   const routeElement = useRoutes(handleRoutes2);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, ...components }, children: routeElement });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, Icon, ...components }, children: routeElement });
 };
 const Content$1 = reactExports.memo(Content);
-const docLayout = "_docLayout_shl0c_1";
-const content = "_content_shl0c_7";
+const docLayout = "_docLayout_1492j_1";
+const content = "_content_1492j_7";
 const styles$3 = {
   docLayout,
   content,
-  "content-footer": "_content-footer_shl0c_15",
-  "content-footer-pre": "_content-footer-pre_shl0c_25",
-  "content-footer-next": "_content-footer-next_shl0c_26"
+  "content-footer": "_content-footer_1492j_15",
+  "content-footer-pre": "_content-footer-pre_1492j_25",
+  "content-footer-next": "_content-footer-next_1492j_26"
 };
 const sidebar = "_sidebar_w0fjt_1";
 const sidebarGroup = "_sidebarGroup_w0fjt_10";

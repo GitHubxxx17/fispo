@@ -205,7 +205,7 @@ function _createMdxContent(props) {
         children: "/"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "部署站点的基础路径。用于配置站点在非根域名下的部署场景。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n部署站点的基础路径。用于配置站点在非根域名下的部署场景。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["必须是以斜杠开始和结束的绝对路径（如 ", jsxRuntimeExports.jsx(_components.code, {
@@ -242,7 +242,7 @@ function _createMdxContent(props) {
         children: "fispo"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "网站的全局标题，将显示在浏览器标签页和默认的 SEO 信息中。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n网站的全局标题，将显示在浏览器标签页和默认的 SEO 信息中。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsx(_components.li, {
         children: "建议保持简洁（通常不超过 60 个字符）"
@@ -271,7 +271,7 @@ function _createMdxContent(props) {
         children: "fispo"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "网站的元描述，用于 SEO 和社交媒体分享。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n网站的元描述，用于 SEO 和社交媒体分享。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsx(_components.li, {
         children: "建议控制在 150-160 个字符之间"
@@ -298,7 +298,7 @@ function _createMdxContent(props) {
         children: "默认值"
       }), "：无", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "指定使用的主题名称。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n指定使用的主题名称。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["npm 主题包（", jsxRuntimeExports.jsx(_components.code, {
@@ -336,12 +336,12 @@ function _createMdxContent(props) {
         children: "默认主题配置"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "主题的个性化配置对象，具体配置项由所选主题决定。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n主题的个性化配置对象，具体配置项由所选主题决定。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsx(_components.li, {
         children: "可包含导航栏配置、侧边栏配置等"
       }), "\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: ["示例：", "\n", jsxRuntimeExports.jsxs(_components.div, {
+        children: ["示例：\n", jsxRuntimeExports.jsxs(_components.div, {
           className: "language-ts",
           children: [jsxRuntimeExports.jsxs(_components.div, {
             className: "highlight-tools",
@@ -755,7 +755,7 @@ function _createMdxContent(props) {
         children: "{}"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "Vite 构建工具的配置选项。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\nVite 构建工具的配置选项。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["支持所有 ", jsxRuntimeExports.jsx(_components.a, {
@@ -765,7 +765,7 @@ function _createMdxContent(props) {
           children: "Vite 配置项"
         })]
       }), "\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: ["常用配置包括：", "\n", jsxRuntimeExports.jsxs(_components.ul, {
+        children: ["常用配置包括：\n", jsxRuntimeExports.jsxs(_components.ul, {
           children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
             children: [jsxRuntimeExports.jsx(_components.code, {
               children: "build"
@@ -781,7 +781,7 @@ function _createMdxContent(props) {
           }), "\n"]
         }), "\n"]
       }), "\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: ["示例：", "\n", jsxRuntimeExports.jsxs(_components.div, {
+        children: ["示例：\n", jsxRuntimeExports.jsxs(_components.div, {
           className: "language-ts",
           children: [jsxRuntimeExports.jsxs(_components.div, {
             className: "highlight-tools",
@@ -898,7 +898,7 @@ function _createMdxContent(props) {
         children: "xxx"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "网站作者的名称，用于文章元数据和版权声明。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n网站作者的名称，用于文章元数据和版权声明。"]
     }), "\n", jsxRuntimeExports.jsx(_components.hr, {}), "\n", jsxRuntimeExports.jsxs(_components.h3, {
       id: "avatar",
       children: [jsxRuntimeExports.jsx(_components.a, {
@@ -919,7 +919,7 @@ function _createMdxContent(props) {
         children: "/avatar.jpg"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "作者头像的 URL 地址或本地路径。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n作者头像的 URL 地址或本地路径。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["支持相对路径（相对于 ", jsxRuntimeExports.jsx(_components.code, {
@@ -952,7 +952,7 @@ function _createMdxContent(props) {
         children: "/bg.png"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "网站背景图像的 URL 或本地路径。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n网站背景图像的 URL 或本地路径。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["示例：", jsxRuntimeExports.jsx(_components.code, {
@@ -979,7 +979,7 @@ function _createMdxContent(props) {
         children: "docs"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "项目的根目录路径。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n项目的根目录路径。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsx(_components.li, {
         children: "当配置文件不在项目根目录时需要配置"
@@ -1008,7 +1008,7 @@ function _createMdxContent(props) {
         children: "/post"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "存放 Markdown 文章的目录路径。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n存放 Markdown 文章的目录路径。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["相对于 ", jsxRuntimeExports.jsx(_components.code, {
@@ -1041,7 +1041,7 @@ function _createMdxContent(props) {
         children: "public"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "静态资源目录路径。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n静态资源目录路径。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsx(_components.li, {
         children: "该目录下的文件会被直接复制到输出目录"
@@ -1066,7 +1066,7 @@ function _createMdxContent(props) {
         children: "build"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "构建输出的目标目录。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n构建输出的目标目录。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsxs(_components.li, {
         children: ["相对于 ", jsxRuntimeExports.jsx(_components.code, {
@@ -1093,7 +1093,7 @@ function _createMdxContent(props) {
         children: "/404.png"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "自定义 404 页面显示的图片。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n自定义 404 页面显示的图片。"]
     }), "\n", jsxRuntimeExports.jsx(_components.hr, {}), "\n", jsxRuntimeExports.jsxs(_components.h3, {
       id: "logo",
       children: [jsxRuntimeExports.jsx(_components.a, {
@@ -1114,7 +1114,7 @@ function _createMdxContent(props) {
         children: "/logo.png"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "网站 Logo 的 URL 或本地路径。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n网站 Logo 的 URL 或本地路径。"]
     }), "\n", jsxRuntimeExports.jsx(_components.hr, {}), "\n", jsxRuntimeExports.jsxs(_components.h3, {
       id: "markdown",
       children: [jsxRuntimeExports.jsx(_components.a, {
@@ -1135,7 +1135,7 @@ function _createMdxContent(props) {
         children: "{}"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "Markdown 处理配置项。", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\nMarkdown 处理配置项。", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "可用选项"
       }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -1323,7 +1323,7 @@ function _createMdxContent(props) {
         children: "[]"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "要启用的插件列表。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n要启用的插件列表。"]
     }), "\n", jsxRuntimeExports.jsx(_components.hr, {}), "\n", jsxRuntimeExports.jsxs(_components.h3, {
       id: "preloader",
       children: [jsxRuntimeExports.jsx(_components.a, {
@@ -1344,7 +1344,7 @@ function _createMdxContent(props) {
         children: "false"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "是否启用页面预加载动画。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n是否启用页面预加载动画。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
       children: ["\n", jsxRuntimeExports.jsx(_components.li, {
         children: "启用后会在页面加载时显示加载动画"
@@ -1371,7 +1371,7 @@ function _createMdxContent(props) {
         children: "{ branch: gh-pages, repo: }"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "部署配置对象。", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n部署配置对象。", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "可用选项"
       }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -1650,7 +1650,7 @@ function _createMdxContent(props) {
         children: "[]"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "自定义 HTML 标签注入配置。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n自定义 HTML 标签注入配置。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
       children: [jsxRuntimeExports.jsx(_components.strong, {
         children: "标签描述对象结构"
@@ -2306,7 +2306,7 @@ function _createMdxContent(props) {
         children: "{}"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "代码高亮配置项。"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n代码高亮配置项。"]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
       children: [jsxRuntimeExports.jsx(_components.strong, {
         children: "可用选项"
@@ -2754,7 +2754,7 @@ function _createMdxContent(props) {
         children: "[]"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "配置导航栏菜单项及其层级结构"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n配置导航栏菜单项及其层级结构"]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-ts",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -3003,7 +3003,7 @@ function _createMdxContent(props) {
         children: '{ img: "/banner.png" }'
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "首页横幅配置", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n首页横幅配置", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "配置项"
       }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -3260,7 +3260,7 @@ function _createMdxContent(props) {
         children: "{}"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "侧边栏综合配置", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n侧边栏综合配置", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "基础配置"
       }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -4298,7 +4298,7 @@ function _createMdxContent(props) {
         children: "{}"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n", "页脚区域配置"]
+      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n页脚区域配置"]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
       children: [jsxRuntimeExports.jsx(_components.strong, {
         children: "配置项"

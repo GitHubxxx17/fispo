@@ -81,8 +81,11 @@ ol,
 p,
 ul {
   line-height: 1.7;
-  margin: 15px 0;
   font-size: 1rem;
+}
+
+p {
+  margin: 15px 0;
 }
 
 .mobile-nav {

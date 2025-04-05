@@ -12,6 +12,9 @@ import remarkBreaks from "remark-breaks";
 import { remarkPluginInfo } from "./remarkPlugins/info";
 import { SiteConfig } from "shared/types";
 import { rehypePluginLink } from "./rehypePlugins/link";
+import rehypeRaw from "rehype-raw";
+import { remarkPluginTags } from "./remarkPlugins/tags";
+import { rehypePluginTags } from "./rehypePlugins/tags";
 
 export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
   const plugins = config.siteData.plugins || [];
@@ -21,6 +24,7 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
       remarkPluginGFM,
       remarkPluginInfo,
       remarkBreaks,
+      remarkPluginTags,
       remarkPluginFrontmatter,
       [remarkPluginMDXFrontMatter, { name: "frontmatter" }],
       remarkPluginToc,
@@ -28,6 +32,18 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
       ...plugins.map((plugin) => plugin.markdown?.remarkPlugins || []).flat(),
     ] as PluggableList,
     rehypePlugins: [
+      [
+        rehypeRaw,
+        {
+          // 配置 passThrough 选项，忽略 mdxjsEsm 节点
+          passThrough: [
+            "mdxjsEsm",
+            "mdxJsxTextElement",
+            "mdxJsxFlowElement",
+            "jsx",
+          ],
+        },
+      ],
       rehypePluginSlug,
       [
         rehypePluginAutolinkHeadings,
@@ -40,6 +56,7 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
       [rehypePluginLink, { base: config.base }],
       rehypePluginPreWrapper,
       [rehypePluginShiki, { highlighter }],
+      rehypePluginTags,
       ...(config.siteData.markdown.rehypePlugins ?? []),
       ...plugins.map((plugin) => plugin.markdown?.rehypePlugins || []).flat(),
     ] as PluggableList,
