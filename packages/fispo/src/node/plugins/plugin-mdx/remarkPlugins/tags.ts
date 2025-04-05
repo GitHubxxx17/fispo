@@ -2,12 +2,14 @@ import { visit } from "unist-util-visit";
 import type { Plugin } from "unified";
 import {
   Html,
+  Link,
   Paragraph,
   PhrasingContent,
   Root,
   RootContent,
   Text,
 } from "mdast";
+import { basename } from "path";
 
 interface Options {
   base?: string;
@@ -23,37 +25,16 @@ interface Tag {
 }
 
 export const remarkPluginTags: Plugin<[Options], Root> = () => {
-  return (tree) => {
-    // const tags: Tag[] = [];
-    // const detachNodes: RootContentType[][] = [];
-    const tagRegex = /\{%\s*([\w\s-]+)\s*%\}/s;
+  return (tree, file) => {
+    const tagsParentNodes: (RootContentType | Root)[] = [];
+    const tagRegex = /\{%\s*([\u4e00-\u9fa5\w\s-]+)\s*%\}/s;
     const EXCLUDE_TAGS = ["mdxjsEsm", "yaml", "break", "code", "heading"];
+    const timelineRegex = /<!--\s*(\S+)\s*(\S[\s\S]*?)\s*-->/;
+    const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
 
     const isTag = (text: string) => {
       return text.match(tagRegex);
     };
-
-    // // 清除换行符和空字符串
-    // const clearLineBreak = (
-    //   node: Text,
-    //   idx: number,
-    //   parent: RootContentType | Root
-    // ): number => {
-    //   let startIdx = idx;
-    //   let delNum = 1;
-    //   // 去除换行符
-    //   if (node.value === "") {
-    //     if (parent.children[idx - 1]?.type === "break") {
-    //       startIdx--;
-    //       delNum++;
-    //     }
-    //     if (parent.children[idx + 1]?.type === "break") {
-    //       delNum++;
-    //     }
-    //     parent.children.splice(startIdx, delNum);
-    //   }
-    //   return startIdx;
-    // };
 
     // 创建 Paragraph 节点
     const createParagraphNode = (children: PhrasingContent[]): Paragraph => {
@@ -75,6 +56,16 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
       };
     };
 
+    // 创建 Link 节点
+    const createLinkNode = (text: string, url: string): Link => {
+      if (text === "") text = url;
+      return {
+        type: "link",
+        url,
+        children: [createTextNode(text)],
+      };
+    };
+
     // 创建标签
     const createTag = ({ isEnd, tag, attrs }: Tag): Html => {
       return {
@@ -83,143 +74,36 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
       };
     };
 
-    // const handleDetachNodes = (nodes: PhrasingContent[]) => {
-    //   const result: RootContentType[] = [];
+    // 创建时间轴标题节点
+    const createTimelineTitleNode = (text: string) => {
+      const matches = text.matchAll(linkRegex);
+      const p = createParagraphNode([]);
+      for (const match of matches) {
+        const [val, linkText, url] = match;
+        const startIdx = match.index;
+        if (startIdx !== 0) {
+          p.children.push(createTextNode(text.slice(0, startIdx)));
+          text = text.slice(startIdx);
+        }
+        p.children.push(createLinkNode(linkText, url));
+        text = text.replace(val, "");
+      }
+      p.children.push(createTextNode(text));
 
-    //   if (nodes[0].type === "break") {
-    //     nodes.shift();
-    //   }
-
-    //   const addNodes = (node: PhrasingContent) => {
-    //     if (
-    //       node.type === "break" &&
-    //       result[result.length - 1].type === "html"
-    //     ) {
-    //       return;
-    //     }
-    //     if (
-    //       result.length == 0 ||
-    //       result[result.length - 1].type !== "paragraph"
-    //     ) {
-    //       const p = createParagraphNode([node]);
-    //       result.push(p);
-    //     } else if (result.at(-1).type == "paragraph") {
-    //       result[result.length - 1].children.push(node);
-    //     } else {
-    //       console.log("error", node);
-    //     }
-    //   };
-
-    //   nodes.forEach((node) => {
-    //     if (node.type === "text" && isTag(node.value)) {
-    //       while (isTag(node.value)) {
-    //         const match = isTag(node.value);
-    //         const [val, tag, attrs] = match;
-    //         const startIdx = match.index;
-    //         const isEnd = tag.startsWith("end");
-    //         node.value = node.value.replace(val, "");
-    //         const tagNode = createTag({
-    //           tag,
-    //           attrs,
-    //           isEnd,
-    //         });
-    //         if (startIdx !== 0) {
-    //           const outerText = node.value.slice(0, startIdx);
-    //           addNodes(createTextNode(outerText));
-    //           node.value = node.value.slice(startIdx);
-    //         }
-    //         result.push(tagNode as RootContentType);
-    //         if (isEnd && !node.value.match(tagRegex)) {
-    //           const p = createParagraphNode([node]);
-    //           result.push(p);
-    //         }
-    //       }
-    //     } else {
-    //       addNodes(node);
-    //     }
-    //   });
-    //   return result;
-    // };
-
-    // 处理标签节点
-    // const handleTagsNode = (
-    //   node: RootContentType,
-    //   idx: number,
-    //   parent: RootContentType | Root,
-    //   parentIdx: number
-    // ) => {
-    //   let curIdx = idx;
-    //   if (node?.children) {
-    //     for (let i = 0; i < node.children.length; i++) {
-    //       const item = node.children[i];
-    //       i = handleTagsNode(item as RootContentType, i, node, parentIdx);
-    //     }
-    //     return curIdx;
-    //   }
-    //   if (node.type === "text") {
-    //     while (isTag(node.value)) {
-    //       const match = isTag(node.value);
-    //       const [val, tag, attrs] = match;
-    //       const startIdx = match.index;
-    //       const isEnd = tag.startsWith("end");
-    //       let outerText = "";
-    //       node.value = node.value.replace(val, "");
-    //       tags.push({ tag, attrs, isEnd, index: parentIdx + (isEnd ? 1 : 0) });
-    //       const detachIdx = clearLineBreak(node, curIdx, parent);
-    //       if (
-    //         (!isEnd && detachIdx === 0 && startIdx === 0) ||
-    //         (isEnd &&
-    //           (isTag(node.value) ||
-    //             (node.value.length === startIdx &&
-    //               curIdx === parent.children.length - 1)))
-    //       ) {
-    //         detachNodes.push(null);
-    //         continue;
-    //       }
-    //       if (isEnd) {
-    //         const nextNodes = parent.children.splice(
-    //           detachIdx + 1
-    //         ) as PhrasingContent[];
-
-    //         outerText = node.value.slice(startIdx);
-    //         console.log(
-    //           node.value,
-    //           detachIdx,
-    //           parent.children,
-    //           nextNodes,
-    //           outerText
-    //         );
-    //         if (outerText !== "") {
-    //           node.value = node.value.slice(0, startIdx);
-    //           nextNodes.unshift(createTextNode(outerText));
-    //         }
-    //         curIdx = detachIdx;
-    //         detachNodes.push(
-    //           nextNodes.length === 0 ? null : handleDetachNodes(nextNodes)
-    //         );
-    //       } else {
-    //         const preNodes = parent.children.splice(
-    //           0,
-    //           detachIdx
-    //         ) as PhrasingContent[];
-    //         outerText = node.value.slice(0, startIdx);
-    //         if (outerText !== "") {
-    //           node.value = node.value.slice(startIdx);
-    //           preNodes.push(createTextNode(outerText));
-    //         }
-    //         curIdx = 0;
-    //         detachNodes.push(
-    //           preNodes.length === 0 ? null : handleDetachNodes(preNodes)
-    //         );
-    //       }
-    //       clearLineBreak(node, curIdx, parent);
-    //     }
-    //   }
-
-    //   return curIdx;
-    // };
-
-    const tagsParentNodes: (RootContentType | Root)[] = [];
+      return [
+        createTag({
+          tag: "timeline-item-title",
+          attrs: [],
+          isEnd: false,
+        }),
+        p,
+        createTag({
+          tag: "timeline-item-title",
+          attrs: [],
+          isEnd: true,
+        }),
+      ];
+    };
 
     const handleTagsNode = (
       node: RootContentType,
@@ -279,41 +163,60 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
             console.log(e);
           }
         }
+      } else if (node.type === "html") {
+        const match = node.value.match(timelineRegex);
+        if (match) {
+          const [val, tag, text] = match;
+          const isEnd = tag.startsWith("end");
+          const startIdx = match.index;
+          node.value = node.value.replace(val, "");
+          const innerText = node.value.slice(startIdx);
+          const p = createParagraphNode(
+            parentNode.children.splice(parentIdx + 1) as PhrasingContent[]
+          );
+          let timelineTitleNode = [];
+          if (!isEnd) {
+            timelineTitleNode = createTimelineTitleNode(text);
+          }
+          if (innerText !== "") {
+            node.value = node.value.slice(0, startIdx);
+            const newText = createTextNode(innerText);
+            p.children.unshift(newText);
+          }
+          containerNode.children.splice(
+            containerIdx + 1,
+            0,
+            createTag({ tag: "timeline-item", attrs: [], isEnd }),
+            ...timelineTitleNode,
+            p
+          );
+        }
       }
     };
 
     visit(tree, "root", (node) => {
+      const fileName = basename(file.path).replace(/\.[^/.]+$/, "");
+      if (fileName === "source") {
+        // console.log(JSON.stringify(node));
+      }
       const children = node.children;
       for (let i = 0; i < children.length; i++) {
         const item = children[i];
         if (EXCLUDE_TAGS.includes(item.type)) continue;
-        // handleTagsNode(item as RootContentType, idx, node, idx);
         handleTagsNode(item as RootContentType, node, i, node, i);
       }
-
-      // let addNum = 0;
-      // tags.forEach((tag, index) => {
-      //   if (tag.isEnd) {
-      //     children.splice(tag.index + addNum, 0, createTag(tag));
-      //     addNum++;
-      //   }
-      //   if (detachNodes[index]) {
-      //     children.splice(tag.index + addNum, 0, ...detachNodes[index]);
-      //     addNum += detachNodes[index].length;
-      //   }
-      //   if (!tag.isEnd) {
-      //     children.splice(tag.index + addNum, 0, createTag(tag));
-      //     addNum++;
-      //   }
-      // });
     });
 
     visit(tree, "paragraph", (node, index, parent) => {
       let i = 0;
       while (i < node.children.length) {
         const item = node.children[i];
-        if (item.type === "text" && item.value == "") {
-          node.children.splice(i, 1);
+        if (item.type === "text" || item.type === "html") {
+          if (item.value === "") {
+            node.children.splice(i, 1);
+          } else {
+            i++;
+          }
         } else if (item.type === "break") {
           const nextNode = node.children[i + 1];
           if (

@@ -72,7 +72,71 @@ export const rehypePluginTags: Plugin<[Options], Root> = () => {
               ],
             });
           }
+        } else if (type === "timeline") {
+          const text = node.properties?.className?.[1];
+          node.properties = { class: type };
+
+          node.children.forEach((item) => {
+            if (
+              item.type === "element" &&
+              item.tagName === "div" &&
+              item.properties.className.toString() == "timeline-item"
+            ) {
+              const spliceIdx = item.children.findIndex(
+                (v) =>
+                  v.type === "element" &&
+                  v.tagName === "div" &&
+                  v.properties.className.toString() == "timeline-item-title"
+              );
+
+              const content = item.children.splice(spliceIdx + 1);
+              item.children.push({
+                type: "element",
+                tagName: "div",
+                properties: {
+                  class: "timeline-item-content",
+                },
+                children: content,
+              });
+            }
+          });
+
+          node.children.unshift({
+            type: "element",
+            tagName: "div",
+            properties: {
+              class: "timeline-item headline",
+            },
+            children: [
+              {
+                type: "element",
+                tagName: "div",
+                properties: {
+                  class: "timeline-item-title",
+                },
+                children: [
+                  {
+                    type: "element",
+                    tagName: "p",
+                    properties: {},
+                    children: [
+                      {
+                        type: "text",
+                        value: text,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          });
         }
+      }
+    });
+
+    visit(tree, "element", (node, index, parent) => {
+      if (node.tagName === "p" && node.children.length === 0) {
+        parent.children.splice(index, 1);
       }
     });
   };
