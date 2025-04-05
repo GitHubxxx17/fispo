@@ -10,7 +10,7 @@
     
     
     <link rel="icon" href="/fispo/logo.png" type="image/png">
-    <link rel="stylesheet" href="/fispo/assets/client-entry-D5IzxvZJ.css">
+    <link rel="stylesheet" href="/fispo/assets/client-entry-DxMvERj9.css">
     
   </head>
   <body>
@@ -59,13 +59,13 @@
 <p>此数据将可用于页面的其余部分，以及所有自定义和主题组件。<br/>
 更多信息，参见<a href="./frontmatter" target="" rel="">frontmatter</a>。</p>
 <h2 id="标签外挂"><a class="header-anchor" href="#标签外挂"><span class="icon icon-link"></span></a>标签外挂</h2>
-<h3 id="note"><a class="header-anchor" href="#note"><span class="icon icon-link"></span></a>note</h3>
+<h3 id="引用-note"><a class="header-anchor" href="#引用-note"><span class="icon icon-link"></span></a>引用 note</h3>
 <p>Fispo 的标签外挂参考了 Hexo 独有的功能标签外挂，并不是标准的 Markdown 格式。</p>
 <div class="note warning modern"><span class="note-icon"></span>
 <p>标签外挂虽然能为主题带来一些额外的功能和 UI 方面的强化，但是，标签外挂也有明显的限制，使用时请留意。</p>
 </div>
 <p><strong>用法</strong>：</p>
-<div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% note [</span><span style="color:#D32F2F">class</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">no-icon</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">style</span><span style="color:#24292EFF">] %}</span></span>
+<div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% note [</span><span style="color:#D32F2F">class</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">no-icon</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">icon</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">style</span><span style="color:#24292EFF">] %}</span></span>
 <span class="line"><span style="color:#24292EFF">Any content (support inline tags too.io).</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
 <span class="line"></span></code></pre></div>
@@ -90,10 +90,15 @@
 
 
 
-<table><thead><tr><th style="text-align:center">名称</th><th style="text-align:center">用法</th></tr></thead><tbody><tr><td style="text-align:center">class</td><td style="text-align:center">【可选】标识，不同的标识有不同的配色（ default / primary / success / info / warning / danger ）</td></tr><tr><td style="text-align:center">no-icon</td><td style="text-align:center">【可选】不显示 icon</td></tr><tr><td style="text-align:center">style</td><td style="text-align:center">【可选】可以覆盖配置中的 style（simple/modern/flat/disabled）</td></tr></tbody></table>
+
+
+
+
+<table><thead><tr><th style="text-align:center">名称</th><th style="text-align:center">用法</th></tr></thead><tbody><tr><td style="text-align:center">class</td><td style="text-align:center">【可选】标识，不同的标识有不同的配色（ default / primary / success / info / warning / danger ）</td></tr><tr><td style="text-align:center">no-icon</td><td style="text-align:center">【可选】不显示 icon</td></tr><tr><td style="text-align:center">icon</td><td style="text-align:center">【可选】以icon-开头标识icon</td></tr><tr><td style="text-align:center">style</td><td style="text-align:center">【可选】可以覆盖配置中的 style（simple/modern/flat/disabled）</td></tr></tbody></table>
 <div class="note primary icon-palette flat"><span class="note-icon"></span>
 <p>simple</p>
 </div>
+<p><strong>示例代码</strong>：</p>
 <div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% note simple %}</span></span>
 <span class="line"><span style="color:#24292EFF">默认 提示块标签</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
@@ -122,7 +127,8 @@
 <span class="line"><span style="color:#24292EFF">danger 提示块标签</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
 <span class="line"></span></code></pre></div>
-<div class="note simple"><span class="note-icon"></span>
+<p><strong>样式预览</strong>：</p>
+<div class="note simple">
 <p>默认 提示块标签</p>
 </div>
 <p></p>
@@ -153,6 +159,7 @@
 <div class="note primary icon-pen-fancy flat"><span class="note-icon"></span>
 <p>modern</p>
 </div>
+<p><strong>示例代码</strong>：</p>
 <div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% note modern %}</span></span>
 <span class="line"><span style="color:#24292EFF">默认 提示块标签</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
@@ -181,7 +188,8 @@
 <span class="line"><span style="color:#24292EFF">danger 提示块标签</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
 <span class="line"></span></code></pre></div>
-<div class="note modern"><span class="note-icon"></span>
+<p><strong>样式预览</strong>：</p>
+<div class="note modern">
 <p>默认 提示块标签</p>
 </div>
 <p></p>
@@ -212,6 +220,7 @@
 <div class="note primary icon-coffee flat"><span class="note-icon"></span>
 <p>flat</p>
 </div>
+<p><strong>示例代码</strong>：</p>
 <div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% note flat %}</span></span>
 <span class="line"><span style="color:#24292EFF">默认 提示块标签</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
@@ -240,7 +249,8 @@
 <span class="line"><span style="color:#24292EFF">danger 提示块标签</span></span>
 <span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
 <span class="line"></span></code></pre></div>
-<div class="note flat"><span class="note-icon"></span>
+<p><strong>样式预览</strong>：</p>
+<div class="note flat">
 <p>默认 提示块标签</p>
 </div>
 <p></p>
@@ -266,7 +276,93 @@
 <p></p>
 <div class="note danger flat"><span class="note-icon"></span>
 <p>danger 提示块标签</p>
-</div><div class="_content-footer_1492j_15"><div class="_content-footer-pre_1492j_25"></div><div class="_content-footer-next_1492j_26"><a href="/fispo/guide/introduction/setup"><span>下一页</span><span>建站</span></a></div></div><footer class="_footer_1up7z_1">Copyright © 2019-present fispo <br/>All rights reserved.</footer></div><div class="_aside_ru1ok_1"><h2>目录</h2><div class="_toc-item_ru1ok_20 _active_ru1ok_17" style="margin-left:0px"><a href="/fispo/guide/writing/markdown#markdown-扩展"><span>Markdown 扩展</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/writing/markdown#链接"><span>链接</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#外部链接"><span>外部链接</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#内部链接"><span>内部链接</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/writing/markdown#frontmatter"><span>frontmatter</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/writing/markdown#标签外挂"><span>标签外挂</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#note"><span>note</span></a></div></div></div></div></div>
+</div>
+<h3 id="上标标签-tip"><a class="header-anchor" href="#上标标签-tip"><span class="icon icon-link"></span></a>上标标签 tip</h3>
+<div class="tip info"><span class="tip-icon"></span>
+<p>tip的样式参考自 <a href="https://akilar.top/posts/615e2dec/" target="_blank" rel="noopener noreferrer">Akilarの糖果屋</a></p>
+</div>
+<p><strong>用法</strong>：</p>
+<div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% tip [</span><span style="color:#D32F2F">class</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">no-icon</span><span style="color:#24292EFF">] [</span><span style="color:#D32F2F">icon</span><span style="color:#24292EFF">] %}</span></span>
+<span class="line"><span style="color:#24292EFF">Any content</span></span>
+<span class="line"><span style="color:#24292EFF">{% endnote %}</span></span>
+<span class="line"></span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:center">名称</th><th style="text-align:center">用法</th></tr></thead><tbody><tr><td style="text-align:center">class</td><td style="text-align:center">【可选】标识，不同的标识有不同的配色（ default/success/error/warning/bolt/ban/home/sync/cogs/key/bell ）</td></tr><tr><td style="text-align:center">no-icon</td><td style="text-align:center">【可选】不显示 icon</td></tr><tr><td style="text-align:center">icon</td><td style="text-align:center">【可选】以icon-开头标识icon</td></tr></tbody></table>
+<p><strong>示例代码</strong>：</p>
+<div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">{% tip %}default{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip info %}info{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip success %}success{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip error %}error{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip warning %}warning{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip bolt %}bolt{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip ban %}ban{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip home %}home{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip sync %}sync{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip cogs %}cogs{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip key %}key{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip bell %}bell{% endtip %}</span></span>
+<span class="line"><span style="color:#24292EFF">{% tip fa-atom %}自定义font awesome图标{% endtip %}</span></span>
+<span class="line"></span></code></pre></div>
+<p><strong>样式预览</strong>：</p>
+<div class="tip">
+<p>default</p>
+</div>
+<div class="tip info"><span class="tip-icon"></span>
+<p>info</p>
+</div>
+<div class="tip success"><span class="tip-icon"></span>
+<p>success</p>
+</div>
+<div class="tip error"><span class="tip-icon"></span>
+<p>error</p>
+</div>
+<div class="tip warning"><span class="tip-icon"></span>
+<p>warning</p>
+</div>
+<div class="tip bolt"><span class="tip-icon"></span>
+<p>bolt</p>
+</div>
+<div class="tip ban"><span class="tip-icon"></span>
+<p>ban</p>
+</div>
+<div class="tip home"><span class="tip-icon"></span>
+<p>home</p>
+</div>
+<div class="tip sync"><span class="tip-icon"></span>
+<p>sync</p>
+</div>
+<div class="tip cogs"><span class="tip-icon"></span>
+<p>cogs</p>
+</div>
+<div class="tip key"><span class="tip-icon"></span>
+<p>key</p>
+</div>
+<div class="tip bell"><span class="tip-icon"></span>
+<p>bell</p>
+</div>
+<div class="tip icon-atom"><span class="tip-icon"></span>
+<p>自定义font awesome图标</p>
+</div><div class="_content-footer_1492j_15"><div class="_content-footer-pre_1492j_25"></div><div class="_content-footer-next_1492j_26"><a href="/fispo/guide/introduction/setup"><span>下一页</span><span>建站</span></a></div></div><footer class="_footer_1up7z_1">Copyright © 2019-present fispo <br/>All rights reserved.</footer></div><div class="_aside_ru1ok_1"><h2>目录</h2><div class="_toc-item_ru1ok_20 _active_ru1ok_17" style="margin-left:0px"><a href="/fispo/guide/writing/markdown#markdown-扩展"><span>Markdown 扩展</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/writing/markdown#链接"><span>链接</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#外部链接"><span>外部链接</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#内部链接"><span>内部链接</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/writing/markdown#frontmatter"><span>frontmatter</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/writing/markdown#标签外挂"><span>标签外挂</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#引用-note"><span>引用 note</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:20px"><a href="/fispo/guide/writing/markdown#上标标签-tip"><span>上标标签 tip</span></a></div></div></div></div></div>
       
     <script type="module" src="/fispo/client-entry.js"></script>
   
