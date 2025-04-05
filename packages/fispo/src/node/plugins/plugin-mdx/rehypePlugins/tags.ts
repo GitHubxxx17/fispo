@@ -7,13 +7,27 @@ interface Options {
   base: string;
 }
 
-const iconMap = new Map([
+const iconNoteMap = new Map([
   ["default", () => ({ icon: "circle-right", className: "fas" })],
   ["primary", () => ({ icon: "plus-circle", className: "fas" })],
   ["success", () => ({ icon: "check-circle", className: "fas" })],
   ["info", () => ({ icon: "info-circle", className: "fas" })],
   ["warning", () => ({ icon: "exclamation-circle", className: "fas" })],
   ["danger", () => ({ icon: "minus-circle", className: "fas" })],
+]);
+
+const iconTipMap = new Map([
+  ["success", () => ({ icon: "check" })],
+  ["info", () => ({ icon: "info" })],
+  ["error", () => ({ icon: "times" })],
+  ["warning", () => ({ icon: "exclamation" })],
+  ["bolt", () => ({ icon: "bolt" })],
+  ["ban", () => ({ icon: "ban" })],
+  ["home", () => ({ icon: "home" })],
+  ["sync", () => ({ icon: "sync" })],
+  ["cogs", () => ({ icon: "cogs" })],
+  ["key", () => ({ icon: "key" })],
+  ["bell", () => ({ icon: "bell" })],
 ]);
 
 const iconRegex = /icon-([\w\s-]+)/;
@@ -31,26 +45,33 @@ export const rehypePluginTags: Plugin<[Options], Root> = () => {
           const customIcon = node.properties?.className
             ?.toString()
             .match(iconRegex)?.[1];
-          const iconProps = iconMap.get(node.properties?.className?.[1])?.();
+          let iconProps = null;
+
           if (customIcon) {
-            iconProps.icon = customIcon;
+            iconProps = { icon: customIcon };
+          } else {
+            const category = node.properties?.className?.[1];
+            iconProps =
+              type == "note"
+                ? iconNoteMap.get(category)?.()
+                : iconTipMap.get(category)?.();
           }
-          node.children.unshift({
-            type: "element",
-            tagName: "span",
-            properties: { class: "note-icon" },
-            children:
-              iconProps && !isNotIcon
-                ? [
-                    {
-                      type: "element",
-                      tagName: "Icon",
-                      properties: iconProps,
-                      children: [],
-                    },
-                  ]
-                : [],
-          });
+
+          if (iconProps && !isNotIcon) {
+            node.children.unshift({
+              type: "element",
+              tagName: "span",
+              properties: { class: `${type}-icon` },
+              children: [
+                {
+                  type: "element",
+                  tagName: "Icon",
+                  properties: iconProps,
+                  children: [],
+                },
+              ],
+            });
+          }
         }
       }
     });

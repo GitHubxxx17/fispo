@@ -378,16 +378,9 @@ div[class*="language-"]:hover #copy-button {
 .note {
   position: relative;
   margin-bottom: 15px;
-  padding: 15px 15px 15px 44px;
+  padding: 0 15px 0 44px;
   border-radius: 3px;
-}
-
-.note > :nth-child(2) {
-  margin-top: 0 !important;
-}
-
-.note > :last-child {
-  margin-bottom: 0 !important;
+  overflow: auto;
 }
 
 .note.no-icon {
@@ -573,6 +566,153 @@ div[class*="language-"]:hover #copy-button {
 
 /* note flat */
 
+/* note */
+
+/**
+ * tip
+ * 外挂标签样式
+ * -------------------------------------------------------------------------- */
+
+.tip {
+  position: relative;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, rgb(65, 54, 60), rgb(73, 70, 72));
+  padding: 6px 20px;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 5px;
+}
+
+.tip a {
+  color: rgb(255, 255, 255) !important;
+}
+
+.tip .tip-icon {
+  background: linear-gradient(0deg, rgb(65, 54, 60), rgb(73, 70, 72));
+  text-shadow: rgb(65, 54, 60) 0px -1px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  line-height: 24.5px;
+  left: -12px;
+  top: -12px;
+  box-shadow: rgb(247, 248, 249) 0px 0px 0px 2.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tip.info {
+  background: linear-gradient(90deg, rgb(32, 160, 255), rgb(32, 184, 255));
+  text-shadow: rgb(32, 160, 255) 0px -1px;
+  box-shadow: rgba(32, 160, 255, 0.5) 0px 3px 5px;
+}
+
+.tip.info .tip-icon {
+  background: linear-gradient(0deg, rgb(0, 146, 255), rgb(32, 184, 255));
+}
+
+.tip.success {
+  background: linear-gradient(90deg, rgb(97, 190, 51), rgb(143, 206, 68));
+  text-shadow: rgb(97, 190, 51) 0px -1px;
+  box-shadow: rgba(104, 195, 59, 0.5) 0px 3px 5px;
+}
+
+.tip.success .tip-icon {
+  background: linear-gradient(0deg, rgb(82, 187, 29), rgb(149, 211, 75));
+}
+
+.tip.error {
+  background: linear-gradient(90deg, rgb(255, 73, 73), rgb(255, 120, 73));
+  text-shadow: rgb(255, 73, 73) 0px -1px;
+  box-shadow: rgba(255, 73, 73, 0.5) 0px 3px 5px;
+}
+
+.tip.error .tip-icon {
+  background: linear-gradient(0deg, rgb(255, 56, 56), rgb(255, 120, 73));
+}
+
+.tip.warning {
+  background: linear-gradient(90deg, rgb(255, 149, 63), rgb(255, 180, 73));
+  text-shadow: rgb(255, 149, 63) 0px -1px;
+  box-shadow: rgba(255, 154, 73, 0.5) 0px 3px 5px;
+}
+
+.tip.warning .tip-icon {
+  background: linear-gradient(0deg, rgb(255, 143, 53), rgb(255, 193, 73));
+}
+
+.tip.bolt {
+  background: linear-gradient(530deg, rgb(120, 202, 51), rgb(37, 130, 44));
+  text-shadow: rgb(76, 247, 6) 0px -1px;
+  box-shadow: rgba(76, 247, 6, 0.5) 0px 3px 5px;
+}
+
+.tip.bolt .tip-icon {
+  background: linear-gradient(776deg, rgb(120, 202, 51), rgb(37, 130, 44));
+}
+
+.tip.ban {
+  background: linear-gradient(90deg, rgb(255, 73, 73), rgb(240, 59, 73));
+  text-shadow: rgb(255, 73, 73) 0px -1px;
+  box-shadow: rgba(255, 73, 73, 0.5) 0px 3px 5px;
+}
+
+.tip.ban .tip-icon {
+  background: linear-gradient(0deg, rgb(255, 56, 56), rgb(255, 16, 34));
+}
+
+.tip.home {
+  background: linear-gradient(90deg, rgb(14, 192, 239), rgb(128, 224, 247));
+  text-shadow: rgb(14, 192, 239) 0px -1px;
+  box-shadow: rgb(1, 202, 255) 0px 3px 5px;
+}
+
+.tip.home .tip-icon {
+  background: linear-gradient(0deg, rgb(14, 192, 238), rgb(14, 192, 234));
+}
+
+.tip.sync {
+  background: linear-gradient(230deg, rgb(71, 192, 224), rgb(45, 195, 66));
+  text-shadow: rgb(27, 205, 252) 0px -1px;
+  box-shadow: rgb(32, 177, 173) 0px 3px 5px;
+}
+
+.tip.sync .tip-icon {
+  background: linear-gradient(270deg, rgb(64, 192, 226), rgb(61, 197, 80));
+}
+
+.tip.cogs {
+  background: linear-gradient(230deg, rgb(64, 192, 226), rgb(82, 71, 226));
+  text-shadow: rgb(130, 120, 253) 0px -1px;
+  box-shadow: rgb(64, 55, 167) 0px 3px 5px;
+}
+
+.tip.cogs .tip-icon {
+  background: linear-gradient(560deg, rgb(64, 192, 226), rgb(82, 70, 226));
+}
+
+.tip.key {
+  background: linear-gradient(230deg, rgb(144, 164, 174), rgb(183, 167, 167));
+  text-shadow: rgb(193, 192, 212) 0px -1px;
+  box-shadow: rgb(211, 210, 222) 0px 3px 5px;
+}
+
+.tip.key .tip-icon {
+  background: linear-gradient(560deg, rgb(188, 205, 210), rgb(207, 206, 212));
+}
+
+.tip.bell {
+  background: linear-gradient(230deg, rgb(255, 170, 13), rgb(222, 180, 85));
+  text-shadow: rgb(193, 192, 212) 0px -1px;
+  box-shadow: rgb(211, 210, 222) 0px 3px 5px;
+}
+
+.tip.bell .tip-icon {
+  background: linear-gradient(560deg, rgb(249, 174, 7), rgb(255, 182, 21));
+}
 /* note */
 ._homeLayout_i4l93_1 {
   padding-top: 200px;

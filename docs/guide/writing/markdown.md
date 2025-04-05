@@ -58,7 +58,7 @@ lang: en-US
 
 ## 标签外挂
 
-### note
+### 引用 note
 
 Fispo 的标签外挂参考了 Hexo 独有的功能标签外挂，并不是标准的 Markdown 格式。
 
@@ -68,7 +68,7 @@ Fispo 的标签外挂参考了 Hexo 独有的功能标签外挂，并不是标�
 
 **用法**：
 ``` md
-{% note [class] [no-icon] [style] %}
+{% note [class] [no-icon] [icon] [style] %}
 Any content (support inline tags too.io).
 {% endnote %}
 ```
@@ -76,7 +76,8 @@ Any content (support inline tags too.io).
 | 名称        |      用法      |
 | :-------------------: | :-----------: | 
 | class     | 【可选】标识，不同的标识有不同的配色（ default / primary / success / info / warning / danger ） |
-| no-icon     |   【可选】不显示 icon    |  
+| no-icon    |   【可选】不显示 icon   |  
+|  icon     |   【可选】以icon-开头标识icon   |  
 | style |   【可选】可以覆盖配置中的 style（simple/modern/flat/disabled）   | 
 
 
@@ -85,6 +86,7 @@ Any content (support inline tags too.io).
 simple
 {% endnote %}
 
+**示例代码**：
 ``` md
 {% note simple %}
 默认 提示块标签
@@ -115,6 +117,7 @@ danger 提示块标签
 {% endnote %}
 ```
 
+**样式预览**：
 {% note simple %}
 默认 提示块标签
 {% endnote %}
@@ -146,6 +149,8 @@ danger 提示块标签
 {% note primary icon-pen-fancy flat %}
 modern
 {% endnote %}
+
+**示例代码**：
 ```md
 {% note modern %}
 默认 提示块标签
@@ -175,7 +180,7 @@ warning 提示块标签
 danger 提示块标签
 {% endnote %}
 ```
-
+**样式预览**：
 {% note modern %}
 默认 提示块标签
 {% endnote %}
@@ -208,7 +213,7 @@ danger 提示块标签
 {% note primary icon-coffee flat %}
 flat
 {% endnote %}
-
+**示例代码**：
 ```md
 {% note flat %}
 默认 提示块标签
@@ -238,7 +243,7 @@ warning 提示块标签
 danger 提示块标签
 {% endnote %}
 ```
-
+**样式预览**：
 {% note flat %}
 默认 提示块标签
 {% endnote %}
@@ -266,3 +271,54 @@ warning 提示块标签
 {% note danger flat %}
 danger 提示块标签
 {% endnote %}
+
+### 上标标签 tip
+{% tip info %}
+tip的样式参考自 [Akilarの糖果屋](https://akilar.top/posts/615e2dec/)
+{% endtip %}
+
+**用法**：
+``` md
+{% tip [class] [no-icon] [icon] %}
+Any content
+{% endnote %}
+```
+
+| 名称        |      用法      |
+| :-------------------: | :-----------: | 
+| class     | 【可选】标识，不同的标识有不同的配色（ default/success/error/warning/bolt/ban/home/sync/cogs/key/bell ） |
+| no-icon   |   【可选】不显示 icon   |  
+|  icon     |   【可选】以icon-开头标识icon    |  
+
+
+**示例代码**：
+```md
+{% tip %}default{% endtip %}
+{% tip info %}info{% endtip %}
+{% tip success %}success{% endtip %}
+{% tip error %}error{% endtip %}
+{% tip warning %}warning{% endtip %}
+{% tip bolt %}bolt{% endtip %}
+{% tip ban %}ban{% endtip %}
+{% tip home %}home{% endtip %}
+{% tip sync %}sync{% endtip %}
+{% tip cogs %}cogs{% endtip %}
+{% tip key %}key{% endtip %}
+{% tip bell %}bell{% endtip %}
+{% tip fa-atom %}自定义font awesome图标{% endtip %}
+```
+
+**样式预览**：
+{% tip %}default{% endtip %}
+{% tip info %}info{% endtip %}
+{% tip success %}success{% endtip %}
+{% tip error %}error{% endtip %}
+{% tip warning %}warning{% endtip %}
+{% tip bolt %}bolt{% endtip %}
+{% tip ban %}ban{% endtip %}
+{% tip home %}home{% endtip %}
+{% tip sync %}sync{% endtip %}
+{% tip cogs %}cogs{% endtip %}
+{% tip key %}key{% endtip %}
+{% tip bell %}bell{% endtip %}
+{% tip icon-atom %}自定义font awesome图标{% endtip %}

@@ -28,8 +28,12 @@ const toc = [{
   "text": "标签外挂",
   "depth": 2
 }, {
-  "id": "note",
-  "text": "note",
+  "id": "引用-note",
+  "text": "引用 note",
+  "depth": 3
+}, {
+  "id": "上标标签-tip",
+  "text": "上标标签 tip",
   "depth": 3
 }];
 function _createMdxContent(props) {
@@ -578,14 +582,14 @@ function _createMdxContent(props) {
         })
       }), "标签外挂"]
     }), "\n", jsxRuntimeExports.jsxs(_components.h3, {
-      id: "note",
+      id: "引用-note",
       children: [jsxRuntimeExports.jsx(_components.a, {
         className: "header-anchor",
-        href: "#note",
+        href: "#引用-note",
         children: jsxRuntimeExports.jsx(_components.span, {
           className: "icon icon-link"
         })
-      }), "note"]
+      }), "引用 note"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {
       children: "Fispo 的标签外挂参考了 Hexo 独有的功能标签外挂，并不是标准的 Markdown 格式。"
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -649,6 +653,16 @@ function _createMdxContent(props) {
               style: {
                 color: "#D32F2F"
               },
+              children: "icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "] ["
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
               children: "style"
             }), jsxRuntimeExports.jsx(_components.span, {
               style: {
@@ -677,7 +691,7 @@ function _createMdxContent(props) {
           })]
         })
       })]
-    }), "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", jsxRuntimeExports.jsxs(_components.table, {
+    }), "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", jsxRuntimeExports.jsxs(_components.table, {
       children: [jsxRuntimeExports.jsx(_components.thead, {
         children: jsxRuntimeExports.jsxs(_components.tr, {
           children: [jsxRuntimeExports.jsx(_components.th, {
@@ -722,6 +736,18 @@ function _createMdxContent(props) {
             style: {
               textAlign: "center"
             },
+            children: "icon"
+          }), jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "【可选】以icon-开头标识icon"
+          })]
+        }), jsxRuntimeExports.jsxs(_components.tr, {
+          children: [jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
             children: "style"
           }), jsxRuntimeExports.jsx(_components.td, {
             style: {
@@ -736,12 +762,15 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.span, {
         className: "note-icon",
         children: jsxRuntimeExports.jsx(Icon, {
-          icon: "palette",
-          className: "fas"
+          icon: "palette"
         })
       }), "\n", jsxRuntimeExports.jsx(_components.p, {
         children: "simple"
       }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "示例代码"
+      }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-md",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -942,11 +971,13 @@ function _createMdxContent(props) {
           })]
         })
       })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "样式预览"
+      }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "note simple",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "note-icon"
-      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+      children: ["\n", jsxRuntimeExports.jsx(_components.p, {
         children: "默认 提示块标签"
       }), "\n"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {}), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -1020,12 +1051,15 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.span, {
         className: "note-icon",
         children: jsxRuntimeExports.jsx(Icon, {
-          icon: "pen-fancy",
-          className: "fas"
+          icon: "pen-fancy"
         })
       }), "\n", jsxRuntimeExports.jsx(_components.p, {
         children: "modern"
       }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "示例代码"
+      }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-md",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -1226,11 +1260,13 @@ function _createMdxContent(props) {
           })]
         })
       })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "样式预览"
+      }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "note modern",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "note-icon"
-      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+      children: ["\n", jsxRuntimeExports.jsx(_components.p, {
         children: "默认 提示块标签"
       }), "\n"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {}), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -1304,12 +1340,15 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.span, {
         className: "note-icon",
         children: jsxRuntimeExports.jsx(Icon, {
-          icon: "coffee",
-          className: "fas"
+          icon: "coffee"
         })
       }), "\n", jsxRuntimeExports.jsx(_components.p, {
         children: "flat"
       }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "示例代码"
+      }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "language-md",
       children: [jsxRuntimeExports.jsxs(_components.div, {
@@ -1510,11 +1549,13 @@ function _createMdxContent(props) {
           })]
         })
       })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "样式预览"
+      }), "："]
     }), "\n", jsxRuntimeExports.jsxs(_components.div, {
       className: "note flat",
-      children: [jsxRuntimeExports.jsx(_components.span, {
-        className: "note-icon"
-      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+      children: ["\n", jsxRuntimeExports.jsx(_components.p, {
         children: "默认 提示块标签"
       }), "\n"]
     }), "\n", jsxRuntimeExports.jsx(_components.p, {}), "\n", jsxRuntimeExports.jsxs(_components.div, {
@@ -1582,6 +1623,419 @@ function _createMdxContent(props) {
         })
       }), "\n", jsxRuntimeExports.jsx(_components.p, {
         children: "danger 提示块标签"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.h3, {
+      id: "上标标签-tip",
+      children: [jsxRuntimeExports.jsx(_components.a, {
+        className: "header-anchor",
+        href: "#上标标签-tip",
+        children: jsxRuntimeExports.jsx(_components.span, {
+          className: "icon icon-link"
+        })
+      }), "上标标签 tip"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip info",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "info"
+        })
+      }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+        children: ["tip的样式参考自 ", jsxRuntimeExports.jsx(_components.a, {
+          href: "https://akilar.top/posts/615e2dec/",
+          target: "_blank",
+          rel: "noopener noreferrer",
+          children: "Akilarの糖果屋"
+        })]
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "用法"
+      }), "："]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "language-md",
+      children: [jsxRuntimeExports.jsxs(_components.div, {
+        className: "highlight-tools",
+        children: [jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "md"
+        }), jsxRuntimeExports.jsx(CopyButton, {})]
+      }), jsxRuntimeExports.jsx(_components.pre, {
+        className: "shiki min-light",
+        style: {
+          backgroundColor: "#ffffff"
+        },
+        tabIndex: "0",
+        children: jsxRuntimeExports.jsxs(_components.code, {
+          children: [jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip ["
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "class"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "] ["
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "no-icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "] ["
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "] %}"
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "Any content"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% endnote %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line"
+          })]
+        })
+      })]
+    }), "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", jsxRuntimeExports.jsxs(_components.table, {
+      children: [jsxRuntimeExports.jsx(_components.thead, {
+        children: jsxRuntimeExports.jsxs(_components.tr, {
+          children: [jsxRuntimeExports.jsx(_components.th, {
+            style: {
+              textAlign: "center"
+            },
+            children: "名称"
+          }), jsxRuntimeExports.jsx(_components.th, {
+            style: {
+              textAlign: "center"
+            },
+            children: "用法"
+          })]
+        })
+      }), jsxRuntimeExports.jsxs(_components.tbody, {
+        children: [jsxRuntimeExports.jsxs(_components.tr, {
+          children: [jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "class"
+          }), jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "【可选】标识，不同的标识有不同的配色（ default/success/error/warning/bolt/ban/home/sync/cogs/key/bell ）"
+          })]
+        }), jsxRuntimeExports.jsxs(_components.tr, {
+          children: [jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "no-icon"
+          }), jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "【可选】不显示 icon"
+          })]
+        }), jsxRuntimeExports.jsxs(_components.tr, {
+          children: [jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "icon"
+          }), jsxRuntimeExports.jsx(_components.td, {
+            style: {
+              textAlign: "center"
+            },
+            children: "【可选】以icon-开头标识icon"
+          })]
+        })]
+      })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "示例代码"
+      }), "："]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "language-md",
+      children: [jsxRuntimeExports.jsxs(_components.div, {
+        className: "highlight-tools",
+        children: [jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "md"
+        }), jsxRuntimeExports.jsx(CopyButton, {})]
+      }), jsxRuntimeExports.jsx(_components.pre, {
+        className: "shiki min-light",
+        style: {
+          backgroundColor: "#ffffff"
+        },
+        tabIndex: "0",
+        children: jsxRuntimeExports.jsxs(_components.code, {
+          children: [jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip %}default{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip info %}info{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip success %}success{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip error %}error{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip warning %}warning{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip bolt %}bolt{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip ban %}ban{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip home %}home{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip sync %}sync{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip cogs %}cogs{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip key %}key{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip bell %}bell{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "{% tip fa-atom %}自定义font awesome图标{% endtip %}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line"
+          })]
+        })
+      })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "样式预览"
+      }), "："]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip",
+      children: ["\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "default"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip info",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "info"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "info"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip success",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "check"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "success"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip error",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "times"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "error"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip warning",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "exclamation"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "warning"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip bolt",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "bolt"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "bolt"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip ban",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "ban"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "ban"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip home",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "home"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "home"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip sync",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "sync"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "sync"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip cogs",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "cogs"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "cogs"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip key",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "key"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "key"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip bell",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "bell"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "bell"
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "tip icon-atom",
+      children: [jsxRuntimeExports.jsx(_components.span, {
+        className: "tip-icon",
+        children: jsxRuntimeExports.jsx(Icon, {
+          icon: "atom"
+        })
+      }), "\n", jsxRuntimeExports.jsx(_components.p, {
+        children: "自定义font awesome图标"
       }), "\n"]
     })]
   });
