@@ -7681,7 +7681,7 @@ const Route2 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x
 const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0));
 const Route4 = React.lazy(() => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0));
 const Route5 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-C8Jk2br_.js"), true ? [] : void 0));
-const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-DGcd0BMG.js"), true ? [] : void 0));
+const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
 const Route7 = React.lazy(() => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0));
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
 const routes = [
@@ -7691,7 +7691,7 @@ const routes = [
   { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0) },
   { path: "/guide/introduction/setup", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0) },
   { path: "/guide/writing/frontmatter", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/frontmatter-C8Jk2br_.js"), true ? [] : void 0) },
-  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-DGcd0BMG.js"), true ? [] : void 0) },
+  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0) },
   { path: "/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) }
 ];
