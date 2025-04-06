@@ -70,10 +70,6 @@ export default defineConfig<ThemeConfig>({
               text: "GitHub Pages",
               link: "/guide/deploy/githubPages",
             },
-            {
-              text: "一键部署",
-              link: "/guide/deploy/oneClickDeployment",
-            },
           ],
         },
       ],
