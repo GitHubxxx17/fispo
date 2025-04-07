@@ -363,3 +363,9 @@ export interface PageData extends PageDataContext {
    */
   [key: string]: unknown;
 }
+
+export interface Theme<ThemeConfig = unknown> {
+  name: string;
+  Layout: string;
+  config: UserConfig<ThemeConfig>;
+}

@@ -16,6 +16,6 @@ features:
     details: 使用 TypeScript 编写，提供了优秀的类型支持，让你的开发更加顺畅。
     icon: 🔑
   - title: '扩展性强: 提供多种自定义能力'
-    details: 通过其扩展机制，你可以轻松的扩展 Island 的主题 UI 和构建能力。
+    details: 通过其扩展机制，你可以轻松的扩展 Fispo 的主题 UI 和构建能力。
     icon: 🎨
 ---

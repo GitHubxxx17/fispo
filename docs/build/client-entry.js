@@ -7682,7 +7682,7 @@ const Route3 = React.lazy(() => __vitePreload(() => import("./assets/setup-BYBSN
 const Route4 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0));
 const Route5 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
 const Route6 = React.lazy(() => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0));
-const Route7 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
+const Route7 = React.lazy(() => __vitePreload(() => import("./assets/index-DJnbAZEn.js"), true ? [] : void 0));
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0));
 const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-B-Ec0x3r.js"), true ? [] : void 0));
 const routes = [
@@ -7693,7 +7693,7 @@ const routes = [
   { path: "/guide/writing/frontmatter", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0) },
   { path: "/guide/writing/markdown", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0) },
-  { path: "/", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) },
+  { path: "/", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/index-DJnbAZEn.js"), true ? [] : void 0) },
   { path: "/plugin/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0) },
   { path: "/theme/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-B-Ec0x3r.js"), true ? [] : void 0) }
 ];
@@ -11359,6 +11359,17 @@ const styles$6 = {
   "home-feature": "_home-feature_i4l93_63",
   "home-feature-item": "_home-feature-item_i4l93_69"
 };
+const footer = "_footer_1up7z_1";
+const styles$5 = {
+  footer
+};
+const Footer = () => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: styles$5.footer, children: [
+    "Copyright © 2019-present fispo ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    "All rights reserved."
+  ] });
+};
 function HomeLayout(props) {
   const { siteData: siteData2, title } = props.pageData;
   const frontmatter = props.pageData.frontmatter;
@@ -11383,7 +11394,8 @@ function HomeLayout(props) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: item.title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: item.details })
       ] }, key);
-    }) })
+    }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
 var reactFastCompare;
@@ -12366,7 +12378,7 @@ function MDXProvider(properties) {
     properties.children
   );
 }
-const styles$5 = {
+const styles$4 = {
   "copy-button": "_copy-button_ab8rs_1"
 };
 const CopyButton = () => {
@@ -12400,7 +12412,7 @@ const CopyButton = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "span",
     {
-      className: styles$5["copy-button"],
+      className: styles$4["copy-button"],
       id: "copy-button",
       onClick: (e) => handleCopy(e),
       children: [
@@ -12440,7 +12452,7 @@ const Content$1 = reactExports.memo(Content);
 const docLayout = "_docLayout_nxqf7_1";
 const content = "_content_nxqf7_7";
 const noSidebar = "_noSidebar_nxqf7_64";
-const styles$4 = {
+const styles$3 = {
   docLayout,
   content,
   "content-footer": "_content-footer_nxqf7_15",
@@ -12454,7 +12466,7 @@ const sidebarTitle = "_sidebarTitle_w0fjt_14";
 const sidebarContent = "_sidebarContent_w0fjt_17";
 const sidebarItem = "_sidebarItem_w0fjt_20";
 const active$1 = "_active_w0fjt_24";
-const styles$3 = {
+const styles$2 = {
   sidebar,
   sidebarGroup,
   sidebarTitle,
@@ -12466,13 +12478,13 @@ const SideBar = (props) => {
   const { sidebarData, pathname } = props;
   const renderGroup = (item) => {
     var _a2;
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: styles$3.sidebarGroup, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.sidebarTitle, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item.text }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.sidebarContent, children: (_a2 = item.items) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: styles$2.sidebarGroup, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarTitle, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item.text }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarContent, children: (_a2 = item.items) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: classNames(styles$3.sidebarItem, {
-            [styles$3.active]: pathname === item2.link
+          className: classNames(styles$2.sidebarItem, {
+            [styles$2.active]: pathname === item2.link
           }),
           children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: item2.link, children: item2.text })
         },
@@ -12480,11 +12492,11 @@ const SideBar = (props) => {
       )) })
     ] }, item.text);
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$3.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$2.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
 };
 const aside = "_aside_ru1ok_1";
 const active = "_active_ru1ok_17";
-const styles$2 = {
+const styles$1 = {
   aside,
   active,
   "toc-item": "_toc-item_ru1ok_20"
@@ -12547,14 +12559,14 @@ const Aside = (props) => {
     };
     scrollManager.add(scrollToToc);
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.aside, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.aside, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "目录" }),
     asideData.map(({ text, id, depth }, index) => {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: classNames(styles$2["toc-item"], {
-            [styles$2.active]: index == activeIndex
+          className: classNames(styles$1["toc-item"], {
+            [styles$1.active]: index == activeIndex
           }),
           style: {
             marginLeft: `${(depth - 1) * 10}px`
@@ -12582,17 +12594,6 @@ const Aside = (props) => {
     })
   ] });
 };
-const footer = "_footer_1up7z_1";
-const styles$1 = {
-  footer
-};
-const Footer = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: styles$1.footer, children: [
-    "Copyright © 2019-present fispo ",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    "All rights reserved."
-  ] });
-};
 const DocLayout = (props) => {
   const { siteData: siteData2, pagePath, toc } = props.pageData;
   const themeConfig = siteData2.themeConfig;
@@ -12617,25 +12618,25 @@ const DocLayout = (props) => {
       )
     );
   }, [articleList]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4.docLayout, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.docLayout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SideBar, { sidebarData: matchedSidebar, pathname: pagePath }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        className: classNames(styles$4.content, {
-          [styles$4.noSidebar]: matchedSidebar.length === 0
+        className: classNames(styles$3.content, {
+          [styles$3.noSidebar]: matchedSidebar.length === 0
         }),
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["content-footer"], children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["content-footer"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-left" }),
                 "上一页"
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex - 1].text })
             ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
                 "下一页",
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-right" })

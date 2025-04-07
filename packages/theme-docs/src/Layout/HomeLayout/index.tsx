@@ -2,6 +2,7 @@ import { PageData } from "fispo-core/types";
 import styles from "./index.module.scss";
 import { Image, Link } from "fispo-core/theme";
 import { HomeFrontmatter } from "../../types/index";
+import Footer from "../../components/Footer";
 
 interface HomeLayoutProps {
   pageData: PageData;
@@ -44,6 +45,7 @@ export function HomeLayout(props: HomeLayoutProps) {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 }
