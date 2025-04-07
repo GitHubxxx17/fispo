@@ -54,6 +54,8 @@
 
   --fispo-doc-c-bg: var(--fispo-c-white);
   --fispo-code-block-c-bg: #f6f6f7;
+
+  --fispo-theme-c-bg: var(--fispo-c-white);
 }
 
 .dark {
@@ -68,4 +70,6 @@
 
   --fispo-doc-c-bg: var(--fispo-c-dark);
   --fispo-code-block-c-bg: rgb(36, 41, 46);
+
+  --fispo-theme-c-bg: var(--fispo-c-dark-1);
 }

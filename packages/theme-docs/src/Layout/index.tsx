@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import scrollManager from "../helper/scroll";
 import { Helmet } from "react-helmet-async";
 import DocLayout from "./DocLayout";
+import { ThemeLayout } from "./ThemeLayout";
 
 interface LayoutProps {
   pageData: PageData;
@@ -16,12 +17,15 @@ interface LayoutProps {
 
 const Layout = (props: LayoutProps) => {
   const { pageData } = props;
-  const { pageType, siteData, title } = pageData;
+  const { pageType, siteData, title, pagePath } = pageData;
   const { themeConfig, title: siteTitle, logo } = siteData;
   const { navMenus } = themeConfig;
   // 获取 pageType
+  const pathList = pagePath.split("/").filter(Boolean);
+  const type = pathList[0];
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
+  const isThemePage = type === "theme";
 
   // 根据 pageType 分发不同的页面内容
   const getCurrentLayout = () => {
@@ -29,6 +33,8 @@ const Layout = (props: LayoutProps) => {
       return <HomeLayout pageData={pageData} />;
     } else if (isArticlePage) {
       return <DocLayout pageData={pageData} />;
+    } else if (isThemePage) {
+      return <ThemeLayout pageData={pageData} />;
     } else if (pageType === "custom") {
       return <DocLayout pageData={pageData} />;
     } else {

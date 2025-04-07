@@ -34,7 +34,7 @@ const iconRegex = /icon-([\w\s-]+)/;
 
 export const rehypePluginTags: Plugin<[Options], Root> = () => {
   return (tree) => {
-    visit(tree, "element", (node) => {
+    visit(tree, "element", (node, index, parent) => {
       if (node.tagName === "div") {
         const type = node.properties?.className?.[0];
         if (EXTENDED_TAGS.includes(type)) {
@@ -132,11 +132,98 @@ export const rehypePluginTags: Plugin<[Options], Root> = () => {
           });
         }
       }
-    });
 
-    visit(tree, "element", (node, index, parent) => {
       if (node.tagName === "p" && node.children.length === 0) {
         parent.children.splice(index, 1);
+      }
+
+      if (
+        node.tagName == "li" &&
+        node.properties?.className?.toString() === "theme-list-item"
+      ) {
+        const properties = node.properties;
+        node.children = [
+          {
+            type: "element",
+            tagName: "div",
+            properties: { className: "theme-list-item-img" },
+            children: [
+              {
+                type: "element",
+                tagName: "Link",
+                properties: { href: properties.dataUrl },
+                children: [
+                  {
+                    type: "element",
+                    tagName: "Image",
+                    properties: { src: properties.dataImg },
+                    children: [],
+                  },
+                  {
+                    type: "element",
+                    tagName: "div",
+                    properties: { className: "theme-list-item-img-text" },
+                    children: [
+                      {
+                        type: "element",
+                        tagName: "Icon",
+                        properties: { icon: "eye" },
+                        children: [],
+                      },
+                      {
+                        type: "element",
+                        tagName: "span",
+                        properties: {},
+                        children: [
+                          {
+                            type: "text",
+                            value: "点击预览网站",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "element",
+            tagName: "div",
+            properties: { className: "theme-list-item-content" },
+            children: [
+              {
+                type: "element",
+                tagName: "h3",
+                properties: {},
+                children: [
+                  {
+                    type: "element",
+                    tagName: "Link",
+                    properties: { href: properties.dataUrl },
+                    children: [
+                      {
+                        type: "text",
+                        value: properties.dataName as string,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "element",
+                tagName: "p",
+                properties: {},
+                children: [
+                  {
+                    type: "text",
+                    value: properties.dataDescription as string,
+                  },
+                ],
+              },
+            ],
+          },
+        ];
       }
     });
   };

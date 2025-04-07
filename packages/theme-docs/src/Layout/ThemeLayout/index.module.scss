@@ -1,0 +1,19 @@
+.themeLayout {
+  position: relative;
+  padding-top: 80px;
+  margin: 0 10%;
+
+  .themeContent {
+    background-color: var(--fispo-doc-c-bg);
+    box-shadow: var(--box-shadow);
+    padding: 20px 40px 0;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .themeLayout {
+    margin: 0 5%;
+  }
+}

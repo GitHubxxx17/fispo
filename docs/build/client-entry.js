@@ -7675,27 +7675,27 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-const Route0 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0));
-const Route1 = React.lazy(() => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0));
-const Route2 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
-const Route3 = React.lazy(() => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0));
-const Route4 = React.lazy(() => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0));
-const Route5 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-C8Jk2br_.js"), true ? [] : void 0));
-const Route6 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
-const Route7 = React.lazy(() => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0));
-const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
+const Route0 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0));
+const Route1 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
+const Route2 = React.lazy(() => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0));
+const Route3 = React.lazy(() => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0));
+const Route4 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0));
+const Route5 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
+const Route6 = React.lazy(() => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0));
+const Route7 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
+const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-BigHwxKo.js"), true ? [] : void 0));
 const routes = [
-  { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-8jgVUL9P.js"), true ? [] : void 0) },
-  { path: "/guide/deploy/oneClickDeployment", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/oneClickDeployment-C3WahElN.js"), true ? [] : void 0) },
-  { path: "/guide/", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/config", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/setup", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0) },
-  { path: "/guide/writing/frontmatter", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/frontmatter-C8Jk2br_.js"), true ? [] : void 0) },
-  { path: "/guide/writing/markdown", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
-  { path: "/guide/writing/source", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/source-Da7LebTf.js"), true ? [] : void 0) },
-  { path: "/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) }
+  { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0) },
+  { path: "/guide/", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/config", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/setup", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0) },
+  { path: "/guide/writing/frontmatter", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0) },
+  { path: "/guide/writing/markdown", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
+  { path: "/guide/writing/source", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0) },
+  { path: "/", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) },
+  { path: "/theme/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-BigHwxKo.js"), true ? [] : void 0) }
 ];
-const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }, { "text": "一键部署", "link": "/guide/deploy/oneClickDeployment" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
+const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
 function formatDateToYYYYMMDD(dateStr) {
   const date = new Date(dateStr);
   const year = date.getFullYear();
@@ -7756,7 +7756,7 @@ const usePageData = () => {
   return reactExports.useContext(DataContext);
 };
 const layout = "_layout_luyrs_1";
-const styles$8 = {
+const styles$9 = {
   layout
 };
 var classnames = { exports: {} };
@@ -7826,7 +7826,7 @@ var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
 const nav = "_nav_1wfjm_1";
 const menus = "_menus_1wfjm_38";
-const styles$7 = {
+const styles$8 = {
   nav,
   "blog-name": "_blog-name_1wfjm_16",
   menus,
@@ -8706,7 +8706,7 @@ function defineIcons(prefix, icons) {
   }
 }
 const {
-  styles: styles$6,
+  styles: styles$7,
   shims
 } = namespace;
 const FAMILY_NAMES = Object.keys(PREFIX_TO_LONG_STYLE);
@@ -8735,7 +8735,7 @@ function getIconName(cssPrefix, cls) {
 }
 const build = () => {
   const lookup = (reducer) => {
-    return reduce(styles$6, (o$$1, style, prefix) => {
+    return reduce(styles$7, (o$$1, style, prefix) => {
       o$$1[prefix] = reduce(style, reducer, {});
       return o$$1;
     }, {});
@@ -8774,7 +8774,7 @@ const build = () => {
     });
     return acc;
   });
-  const hasRegular = "far" in styles$6 || config.autoFetchSvg;
+  const hasRegular = "far" in styles$7 || config.autoFetchSvg;
   const shimLookups = reduce(shims, (acc, shim) => {
     const maybeNameMaybeUnicode = shim[0];
     let prefix = shim[1];
@@ -8918,7 +8918,7 @@ function getCanonicalIcon(values) {
   return _objectSpread2$1(_objectSpread2$1(_objectSpread2$1({}, canonical), getDefaultCanonicalPrefix({
     values,
     family,
-    styles: styles$6,
+    styles: styles$7,
     config,
     canonical,
     givenPrefix
@@ -8939,7 +8939,7 @@ function applyShimAndAlias(skipLookups, givenPrefix, canonical) {
   const aliasIconName = byAlias(prefix, iconName);
   iconName = shim.iconName || aliasIconName || iconName;
   prefix = shim.prefix || prefix;
-  if (prefix === "far" && !styles$6["far"] && styles$6["fas"] && !config.autoFetchSvg) {
+  if (prefix === "far" && !styles$7["far"] && styles$7["fas"] && !config.autoFetchSvg) {
     prefix = "fas";
   }
   return {
@@ -11285,31 +11285,31 @@ function Nav(props) {
   }, [menus2]);
   const renderTools = reactExports.useMemo(() => {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "切换黑白主题", onClick: clickToChangeTheme, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: curTheme === "light" ? "sun" : "moon" }) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "github", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: "https://github.com/GitHubxxx17/fispo", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "github" }) }) }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "切换黑白主题", onClick: clickToChangeTheme, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: curTheme === "light" ? "sun" : "moon" }) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "github", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: "https://github.com/GitHubxxx17/fispo", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "github" }) }) }) })
     ] });
   }, [curTheme]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "nav",
       {
-        className: classNames(styles$7.nav, {
-          [styles$7["nav-top"]]: isTop
+        className: classNames(styles$8.nav, {
+          [styles$8["nav-top"]]: isTop
         }),
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$7["nav-left"], children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: "/", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8["nav-left"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["blog-name"], children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: "/", children: [
               logo && /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { src: logo }),
               title
             ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: renderMenus }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8.menus, children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: renderMenus }) })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$7["nav-right"], children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-right-tools"], children: renderTools }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8["nav-right"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["nav-right-tools"], children: renderTools }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "div",
               {
-                className: styles$7["nav-right-menus"],
+                className: styles$8["nav-right-menus"],
                 onClick: () => {
                   setIsShowMenus((v) => {
                     document.body.classList.toggle("mobile-nav");
@@ -11326,19 +11326,19 @@ function Nav(props) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       "div",
       {
-        className: classNames(styles$7["nav-menus"], {
-          [styles$7["nav-menus-show"]]: isShowMenus
+        className: classNames(styles$8["nav-menus"], {
+          [styles$8["nav-menus-show"]]: isShowMenus
         }),
         children: [
           renderMenus,
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$7["nav-menus-tools"], children: renderTools })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["nav-menus-tools"], children: renderTools })
         ]
       }
     )
   ] });
 }
 const homeLayout = "_homeLayout_i4l93_1";
-const styles$5 = {
+const styles$6 = {
   homeLayout,
   "home-hero": "_home-hero_i4l93_5",
   "home-hero-left": "_home-hero-left_i4l93_11",
@@ -11352,22 +11352,22 @@ function HomeLayout(props) {
   const { siteData: siteData2, title } = props.pageData;
   const frontmatter = props.pageData.frontmatter;
   const { description, logo } = siteData2;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5.homeLayout, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-hero"], children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-hero-left"], children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6.homeLayout, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-hero"], children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-hero-left"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: description }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["home-hero-button"], children: frontmatter.buttons.map((button, key) => {
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-hero-button"], children: frontmatter.buttons.map((button, key) => {
           return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: button.link, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: button.text }) }, key);
         }) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-hero-right"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["home-hero-right-img-bg"] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-hero-right"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-hero-right-img-bg"] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { src: logo })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$5["home-feature"], children: frontmatter.features.map((item, key) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$5["home-feature-item"], children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-feature"], children: frontmatter.features.map((item, key) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-feature-item"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: item.icon }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: item.title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: item.details })
@@ -12355,7 +12355,7 @@ function MDXProvider(properties) {
     properties.children
   );
 }
-const styles$4 = {
+const styles$5 = {
   "copy-button": "_copy-button_ab8rs_1"
 };
 const CopyButton = () => {
@@ -12389,7 +12389,7 @@ const CopyButton = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "span",
     {
-      className: styles$4["copy-button"],
+      className: styles$5["copy-button"],
       id: "copy-button",
       onClick: (e) => handleCopy(e),
       children: [
@@ -12423,12 +12423,12 @@ const Content = (props) => {
     });
   }, [routes]);
   const routeElement = useRoutes(handleRoutes2);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, Icon, ...components }, children: routeElement });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, Icon, Image, Link, ...components }, children: routeElement });
 };
 const Content$1 = reactExports.memo(Content);
 const docLayout = "_docLayout_1492j_1";
 const content = "_content_1492j_7";
-const styles$3 = {
+const styles$4 = {
   docLayout,
   content,
   "content-footer": "_content-footer_1492j_15",
@@ -12441,7 +12441,7 @@ const sidebarTitle = "_sidebarTitle_w0fjt_14";
 const sidebarContent = "_sidebarContent_w0fjt_17";
 const sidebarItem = "_sidebarItem_w0fjt_20";
 const active$1 = "_active_w0fjt_24";
-const styles$2 = {
+const styles$3 = {
   sidebar,
   sidebarGroup,
   sidebarTitle,
@@ -12453,13 +12453,13 @@ const SideBar = (props) => {
   const { sidebarData, pathname } = props;
   const renderGroup = (item) => {
     var _a2;
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: styles$2.sidebarGroup, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarTitle, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item.text }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$2.sidebarContent, children: (_a2 = item.items) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: styles$3.sidebarGroup, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.sidebarTitle, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: item.text }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3.sidebarContent, children: (_a2 = item.items) == null ? void 0 : _a2.map((item2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: classNames(styles$2.sidebarItem, {
-            [styles$2.active]: pathname === item2.link
+          className: classNames(styles$3.sidebarItem, {
+            [styles$3.active]: pathname === item2.link
           }),
           children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: item2.link, children: item2.text })
         },
@@ -12467,11 +12467,11 @@ const SideBar = (props) => {
       )) })
     ] }, item.text);
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$2.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("aside", { className: styles$3.sidebar, children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { children: sidebarData.map(renderGroup) }) });
 };
 const aside = "_aside_ru1ok_1";
 const active = "_active_ru1ok_17";
-const styles$1 = {
+const styles$2 = {
   aside,
   active,
   "toc-item": "_toc-item_ru1ok_20"
@@ -12534,14 +12534,14 @@ const Aside = (props) => {
     };
     scrollManager.add(scrollToToc);
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.aside, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$2.aside, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "目录" }),
     asideData.map(({ text, id, depth }, index) => {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: classNames(styles$1["toc-item"], {
-            [styles$1.active]: index == activeIndex
+          className: classNames(styles$2["toc-item"], {
+            [styles$2.active]: index == activeIndex
           }),
           style: {
             marginLeft: `${(depth - 1) * 10}px`
@@ -12570,11 +12570,11 @@ const Aside = (props) => {
   ] });
 };
 const footer = "_footer_1up7z_1";
-const styles = {
+const styles$1 = {
   footer
 };
 const Footer = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: styles.footer, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: styles$1.footer, children: [
     "Copyright © 2019-present fispo ",
     /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
     "All rights reserved."
@@ -12604,19 +12604,19 @@ const DocLayout = (props) => {
       )
     );
   }, [articleList]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.docLayout, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4.docLayout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SideBar, { sidebarData: matchedSidebar, pathname: pagePath }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.content, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4.content, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["content-footer"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["content-footer"], children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-left" }),
             "上一页"
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex - 1].text })
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
             "下一页",
             /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-right" })
@@ -12629,18 +12629,35 @@ const DocLayout = (props) => {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Aside, { asideData: toc, pagePath })
   ] });
 };
+const themeLayout = "_themeLayout_2xx0y_1";
+const themeContent = "_themeContent_2xx0y_6";
+const styles = {
+  themeLayout,
+  themeContent
+};
+function ThemeLayout(_) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.themeLayout, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.themeContent, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+  ] }) });
+}
 const Layout = (props) => {
   const { pageData } = props;
-  const { pageType, siteData: siteData2, title } = pageData;
+  const { pageType, siteData: siteData2, title, pagePath } = pageData;
   const { themeConfig, title: siteTitle, logo } = siteData2;
   const { navMenus } = themeConfig;
+  const pathList = pagePath.split("/").filter(Boolean);
+  const type = pathList[0];
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
+  const isThemePage = type === "theme";
   const getCurrentLayout = () => {
     if (isHomePage) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
     } else if (isArticlePage) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
+    } else if (isThemePage) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeLayout, { pageData });
     } else if (pageType === "custom") {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
     } else {
@@ -12653,7 +12670,7 @@ const Layout = (props) => {
       scrollManager.destory();
     };
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$8.layout, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.layout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Helmet, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: isHomePage ? title : `${title} | ${siteData2.title}` }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus, logo }),
     getCurrentLayout()
