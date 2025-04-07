@@ -7683,7 +7683,8 @@ const Route4 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter
 const Route5 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
 const Route6 = React.lazy(() => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0));
 const Route7 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0));
-const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-BigHwxKo.js"), true ? [] : void 0));
+const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0));
+const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-B-Ec0x3r.js"), true ? [] : void 0));
 const routes = [
   { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0) },
   { path: "/guide/", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
@@ -7693,7 +7694,8 @@ const routes = [
   { path: "/guide/writing/markdown", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0) },
   { path: "/", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/index-aMMFW5XO.js"), true ? [] : void 0) },
-  { path: "/theme/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-BigHwxKo.js"), true ? [] : void 0) }
+  { path: "/plugin/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0) },
+  { path: "/theme/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-B-Ec0x3r.js"), true ? [] : void 0) }
 ];
 const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
 function formatDateToYYYYMMDD(dateStr) {
@@ -12629,14 +12631,14 @@ const DocLayout = (props) => {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Aside, { asideData: toc, pagePath })
   ] });
 };
-const themeLayout = "_themeLayout_2xx0y_1";
-const themeContent = "_themeContent_2xx0y_6";
+const marketLayout = "_marketLayout_8t2rc_1";
+const marketContent = "_marketContent_8t2rc_6";
 const styles = {
-  themeLayout,
-  themeContent
+  marketLayout,
+  marketContent
 };
-function ThemeLayout(_) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.themeLayout, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.themeContent, children: [
+function MarketLayout(_) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.marketLayout, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.marketContent, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] }) });
@@ -12650,14 +12652,14 @@ const Layout = (props) => {
   const type = pathList[0];
   const isHomePage = pageType === "home";
   const isArticlePage = pageType === "article";
-  const isThemePage = type === "theme";
+  const isMarketPage = type === "theme" || type === "plugin";
   const getCurrentLayout = () => {
     if (isHomePage) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
     } else if (isArticlePage) {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
-    } else if (isThemePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeLayout, { pageData });
+    } else if (isMarketPage) {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(MarketLayout, { pageData });
     } else if (pageType === "custom") {
       return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
     } else {
