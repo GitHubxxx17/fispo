@@ -49,7 +49,7 @@ const toc = [{
   "depth": 3
 }, {
   "id": "root-",
-  "text": "root ",
+  "text": "root .",
   "depth": 3
 }, {
   "id": "postdir",
@@ -330,7 +330,7 @@ function _createMdxContent(props) {
       }), "：", jsxRuntimeExports.jsx(_components.code, {
         children: "<DefaultThemeConfig>"
       }), " ", jsxRuntimeExports.jsx(_components.a, {
-        href: "./config#%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE",
+        href: "/fispo/config#%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE",
         target: "",
         rel: "",
         children: "默认主题配置"
@@ -967,7 +967,7 @@ function _createMdxContent(props) {
         children: jsxRuntimeExports.jsx(_components.span, {
           className: "icon icon-link"
         })
-      }), "root ", jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {})]
+      }), "root ."]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
       children: [jsxRuntimeExports.jsx(_components.strong, {
         children: "类型"
