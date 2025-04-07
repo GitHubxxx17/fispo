@@ -16,7 +16,7 @@ export default defineConfig<ThemeConfig>({
       },
       {
         title: "配置项",
-        path: "/guide/introduction/config",
+        path: "/config",
       },
       {
         title: "主题",
@@ -39,10 +39,6 @@ export default defineConfig<ThemeConfig>({
             {
               text: "建站",
               link: "/guide/introduction/setup",
-            },
-            {
-              text: "配置项",
-              link: "/guide/introduction/config",
             },
           ],
         },

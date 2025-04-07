@@ -66,6 +66,11 @@
     }
   }
 
+  .noSidebar {
+    margin-left: 0;
+    width: calc(100% - 240px);
+  }
+
   p {
     font-size: 1rem;
   }
@@ -141,6 +146,9 @@
   .docLayout {
     .content {
       width: calc(100% - 200px);
+    }
+    .noSidebar {
+      width: 100%;
     }
   }
 }

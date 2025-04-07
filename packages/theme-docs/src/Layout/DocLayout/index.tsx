@@ -7,6 +7,7 @@ import Aside from "../../components/Aside";
 import Footer from "../../components/Footer";
 import { Icon, Link } from "fispo-core/theme";
 import { useEffect, useMemo, useState } from "react";
+import classNames from "classnames";
 
 interface DocLayoutProps {
   pageData: PageData;
@@ -45,7 +46,11 @@ const DocLayout = (props: DocLayoutProps) => {
   return (
     <div className={styles.docLayout}>
       <SideBar sidebarData={matchedSidebar} pathname={pagePath} />
-      <div className={styles.content}>
+      <div
+        className={classNames(styles.content, {
+          [styles.noSidebar]: matchedSidebar.length === 0,
+        })}
+      >
         <Content />
         <div className={styles["content-footer"]}>
           <div className={styles["content-footer-pre"]}>

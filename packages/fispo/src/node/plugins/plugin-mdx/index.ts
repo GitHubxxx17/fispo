@@ -53,7 +53,7 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
           },
         },
       ],
-      [rehypePluginLink, { base: config.base }],
+      [rehypePluginLink, { base: config.base, root: config.root }],
       rehypePluginPreWrapper,
       [rehypePluginShiki, { highlighter }],
       rehypePluginTags,

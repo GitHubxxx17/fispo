@@ -1072,7 +1072,7 @@ function _createMdxContent(props) {
       })]
     }), "\n", jsxRuntimeExports.jsxs(_components.p, {
       children: ["完整配置说明请参考：", jsxRuntimeExports.jsx(_components.a, {
-        href: "./config",
+        href: "../../config",
         target: "",
         rel: "",
         children: "配置项"

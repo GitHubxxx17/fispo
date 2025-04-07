@@ -3,13 +3,14 @@ import type { Plugin } from "unified";
 import type { Root } from "hast";
 import { EXTERNAL_URL_RE } from "shared/constants";
 import { isHashPath, isRelativePath, withBase } from "shared/utils";
-import { basename } from "path";
+import { basename, dirname } from "path";
 
 interface Options {
   base: string;
+  root: string;
 }
 
-export const rehypePluginLink: Plugin<[Options], Root> = ({ base }) => {
+export const rehypePluginLink: Plugin<[Options], Root> = ({ base, root }) => {
   return (tree, file) => {
     visit(tree, "element", (node) => {
       try {
@@ -17,8 +18,13 @@ export const rehypePluginLink: Plugin<[Options], Root> = ({ base }) => {
           const { target = "", rel = "" } = node.properties;
           let href = (node.properties.href ?? "/") as string;
           if (isHashPath(href)) {
+            const dirName = dirname(file.path);
+            const index = dirName.indexOf(`${root}/`);
+            const targetpath = dirName.slice(index + root.length);
+
             const fileName = basename(file.path).replace(/\.[^/.]+$/, "");
-            href = `./${fileName}${href}`;
+
+            href = `${fileName !== "index" ? "./" + fileName : targetpath}${href}`;
           }
           const isExternal = EXTERNAL_URL_RE.test(href as string);
           const innerTarget = isExternal ? "_blank" : target;

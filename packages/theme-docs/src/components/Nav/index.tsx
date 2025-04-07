@@ -11,12 +11,13 @@ interface NavProps {
   menus?: navMenuItem[];
   navBlue?: boolean;
   logo?: string;
+  curPath?: string;
 }
 
 const THEME = "THEME";
 
 function Nav(props: NavProps) {
-  const { title = "", menus = [], logo = "" } = props;
+  const { title = "", menus = [], logo = "", curPath = "/" } = props;
   const [isTop, setIsTop] = useState(true);
   const [isShowMenus, setIsShowMenus] = useState(false);
   const [curTheme, setCurTheme] = useState("light");
@@ -73,7 +74,10 @@ function Nav(props: NavProps) {
         {menus.map((items) => {
           return (
             <li key={items.title}>
-              <Link href={items.path}>
+              <Link
+                href={items.path}
+                className={items.path === curPath ? styles.active : ""}
+              >
                 {items.icon && <Icon icon={items.icon} />}
                 <span>{items.title}</span>
               </Link>

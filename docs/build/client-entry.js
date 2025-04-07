@@ -7675,10 +7675,10 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-const Route0 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0));
-const Route1 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
-const Route2 = React.lazy(() => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0));
-const Route3 = React.lazy(() => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0));
+const Route0 = React.lazy(() => __vitePreload(() => import("./assets/index-BE1Qt8xh.js"), true ? [] : void 0));
+const Route1 = React.lazy(() => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0));
+const Route2 = React.lazy(() => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0));
+const Route3 = React.lazy(() => __vitePreload(() => import("./assets/setup-BYBSNFAV.js"), true ? [] : void 0));
 const Route4 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0));
 const Route5 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
 const Route6 = React.lazy(() => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0));
@@ -7686,10 +7686,10 @@ const Route7 = React.lazy(() => __vitePreload(() => import("./assets/index-aMMFW
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0));
 const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-B-Ec0x3r.js"), true ? [] : void 0));
 const routes = [
-  { path: "/guide/deploy/githubPages", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0) },
-  { path: "/guide/", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/config", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/config-CDkg0KmC.js"), true ? [] : void 0) },
-  { path: "/guide/introduction/setup", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/setup-pIGNAZfe.js"), true ? [] : void 0) },
+  { path: "/config/", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/index-BE1Qt8xh.js"), true ? [] : void 0) },
+  { path: "/guide/deploy/githubPages", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0) },
+  { path: "/guide/", element: React.createElement(Route2), preload: () => __vitePreload(() => import("./assets/index-Cyk6x4vU.js"), true ? [] : void 0) },
+  { path: "/guide/introduction/setup", element: React.createElement(Route3), preload: () => __vitePreload(() => import("./assets/setup-BYBSNFAV.js"), true ? [] : void 0) },
   { path: "/guide/writing/frontmatter", element: React.createElement(Route4), preload: () => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0) },
   { path: "/guide/writing/markdown", element: React.createElement(Route5), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0) },
@@ -7697,7 +7697,7 @@ const routes = [
   { path: "/plugin/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0) },
   { path: "/theme/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-B-Ec0x3r.js"), true ? [] : void 0) }
 ];
-const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/guide/introduction/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }, { "text": "配置项", "link": "/guide/introduction/config" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
+const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": "theme-docs", "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
 function formatDateToYYYYMMDD(dateStr) {
   const date = new Date(dateStr);
   const year = date.getFullYear();
@@ -7826,21 +7826,23 @@ function requireClassnames() {
 }
 var classnamesExports = requireClassnames();
 const classNames = /* @__PURE__ */ getDefaultExportFromCjs(classnamesExports);
-const nav = "_nav_1wfjm_1";
-const menus = "_menus_1wfjm_38";
+const nav = "_nav_14xl9_1";
+const menus = "_menus_14xl9_38";
+const active$2 = "_active_14xl9_131";
 const styles$8 = {
   nav,
-  "blog-name": "_blog-name_1wfjm_16",
+  "blog-name": "_blog-name_14xl9_16",
   menus,
-  "nav-left": "_nav-left_1wfjm_51",
-  "nav-right": "_nav-right_1wfjm_55",
-  "nav-right-tools": "_nav-right-tools_1wfjm_58",
-  "nav-right-menus": "_nav-right-menus_1wfjm_61",
-  "nav-tools-item": "_nav-tools-item_1wfjm_75",
-  "nav-menus": "_nav-menus_1wfjm_91",
-  "nav-menus-show": "_nav-menus-show_1wfjm_121",
-  "nav-menus-tools": "_nav-menus-tools_1wfjm_124",
-  "nav-top": "_nav-top_1wfjm_132"
+  "nav-left": "_nav-left_14xl9_51",
+  "nav-right": "_nav-right_14xl9_55",
+  "nav-right-tools": "_nav-right-tools_14xl9_58",
+  "nav-right-menus": "_nav-right-menus_14xl9_61",
+  "nav-tools-item": "_nav-tools-item_14xl9_75",
+  "nav-menus": "_nav-menus_14xl9_91",
+  "nav-menus-show": "_nav-menus-show_14xl9_121",
+  "nav-menus-tools": "_nav-menus-tools_14xl9_124",
+  active: active$2,
+  "nav-top": "_nav-top_14xl9_135"
 };
 function debounce(func, delay) {
   let timer = null;
@@ -11234,7 +11236,7 @@ function localSaveData(name, data) {
 }
 const THEME = "THEME";
 function Nav(props) {
-  const { title = "", menus: menus2 = [], logo = "" } = props;
+  const { title = "", menus: menus2 = [], logo = "", curPath = "/" } = props;
   const [isTop, setIsTop] = reactExports.useState(true);
   const [isShowMenus, setIsShowMenus] = reactExports.useState(false);
   const [curTheme, setCurTheme] = reactExports.useState("light");
@@ -11279,10 +11281,17 @@ function Nav(props) {
   }, []);
   const renderMenus = reactExports.useMemo(() => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { children: menus2.map((items) => {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: items.path, children: [
-        items.icon && /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: items.icon }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: items.title })
-      ] }) }, items.title);
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        Link,
+        {
+          href: items.path,
+          className: items.path === curPath ? styles$8.active : "",
+          children: [
+            items.icon && /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: items.icon }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: items.title })
+          ]
+        }
+      ) }, items.title);
     }) });
   }, [menus2]);
   const renderTools = reactExports.useMemo(() => {
@@ -12428,14 +12437,16 @@ const Content = (props) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, Icon, Image, Link, ...components }, children: routeElement });
 };
 const Content$1 = reactExports.memo(Content);
-const docLayout = "_docLayout_1492j_1";
-const content = "_content_1492j_7";
+const docLayout = "_docLayout_nxqf7_1";
+const content = "_content_nxqf7_7";
+const noSidebar = "_noSidebar_nxqf7_64";
 const styles$4 = {
   docLayout,
   content,
-  "content-footer": "_content-footer_1492j_15",
-  "content-footer-pre": "_content-footer-pre_1492j_25",
-  "content-footer-next": "_content-footer-next_1492j_26"
+  "content-footer": "_content-footer_nxqf7_15",
+  "content-footer-pre": "_content-footer-pre_nxqf7_25",
+  "content-footer-next": "_content-footer-next_nxqf7_26",
+  noSidebar
 };
 const sidebar = "_sidebar_w0fjt_1";
 const sidebarGroup = "_sidebarGroup_w0fjt_10";
@@ -12608,26 +12619,34 @@ const DocLayout = (props) => {
   }, [articleList]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4.docLayout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SideBar, { sidebarData: matchedSidebar, pathname: pagePath }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4.content, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["content-footer"], children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-left" }),
-            "上一页"
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      "div",
+      {
+        className: classNames(styles$4.content, {
+          [styles$4.noSidebar]: matchedSidebar.length === 0
+        }),
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$4["content-footer"], children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-left" }),
+                "上一页"
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex - 1].text })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                "下一页",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-right" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex + 1].text })
+            ] }) })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex - 1].text })
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$4["content-footer-next"], children: currIndex < articleList.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex + 1].link, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            "下一页",
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-right" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: articleList[currIndex + 1].text })
-        ] }) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
-    ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
+        ]
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Aside, { asideData: toc, pagePath })
   ] });
 };
@@ -12674,7 +12693,15 @@ const Layout = (props) => {
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.layout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Helmet, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("title", { children: isHomePage ? title : `${title} | ${siteData2.title}` }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { title: siteTitle, menus: navMenus, logo }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Nav,
+      {
+        title: siteTitle,
+        menus: navMenus,
+        logo,
+        curPath: `/${type}`
+      }
+    ),
     getCurrentLayout()
   ] });
 };

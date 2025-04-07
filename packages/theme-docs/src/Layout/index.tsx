@@ -54,7 +54,12 @@ const Layout = (props: LayoutProps) => {
       <Helmet>
         <title>{isHomePage ? title : `${title} | ${siteData.title}`}</title>
       </Helmet>
-      <Nav title={siteTitle} menus={navMenus} logo={logo}></Nav>
+      <Nav
+        title={siteTitle}
+        menus={navMenus}
+        logo={logo}
+        curPath={`/${type}`}
+      ></Nav>
       {getCurrentLayout()}
     </div>
   );
