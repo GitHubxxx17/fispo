@@ -5,7 +5,7 @@ title: 主题
 
 # 主题
 
-{% themeList %}
+{% marketList %}
 
 <ul>
 <li class="theme-list-item"
@@ -33,4 +33,4 @@ data-description="fispo的默认主题"
 data-url="https://githubxxx17.github.io/testblog/" />
 </ul>
 
-{% endthemeList %}
+{% endmarketList %}

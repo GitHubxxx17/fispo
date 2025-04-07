@@ -1,9 +1,9 @@
-.themeLayout {
+.marketLayout {
   position: relative;
   padding-top: 80px;
   margin: 0 10%;
 
-  .themeContent {
+  .marketContent {
     background-color: var(--fispo-doc-c-bg);
     box-shadow: var(--box-shadow);
     padding: 20px 40px 0;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 1440px) {
-  .themeLayout {
+  .marketLayout {
     margin: 0 5%;
   }
 }

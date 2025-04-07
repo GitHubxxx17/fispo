@@ -1,6 +1,6 @@
 import { visit } from "unist-util-visit";
 import type { Plugin } from "unified";
-import type { Root } from "hast";
+import type { ElementContent, Root } from "hast";
 import { EXTENDED_TAGS } from "../../../constants";
 
 interface Options {
@@ -139,11 +139,16 @@ export const rehypePluginTags: Plugin<[Options], Root> = () => {
 
       if (
         node.tagName == "li" &&
-        node.properties?.className?.toString() === "theme-list-item"
+        node.properties?.className?.toString().endsWith("-list-item")
       ) {
+        const className = node.properties?.className;
         const properties = node.properties;
-        node.children = [
-          {
+        node.properties = { className: node.properties?.className };
+        node.children = [];
+
+        const isTheme = className.toString().startsWith("theme");
+        if (isTheme) {
+          node.children.push({
             type: "element",
             tagName: "div",
             properties: { className: "theme-list-item-img" },
@@ -186,44 +191,71 @@ export const rehypePluginTags: Plugin<[Options], Root> = () => {
                 ],
               },
             ],
+          });
+        }
+
+        const content: ElementContent = {
+          type: "element",
+          tagName: "div",
+          properties: {
+            className: `${isTheme ? "theme" : "plugin"}-list-item-content`,
           },
-          {
+          children: [
+            {
+              type: "element",
+              tagName: "h3",
+              properties: {},
+              children: [
+                {
+                  type: "element",
+                  tagName: "Link",
+                  properties: { href: properties.dataUrl },
+                  children: [
+                    {
+                      type: "text",
+                      value: properties.dataName as string,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "element",
+              tagName: "p",
+              properties: {},
+              children: [
+                {
+                  type: "text",
+                  value: properties.dataDescription as string,
+                },
+              ],
+            },
+          ],
+        };
+
+        if (!isTheme) {
+          const tags = properties?.dataTags.toString().split(" ");
+          content.children.push({
             type: "element",
             tagName: "div",
-            properties: { className: "theme-list-item-content" },
-            children: [
-              {
+            properties: { className: "plugin-list-item-tags" },
+            children: tags.map((tag) => {
+              return {
                 type: "element",
-                tagName: "h3",
-                properties: {},
-                children: [
-                  {
-                    type: "element",
-                    tagName: "Link",
-                    properties: { href: properties.dataUrl },
-                    children: [
-                      {
-                        type: "text",
-                        value: properties.dataName as string,
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                type: "element",
-                tagName: "p",
+                tagName: "span",
                 properties: {},
                 children: [
                   {
                     type: "text",
-                    value: properties.dataDescription as string,
+                    value: `#${tag}`,
                   },
                 ],
-              },
-            ],
-          },
-        ];
+              };
+            }),
+          });
+        }
+
+        node.children.push(content);
       }
     });
   };
