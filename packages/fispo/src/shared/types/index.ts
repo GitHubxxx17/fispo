@@ -40,7 +40,7 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
   /**
    * 网站使用的主题名称
    */
-  theme?: string;
+  theme?: Theme<ThemeConfig>;
   /**
    * 主题的配置信息
    */
@@ -366,6 +366,7 @@ export interface PageData extends PageDataContext {
 
 export interface Theme<ThemeConfig = unknown> {
   name: string;
-  Layout: string;
-  config: UserConfig<ThemeConfig>;
+  layoutPath: string;
+  config: ThemeConfig;
+  plugins?: FispoPlugin[];
 }

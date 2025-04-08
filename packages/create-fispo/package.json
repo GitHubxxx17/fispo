@@ -1,6 +1,6 @@
 {
   "name": "@fispo/create-fispo",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "create template for fipso",
   "type": "module",
   "main": "dist/index.cjs",

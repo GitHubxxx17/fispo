@@ -2,10 +2,8 @@ import { loadConfigFromFile, mergeConfig } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "shared/types";
 import { defaultConfig } from "shared/utils/defaultConfig";
-import { configFiles, THEME_PATH } from "./constants";
+import { configFiles } from "./constants";
 import { DefaultThemeConfig } from "shared/types/default-theme";
-import { join } from "path";
-import { pathToFileURL } from "url";
 
 type RawConfig<ThemeConfig = unknown> =
   | UserConfig<ThemeConfig>
@@ -57,20 +55,20 @@ export async function resolveSiteData(
   userConfig: UserConfig
 ): Promise<UserConfig> {
   const targetConfig = userConfig.themeConfig;
-  let deConfig = defaultConfig;
+  let deConfig: typeof targetConfig = defaultConfig;
   if (userConfig.theme) {
-    const path = join(THEME_PATH, userConfig.theme, "src/config.js");
-    const { default: themeConfig } = await import(
-      pathToFileURL(path).toString()
-    );
-    deConfig = themeConfig;
+    deConfig = userConfig.theme.config;
   }
 
   return {
     base: userConfig.base || "/",
     title: userConfig.title || "fispo",
     description: userConfig.description || "fispo",
-    theme: userConfig.theme || "",
+    theme: userConfig.theme || {
+      name: "fish in the pool",
+      layoutPath: "@theme-default/index.ts",
+      config: defaultConfig,
+    },
     themeConfig: mergeConfig(deConfig, targetConfig),
     vite: {
       ...userConfig.vite,

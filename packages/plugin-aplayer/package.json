@@ -1,6 +1,6 @@
 {
   "name": "@fispo/plugin-aplayer",
-  "version": "1.0.0",
+  "version": "0.4.0",
   "description": "Fispo plug-in based on aplayer",
   "type": "module",
   "main": "dist/index.cjs",

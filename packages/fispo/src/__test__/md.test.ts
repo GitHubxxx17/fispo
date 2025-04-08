@@ -39,7 +39,7 @@ describe("Markdown compile cases", async () => {
     const mdContent = "```js\nconsole.log(123);\n```";
     const result = await processor.process(mdContent);
     expect(result.value).toMatchInlineSnapshot(`
-      "<div class="language-js"><div class="highlight-tools"><span class="lang">js</span></div><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">console</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">log</span><span style="color: #D8DEE9FF">(</span><span style="color: #B48EAD">123</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+      "<div class="language-js"><div class="highlight-tools"><span class="lang">js</span><CopyButton></CopyButton></div><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">console</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">log</span><span style="color: #D8DEE9FF">(</span><span style="color: #B48EAD">123</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
       <span class="line"></span></code></pre></div>"
     `);
   });

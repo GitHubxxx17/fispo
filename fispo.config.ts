@@ -1,5 +1,6 @@
 import { defineConfig } from "fispo-core";
 import { ThemeConfig } from "./packages/theme-docs/src/types/index";
+import theme from "./packages/theme-docs/src/config";
 
 export default defineConfig<ThemeConfig>({
   base: "/fispo",
@@ -7,7 +8,7 @@ export default defineConfig<ThemeConfig>({
   author: "XXX17",
   description: "专为构建现代化博客而设计的静态站点生成器",
   notFoundImg: "/404.png",
-  theme: "theme-docs",
+  theme: theme,
   themeConfig: {
     navMenus: [
       {
