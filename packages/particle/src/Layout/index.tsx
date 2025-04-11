@@ -1,6 +1,6 @@
 import { PageData } from "fispo-core/types";
 import "../style/base.css";
-import "../style/code.css";
+import "../style/docs.css";
 import styles from "./index.module.scss";
 import Nav from "../components/Nav";
 import { HomeLayout } from "./HomeLayout";
