@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 
-export default defineConfig((options) => ({
+export default defineConfig({
   entryPoints: {
     cli: "./src/node/cli.ts",
     index: "./src/node/index.ts",
@@ -13,7 +13,4 @@ export default defineConfig((options) => ({
   dts: true,
   shims: true,
   clean: true, // 清空之前的构建产物
-  define: {
-    "process.env.TSUP_MODE": JSON.stringify(options.watch ? "watch" : "build"),
-  },
-}));
+});

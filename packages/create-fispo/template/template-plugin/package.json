@@ -1,0 +1,36 @@
+{
+  "name": "@fispo/template-plugin",
+  "version": "0.0.0",
+  "description": "plugin of fispo",
+  "main": "./src/index.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "react",
+    "plugin",
+    "fispo"
+  ],
+  "author": "XXX17",
+  "license": "MIT",
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sass": "^1.85.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1",
+    "fispo-core": "^0.4.0"
+  },
+  "files": [
+    "src",
+    "package.json",
+    "tsconfig.json"
+  ]
+}

@@ -1,0 +1,445 @@
+/**
+ * code highlight
+ * 代码高亮
+ * -------------------------------------------------------------------------- */
+div[class*="language-"] {
+  box-shadow: 0 2px 12px 0 #0000001a;
+  border-radius: 5px;
+  margin: 15px 0;
+  overflow: hidden;
+  white-space: normal;
+  position: relative;
+}
+
+.highlight-tools .lang {
+  display: none;
+}
+
+.highlight-tools {
+  position: absolute;
+  right: 0;
+  padding: 6px 10px 6px 0;
+  z-index: 100;
+}
+
+div[class*="language-"]:hover #copy-button {
+  opacity: 1;
+}
+
+.shiki {
+  position: relative;
+  padding: 15px;
+  background-color: var(--fispo-code-block-c-bg) !important;
+}
+
+[class*="language-"] .shiki code {
+  background-color: transparent;
+  line-height: 1.5;
+  padding: 0;
+  font-size: 14px;
+}
+
+[class*="language-"] pre {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  overflow-x: auto;
+  scrollbar-color: #a1a1a1 transparent;
+}
+
+/* code highlight */
+
+/**
+ * note
+ * 外挂标签样式
+ * -------------------------------------------------------------------------- */
+
+.note {
+  position: relative;
+  margin-bottom: 15px;
+  padding: 0 15px 0 44px;
+  border-radius: 3px;
+  overflow: auto;
+}
+
+.note.no-icon {
+  padding-left: 15px;
+}
+
+.note .note-icon {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 15px;
+  font-size: 1rem;
+}
+
+/* note simple */
+
+.note.simple {
+  border: 1px solid rgb(238, 238, 238);
+  border-left: 5px solid rgb(238, 238, 238);
+}
+
+.note.simple p {
+  color: rgb(76, 73, 72);
+  font-size: small;
+}
+
+.note.default.simple {
+  border-left-color: rgb(119, 119, 119);
+}
+
+.note.default.simple .note-icon {
+  color: rgb(119, 119, 119);
+}
+
+.note.primary.simple {
+  border-left-color: rgb(111, 66, 193);
+}
+
+.note.primary.simple .note-icon {
+  color: rgb(111, 66, 193);
+}
+
+.note.success.simple {
+  border-left-color: rgb(92, 184, 92);
+}
+
+.note.success.simple .note-icon {
+  color: rgb(92, 184, 92);
+}
+
+.note.info.simple {
+  border-left-color: rgb(66, 139, 202);
+}
+
+.note.info.simple .note-icon {
+  color: rgb(66, 139, 202);
+}
+
+.note.warning.simple {
+  border-left-color: rgb(240, 173, 78);
+}
+
+.note.warning.simple .note-icon {
+  color: rgb(240, 173, 78);
+}
+
+.note.danger.simple {
+  border-left-color: rgb(217, 83, 79);
+}
+
+.note.danger.simple .note-icon {
+  color: rgb(217, 83, 79);
+}
+
+/* note simple */
+
+/* note modern */
+.note.modern p {
+  font-size: small;
+}
+
+.note.modern {
+  background: rgb(245, 245, 245);
+  color: #666;
+}
+
+.note.default.modern {
+  background: #f3f3f3;
+  color: #666;
+}
+
+.note.primary.modern {
+  background: #f3daff;
+  color: #6f42c1;
+}
+
+.note.success.modern {
+  background: #dff0d8;
+  color: #3c763d;
+}
+
+.note.info.modern {
+  background: #d9edf7;
+  color: #31708f;
+}
+
+.note.warning.modern {
+  background: #fcf4e3;
+  color: #8a6d3b;
+}
+
+.note.danger.modern {
+  background: #f2dfdf;
+  color: #a94442;
+}
+/* note modern */
+
+/* note flat */
+
+.note.flat {
+  background-color: rgb(249, 249, 249);
+  border: 1px solid rgb(238, 238, 238);
+  border-left: 5px solid rgb(238, 238, 238);
+}
+
+.note.flat p {
+  color: rgb(76, 73, 72);
+  font-size: small;
+}
+
+.note.default.flat {
+  background: rgb(247, 247, 247);
+  border-left-color: rgb(119, 119, 119);
+}
+
+.note.default.flat .note-icon {
+  color: rgb(119, 119, 119);
+}
+
+.note.primary.flat {
+  background: rgb(245, 240, 250);
+  border-left-color: rgb(111, 66, 193);
+}
+
+.note.primary.flat .note-icon {
+  color: rgb(111, 66, 193);
+}
+
+.note.success.flat {
+  background: rgb(239, 248, 240);
+  border-left-color: rgb(92, 184, 92);
+}
+
+.note.success.flat .note-icon {
+  color: rgb(92, 184, 92);
+}
+
+.note.info.flat {
+  background: rgb(238, 247, 250);
+  border-left-color: rgb(66, 139, 202);
+}
+
+.note.info.flat .note-icon {
+  color: rgb(66, 139, 202);
+}
+
+.note.warning.flat {
+  background: rgb(253, 248, 234);
+  border-left-color: rgb(240, 173, 78);
+}
+
+.note.warning.flat .note-icon {
+  color: rgb(240, 173, 78);
+}
+
+.note.danger.flat {
+  background: rgb(252, 241, 242);
+  border-left-color: rgb(217, 83, 79);
+}
+
+.note.danger.flat .note-icon {
+  color: rgb(217, 83, 79);
+}
+
+/* note flat */
+
+/* note */
+
+/**
+ * tip
+ * 外挂标签样式
+ * -------------------------------------------------------------------------- */
+
+.tip {
+  position: relative;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, rgb(65, 54, 60), rgb(73, 70, 72));
+  padding: 6px 20px;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 5px;
+}
+
+.tip a {
+  color: rgb(255, 255, 255) !important;
+}
+
+.tip .tip-icon {
+  background: linear-gradient(0deg, rgb(65, 54, 60), rgb(73, 70, 72));
+  text-shadow: rgb(65, 54, 60) 0px -1px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  line-height: 24.5px;
+  left: -12px;
+  top: -12px;
+  box-shadow: rgb(247, 248, 249) 0px 0px 0px 2.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tip.info {
+  background: linear-gradient(90deg, rgb(32, 160, 255), rgb(32, 184, 255));
+  text-shadow: rgb(32, 160, 255) 0px -1px;
+  box-shadow: rgba(32, 160, 255, 0.5) 0px 3px 5px;
+}
+
+.tip.info .tip-icon {
+  background: linear-gradient(0deg, rgb(0, 146, 255), rgb(32, 184, 255));
+}
+
+.tip.success {
+  background: linear-gradient(90deg, rgb(97, 190, 51), rgb(143, 206, 68));
+  text-shadow: rgb(97, 190, 51) 0px -1px;
+  box-shadow: rgba(104, 195, 59, 0.5) 0px 3px 5px;
+}
+
+.tip.success .tip-icon {
+  background: linear-gradient(0deg, rgb(82, 187, 29), rgb(149, 211, 75));
+}
+
+.tip.error {
+  background: linear-gradient(90deg, rgb(255, 73, 73), rgb(255, 120, 73));
+  text-shadow: rgb(255, 73, 73) 0px -1px;
+  box-shadow: rgba(255, 73, 73, 0.5) 0px 3px 5px;
+}
+
+.tip.error .tip-icon {
+  background: linear-gradient(0deg, rgb(255, 56, 56), rgb(255, 120, 73));
+}
+
+.tip.warning {
+  background: linear-gradient(90deg, rgb(255, 149, 63), rgb(255, 180, 73));
+  text-shadow: rgb(255, 149, 63) 0px -1px;
+  box-shadow: rgba(255, 154, 73, 0.5) 0px 3px 5px;
+}
+
+.tip.warning .tip-icon {
+  background: linear-gradient(0deg, rgb(255, 143, 53), rgb(255, 193, 73));
+}
+
+.tip.bolt {
+  background: linear-gradient(530deg, rgb(120, 202, 51), rgb(37, 130, 44));
+  text-shadow: rgb(76, 247, 6) 0px -1px;
+  box-shadow: rgba(76, 247, 6, 0.5) 0px 3px 5px;
+}
+
+.tip.bolt .tip-icon {
+  background: linear-gradient(776deg, rgb(120, 202, 51), rgb(37, 130, 44));
+}
+
+.tip.ban {
+  background: linear-gradient(90deg, rgb(255, 73, 73), rgb(240, 59, 73));
+  text-shadow: rgb(255, 73, 73) 0px -1px;
+  box-shadow: rgba(255, 73, 73, 0.5) 0px 3px 5px;
+}
+
+.tip.ban .tip-icon {
+  background: linear-gradient(0deg, rgb(255, 56, 56), rgb(255, 16, 34));
+}
+
+.tip.home {
+  background: linear-gradient(90deg, rgb(14, 192, 239), rgb(128, 224, 247));
+  text-shadow: rgb(14, 192, 239) 0px -1px;
+  box-shadow: rgb(1, 202, 255) 0px 3px 5px;
+}
+
+.tip.home .tip-icon {
+  background: linear-gradient(0deg, rgb(14, 192, 238), rgb(14, 192, 234));
+}
+
+.tip.sync {
+  background: linear-gradient(230deg, rgb(71, 192, 224), rgb(45, 195, 66));
+  text-shadow: rgb(27, 205, 252) 0px -1px;
+  box-shadow: rgb(32, 177, 173) 0px 3px 5px;
+}
+
+.tip.sync .tip-icon {
+  background: linear-gradient(270deg, rgb(64, 192, 226), rgb(61, 197, 80));
+}
+
+.tip.cogs {
+  background: linear-gradient(230deg, rgb(64, 192, 226), rgb(82, 71, 226));
+  text-shadow: rgb(130, 120, 253) 0px -1px;
+  box-shadow: rgb(64, 55, 167) 0px 3px 5px;
+}
+
+.tip.cogs .tip-icon {
+  background: linear-gradient(560deg, rgb(64, 192, 226), rgb(82, 70, 226));
+}
+
+.tip.key {
+  background: linear-gradient(230deg, rgb(144, 164, 174), rgb(183, 167, 167));
+  text-shadow: rgb(193, 192, 212) 0px -1px;
+  box-shadow: rgb(211, 210, 222) 0px 3px 5px;
+}
+
+.tip.key .tip-icon {
+  background: linear-gradient(560deg, rgb(188, 205, 210), rgb(207, 206, 212));
+}
+
+.tip.bell {
+  background: linear-gradient(230deg, rgb(255, 170, 13), rgb(222, 180, 85));
+  text-shadow: rgb(193, 192, 212) 0px -1px;
+  box-shadow: rgb(211, 210, 222) 0px 3px 5px;
+}
+
+.tip.bell .tip-icon {
+  background: linear-gradient(560deg, rgb(249, 174, 7), rgb(255, 182, 21));
+}
+/* tip */
+
+/**
+ * timeline
+ * 外挂标签样式
+ * -------------------------------------------------------------------------- */
+
+.timeline {
+  margin: 0 0 20px 10px;
+  padding: 14px 20px 5px;
+  border-left: 2px solid #49b1f5;
+}
+
+.timeline .timeline-item {
+  margin: 0 0 15px;
+}
+.timeline .timeline-item .timeline-item-title {
+  position: relative;
+}
+
+.timeline .timeline-item .timeline-item-title:before {
+  position: absolute;
+  top: 50%;
+  left: -27px;
+  width: 6px;
+  height: 6px;
+  border: 3px solid #ff7242;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+  transition: all 0.3s;
+  transform: translate(0, -50%);
+}
+
+.timeline .timeline-item.headline .timeline-item-title:before {
+  left: -28px;
+  border: 4px solid #49b1f5;
+}
+
+.timeline .timeline-item .timeline-item-content {
+  position: relative;
+  font-size: 0.93em;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: #e4f3fd;
+}
+
+.timeline .timeline-item:hover .timeline-item-title:before {
+  border-color: #49b1f5;
+}
+/* timeline */

@@ -115,6 +115,8 @@
     "template.html",
     "src/shared",
     "runtime.d.ts",
-    "theme.d.ts"
+    "theme.d.ts",
+    "plugin.d.ts",
+    "types.d.ts"
   ]
 }

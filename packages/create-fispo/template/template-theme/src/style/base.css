@@ -1,0 +1,89 @@
+:root {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Lato,
+    Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --default-bg-color: #49b1f5;
+  --box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
+  --default-border-radius: 8px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #8ab5ff #e6efff;
+  word-wrap: break-word;
+}
+
+*::selection {
+  background: #00c4b6;
+  color: #f7f7f7;
+}
+
+body {
+  background: var(--fispo-c-bg);
+  position: relative;
+  color: var(--fispo-c-text);
+  font-size: 1rem;
+  font:
+    500 14px Lexend,
+    "Noto Sans SC",
+    sans-serif;
+
+  transition: background 0.3s;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+input,
+button,
+select,
+textarea {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: var(--fispo-c-text);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.3s;
+}
+
+a:hover {
+  color: var(--fispo-c-blue);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--fispo-c-text);
+  font-weight: 700;
+  margin: 15px 0;
+  word-break: keep-all;
+}
+
+ol,
+p,
+ul {
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+p {
+  margin: 15px 0;
+}

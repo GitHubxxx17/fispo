@@ -3,11 +3,10 @@ import { join } from "path";
 import { ThemeConfig } from "types";
 
 const theme: Theme<ThemeConfig> = {
-  name: "theme-docs",
+  name: "template-theme",
   layoutPath: join(__dirname, "index.ts"),
   config: {
     navMenus: [],
-    sidebar: {},
   },
   plugins: [],
 };

@@ -2,7 +2,7 @@ import { loadConfigFromFile, mergeConfig } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "shared/types";
 import { defaultConfig } from "shared/utils/defaultConfig";
-import { configFiles } from "./constants";
+import { configFiles, DEFAULT_THEME_PATH } from "./constants";
 import { DefaultThemeConfig } from "shared/types/default-theme";
 
 type RawConfig<ThemeConfig = unknown> =
@@ -66,7 +66,7 @@ export async function resolveSiteData(
     description: userConfig.description || "fispo",
     theme: userConfig.theme || {
       name: "fish in the pool",
-      layoutPath: "@theme-default/index.ts",
+      layoutPath: DEFAULT_THEME_PATH,
       config: defaultConfig,
     },
     themeConfig: mergeConfig(deConfig, targetConfig),

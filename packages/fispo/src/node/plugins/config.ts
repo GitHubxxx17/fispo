@@ -1,7 +1,7 @@
 import { join, relative } from "path";
 import { mergeConfig, Plugin, UserConfig } from "vite";
 import { SiteConfig } from "shared/types/index";
-import { configFiles, PACKAGE_ROOT, THEME_PATH } from "../constants";
+import { configFiles, PACKAGE_ROOT } from "../constants";
 import fs from "fs-extra";
 import sirv from "sirv";
 
@@ -75,14 +75,12 @@ export function pluginConfig(
               "classnames",
               "@mdx-js/react",
             ],
-            exclude: ["@fispo", "@theme-default", "@runtime", "shared"],
+            exclude: ["@runtime", "shared"],
           },
           resolve: {
             alias: {
               "@runtime": join(PACKAGE_ROOT, "src", "runtime"),
               shared: join(PACKAGE_ROOT, "src", "shared"),
-              "@fispo": THEME_PATH,
-              "@theme-default": join(PACKAGE_ROOT, "src", "theme-default"),
               ...pluginAlias,
             },
           },

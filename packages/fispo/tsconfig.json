@@ -7,8 +7,7 @@
     "jsxImportSource": "react",
     "paths": {
       "@runtime/*": ["./runtime/*"],
-      "shared/*": ["shared/*"],
-      "@fispo": [".."]
+      "shared/*": ["shared/*"]
     }
   },
   "include": ["e2e/**/*.ts", "src/**/*"]
