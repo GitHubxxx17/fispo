@@ -1,6 +1,6 @@
 {
   "name": "@fispo/particle",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "themes of fispo",
   "main": "./src/index.ts",
   "types": "./src/types/index.ts",

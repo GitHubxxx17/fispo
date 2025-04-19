@@ -1,3 +1,36 @@
+## [0.4.1](https://github.com/GitHubxxx17/fispo/compare/v0.3.4...v0.4.1) (2025-04-19)
+
+
+### Bug Fixes
+
+* 修复 @mdx-js/react 打包问题 ([8e71f7b](https://github.com/GitHubxxx17/fispo/commit/8e71f7b2ebb1cd6f01813169cd4ba0f278759bc0))
+* 修复全局组件打包和预览命令 bug ([92e854b](https://github.com/GitHubxxx17/fispo/commit/92e854bfc023e7cab46a18c872354c398a5b3803))
+
+
+### Features
+
+* 初始化工具主题和插件模板 ([5a9532b](https://github.com/GitHubxxx17/fispo/commit/5a9532bd40d0a07a0608a34b6154c28a57925ff8))
+* 全局插件 aplayer ([5f9a940](https://github.com/GitHubxxx17/fispo/commit/5f9a940c64653613fd8fa5ec929f4005aed5a878))
+* 外挂标签样式 ([f09b218](https://github.com/GitHubxxx17/fispo/commit/f09b2182d4a14a413e69c3e1a2f53f30949402e6))
+* 完成指南部分内容 ([a766261](https://github.com/GitHubxxx17/fispo/commit/a7662611e657269b67b24df7566892c07bc9393a))
+* 完善路径解析 ([511d199](https://github.com/GitHubxxx17/fispo/commit/511d199653aa53fb914ab542ffeb67e6b9495075))
+* 完善配置项页和目录跳转 ([c361a89](https://github.com/GitHubxxx17/fispo/commit/c361a8988bb0a59cb008d79ee71a6b178f63f5ee))
+* 完善文档标题 ([018ac01](https://github.com/GitHubxxx17/fispo/commit/018ac010f114a603c08acd07c480021eea7cb664))
+* 完善文档导航栏 ([4db9ad8](https://github.com/GitHubxxx17/fispo/commit/4db9ad89cbfe1a950d229a7769ee60f63b9074fd))
+* 完善文档页 ([155f0e7](https://github.com/GitHubxxx17/fispo/commit/155f0e7ccd23c435de7d1e4bc3579f5cb29efadc))
+* 新增插件页 ([db3ab8a](https://github.com/GitHubxxx17/fispo/commit/db3ab8aecd05d1d300a490c6d85e6e421e7ac897))
+* 新增主题页 ([0a3feb3](https://github.com/GitHubxxx17/fispo/commit/0a3feb3438b94f63d01c0989db62d82ef2d9d4af))
+* 新增theme-docs主题包 ([22e8abb](https://github.com/GitHubxxx17/fispo/commit/22e8abba3a023b3970a3241ac15ef2325439cfa0))
+* 修改配置theme ([efc2c0d](https://github.com/GitHubxxx17/fispo/commit/efc2c0daa4fda9e116b6f3ee2e2d5bf63fd5062b))
+* 自定义 css ([8045e7b](https://github.com/GitHubxxx17/fispo/commit/8045e7b5f665dea1a10318bdb3e6ff75ab536ecc))
+* 自定义插件生命周期函数 ([b73d0fc](https://github.com/GitHubxxx17/fispo/commit/b73d0fc1b622672860857d7d931092f8046517c9))
+* markdown扩展->时间轴 ([5885c52](https://github.com/GitHubxxx17/fispo/commit/5885c52dddeb2024fb19b4c52e38d9c17ab9fe18))
+* markdown扩展标签外挂插件 ([595945d](https://github.com/GitHubxxx17/fispo/commit/595945d5171be31573fa56717040732e746557bf))
+* markdown扩展链接 ([102a849](https://github.com/GitHubxxx17/fispo/commit/102a84918d2d902bd8ac3add64e21aef96e585e1))
+* markdown扩展tip ([311adca](https://github.com/GitHubxxx17/fispo/commit/311adca73d408e8297924699240d7f2a3b07e125))
+
+
+
 # [0.4.0](https://github.com/GitHubxxx17/fispo/compare/v0.3.4...v0.4.0) (2025-04-08)
 
 

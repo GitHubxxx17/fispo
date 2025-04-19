@@ -4,7 +4,7 @@ import fs from "fs-extra";
 import chalk from "chalk";
 import ora from "ora";
 import enquirer from "enquirer";
-// import { execa } from "execa";
+import { execa } from "execa";
 const { prompt } = enquirer;
 import figlet from "figlet";
 import { createRequire } from "module";
@@ -135,7 +135,7 @@ async function createProject(
     // 安装依赖
     spinner.text = chalk.blue("正在安装依赖...\n");
     process.chdir(targetDir);
-    // await execa("npm", ["install", "fispo-core@latest"], { stdio: "inherit" });
+    await execa("npm", ["install", "fispo-core@latest"], { stdio: "inherit" });
 
     spinner.succeed(chalk.green("项目创建成功！"));
 
