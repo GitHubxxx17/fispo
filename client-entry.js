@@ -7684,7 +7684,7 @@ const Route5 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CP
 const Route6 = React.lazy(() => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0));
 const Route7 = React.lazy(() => __vitePreload(() => import("./assets/index-DJnbAZEn.js"), true ? [] : void 0));
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0));
-const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-D7k-gfa2.js"), true ? [] : void 0));
+const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-N9-B6_y2.js"), true ? [] : void 0));
 const routes = [
   { path: "/config/", element: React.createElement(Route0), preload: () => __vitePreload(() => import("./assets/index-BE1Qt8xh.js"), true ? [] : void 0) },
   { path: "/guide/deploy/githubPages", element: React.createElement(Route1), preload: () => __vitePreload(() => import("./assets/githubPages-CpIVAWX1.js"), true ? [] : void 0) },
@@ -7695,7 +7695,7 @@ const routes = [
   { path: "/guide/writing/source", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0) },
   { path: "/", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/index-DJnbAZEn.js"), true ? [] : void 0) },
   { path: "/plugin/", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0) },
-  { path: "/theme/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-D7k-gfa2.js"), true ? [] : void 0) }
+  { path: "/theme/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-N9-B6_y2.js"), true ? [] : void 0) }
 ];
 const siteData = { "base": "/fispo", "title": "Fispo", "description": "专为构建现代化博客而设计的静态站点生成器", "theme": { "name": "theme-docs", "layoutPath": "D:\\Front-end\\fispo\\packages\\theme-docs\\src\\index.ts", "config": { "navMenus": [], "sidebar": {} }, "plugins": [] }, "themeConfig": { "navMenus": [{ "title": "指南", "path": "/guide" }, { "title": "配置项", "path": "/config" }, { "title": "主题", "path": "/theme" }, { "title": "插件", "path": "/plugin" }], "sidebar": { "/guide": [{ "text": "简介", "items": [{ "text": "什么是Fispo", "link": "/guide" }, { "text": "建站", "link": "/guide/introduction/setup" }] }, { "text": "写作", "items": [{ "text": "markdown 扩展", "link": "/guide/writing/markdown" }, { "text": "frontmatter", "link": "/guide/writing/frontmatter" }, { "text": "资源处理", "link": "/guide/writing/source" }] }, { "text": "部署", "items": [{ "text": "GitHub Pages", "link": "/guide/deploy/githubPages" }] }] } }, "vite": { "base": "/fispo" }, "author": "XXX17", "avatar": "/avatar.jpg", "backgroundImg": "/bg.png", "root": "docs", "postDir": "/post", "build": "build", "public": "public", "notFoundImg": "/404.png", "logo": "/logo.png", "markdown": {}, "plugins": [], "preloader": false, "deploy": { "branch": "gh-pages", "repo": "" }, "htmlTags": [], "highlighter": { "theme": "min-light" } };
 function formatDateToYYYYMMDD(dateStr) {
