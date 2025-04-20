@@ -293,7 +293,7 @@ function _createMdxContent(props) {
       children: [jsxRuntimeExports.jsx(_components.strong, {
         children: "类型"
       }), "：", jsxRuntimeExports.jsx(_components.code, {
-        children: "string"
+        children: "Theme"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "默认值"
       }), "：无", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
@@ -306,11 +306,995 @@ function _createMdxContent(props) {
         }), "）"]
       }), "\n", jsxRuntimeExports.jsx(_components.li, {
         children: "需确保主题包已正确安装"
-      }), "\n", jsxRuntimeExports.jsxs(_components.li, {
-        children: ["示例：", jsxRuntimeExports.jsx(_components.code, {
-          children: '"particle"'
-        })]
+      }), "\n", jsxRuntimeExports.jsx(_components.li, {
+        children: "示例："
       }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "language-ts",
+      children: [jsxRuntimeExports.jsxs(_components.div, {
+        className: "highlight-tools",
+        children: [jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "ts"
+        }), jsxRuntimeExports.jsx(CopyButton, {})]
+      }), jsxRuntimeExports.jsx(_components.pre, {
+        className: "shiki min-light",
+        style: {
+          backgroundColor: "#ffffff"
+        },
+        tabIndex: "0",
+        children: jsxRuntimeExports.jsxs(_components.code, {
+          children: [jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "import"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " { defineConfig } "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "from"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"fispo-core"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ";"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "import"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " theme "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "from"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"@fispo/particle/config"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ";"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "import"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " { ThemeConfig } "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "from"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"@fispo/particle"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ";"
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line"
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "export"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "default"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "defineConfig"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "<"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "ThemeConfig"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ">({"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  title"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"fispo的个人博客"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  author"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"fispo"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  description"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"学无止境"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  notFoundImg"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"/404.png"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  theme"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " theme"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  themeConfig"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " {"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "    navMenus"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " ["
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      {"
+            })
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        title"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"首页"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        path"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"/"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"home"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      }"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      {"
+            })
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        title"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"标签"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        path"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"/tag"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"tag"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      }"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      {"
+            })
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        title"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"分类"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        path"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"/category"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"folder-open"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      }"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      {"
+            })
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        title"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"关于"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        path"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"/about"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "        icon"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"heart"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "      }"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "    ]"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  }"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "});"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line"
+          })]
+        })
+      })]
+    }), "\n", jsxRuntimeExports.jsxs(_components.p, {
+      children: [jsxRuntimeExports.jsx(_components.strong, {
+        children: "主题描述对象结构"
+      }), "："]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "language-ts",
+      children: [jsxRuntimeExports.jsxs(_components.div, {
+        className: "highlight-tools",
+        children: [jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "ts"
+        }), jsxRuntimeExports.jsx(CopyButton, {})]
+      }), jsxRuntimeExports.jsx(_components.pre, {
+        className: "shiki min-light",
+        style: {
+          backgroundColor: "#ffffff"
+        },
+        tabIndex: "0",
+        children: jsxRuntimeExports.jsxs(_components.code, {
+          children: [jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "interface"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "Theme"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "<"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "ThemeConfig"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "="
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#1976D2"
+              },
+              children: "unknown"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "> {"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  name"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#1976D2"
+              },
+              children: "string"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ";"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  layoutPath"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#1976D2"
+              },
+              children: "string"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ";"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  config"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "ThemeConfig"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: ";"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  plugins"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: "?:"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "FispoPlugin"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "[];"
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line",
+            children: jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "}"
+            })
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line"
+          })]
+        })
+      })]
     }), "\n", jsxRuntimeExports.jsx(_components.hr, {}), "\n", jsxRuntimeExports.jsxs(_components.h3, {
       id: "themeconfig",
       children: [jsxRuntimeExports.jsx(_components.a, {
@@ -1323,7 +2307,232 @@ function _createMdxContent(props) {
         children: "[]"
       }), jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
         children: "详情"
-      }), "：", jsxRuntimeExports.jsx(_components.br, {}), "\n要启用的插件列表。"]
+      }), "："]
+    }), "\n", jsxRuntimeExports.jsxs(_components.ul, {
+      children: ["\n", jsxRuntimeExports.jsx(_components.li, {
+        children: "要启用的插件列表。"
+      }), "\n", jsxRuntimeExports.jsxs(_components.li, {
+        children: ["需要确保已安装了相关插件。", jsxRuntimeExports.jsx(_components.br, {}), "\n", jsxRuntimeExports.jsx(_components.strong, {
+          children: "示例"
+        }), "："]
+      }), "\n"]
+    }), "\n", jsxRuntimeExports.jsxs(_components.div, {
+      className: "language-js",
+      children: [jsxRuntimeExports.jsxs(_components.div, {
+        className: "highlight-tools",
+        children: [jsxRuntimeExports.jsx(_components.span, {
+          className: "lang",
+          children: "js"
+        }), jsxRuntimeExports.jsx(CopyButton, {})]
+      }), jsxRuntimeExports.jsx(_components.pre, {
+        className: "shiki min-light",
+        style: {
+          backgroundColor: "#ffffff"
+        },
+        tabIndex: "0",
+        children: jsxRuntimeExports.jsxs(_components.code, {
+          children: [jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "plugins"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " ["
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "preloaderPlugin"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "()"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#6F42C1"
+              },
+              children: "aplayerPlugin"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "({"
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "    server"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"netease"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "    id"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"2540031947"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "    type"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#22863A"
+              },
+              children: '"playlist"'
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "    mini"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#D32F2F"
+              },
+              children: ":"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: " "
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#1976D2"
+              },
+              children: "true"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "  })"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsxs(_components.span, {
+            className: "line",
+            children: [jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#24292EFF"
+              },
+              children: "]"
+            }), jsxRuntimeExports.jsx(_components.span, {
+              style: {
+                color: "#212121"
+              },
+              children: ","
+            })]
+          }), "\n", jsxRuntimeExports.jsx(_components.span, {
+            className: "line"
+          })]
+        })
+      })]
     }), "\n", jsxRuntimeExports.jsx(_components.hr, {}), "\n", jsxRuntimeExports.jsxs(_components.h3, {
       id: "preloader",
       children: [jsxRuntimeExports.jsx(_components.a, {
