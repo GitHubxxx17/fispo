@@ -72,7 +72,7 @@ function _createMdxContent(props) {
             children: jsxRuntimeExports.jsxs(Link, {
               href: "https://githubxxx17.github.io/fispo-particle/",
               children: [jsxRuntimeExports.jsx(Image, {
-                src: "/theme/1.png"
+                src: "/theme/2.png"
               }), jsxRuntimeExports.jsxs(_components.div, {
                 className: "theme-list-item-img-text",
                 children: [jsxRuntimeExports.jsx(Icon, {
