@@ -51,15 +51,59 @@
 </ul>
 <hr/>
 <h3 id="theme"><a class="header-anchor" href="#theme"><span class="icon icon-link"></span></a>theme</h3>
-<p><strong>类型</strong>：<code>string</code><br/>
+<p><strong>类型</strong>：<code>Theme</code><br/>
 <strong>默认值</strong>：无<br/>
 <strong>详情</strong>：<br/>
 指定使用的主题名称。</p>
 <ul>
 <li>npm 主题包（<code>npm-package-name</code>）</li>
 <li>需确保主题包已正确安装</li>
-<li>示例：<code>&quot;particle&quot;</code></li>
+<li>示例：</li>
 </ul>
+<div class="language-ts"><div class="highlight-tools"><span class="lang">ts</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#D32F2F">import</span><span style="color:#24292EFF"> { defineConfig } </span><span style="color:#D32F2F">from</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;fispo-core&quot;</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#D32F2F">import</span><span style="color:#24292EFF"> theme </span><span style="color:#D32F2F">from</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;@fispo/particle/config&quot;</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#D32F2F">import</span><span style="color:#24292EFF"> { ThemeConfig } </span><span style="color:#D32F2F">from</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;@fispo/particle&quot;</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D32F2F">export</span><span style="color:#24292EFF"> </span><span style="color:#D32F2F">default</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">defineConfig</span><span style="color:#24292EFF">&lt;</span><span style="color:#6F42C1">ThemeConfig</span><span style="color:#24292EFF">&gt;({</span></span>
+<span class="line"><span style="color:#24292EFF">  title</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;fispo的个人博客&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  author</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;fispo&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  description</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;学无止境&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  notFoundImg</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;/404.png&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  theme</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> theme</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  themeConfig</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> {</span></span>
+<span class="line"><span style="color:#24292EFF">    navMenus</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> [</span></span>
+<span class="line"><span style="color:#24292EFF">      {</span></span>
+<span class="line"><span style="color:#24292EFF">        title</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;首页&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        path</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;/&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        icon</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;home&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      }</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      {</span></span>
+<span class="line"><span style="color:#24292EFF">        title</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;标签&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        path</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;/tag&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        icon</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;tag&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      }</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      {</span></span>
+<span class="line"><span style="color:#24292EFF">        title</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;分类&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        path</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;/category&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        icon</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;folder-open&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      }</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      {</span></span>
+<span class="line"><span style="color:#24292EFF">        title</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;关于&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        path</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;/about&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">        icon</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;heart&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">      }</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">    ]</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  }</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">});</span></span>
+<span class="line"></span></code></pre></div>
+<p><strong>主题描述对象结构</strong>：</p>
+<div class="language-ts"><div class="highlight-tools"><span class="lang">ts</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#D32F2F">interface</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">Theme</span><span style="color:#24292EFF">&lt;</span><span style="color:#6F42C1">ThemeConfig</span><span style="color:#24292EFF"> </span><span style="color:#D32F2F">=</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">unknown</span><span style="color:#24292EFF">&gt; {</span></span>
+<span class="line"><span style="color:#24292EFF">  name</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">  layoutPath</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">  config</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">ThemeConfig</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">  plugins</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">FispoPlugin</span><span style="color:#24292EFF">[];</span></span>
+<span class="line"><span style="color:#24292EFF">}</span></span>
+<span class="line"></span></code></pre></div>
 <hr/>
 <h3 id="themeconfig"><a class="header-anchor" href="#themeconfig"><span class="icon icon-link"></span></a>themeConfig</h3>
 <p><strong>类型</strong>：<code>ThemeConfig</code>（泛型参数）<br/>
@@ -214,8 +258,22 @@ Markdown 处理配置项。<br/>
 <h3 id="plugins"><a class="header-anchor" href="#plugins"><span class="icon icon-link"></span></a>plugins</h3>
 <p><strong>类型</strong>：<code>FispoPlugin[]</code><br/>
 <strong>默认值</strong>：<code>[]</code><br/>
-<strong>详情</strong>：<br/>
-要启用的插件列表。</p>
+<strong>详情</strong>：</p>
+<ul>
+<li>要启用的插件列表。</li>
+<li>需要确保已安装了相关插件。<br/>
+<strong>示例</strong>：</li>
+</ul>
+<div class="language-js"><div class="highlight-tools"><span class="lang">js</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">plugins</span><span style="color:#212121">:</span><span style="color:#24292EFF"> [</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">preloaderPlugin</span><span style="color:#24292EFF">()</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">aplayerPlugin</span><span style="color:#24292EFF">({</span></span>
+<span class="line"><span style="color:#24292EFF">    server</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;netease&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">    id</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;2540031947&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">    type</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#22863A">&quot;playlist&quot;</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">    mini</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">true</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">  })</span><span style="color:#212121">,</span></span>
+<span class="line"><span style="color:#24292EFF">]</span><span style="color:#212121">,</span></span>
+<span class="line"></span></code></pre></div>
 <hr/>
 <h3 id="preloader"><a class="header-anchor" href="#preloader"><span class="icon icon-link"></span></a>preloader</h3>
 <p><strong>类型</strong>：<code>boolean</code><br/>

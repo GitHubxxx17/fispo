@@ -42,14 +42,60 @@ title: 配置项
 ---
 
 ### theme
-**类型**：`string`  
+**类型**：`Theme`  
 **默认值**：无 
 **详情**：  
 指定使用的主题名称。  
 - npm 主题包（`npm-package-name`）
 - 需确保主题包已正确安装
-- 示例：`"particle"`
+- 示例：
+```ts
+import { defineConfig } from "fispo-core";
+import theme from "@fispo/particle/config";
+import { ThemeConfig } from "@fispo/particle";
 
+export default defineConfig<ThemeConfig>({
+  title: "fispo的个人博客",
+  author: "fispo",
+  description: "学无止境",
+  notFoundImg: "/404.png",
+  theme: theme,
+  themeConfig: {
+    navMenus: [
+      {
+        title: "首页",
+        path: "/",
+        icon: "home",
+      },
+      {
+        title: "标签",
+        path: "/tag",
+        icon: "tag",
+      },
+      {
+        title: "分类",
+        path: "/category",
+        icon: "folder-open",
+      },
+      {
+        title: "关于",
+        path: "/about",
+        icon: "heart",
+      },
+    ],
+  },
+});
+```
+
+**主题描述对象结构**：
+```ts
+interface Theme<ThemeConfig = unknown> {
+  name: string;
+  layoutPath: string;
+  config: ThemeConfig;
+  plugins?: FispoPlugin[];
+}
+```
 ---
 
 ### themeConfig
@@ -213,9 +259,20 @@ interface MarkdownOptions {
 **类型**：`FispoPlugin[]`  
 **默认值**：`[]`  
 **详情**：  
-要启用的插件列表。  
-
-
+- 要启用的插件列表。  
+- 需要确保已安装了相关插件。
+**示例**：
+```js
+plugins: [
+  preloaderPlugin(),
+  aplayerPlugin({
+    server: "netease",
+    id: "2540031947",
+    type: "playlist",
+    mini: true,
+  }),
+],
+```
 ---
 
 ### preloader

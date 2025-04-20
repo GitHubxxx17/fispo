@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="专为构建现代化博客而设计的静态站点生成器">
+    <title data-rh="true">插件 | Fispo</title>
+    
+    
+    
+    <link rel="icon" href="/fispo/logo.png" type="image/png">
+    <link rel="stylesheet" href="/fispo/assets/client-entry-BIt7t9mc.css">
+    
+  </head>
+  <body>
+  
+    <div id="root"><div class="_layout_luyrs_1"><nav class="_nav_14xl9_1 _nav-top_14xl9_135"><div class="_nav-left_14xl9_51"><div class="_blog-name_14xl9_16"><a href="/fispo/"><img src="/fispo/logo.png"/>Fispo</a></div><div class="_menus_14xl9_38"><ul><ul><li><a href="/fispo/guide" class="_active_14xl9_131"><span>指南</span></a></li><li><a href="/fispo/config" class=""><span>配置项</span></a></li><li><a href="/fispo/theme" class=""><span>主题</span></a></li><li><a href="/fispo/plugin" class=""><span>插件</span></a></li></ul></ul></div></div><div class="_nav-right_14xl9_55"><div class="_nav-right-tools_14xl9_58"><div class="_nav-tools-item_14xl9_75"><span title="切换黑白主题"></span></div><div class="_nav-tools-item_14xl9_75"><span title="github"><a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noopener noreferrer"></a></span></div></div><div class="_nav-right-menus_14xl9_61"></div></div></nav><div class="_nav-menus_14xl9_91"><ul><li><a href="/fispo/guide" class="_active_14xl9_131"><span>指南</span></a></li><li><a href="/fispo/config" class=""><span>配置项</span></a></li><li><a href="/fispo/theme" class=""><span>主题</span></a></li><li><a href="/fispo/plugin" class=""><span>插件</span></a></li></ul><div class="_nav-menus-tools_14xl9_124"><div class="_nav-tools-item_14xl9_75"><span title="切换黑白主题"></span></div><div class="_nav-tools-item_14xl9_75"><span title="github"><a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noopener noreferrer"></a></span></div></div></div><div class="_docLayout_nxqf7_1"><aside class="_sidebar_w0fjt_1"><nav><section class="_sidebarGroup_w0fjt_10"><div class="_sidebarTitle_w0fjt_14"><h2>简介</h2></div><div class="_sidebarContent_w0fjt_17"><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide">什么是Fispo</a></div><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide/introduction/setup">建站</a></div></div></section><section class="_sidebarGroup_w0fjt_10"><div class="_sidebarTitle_w0fjt_14"><h2>写作</h2></div><div class="_sidebarContent_w0fjt_17"><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide/writing/markdown">markdown 扩展</a></div><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide/writing/frontmatter">frontmatter</a></div><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide/writing/source">资源处理</a></div></div></section><section class="_sidebarGroup_w0fjt_10"><div class="_sidebarTitle_w0fjt_14"><h2>部署</h2></div><div class="_sidebarContent_w0fjt_17"><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide/deploy/githubPages">GitHub Pages</a></div></div></section><section class="_sidebarGroup_w0fjt_10"><div class="_sidebarTitle_w0fjt_14"><h2>自定义</h2></div><div class="_sidebarContent_w0fjt_17"><div class="_sidebarItem_w0fjt_20"><a href="/fispo/guide/customize/theme">主题</a></div><div class="_sidebarItem_w0fjt_20 _active_w0fjt_24"><a href="/fispo/guide/customize/plugin">插件</a></div></div></section></nav></aside><div class="_content_nxqf7_7"><h1 id="插件"><a class="header-anchor" href="#插件"><span class="icon icon-link"></span></a>插件</h1>
+<p>如果您想要自己开发插件，可通过 Fispo 的初始化工具创建插件项目的模板</p>
+<h2 id="初始化项目"><a class="header-anchor" href="#初始化项目"><span class="icon icon-link"></span></a>初始化项目</h2>
+<div class="language-bash"><div class="highlight-tools"><span class="lang">bash</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#6F42C1">create-fispo</span><span style="color:#24292EFF"> </span><span style="color:#D32F2F">&lt;</span><span style="color:#2B5581">项目目录</span><span style="color:#24292EFF">名</span><span style="color:#D32F2F">&gt;</span><span style="color:#24292EFF"> </span><span style="color:#2B5581">--plugin</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="文件结构"><a class="header-anchor" href="#文件结构"><span class="icon icon-link"></span></a>文件结构</h2>
+<p>初始化后，您的项目文件夹将如下所示：</p>
+<div class="language-md"><div class="highlight-tools"><span class="lang">md</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#24292EFF">.</span></span>
+<span class="line"><span style="color:#24292EFF">├── fispo.config.ts          # 项目的配置文件</span></span>
+<span class="line"><span style="color:#24292EFF">├── package-lock.json        # 锁定依赖包版本的文件</span></span>
+<span class="line"><span style="color:#24292EFF">├── package.json             # 项目的元数据和依赖信息文件</span></span>
+<span class="line"><span style="color:#24292EFF">├── tsconfig.json            # TypeScript 编译配置文件</span></span>
+<span class="line"><span style="color:#24292EFF">├── tsup.config.ts           # tsup 打包工具的配置文件</span></span>
+<span class="line"><span style="color:#24292EFF">├── docs                     # 存放博客相关内容</span></span>
+<span class="line"><span style="color:#24292EFF">│   ├── post                 # 文章目录（Markdown 文件）</span></span>
+<span class="line"><span style="color:#24292EFF">│   │   └── helloworld.md    # 示例文章</span></span>
+<span class="line"><span style="color:#24292EFF">│   └── public               # 存放公共资源文件的目录</span></span>
+<span class="line"><span style="color:#24292EFF">│       ├── 404.png          # 404 页面显示的图片</span></span>
+<span class="line"><span style="color:#24292EFF">│       ├── avatar.jpg       # 用户头像图片</span></span>
+<span class="line"><span style="color:#24292EFF">│       ├── banner.png       # 横幅图片</span></span>
+<span class="line"><span style="color:#24292EFF">│       ├── bg.png           # 背景图片</span></span>
+<span class="line"><span style="color:#24292EFF">│       ├── logo.png         # 项目 logo 图片</span></span>
+<span class="line"><span style="color:#24292EFF">│       └── cover            # 封面图片文件夹</span></span>
+<span class="line"><span style="color:#24292EFF">│           └── a.jpg        # 封面示例图片</span></span>
+<span class="line"><span style="color:#24292EFF">└── src                      # 源代码目录</span></span>
+<span class="line"><span style="color:#24292EFF">    ├── index.ts             # 项目入口文件</span></span>
+<span class="line"><span style="color:#24292EFF">    └── types                # 类型定义目录</span></span>
+<span class="line"><span style="color:#24292EFF">        └── types.d.ts       # 类型定义文件</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="开发插件"><a class="header-anchor" href="#开发插件"><span class="icon icon-link"></span></a>开发插件</h2>
+<p>完成初始化后可以使用<code>npx fispo dev</code>命令启动项目</p>
+<p>页面的数据结构如下</p>
+<ul>
+<li>可以在自定义插件中添加 markdown 相关的插件以及 vite 相关插件</li>
+<li>通过生命周期的钩子函数控制页面的数据以及渲染</li>
+<li>插入页面加载动画组件</li>
+<li>在页面上挂载全局组件</li>
+</ul>
+<div class="language-ts"><div class="highlight-tools"><span class="lang">ts</span><span class="_copy-button_ab8rs_1" id="copy-button"></span></div><pre class="shiki min-light" style="background-color:#ffffff" tabindex="0"><code><span class="line"><span style="color:#D32F2F">export</span><span style="color:#24292EFF"> </span><span style="color:#D32F2F">interface</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">FispoPlugin</span><span style="color:#24292EFF"> {</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 插件的名称</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  name</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的别名配置，用于在项目中为模块路径设置别名。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 键为别名，值为实际的模块路径。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 例如：{ &#x27;@&#x27;: &#x27;src&#x27; } 表示将 &#x27;@&#x27; 别名映射到 &#x27;src&#x27; 目录。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  alias</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">Record</span><span style="color:#24292EFF">&lt;</span><span style="color:#1976D2">string</span><span style="color:#212121">,</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的全局常量定义配置，用于在项目中定义全局可用的常量。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 键为常量名，值为常量值（以字符串形式表示）。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 例如：{ &#x27;process.env.NODE_ENV&#x27;: &#x27;&quot;development&quot;&#x27; } 表示定义一个全局常量 process.env.NODE_ENV 并赋值为 &quot;development&quot;。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  define</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">Record</span><span style="color:#24292EFF">&lt;</span><span style="color:#1976D2">string</span><span style="color:#212121">,</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">&gt;;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的 Markdown 处理配置，包含 remark 和 rehype 插件的配置。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  markdown</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> {</span></span>
+<span class="line"><span style="color:#24292EFF">    </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">     * 可选的 remark 插件列表，用于在 Markdown 解析阶段对 Markdown 内容进行转换和处理。</span></span>
+<span class="line"><span style="color:#C2C3C5">     * remark 是一个用于处理 Markdown 的工具，这些插件可以扩展 remark 的功能。</span></span>
+<span class="line"><span style="color:#C2C3C5">     */</span></span>
+<span class="line"><span style="color:#24292EFF">    remarkPlugins</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">PluggableList</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">    </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">     * 可选的 rehype 插件列表，用于在 Markdown 转换为 HTML 阶段对 HTML 内容进行转换和处理。</span></span>
+<span class="line"><span style="color:#C2C3C5">     * rehype 是一个用于处理 HTML 的工具，这些插件可以扩展 rehype 的功能。</span></span>
+<span class="line"><span style="color:#C2C3C5">     */</span></span>
+<span class="line"><span style="color:#24292EFF">    rehypePlugins</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">PluggableList</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的 Vite 配置，用于对 Vite 构建工具进行自定义配置。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  vite</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">UserConfig</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的文件监听列表，用于指定需要监听变化的文件路径。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 当这些文件发生变化时，可能会触发相应的重新构建或其他操作。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  watchFiles</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">[];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的钩子函数，在配置解析之前执行。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可以在这个函数中对配置进行一些预处理操作。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">configBeforeResolved</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> () </span><span style="color:#D32F2F">=&gt;</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">void</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的钩子函数，在配置解析完成后执行。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 该函数接收一个 PageDataContext 类型的参数，并返回一个 PageData 类型的值。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可以在这个函数中对解析后的配置进行进一步的处理和修改。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">configResolved</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> (config</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">PageDataContext</span><span style="color:#24292EFF">) </span><span style="color:#D32F2F">=&gt;</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">void</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的预加载动画配置，用于指定预加载动画的模块路径。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  preloader</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的全局组件配置，用于指定全局组件的模块路径。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  globalComponents</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> {</span></span>
+<span class="line"><span style="color:#24292EFF">    path</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">string</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">    props</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">any</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的钩子函数，在页面渲染之前执行。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 此函数接收一个 PageData 类型的参数，可用于在页面渲染前对页面数据进行修改、数据准备等操作，</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">beforeRenderpage</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> (pageData</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">PageData</span><span style="color:#24292EFF">) </span><span style="color:#D32F2F">=&gt;</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">void</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的钩子函数，在页面渲染完成后执行。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 此函数接收一个 PageData 类型的参数，可用于在页面渲染完成后进行一些后续处理，</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">afterRenderPage</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> (pageData</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">PageData</span><span style="color:#24292EFF">) </span><span style="color:#D32F2F">=&gt;</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">void</span><span style="color:#24292EFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#C2C3C5">/**</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 可选的钩子函数，在页面关闭时执行。</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 此函数接收一个 PageData 类型的参数，可用于在页面关闭时进行资源清理、数据保存等操作，</span></span>
+<span class="line"><span style="color:#C2C3C5">   * 例如释放占用的内存、保存用户未提交的表单数据等。</span></span>
+<span class="line"><span style="color:#C2C3C5">   */</span></span>
+<span class="line"><span style="color:#24292EFF">  </span><span style="color:#6F42C1">pageClosed</span><span style="color:#D32F2F">?:</span><span style="color:#24292EFF"> (pageData</span><span style="color:#D32F2F">:</span><span style="color:#24292EFF"> </span><span style="color:#6F42C1">PageData</span><span style="color:#24292EFF">) </span><span style="color:#D32F2F">=&gt;</span><span style="color:#24292EFF"> </span><span style="color:#1976D2">void</span><span style="color:#24292EFF">;</span></span>
+<span class="line"><span style="color:#24292EFF">}</span></span>
+<span class="line"></span></code></pre></div><div class="_content-footer_nxqf7_15"><div class="_content-footer-pre_nxqf7_25"></div><div class="_content-footer-next_nxqf7_26"><a href="/fispo/guide/introduction/setup"><span>下一页</span><span>建站</span></a></div></div><footer class="_footer_1up7z_1">Copyright © 2019-present fispo <br/>All rights reserved.</footer></div><div class="_aside_ru1ok_1"><h2>目录</h2><div class="_toc-item_ru1ok_20 _active_ru1ok_17" style="margin-left:0px"><a href="/fispo/guide/customize/plugin#插件"><span>插件</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/customize/plugin#初始化项目"><span>初始化项目</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/customize/plugin#文件结构"><span>文件结构</span></a></div><div class="_toc-item_ru1ok_20" style="margin-left:10px"><a href="/fispo/guide/customize/plugin#开发插件"><span>开发插件</span></a></div></div></div></div></div>
+      
+    <script type="module" src="/fispo/client-entry.js"></script>
+  
+  </body>
+</html>

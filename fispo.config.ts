@@ -69,6 +69,19 @@ export default defineConfig<ThemeConfig>({
             },
           ],
         },
+        {
+          text: "自定义",
+          items: [
+            {
+              text: "主题",
+              link: "/guide/customize/theme",
+            },
+            {
+              text: "插件",
+              link: "/guide/customize/plugin",
+            },
+          ],
+        },
       ],
     },
   },

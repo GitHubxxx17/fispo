@@ -179,7 +179,7 @@ function _createMdxContent(props) {
               style: {
                 color: "#2B5581"
               },
-              children: "create-fispo"
+              children: "@fispo/create-fispo"
             })]
           }), "\n", jsxRuntimeExports.jsx(_components.span, {
             className: "line"
