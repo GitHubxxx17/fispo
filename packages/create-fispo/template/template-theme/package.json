@@ -5,6 +5,10 @@
   "main": "./src/index.ts",
   "types": "./src/types/index.ts",
   "type": "module",
+  "scripts": {
+    "start": "tsup --watch --format=cjs,esm",
+    "build": "tsup --format=cjs,esm"
+  },
   "exports": {
     ".": {
       "types": "./src/types/index.ts",

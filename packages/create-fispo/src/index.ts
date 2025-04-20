@@ -57,7 +57,7 @@ import { ThemeConfig } from "types";
 
 const theme: Theme<ThemeConfig> = {
   name: "${projectName}",
-  layoutPath: join(__dirname, "index.ts"),
+  layoutPath: join(__dirname, "..", "src", "index.ts"),
   config: {
     navMenus: [],
   },

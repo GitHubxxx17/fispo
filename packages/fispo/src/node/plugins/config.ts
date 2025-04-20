@@ -75,7 +75,13 @@ export function pluginConfig(
               "classnames",
               "@mdx-js/react",
             ],
-            exclude: ["@runtime", "shared"],
+            exclude: [
+              "@runtime",
+              "shared",
+              "fispo:globalComponents",
+              "virtual:routes",
+              "fispo:site-data",
+            ],
           },
           resolve: {
             alias: {

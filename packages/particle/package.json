@@ -1,10 +1,14 @@
 {
   "name": "@fispo/particle",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "themes of fispo",
   "main": "./src/index.ts",
   "types": "./src/types/index.ts",
   "type": "module",
+  "scripts": {
+    "start": "tsup --watch --format=cjs,esm",
+    "build": "tsup --format=cjs,esm"
+  },
   "exports": {
     ".": {
       "types": "./src/types/index.ts",
@@ -12,7 +16,7 @@
     },
     "./src/*": "./src/*",
     "./package.json": "./package.json",
-    "./config": "./src/config.js"
+    "./config": "./dist/config.js"
   },
   "keywords": [
     "react",

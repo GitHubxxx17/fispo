@@ -4,7 +4,7 @@ import { ThemeConfig } from "types";
 
 const theme: Theme<ThemeConfig> = {
   name: "theme-docs",
-  layoutPath: join(__dirname, "index.ts"),
+  layoutPath: join(__dirname, "..", "src", "index.ts"),
   config: {
     navMenus: [],
     sidebar: {},
