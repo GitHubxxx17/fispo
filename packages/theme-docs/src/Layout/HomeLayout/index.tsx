@@ -20,7 +20,7 @@ export function HomeLayout(props: HomeLayoutProps) {
           <h1>{title}</h1>
           <p>{description}</p>
           <div className={styles["home-hero-button"]}>
-            {frontmatter.buttons.map((button, key) => {
+            {frontmatter.buttons?.map((button, key) => {
               return (
                 <Link key={key} href={button.link}>
                   <span>{button.text}</span>
@@ -35,7 +35,7 @@ export function HomeLayout(props: HomeLayoutProps) {
         </div>
       </div>
       <div className={styles["home-feature"]}>
-        {frontmatter.features.map((item, key) => {
+        {frontmatter.features?.map((item, key) => {
           return (
             <div className={styles["home-feature-item"]} key={key}>
               <i>{item.icon}</i>

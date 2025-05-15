@@ -1,28 +1,24 @@
 import { routes } from "virtual:routes";
-import { useRoutes } from "react-router-dom";
-import { baseUrl } from "./util";
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import CopyButton from "shared/components/CopyButton";
-import { inBrowser } from "shared/utils";
 import Icon from "shared/components/Icon";
 import Image from "shared/components/Image";
 import Link from "shared/components/Link";
+import { removeTrailingSlash } from "./util";
 
 export interface ContentProps {
   components?: {
     [key: string]: (props: any) => JSX.Element;
   };
+  path: string;
 }
 
 const Content = (props: ContentProps) => {
-  const { components } = props;
-  const handleRoutes = useMemo(() => {
-    return routes.map((route) => {
-      return { ...route, path: inBrowser() ? baseUrl(route.path) : route.path };
-    });
-  }, [routes]);
-  const routeElement = useRoutes(handleRoutes);
+  const { components, path } = props;
+  const routeElement = routes.find((r) => {
+    return removeTrailingSlash(r.path) === path;
+  })?.element;
   return (
     <MDXProvider components={{ CopyButton, Icon, Image, Link, ...components }}>
       {routeElement}

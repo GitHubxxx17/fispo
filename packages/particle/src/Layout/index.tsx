@@ -1,14 +1,15 @@
-import { PageData } from "fispo-core/types";
+import { LayoutRoutes, PageData } from "fispo-core/types";
 import "../style/base.css";
 import "../style/docs.css";
 import styles from "./index.module.scss";
 import Nav from "../components/Nav";
 import { HomeLayout } from "./HomeLayout";
 import scrollManager from "../helper/scroll";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Footer from "../components/Footer";
 import ArticleLayout from "./ArticleLayout";
 import CustomLayout from "./CustomLayout";
+import { GetLayoutRoutes } from "fispo-core/theme";
 
 interface LayoutProps {
   pageData: PageData;
@@ -20,22 +21,32 @@ const Layout = (props: LayoutProps) => {
   const { title: siteTitle, themeConfig, author } = siteData;
   const { navMenus } = themeConfig;
   // 获取 pageType
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
-  console.log(pageData);
+  const isHomePage = useMemo(() => pageType === "home", [pageType]);
 
-  // 根据 pageType 分发不同的页面内容
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return <HomeLayout pageData={pageData} />;
-    } else if (isArticlePage) {
-      return <ArticleLayout pageData={pageData} />;
-    } else if (pageType === "custom") {
-      return <CustomLayout pageData={pageData} />;
-    } else {
-      return <div>404</div>;
-    }
-  };
+  const routes: LayoutRoutes = useMemo(() => {
+    return [
+      {
+        path: "/",
+        element: <HomeLayout pageData={pageData}></HomeLayout>,
+      },
+      {
+        path: "post/*",
+        element: <ArticleLayout pageData={pageData}></ArticleLayout>,
+      },
+      {
+        path: "tag/*",
+        element: <CustomLayout pageData={pageData}></CustomLayout>,
+      },
+      {
+        path: "category/*",
+        element: <CustomLayout pageData={pageData}></CustomLayout>,
+      },
+      {
+        path: "*",
+        element: <>404</>,
+      },
+    ];
+  }, [pageData]);
 
   useEffect(() => {
     scrollManager.init();
@@ -47,7 +58,7 @@ const Layout = (props: LayoutProps) => {
   return (
     <div className={styles.layout}>
       <Nav title={siteTitle} menus={navMenus} navBlue={!isHomePage}></Nav>
-      {getCurrentLayout()}
+      <GetLayoutRoutes routes={routes} />
       <Footer author={author} title={siteTitle}></Footer>
     </div>
   );

@@ -1,4 +1,4 @@
-import { matchRoutes } from "react-router-dom";
+import { matchRoutes, useLocation } from "react-router-dom";
 import { routes } from "virtual:routes";
 import { PageData, Route } from "shared/types";
 import siteData from "fispo:site-data";
@@ -99,18 +99,28 @@ export function App({
   ssr?: boolean;
   lifecycleList?: LifecycleList;
 }) {
-  const pageData = usePageData();
+  const pageData = usePageData().pageData;
   pageData.ssr = ssr;
   const [finishLoading, setFinishLoading] = useState(false);
 
   useEffect(() => {
+    setFinishLoading(false);
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+
     lifecycleList.beforeRenderpage.forEach((fn) =>
       executeFunctionFromString(fn, pageData)
     );
 
     const unmountLoading = () => {
       checkAllAssetsLoaded().then(() => {
-        setFinishLoading(true);
+        setTimeout(() => {
+          setFinishLoading(true);
+        }, 1000);
+
         lifecycleList.afterRenderPage.forEach((fn) =>
           executeFunctionFromString(fn, pageData)
         );
@@ -123,7 +133,7 @@ export function App({
         executeFunctionFromString(fn, pageData)
       );
     };
-  }, []);
+  }, [pageData]);
 
   return (
     <>
@@ -132,4 +142,20 @@ export function App({
       {!ssr && <GlobalComponents />}
     </>
   );
+}
+
+// 路由守卫 更新页面数据
+export function AppRouter({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const pageData = usePageData();
+
+  const setData = async () => {
+    pageData.setPageData(await initPageData(location.pathname));
+  };
+
+  useEffect(() => {
+    setData();
+  }, [location]);
+
+  return <>{children}</>;
 }

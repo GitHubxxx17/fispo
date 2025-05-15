@@ -41,7 +41,7 @@ const DocLayout = (props: DocLayoutProps) => {
         (item) => decodeURI(item.link) === decodeURI(pagePath)
       )
     );
-  }, [articleList]);
+  }, [articleList, pagePath]);
 
   return (
     <div className={styles.docLayout}>
@@ -51,7 +51,7 @@ const DocLayout = (props: DocLayoutProps) => {
           [styles.noSidebar]: matchedSidebar.length === 0,
         })}
       >
-        <Content />
+        <Content path={pagePath} />
         <div className={styles["content-footer"]}>
           <div className={styles["content-footer-pre"]}>
             {currIndex > 0 && (

@@ -10,7 +10,7 @@ interface ArticleLayoutProps {
 }
 
 const ArticleLayout = (props: ArticleLayoutProps) => {
-  const { title, frontmatter } = props.pageData;
+  const { title, frontmatter, pagePath } = props.pageData;
 
   return (
     <div className={styles.articleLayout}>
@@ -29,7 +29,7 @@ const ArticleLayout = (props: ArticleLayoutProps) => {
           </span>
           <span>
             <Icon icon="tags" />
-            {frontmatter.tags.map((tag, index) => {
+            {frontmatter.tags?.map((tag, index) => {
               return (
                 <Link href={`/tag/${tag}`} key={index}>
                   <span style={{ color: getRandomColor() }}>{tag}</span>
@@ -39,7 +39,7 @@ const ArticleLayout = (props: ArticleLayoutProps) => {
           </span>
         </div>
       </div>
-      <Content></Content>
+      <Content path={pagePath} />
     </div>
   );
 };

@@ -7,11 +7,12 @@ interface MarketLayoutProps {
   pageData: PageData;
 }
 
-export function MarketLayout(_: MarketLayoutProps) {
+export function MarketLayout({ pageData }: MarketLayoutProps) {
+  const { pagePath } = pageData;
   return (
     <div className={styles.marketLayout}>
       <div className={styles.marketContent}>
-        <Content />
+        <Content path={pagePath} />
         <Footer />
       </div>
     </div>

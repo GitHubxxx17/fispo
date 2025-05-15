@@ -1,9 +1,10 @@
 import { defineConfig } from "fispo-core";
-import { preloaderPlugin } from "./../plugin-preloader/src/index";
+// import { preloaderPlugin } from "./../plugin-preloader/src/index";
 import { aplayerPlugin } from "./../plugin-aplayer/src/index";
 import theme from "./../particle/dist/config.js";
 
 export default defineConfig({
+  base: "/fispo",
   title: "XXX17的个人博客",
   author: "XXX17",
   description: "学无止境",
@@ -35,7 +36,6 @@ export default defineConfig({
   },
   preloader: true,
   plugins: [
-    preloaderPlugin(),
     aplayerPlugin({
       server: "netease",
       id: "2540031947",

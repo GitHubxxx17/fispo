@@ -11,13 +11,14 @@ import { ArticleLayout } from "./ArticleLayout";
 import { CustomLayout } from "./CustomLayout";
 import classNames from "classnames";
 import scrollManager from "../helper/scroll";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import RightSide from "../components/rightSide";
 import { localGetData, localSaveData } from "../helper/storage";
 import { Helmet } from "react-helmet-async";
 import NotFoundLayout from "./NotFoundLayout";
-import { PageData } from "shared/types";
+import { LayoutRoutes, PageData } from "shared/types";
 import { baseUrl } from "@runtime/util";
+import { GetLayoutRoutes } from "shared/components";
 
 interface LayoutProps {
   pageData: PageData;
@@ -29,31 +30,48 @@ export default function Layout(props: LayoutProps) {
   const { pageType, title, siteData, frontmatter } = pageData;
   const { title: siteTitle, themeConfig } = siteData;
   const { sidebar, navMenus, banner } = themeConfig;
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
-  const is404 = pageType === "404";
-  const [sidebarEnable, setSidebarEnable] = useState(() => {
+  const isHomePage = useMemo(() => pageType === "home", [pageType]);
+  const isArticlePage = useMemo(() => pageType === "article", [pageType]);
+  const is404 = useMemo(() => pageType === "404", [pageType]);
+  const setSidebarEnableFn = useCallback(() => {
     if (is404) return false;
     const hide = localGetData("sidebarHide");
     if (hide !== null) {
       return !hide;
     }
     return sidebar.enable;
-  });
+  }, [is404, sidebar]);
+  const [sidebarEnable, setSidebarEnable] = useState(setSidebarEnableFn);
   const [sideBarHide, setSideBarHide] = useState(sidebar.hide);
 
-  // 根据 pageType 分发不同的页面内容
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return <HomeLayout pageData={pageData}></HomeLayout>;
-    } else if (isArticlePage) {
-      return <ArticleLayout pageData={pageData}></ArticleLayout>;
-    } else if (pageType === "custom") {
-      return <CustomLayout pageData={pageData}></CustomLayout>;
-    } else {
-      return <NotFoundLayout notFoundImg={siteData.notFoundImg} />;
-    }
-  };
+  useEffect(() => {
+    setSidebarEnable(setSidebarEnableFn());
+  }, [is404]);
+
+  const routes: LayoutRoutes = useMemo(() => {
+    return [
+      {
+        path: "/",
+        element: <HomeLayout pageData={pageData}></HomeLayout>,
+      },
+      {
+        path: "post/*",
+        element: <ArticleLayout pageData={pageData}></ArticleLayout>,
+      },
+      {
+        path: "tag/*",
+        element: <CustomLayout pageData={pageData}></CustomLayout>,
+      },
+      {
+        path: "category/*",
+        element: <CustomLayout pageData={pageData}></CustomLayout>,
+      },
+      {
+        path: "*",
+        element: <NotFoundLayout notFoundImg={siteData.notFoundImg} />,
+      },
+    ];
+  }, [pageData]);
 
   useEffect(() => {
     scrollManager.init();
@@ -98,7 +116,7 @@ export default function Layout(props: LayoutProps) {
               width: sideBarHide ? "80%" : "",
             }}
           >
-            {getCurrentLayout()}
+            <GetLayoutRoutes routes={routes} />
           </div>
           {sidebarEnable && (
             <div

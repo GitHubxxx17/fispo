@@ -75,7 +75,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
   return (
     <div className={styles["article-layout"]}>
       <div className={styles["article-content"]}>
-        <Content></Content>
+        <Content path={pagePath}></Content>
       </div>
       <div className={styles["post-copyright"]}>
         {copyrightText.map((item, index) => {
@@ -91,7 +91,7 @@ export function ArticleLayout(props: ArticleLayoutProps) {
         })}
       </div>
       <div className={styles["article-tag"]}>
-        {frontmatter.tags.map((item, index) => {
+        {frontmatter.tags?.map((item, index) => {
           return (
             <span key={`${item}-${index}`}>
               <Link href={`/tag/${item}`}>{item}</Link>

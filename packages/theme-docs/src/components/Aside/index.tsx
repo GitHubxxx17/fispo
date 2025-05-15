@@ -86,6 +86,10 @@ const Aside = (props: AsideProps) => {
     };
 
     scrollManager.add(scrollToToc);
+
+    return () => {
+      scrollManager.remove(scrollToToc);
+    };
   }, []);
 
   return (

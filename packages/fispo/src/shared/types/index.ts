@@ -4,6 +4,7 @@ import { DefaultThemeConfig } from "./default-theme";
 import type { PluggableList } from "unified";
 import { FispoPlugin } from "./plugin";
 import { HighlighterOptions } from "shiki";
+import { RouteObject } from "react-router-dom";
 
 /**
  * 定义 Markdown 配置选项的接口
@@ -370,3 +371,8 @@ export interface Theme<ThemeConfig = unknown> {
   config: ThemeConfig;
   plugins?: FispoPlugin[];
 }
+
+/**
+ * 布局组件路由
+ */
+export type LayoutRoutes = RouteObject[];

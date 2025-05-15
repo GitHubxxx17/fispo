@@ -135,6 +135,10 @@ const TocCard = (props: TocCardProps) => {
     };
 
     scrollManager.add(scrollToToc);
+
+    return () => {
+      scrollManager.remove(scrollToToc);
+    };
   }, []);
 
   return (

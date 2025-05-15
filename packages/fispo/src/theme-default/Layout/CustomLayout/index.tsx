@@ -4,6 +4,7 @@ import ArticleList from "../../components/ArticleList";
 import Categories from "../../components/Categories";
 import { Content } from "@runtime/index";
 import styles from "./index.module.scss";
+import { useMemo } from "react";
 
 interface CustomLayoutProps {
   pageData: PageData;
@@ -11,35 +12,51 @@ interface CustomLayoutProps {
 
 export function CustomLayout(props: CustomLayoutProps) {
   const { pagePath, tags, articlesList, categories } = props.pageData;
-  const pathList = pagePath.split("/").filter(Boolean);
-  const type = pathList[0];
 
-  if (type == "tag") {
-    return pathList.length == 1 ? (
-      <Tags tags={tags} />
-    ) : (
-      <ArticleList
-        articleList={articlesList}
-        filter={{ type: "tag", keyword: decodeURIComponent(pathList.at(-1)) }}
-      />
-    );
-  } else if (type === "category") {
-    return pathList.length == 1 ? (
-      <Categories categories={categories} />
-    ) : (
-      <ArticleList
-        articleList={articlesList}
-        filter={{
-          type: "category",
-          keyword: decodeURIComponent(pathList.at(-1)),
-        }}
-      />
-    );
-  } else {
+  const customComponent = useMemo(() => {
+    const pathList = pagePath.split("/").filter(Boolean);
+    const type = pathList[0];
+
     return (
-      <div className={styles["custom-layout"]}>
-        <Content />
-      </div>
+      <>
+        {type == "tag" && (
+          <>
+            {pathList.length == 1 ? (
+              <Tags tags={tags} />
+            ) : (
+              <ArticleList
+                articleList={articlesList}
+                filter={{
+                  type: "tag",
+                  keyword: decodeURIComponent(pathList.at(-1)),
+                }}
+              />
+            )}
+          </>
+        )}
+        {type == "category" && (
+          <>
+            {pathList.length == 1 ? (
+              <Categories categories={categories} />
+            ) : (
+              <ArticleList
+                articleList={articlesList}
+                filter={{
+                  type: "category",
+                  keyword: decodeURIComponent(pathList.at(-1)),
+                }}
+              />
+            )}
+          </>
+        )}
+        {type !== "tag" && type !== "category" && (
+          <div className={styles["custom-layout"]}>
+            <Content />
+          </div>
+        )}
+      </>
     );
-  }
+  }, [pagePath]);
+
+  return <>{customComponent}</>;
 }

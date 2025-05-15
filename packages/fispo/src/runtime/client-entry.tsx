@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
-import { App, initPageData } from "./app";
+import { App, AppRouter, initPageData } from "./app";
 import { BrowserRouter } from "react-router-dom";
-import { DataContext } from "./hooks";
+import { DataProvider } from "./hooks";
 import { HelmetProvider } from "react-helmet-async";
 import { lifecycleList } from "fispo:lifecycle";
 import { executeFunctionFromString } from "./util";
@@ -23,11 +23,13 @@ async function renderInBrowser() {
 
   createRoot(containerEl).render(
     <HelmetProvider>
-      <DataContext.Provider value={pageData}>
+      <DataProvider value={pageData}>
         <BrowserRouter>
-          <App lifecycleList={lifecycleList} />
+          <AppRouter>
+            <App lifecycleList={lifecycleList} />
+          </AppRouter>
         </BrowserRouter>
-      </DataContext.Provider>
+      </DataProvider>
     </HelmetProvider>
   );
 }

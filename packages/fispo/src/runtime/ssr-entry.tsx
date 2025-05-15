@@ -1,7 +1,7 @@
-import { App, initPageData } from "./app";
+import { App, AppRouter, initPageData } from "./app";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { DataContext } from "./hooks";
+import { DataProvider } from "./hooks";
 import { HelmetProvider } from "react-helmet-async";
 import { globalComponents } from "fispo:globalComponents";
 
@@ -18,11 +18,13 @@ export async function render(
 
   const appHtml = renderToString(
     <HelmetProvider context={helmetContext}>
-      <DataContext.Provider value={pageData}>
+      <DataProvider value={pageData}>
         <StaticRouter location={pagePath}>
-          <App ssr />
+          <AppRouter>
+            <App ssr />
+          </AppRouter>
         </StaticRouter>
-      </DataContext.Provider>
+      </DataProvider>
     </HelmetProvider>
   );
 

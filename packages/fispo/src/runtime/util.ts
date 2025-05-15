@@ -77,6 +77,10 @@ export function removeBase(url: string): string {
   return normalizedUrl;
 }
 
+export function removeTrailingSlash(url: string) {
+  return url.charAt(url.length - 1) === "/" ? url.slice(0, -1) : url;
+}
+
 export const executeFunctionFromString = (
   functionString: string,
   config?: any

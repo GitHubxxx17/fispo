@@ -1,15 +1,16 @@
-import { PageData } from "fispo-core/types";
+import { LayoutRoutes, PageData } from "fispo-core/types";
 import styles from "./index.module.scss";
 import Nav from "../components/Nav";
 import "../style/base.css";
 import "../style/vars.css";
 import "../style/docs.css";
 import { HomeLayout } from "./HomeLayout";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import scrollManager from "../helper/scroll";
 import { Helmet } from "react-helmet-async";
 import DocLayout from "./DocLayout";
 import { MarketLayout } from "./MarketLayout";
+import { GetLayoutRoutes } from "fispo-core/theme";
 
 interface LayoutProps {
   pageData: PageData;
@@ -21,26 +22,33 @@ const Layout = (props: LayoutProps) => {
   const { themeConfig, title: siteTitle, logo } = siteData;
   const { navMenus } = themeConfig;
   // 获取 pageType
-  const pathList = pagePath.split("/").filter(Boolean);
-  const type = pathList[0];
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
-  const isMarketPage = type === "theme" || type === "plugin";
+  const type = useMemo(() => {
+    const pathList = pagePath.split("/").filter(Boolean);
+    return pathList[0];
+  }, [pagePath]);
+  const isHomePage = useMemo(() => pageType === "home", [pageType]);
 
-  // 根据 pageType 分发不同的页面内容
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return <HomeLayout pageData={pageData} />;
-    } else if (isArticlePage) {
-      return <DocLayout pageData={pageData} />;
-    } else if (isMarketPage) {
-      return <MarketLayout pageData={pageData} />;
-    } else if (pageType === "custom") {
-      return <DocLayout pageData={pageData} />;
-    } else {
-      return <div>404</div>;
-    }
-  };
+  const routes: LayoutRoutes = useMemo(() => {
+    return [
+      {
+        path: "/",
+        element: <HomeLayout pageData={pageData}></HomeLayout>,
+      },
+
+      {
+        path: "/theme/*",
+        element: <MarketLayout pageData={pageData}></MarketLayout>,
+      },
+      {
+        path: "/plugin/*",
+        element: <MarketLayout pageData={pageData}></MarketLayout>,
+      },
+      {
+        path: "*",
+        element: <DocLayout pageData={pageData}></DocLayout>,
+      },
+    ];
+  }, [pageData]);
 
   useEffect(() => {
     scrollManager.init();
@@ -60,7 +68,7 @@ const Layout = (props: LayoutProps) => {
         logo={logo}
         curPath={`/${type}`}
       ></Nav>
-      {getCurrentLayout()}
+      <GetLayoutRoutes routes={routes} />
     </div>
   );
 };

@@ -6,6 +6,9 @@
   "types": "./src/types/index.ts",
   "type": "module",
   "scripts": {
+    "dev": "fispo dev",
+    "docs:build": "fispo build",
+    "preview": "fispo preview",
     "start": "tsup --watch --format=cjs,esm",
     "build": "tsup --format=cjs,esm"
   },

@@ -47,7 +47,7 @@ function ArticleList(props: ArticleListProps) {
 
   const currentArtcleList = useMemo(() => {
     return articleList.slice((currentPage - 1) * step, currentPage * step);
-  }, [currentPage]);
+  }, [currentPage, articleList]);
 
   const paginationOptions: PaginationProps = {
     pageCount: Math.ceil(articleList.length / step),

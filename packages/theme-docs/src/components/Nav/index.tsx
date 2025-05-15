@@ -86,7 +86,7 @@ function Nav(props: NavProps) {
         })}
       </ul>
     );
-  }, [menus]);
+  }, [menus, curPath]);
 
   const renderTools = useMemo(() => {
     return (

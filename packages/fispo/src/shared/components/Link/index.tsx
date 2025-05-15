@@ -1,6 +1,7 @@
 import { baseUrl } from "@runtime/util";
 import React, { forwardRef } from "react";
 import { EXTERNAL_URL_RE } from "shared/constants";
+import { Link as ReactLink } from "react-router-dom";
 
 export interface LinkProps extends React.AnchorHTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
@@ -14,15 +15,15 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const withBaseUrl = isExternal ? href : baseUrl(href);
 
   return (
-    <a
+    <ReactLink
       ref={ref}
-      href={withBaseUrl}
+      to={withBaseUrl}
       target={innerTarget}
       rel={innerRel}
       {...rest}
     >
       {children}
-    </a>
+    </ReactLink>
   );
 });
 
