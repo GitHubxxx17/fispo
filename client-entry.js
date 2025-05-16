@@ -7023,14 +7023,14 @@ function requireClient() {
 var clientExports = requireClient();
 var reactExports = requireReact();
 const React = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
-function _extends() {
-  return _extends = Object.assign ? Object.assign.bind() : function(n) {
+function _extends$1() {
+  return _extends$1 = Object.assign ? Object.assign.bind() : function(n) {
     for (var e = 1; e < arguments.length; e++) {
       var t2 = arguments[e];
       for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n[r2] = t2[r2]);
     }
     return n;
-  }, _extends.apply(null, arguments);
+  }, _extends$1.apply(null, arguments);
 }
 var Action;
 (function(Action2) {
@@ -7094,7 +7094,7 @@ function createBrowserHistory(options) {
   var blockers = createEvents();
   if (index == null) {
     index = 0;
-    globalHistory.replaceState(_extends({}, globalHistory.state, {
+    globalHistory.replaceState(_extends$1({}, globalHistory.state, {
       idx: index
     }), "");
   }
@@ -7105,7 +7105,7 @@ function createBrowserHistory(options) {
     if (state === void 0) {
       state = null;
     }
-    return readOnly(_extends({
+    return readOnly(_extends$1({
       pathname: location2.pathname,
       hash: "",
       search: ""
@@ -7462,6 +7462,61 @@ function safelyDecodeURIComponent(value, paramName) {
     return value;
   }
 }
+function resolvePath(to, fromPathname) {
+  if (fromPathname === void 0) {
+    fromPathname = "/";
+  }
+  let {
+    pathname: toPathname,
+    search = "",
+    hash = ""
+  } = typeof to === "string" ? parsePath(to) : to;
+  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+  return {
+    pathname,
+    search: normalizeSearch(search),
+    hash: normalizeHash(hash)
+  };
+}
+function resolvePathname(relativePath, fromPathname) {
+  let segments = fromPathname.replace(/\/+$/, "").split("/");
+  let relativeSegments = relativePath.split("/");
+  relativeSegments.forEach((segment) => {
+    if (segment === "..") {
+      if (segments.length > 1) segments.pop();
+    } else if (segment !== ".") {
+      segments.push(segment);
+    }
+  });
+  return segments.length > 1 ? segments.join("/") : "/";
+}
+function resolveTo(toArg, routePathnames, locationPathname) {
+  let to = typeof toArg === "string" ? parsePath(toArg) : toArg;
+  let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname;
+  let from;
+  if (toPathname == null) {
+    from = locationPathname;
+  } else {
+    let routePathnameIndex = routePathnames.length - 1;
+    if (toPathname.startsWith("..")) {
+      let toSegments = toPathname.split("/");
+      while (toSegments[0] === "..") {
+        toSegments.shift();
+        routePathnameIndex -= 1;
+      }
+      to.pathname = toSegments.join("/");
+    }
+    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+  }
+  let path = resolvePath(to, from);
+  if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+    path.pathname += "/";
+  }
+  return path;
+}
+function getToPathname(to) {
+  return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? parsePath(to).pathname : to.pathname;
+}
 function stripBasename(pathname, basename) {
   if (basename === "/") return pathname;
   if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
@@ -7475,12 +7530,81 @@ function stripBasename(pathname, basename) {
 }
 const joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
 const normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+const normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+const normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+function useHref(to) {
+  !useInRouterContext() ? invariant$1() : void 0;
+  let {
+    basename,
+    navigator: navigator2
+  } = reactExports.useContext(NavigationContext);
+  let {
+    hash,
+    pathname,
+    search
+  } = useResolvedPath(to);
+  let joinedPathname = pathname;
+  if (basename !== "/") {
+    let toPathname = getToPathname(to);
+    let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+    joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+  }
+  return navigator2.createHref({
+    pathname: joinedPathname,
+    search,
+    hash
+  });
+}
 function useInRouterContext() {
   return reactExports.useContext(LocationContext) != null;
 }
 function useLocation() {
   !useInRouterContext() ? invariant$1() : void 0;
   return reactExports.useContext(LocationContext).location;
+}
+function useNavigate() {
+  !useInRouterContext() ? invariant$1() : void 0;
+  let {
+    basename,
+    navigator: navigator2
+  } = reactExports.useContext(NavigationContext);
+  let {
+    matches
+  } = reactExports.useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
+  let activeRef = reactExports.useRef(false);
+  reactExports.useEffect(() => {
+    activeRef.current = true;
+  });
+  let navigate = reactExports.useCallback(function(to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    if (!activeRef.current) return;
+    if (typeof to === "number") {
+      navigator2.go(to);
+      return;
+    }
+    let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+    if (basename !== "/") {
+      path.pathname = joinPaths([basename, path.pathname]);
+    }
+    (!!options.replace ? navigator2.replace : navigator2.push)(path, options.state);
+  }, [basename, navigator2, routePathnamesJson, locationPathname]);
+  return navigate;
+}
+function useResolvedPath(to) {
+  let {
+    matches
+  } = reactExports.useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(matches.map((match) => match.pathnameBase));
+  return reactExports.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
 }
 function useRoutes(routes2, locationArg) {
   !useInRouterContext() ? invariant$1() : void 0;
@@ -7585,6 +7709,33 @@ function Router(_ref3) {
  *
  * @license MIT
  */
+function _extends() {
+  _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+function _objectWithoutPropertiesLoose$1(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+const _excluded$1 = ["onClick", "reloadDocument", "replace", "state", "target", "to"];
 function BrowserRouter(_ref) {
   let {
     basename,
@@ -7610,6 +7761,62 @@ function BrowserRouter(_ref) {
     navigationType: state.action,
     navigator: history2
   });
+}
+function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+const Link$1 = /* @__PURE__ */ reactExports.forwardRef(function LinkWithRef(_ref4, ref) {
+  let {
+    onClick,
+    reloadDocument,
+    replace: replace2 = false,
+    state,
+    target,
+    to
+  } = _ref4, rest = _objectWithoutPropertiesLoose$1(_ref4, _excluded$1);
+  let href = useHref(to);
+  let internalOnClick = useLinkClickHandler(to, {
+    replace: replace2,
+    state,
+    target
+  });
+  function handleClick(event) {
+    if (onClick) onClick(event);
+    if (!event.defaultPrevented && !reloadDocument) {
+      internalOnClick(event);
+    }
+  }
+  return (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    /* @__PURE__ */ reactExports.createElement("a", _extends({}, rest, {
+      href,
+      onClick: handleClick,
+      ref,
+      target
+    }))
+  );
+});
+function useLinkClickHandler(to, _temp) {
+  let {
+    target,
+    replace: replaceProp,
+    state
+  } = _temp === void 0 ? {} : _temp;
+  let navigate = useNavigate();
+  let location2 = useLocation();
+  let path = useResolvedPath(to);
+  return reactExports.useCallback((event) => {
+    if (event.button === 0 && // Ignore everything but left clicks
+    (!target || target === "_self") && // Let browser handle "target=_blank" etc.
+    !isModifiedEvent(event)) {
+      event.preventDefault();
+      let replace2 = !!replaceProp || createPath(location2) === createPath(path);
+      navigate(to, {
+        replace: replace2,
+        state
+      });
+    }
+  }, [location2, navigate, path, replaceProp, state, target, to]);
 }
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
@@ -7684,7 +7891,7 @@ const Route5 = React.lazy(() => __vitePreload(() => import("./assets/setup-dw4u5
 const Route6 = React.lazy(() => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0));
 const Route7 = React.lazy(() => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0));
 const Route8 = React.lazy(() => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0));
-const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-DJnbAZEn.js"), true ? [] : void 0));
+const Route9 = React.lazy(() => __vitePreload(() => import("./assets/index-AVGCSPmn.js"), true ? [] : void 0));
 const Route10 = React.lazy(() => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0));
 const Route11 = React.lazy(() => __vitePreload(() => import("./assets/index-N9-B6_y2.js"), true ? [] : void 0));
 const routes = [
@@ -7697,7 +7904,7 @@ const routes = [
   { path: "/guide/writing/frontmatter", element: React.createElement(Route6), preload: () => __vitePreload(() => import("./assets/frontmatter-xfnsmH-1.js"), true ? [] : void 0) },
   { path: "/guide/writing/markdown", element: React.createElement(Route7), preload: () => __vitePreload(() => import("./assets/markdown-CPo03qlZ.js"), true ? [] : void 0) },
   { path: "/guide/writing/source", element: React.createElement(Route8), preload: () => __vitePreload(() => import("./assets/source-BMhhPOlu.js"), true ? [] : void 0) },
-  { path: "/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-DJnbAZEn.js"), true ? [] : void 0) },
+  { path: "/", element: React.createElement(Route9), preload: () => __vitePreload(() => import("./assets/index-AVGCSPmn.js"), true ? [] : void 0) },
   { path: "/plugin/", element: React.createElement(Route10), preload: () => __vitePreload(() => import("./assets/index-CqN4r-Md.js"), true ? [] : void 0) },
   { path: "/theme/", element: React.createElement(Route11), preload: () => __vitePreload(() => import("./assets/index-N9-B6_y2.js"), true ? [] : void 0) }
 ];
@@ -7757,9 +7964,26 @@ async function handleRoutes(routes2, postDir) {
     categories
   };
 }
-const DataContext = reactExports.createContext({});
+const DataContext = reactExports.createContext(
+  {}
+);
 const usePageData = () => {
   return reactExports.useContext(DataContext);
+};
+const DataProvider = ({
+  value,
+  children
+}) => {
+  const [pageData, setPageDataState] = reactExports.useState(value);
+  const innerValue = reactExports.useMemo(() => {
+    return {
+      pageData,
+      setPageData: (data) => {
+        setPageDataState(data);
+      }
+    };
+  }, [pageData]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(DataContext.Provider, { value: innerValue, children });
 };
 const layout = "_layout_luyrs_1";
 const styles$9 = {
@@ -7856,100 +8080,221 @@ function debounce(func, delay) {
     }
     timer = setTimeout(() => {
       func.apply(null, arguments);
+      timer = null;
     }, delay);
   };
 }
-const NAV_HEIGHT = 60;
-function UseScroll() {
-  let callbackList = [];
-  let lastScrollTop = Math.ceil(0);
-  let direction = "down";
-  function bind() {
+class ScrollManager {
+  constructor() {
+    /** 滚动回调函数列表 */
+    __publicField(this, "callbackList", []);
+    /** 上次滚动位置 */
+    __publicField(this, "lastScrollTop", 0);
+    /** 当前滚动方向 */
+    __publicField(this, "direction", "down");
+    /** 防抖处理后的滚动事件处理函数 */
+    __publicField(this, "debouncedBind");
+    /** 是否已初始化标志 */
+    __publicField(this, "isInitialized", false);
+    /** 导航栏高度，默认为60px */
+    __publicField(this, "navHeight", 60);
+    /** 导航栏是否滚动折叠 */
+    __publicField(this, "navIsHidden", true);
+    this.debouncedBind = debounce(this.bind.bind(this), 10);
+  }
+  /**
+   * 设置导航栏高度
+   * @param height - 导航栏高度（像素）
+   */
+  setNavHeight(height) {
+    this.navHeight = height;
+  }
+  /**
+   * 设置导航栏是否滚动折叠
+   * @param hidden - 导航栏是否滚动折叠
+   */
+  setNavIsScrollHidden(hidden) {
+    this.navIsHidden = hidden;
+  }
+  /**
+   * 处理滚动事件
+   * 1. 检测滚动方向
+   * 2. 调用所有注册的回调函数
+   */
+  bind() {
     const currentScrollTop = Math.ceil(window.scrollY);
-    if (currentScrollTop > lastScrollTop) {
-      direction = "down";
+    if (currentScrollTop > this.lastScrollTop) {
+      this.direction = "down";
     } else {
-      direction = "up";
+      this.direction = "up";
     }
-    lastScrollTop = currentScrollTop;
-    callbackList.forEach((callback) => {
-      callback(direction, currentScrollTop === 0);
+    this.lastScrollTop = currentScrollTop;
+    console.log(this.callbackList);
+    this.callbackList.forEach((callback) => {
+      callback(this.direction, currentScrollTop === 0);
     });
   }
-  function init() {
+  /**
+   * 初始化滚动管理器
+   * 1. 添加滚动事件监听器
+   * 2. 绑定锚点导航处理
+   */
+  init() {
+    if (this.isInitialized) return;
     console.log("滚动模块初始化");
-    const newBind = debounce(bind, 10);
-    window.addEventListener("scroll", newBind);
-    bindingWindowScroll();
+    window.addEventListener("scroll", this.debouncedBind);
+    this.bindingWindowScroll();
+    this.isInitialized = true;
   }
-  function add(callback) {
-    callbackList.push(callback);
+  /**
+   * 添加滚动回调函数
+   * @param callback - 滚动回调函数
+   */
+  add(callback) {
+    this.callbackList.push(callback);
   }
-  function remove(removeFn) {
-    const index = callbackList.findIndex((fn) => fn == removeFn);
-    callbackList.splice(index, 1);
+  /**
+   * 移除滚动回调函数
+   * @param removeFn - 需要移除的回调函数
+   */
+  remove(removeFn) {
+    const index = this.callbackList.findIndex((fn) => fn === removeFn);
+    if (index !== -1) {
+      this.callbackList.splice(index, 1);
+    }
   }
-  function destory() {
-    callbackList = [];
-    window.removeEventListener("scroll", bind);
+  /**
+   * 销毁滚动管理器
+   * 1. 移除滚动事件监听器
+   * 2. 清空回调函数列表
+   */
+  destroy() {
+    window.removeEventListener("scroll", this.debouncedBind);
+    this.callbackList = [];
+    this.isInitialized = false;
   }
-  function scrollToTarget(target, isSmooth) {
+  /**
+   * 滚动到指定元素
+   * @param target - 目标元素
+   * @param isSmooth - 是否使用平滑滚动
+   */
+  scrollToTarget(target, isSmooth = true) {
     const targetPadding = parseInt(
       window.getComputedStyle(target).paddingTop,
       10
     );
     const targetTop = target.getBoundingClientRect().top;
-    const scrollTop = window.scrollY + targetTop + targetPadding - NAV_HEIGHT + 1;
+    let scrollTop = window.scrollY + targetTop + targetPadding + 1;
+    if (targetTop < 0 || !this.navIsHidden) {
+      scrollTop -= this.navHeight;
+    }
     window.scrollTo({
       left: 0,
       top: scrollTop,
       behavior: isSmooth ? "smooth" : "auto"
     });
   }
-  function bindingWindowScroll() {
-    function scrollTo(el, hash, isSmooth = false) {
+  /**
+   * 绑定锚点导航处理
+   * 1. 处理内部链接点击事件
+   * 2. 处理 hashchange 事件
+   * @returns 清理函数，用于移除事件监听器
+   */
+  bindingWindowScroll() {
+    const scrollTo = (el, hash, isSmooth = false) => {
       let target = null;
       try {
         target = el.classList.contains("header-anchor") ? el : document.getElementById(decodeURIComponent(hash.slice(1)));
       } catch (e) {
-        console.warn(e);
+        console.warn("解析锚点失败:", e);
       }
       if (target) {
-        scrollToTarget(target, isSmooth);
+        this.scrollToTarget(target, isSmooth);
       }
-    }
-    window.addEventListener(
-      "click",
-      (e) => {
-        const link = e.target.closest("a");
-        if (link) {
-          const { origin, hash, target, pathname, search } = link;
-          const currentUrl = window.location;
-          if (hash && target !== "_blank" && origin === currentUrl.origin) {
-            if (pathname === currentUrl.pathname && search === currentUrl.search && hash && hash !== currentUrl.hash) {
-              e.preventDefault();
-              history.pushState(null, "", hash);
-              scrollTo(link, hash, true);
-              window.dispatchEvent(new Event("hashchange"));
-            }
+    };
+    const clickHandler = (e) => {
+      const link = e.target.closest("a");
+      if (link) {
+        const { origin, hash, target, pathname, search } = link;
+        const currentUrl = window.location;
+        if (hash && target !== "_blank" && origin === currentUrl.origin) {
+          if (pathname === currentUrl.pathname && search === currentUrl.search && hash && hash !== currentUrl.hash) {
+            e.preventDefault();
+            history.pushState(null, "", hash);
+            scrollTo(link, hash, true);
+            window.dispatchEvent(new Event("hashchange"));
           }
         }
-      },
-      { capture: true }
-    );
-    window.addEventListener("hashchange", (e) => {
+      }
+    };
+    const hashChangeHandler = (e) => {
       e.preventDefault();
-    });
+    };
+    window.addEventListener("click", clickHandler, { capture: true });
+    window.addEventListener("hashchange", hashChangeHandler);
+    return () => {
+      window.removeEventListener("click", clickHandler);
+      window.removeEventListener("hashchange", hashChangeHandler);
+    };
   }
-  return {
-    init,
-    add,
-    remove,
-    destory,
-    scrollToTarget
-  };
 }
-const scrollManager = UseScroll();
+const scrollManager = new ScrollManager();
+class MemoryStorage {
+  constructor() {
+    __publicField(this, "storage", {});
+  }
+  getItem(key) {
+    return this.storage[key] || null;
+  }
+  setItem(key, value) {
+    this.storage[key] = value;
+  }
+  removeItem(key) {
+    delete this.storage[key];
+  }
+  clear() {
+    this.storage = {};
+  }
+}
+const inBrowser$1 = () => typeof window !== "undefined";
+function getStorage(type) {
+  if (!inBrowser$1()) {
+    return;
+  }
+  try {
+    const storage = type === "local" ? localStorage : sessionStorage;
+    const testKey = "__storage_test__";
+    storage.setItem(testKey, testKey);
+    storage.removeItem(testKey);
+    return storage;
+  } catch {
+    console.warn(`[Storage] ${type}Storage 不可用，将使用内存存储降级方案`);
+    return new MemoryStorage();
+  }
+}
+function localGetData(name) {
+  const storage = getStorage("local");
+  if (!storage) return null;
+  const data = storage.getItem(name);
+  if (data !== null) {
+    try {
+      return JSON.parse(data);
+    } catch (error) {
+      console.error(`解析本地存储数据失败: ${name}`, error);
+      return null;
+    }
+  }
+  return null;
+}
+function localSaveData(name, data) {
+  const storage = getStorage("local");
+  if (!storage) return;
+  try {
+    storage.setItem(name, JSON.stringify(data));
+  } catch (error) {
+    console.error(`保存本地存储数据失败: ${name}`, error);
+  }
+}
 /*!
  * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -11155,11 +11500,11 @@ const inBrowser = () => typeof window !== "undefined";
 function addLeadingSlash(url) {
   return url.charAt(0) === "/" || EXTERNAL_URL_RE.test(url) ? url : "/" + url;
 }
-function removeTrailingSlash(url) {
+function removeTrailingSlash$1(url) {
   return url.charAt(url.length - 1) === "/" ? url.slice(0, -1) : url;
 }
 function normalizeSlash(url) {
-  return removeTrailingSlash(addLeadingSlash(url));
+  return removeTrailingSlash$1(addLeadingSlash(url));
 }
 function withBase(url, base) {
   if (EXTERNAL_URL_RE.test(url)) {
@@ -11177,6 +11522,9 @@ function removeBase(url) {
   const normalizedBase = normalizeSlash(siteData.base);
   const normalizedUrl = url.replace(normalizedBase, "") || "/";
   return normalizedUrl;
+}
+function removeTrailingSlash(url) {
+  return url.charAt(url.length - 1) === "/" ? url.slice(0, -1) : url;
 }
 const executeFunctionFromString = (functionString, config2) => {
   const funString = functionString.charAt(0) !== "(" ? `function ${functionString}` : functionString;
@@ -11198,10 +11546,10 @@ const Link = reactExports.forwardRef((props, ref) => {
   const innerRel = isExternal ? "noopener noreferrer" : rel;
   const withBaseUrl = isExternal ? href : baseUrl(href);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "a",
+    Link$1,
     {
       ref,
-      href: withBaseUrl,
+      to: withBaseUrl,
       target: innerTarget,
       rel: innerRel,
       ...rest,
@@ -11224,20 +11572,16 @@ const GlobalComponents = () => {
     return reactDomExports.createPortal(globalComponent.element, document.body);
   }) });
 };
-function localGetData(name) {
-  if (typeof localStorage === "undefined") {
-    return null;
-  }
-  const data = localStorage.getItem(name);
-  if (data !== null) {
-    return JSON.parse(data);
-  } else {
-    return null;
-  }
-}
-function localSaveData(name, data) {
-  localStorage.setItem(name, JSON.stringify(data));
-}
+const GetLayoutRoutes = (props) => {
+  const { routes: routes2 } = props;
+  const handleRoutes2 = reactExports.useMemo(() => {
+    return routes2.map((route) => {
+      return { ...route, path: inBrowser() ? baseUrl(route.path) : route.path };
+    });
+  }, [routes2]);
+  const routeElement = useRoutes(handleRoutes2);
+  return routeElement;
+};
 const THEME = "THEME";
 function Nav(props) {
   const { title = "", menus: menus2 = [], logo = "", curPath = "/" } = props;
@@ -11274,13 +11618,14 @@ function Nav(props) {
     };
     scrollManager.add(scroll);
     updateTheme();
-    window.addEventListener("storage", updateTheme);
+    const debouncedUpdateTheme = debounce(updateTheme, 300);
+    window.addEventListener("storage", debouncedUpdateTheme);
     const mediaQuery = window.matchMedia("(max-width: 750px)");
     mediaQuery.addEventListener("change", resetMenus);
     return () => {
       scrollManager.remove(scroll);
       mediaQuery.removeEventListener("change", resetMenus);
-      window.removeEventListener("storage", updateTheme);
+      window.removeEventListener("storage", debouncedUpdateTheme);
     };
   }, []);
   const renderMenus = reactExports.useMemo(() => {
@@ -11297,7 +11642,7 @@ function Nav(props) {
         }
       ) }, items.title);
     }) });
-  }, [menus2]);
+  }, [menus2, curPath]);
   const renderTools = reactExports.useMemo(() => {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$8["nav-tools-item"], children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { title: "切换黑白主题", onClick: clickToChangeTheme, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: curTheme === "light" ? "sun" : "moon" }) }) }),
@@ -11375,6 +11720,7 @@ const Footer = () => {
   ] });
 };
 function HomeLayout(props) {
+  var _a2, _b2;
   const { siteData: siteData2, title } = props.pageData;
   const frontmatter = props.pageData.frontmatter;
   const { description, logo } = siteData2;
@@ -11383,7 +11729,7 @@ function HomeLayout(props) {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-hero-left"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: title }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: description }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-hero-button"], children: frontmatter.buttons.map((button, key) => {
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-hero-button"], children: (_a2 = frontmatter.buttons) == null ? void 0 : _a2.map((button, key) => {
           return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { href: button.link, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: button.text }) }, key);
         }) })
       ] }),
@@ -11392,7 +11738,7 @@ function HomeLayout(props) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { src: logo })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-feature"], children: frontmatter.features.map((item, key) => {
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$6["home-feature"], children: (_b2 = frontmatter.features) == null ? void 0 : _b2.map((item, key) => {
       return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$6["home-feature-item"], children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: item.icon }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: item.title }),
@@ -12443,13 +12789,11 @@ const CopyButton = () => {
   );
 };
 const Content = (props) => {
-  const { components } = props;
-  const handleRoutes2 = reactExports.useMemo(() => {
-    return routes.map((route) => {
-      return { ...route, path: inBrowser() ? baseUrl(route.path) : route.path };
-    });
-  }, [routes]);
-  const routeElement = useRoutes(handleRoutes2);
+  var _a2;
+  const { components, path } = props;
+  const routeElement = (_a2 = routes.find((r2) => {
+    return removeTrailingSlash(r2.path) === path;
+  })) == null ? void 0 : _a2.element;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(MDXProvider, { components: { CopyButton, Icon, Image, Link, ...components }, children: routeElement });
 };
 const Content$1 = reactExports.memo(Content);
@@ -12512,6 +12856,7 @@ const Aside = (props) => {
   const tocScroller = reactExports.useRef(null);
   const tocActive = reactExports.useCallback(
     (index, isScrollIntoView = true) => {
+      console.log(index, isScrollIntoView);
       setActiveIndex(index);
       const targetItem = tocList.current[index];
       if (!isScrollIntoView && !targetItem && tocScroller.current.scrollHeight === tocScroller.current.offsetHeight)
@@ -12527,17 +12872,17 @@ const Aside = (props) => {
         });
       }
     },
-    []
+    [tocList.current, tocScroller.current]
   );
   reactExports.useLayoutEffect(() => {
     let headers = [];
-    const NAV_HEIGHT2 = 60;
+    const NAV_HEIGHT = 60;
     const isBottom = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.scrollHeight;
     const scrollToToc = () => {
       if (headers.length == 0) {
         headers = Array.from(document.getElementsByClassName("header-anchor"));
       }
-      const scrollTop = Math.ceil(window.scrollY) + NAV_HEIGHT2;
+      const scrollTop = Math.ceil(window.scrollY) + NAV_HEIGHT;
       if (isBottom) {
         tocActive(headers.length - 1);
         return;
@@ -12562,7 +12907,11 @@ const Aside = (props) => {
       }
     };
     scrollManager.add(scrollToToc);
-  }, []);
+    return () => {
+      console.log("销毁成功");
+      scrollManager.remove(scrollToToc);
+    };
+  }, [tocActive]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$1.aside, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "目录" }),
     asideData.map(({ text, id, depth }, index) => {
@@ -12621,7 +12970,7 @@ const DocLayout = (props) => {
         (item) => decodeURI(item.link) === decodeURI(pagePath)
       )
     );
-  }, [articleList]);
+  }, [articleList, pagePath]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3.docLayout, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SideBar, { sidebarData: matchedSidebar, pathname: pagePath }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -12631,8 +12980,8 @@ const DocLayout = (props) => {
           [styles$3.noSidebar]: matchedSidebar.length === 0
         }),
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["content-footer"], children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, { path: pagePath }),
+          articleList[currIndex - 1] && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$3["content-footer"], children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$3["content-footer-pre"], children: currIndex > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { href: articleList[currIndex - 1].link, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { icon: "angle-left" }),
@@ -12661,9 +13010,10 @@ const styles = {
   marketLayout,
   marketContent
 };
-function MarketLayout(_) {
+function MarketLayout({ pageData }) {
+  const { pagePath } = pageData;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles.marketLayout, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles.marketContent, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Content$1, { path: pagePath }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] }) });
 }
@@ -12672,28 +13022,36 @@ const Layout = (props) => {
   const { pageType, siteData: siteData2, title, pagePath } = pageData;
   const { themeConfig, title: siteTitle, logo } = siteData2;
   const { navMenus } = themeConfig;
-  const pathList = pagePath.split("/").filter(Boolean);
-  const type = pathList[0];
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
-  const isMarketPage = type === "theme" || type === "plugin";
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData });
-    } else if (isArticlePage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
-    } else if (isMarketPage) {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(MarketLayout, { pageData });
-    } else if (pageType === "custom") {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData });
-    } else {
-      return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "404" });
-    }
-  };
+  const type = reactExports.useMemo(() => {
+    const pathList = pagePath.split("/").filter(Boolean);
+    return pathList[0];
+  }, [pagePath]);
+  const isHomePage = reactExports.useMemo(() => pageType === "home", [pageType]);
+  const routes2 = reactExports.useMemo(() => {
+    return [
+      {
+        path: "/",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(HomeLayout, { pageData })
+      },
+      {
+        path: "/theme/*",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(MarketLayout, { pageData })
+      },
+      {
+        path: "/plugin/*",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(MarketLayout, { pageData })
+      },
+      {
+        path: "*",
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(DocLayout, { pageData })
+      }
+    ];
+  }, [pageData]);
   reactExports.useEffect(() => {
     scrollManager.init();
+    scrollManager.setNavIsScrollHidden(false);
     return () => {
-      scrollManager.destory();
+      scrollManager.destroy();
     };
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$9.layout, children: [
@@ -12707,7 +13065,7 @@ const Layout = (props) => {
         curPath: `/${type}`
       }
     ),
-    getCurrentLayout()
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GetLayoutRoutes, { routes: routes2 })
   ] });
 };
 async function initPageData(routePath) {
@@ -12770,10 +13128,15 @@ function App({
   ssr = false,
   lifecycleList: lifecycleList2
 }) {
-  const pageData = usePageData();
+  const pageData = usePageData().pageData;
   pageData.ssr = ssr;
   const [finishLoading, setFinishLoading] = reactExports.useState(false);
   reactExports.useEffect(() => {
+    setFinishLoading(false);
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0
+    });
     lifecycleList2.beforeRenderpage.forEach(
       (fn) => executeFunctionFromString(fn, pageData)
     );
@@ -12782,12 +13145,23 @@ function App({
         (fn) => executeFunctionFromString(fn, pageData)
       );
     };
-  }, []);
+  }, [pageData]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     siteData.preloader,
     /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { pageData }),
     !ssr && /* @__PURE__ */ jsxRuntimeExports.jsx(GlobalComponents, {})
   ] });
+}
+function AppRouter({ children }) {
+  const location2 = useLocation();
+  const pageData = usePageData();
+  const setData = async () => {
+    pageData.setPageData(await initPageData(location2.pathname));
+  };
+  reactExports.useEffect(() => {
+    setData();
+  }, [location2]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children });
 }
 const lifecycleList = { "configBeforeResolved": [], "configResolved": [], "beforeRenderpage": [], "afterRenderPage": [], "pageClosed": [] };
 async function renderInBrowser() {
@@ -12801,7 +13175,7 @@ async function renderInBrowser() {
     (fn) => executeFunctionFromString(fn, pageData)
   );
   clientExports.createRoot(containerEl).render(
-    /* @__PURE__ */ jsxRuntimeExports.jsx(HelmetProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(DataContext.Provider, { value: pageData, children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { lifecycleList }) }) }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(HelmetProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(DataProvider, { value: pageData, children: /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { lifecycleList }) }) }) }) })
   );
 }
 renderInBrowser();

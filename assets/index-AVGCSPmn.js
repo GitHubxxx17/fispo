@@ -2,7 +2,7 @@ import { u as useMDXComponents, j as jsxRuntimeExports } from "../client-entry.j
 const frontmatter = {
   "buttons": [{
     "text": "立即上手",
-    "link": "/guide/"
+    "link": "/guide"
   }, {
     "text": "GitHub",
     "link": "https://github.com/GitHubxxx17/fispo"
