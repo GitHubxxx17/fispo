@@ -8129,7 +8129,6 @@ class ScrollManager {
       this.direction = "up";
     }
     this.lastScrollTop = currentScrollTop;
-    console.log(this.callbackList);
     this.callbackList.forEach((callback) => {
       callback(this.direction, currentScrollTop === 0);
     });
@@ -11540,22 +11539,23 @@ const executeFunctionFromString = (functionString, config2) => {
   }
 };
 const Link = reactExports.forwardRef((props, ref) => {
-  const { href = "/", children, target, rel, ...rest } = props;
+  const { href = "/", children, ...rest } = props;
   const isExternal = EXTERNAL_URL_RE.test(href);
-  const innerTarget = isExternal ? "_blank" : target;
-  const innerRel = isExternal ? "noopener noreferrer" : rel;
   const withBaseUrl = isExternal ? href : baseUrl(href);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Link$1,
-    {
-      ref,
-      to: withBaseUrl,
-      target: innerTarget,
-      rel: innerRel,
-      ...rest,
-      children
-    }
-  );
+  if (isExternal) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "a",
+      {
+        ref,
+        href,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        ...rest,
+        children
+      }
+    );
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Link$1, { ref, to: withBaseUrl, ...rest, children });
 });
 Link.displayName = "Link";
 const Image = reactExports.forwardRef((props, ref) => {
@@ -12856,7 +12856,6 @@ const Aside = (props) => {
   const tocScroller = reactExports.useRef(null);
   const tocActive = reactExports.useCallback(
     (index, isScrollIntoView = true) => {
-      console.log(index, isScrollIntoView);
       setActiveIndex(index);
       const targetItem = tocList.current[index];
       if (!isScrollIntoView && !targetItem && tocScroller.current.scrollHeight === tocScroller.current.offsetHeight)
@@ -12908,7 +12907,6 @@ const Aside = (props) => {
     };
     scrollManager.add(scrollToToc);
     return () => {
-      console.log("销毁成功");
       scrollManager.remove(scrollToToc);
     };
   }, [tocActive]);

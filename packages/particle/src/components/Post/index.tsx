@@ -7,7 +7,6 @@ import { getRandomColor } from "../../helper/tag";
 interface PostProps extends ArticleData {}
 
 const Post = (props: PostProps) => {
-  console.log(props);
   return (
     <div className={styles.post}>
       <Link href={props.path}>

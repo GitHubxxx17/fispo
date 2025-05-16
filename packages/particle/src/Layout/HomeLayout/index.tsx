@@ -12,7 +12,6 @@ export function HomeLayout(props: HomeLayoutProps) {
   const { siteData, title, articlesList } = props.pageData;
   const { themeConfig, author, avatar, description } = siteData;
   const { banner } = themeConfig as ThemeConfig;
-  console.log(themeConfig);
   const iconList: IconName[] = ["github", "qq", "envelope"];
 
   return (

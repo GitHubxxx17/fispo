@@ -18,7 +18,6 @@ const Aside = (props: AsideProps) => {
 
   const tocActive = useCallback(
     (index: number, isScrollIntoView: boolean = true) => {
-      console.log(index, isScrollIntoView);
       setActiveIndex(index);
       const targetItem = tocList.current[index];
       if (
@@ -89,7 +88,6 @@ const Aside = (props: AsideProps) => {
     scrollManager.add(scrollToToc);
 
     return () => {
-      console.log("销毁成功");
       scrollManager.remove(scrollToToc);
     };
   }, [tocActive]);

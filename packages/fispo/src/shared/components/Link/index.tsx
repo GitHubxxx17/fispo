@@ -8,20 +8,24 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLElement> {
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { href = "/", children, target, rel, ...rest } = props;
+  const { href = "/", children, ...rest } = props;
   const isExternal = EXTERNAL_URL_RE.test(href);
-  const innerTarget = isExternal ? "_blank" : target;
-  const innerRel = isExternal ? "noopener noreferrer" : rel;
   const withBaseUrl = isExternal ? href : baseUrl(href);
-
+  if (isExternal) {
+    return (
+      <a
+        ref={ref}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
   return (
-    <ReactLink
-      ref={ref}
-      to={withBaseUrl}
-      target={innerTarget}
-      rel={innerRel}
-      {...rest}
-    >
+    <ReactLink ref={ref} to={withBaseUrl} {...rest}>
       {children}
     </ReactLink>
   );

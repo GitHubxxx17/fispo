@@ -75,7 +75,6 @@ class ScrollManager {
     }
 
     this.lastScrollTop = currentScrollTop;
-    console.log(this.callbackList);
     // 触发所有回调函数
     this.callbackList.forEach((callback) => {
       callback(this.direction, currentScrollTop === 0);
