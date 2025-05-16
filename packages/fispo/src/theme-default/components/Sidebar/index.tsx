@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import Card from "../Card";
 import { PageData } from "shared/types";
-import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import { scrollManager, ScrollCallback } from "fispo-core/helper";
 
 type SidebarProps = {
   children?: React.ReactNode;

@@ -52,30 +52,33 @@ const DocLayout = (props: DocLayoutProps) => {
         })}
       >
         <Content path={pagePath} />
-        <div className={styles["content-footer"]}>
-          <div className={styles["content-footer-pre"]}>
-            {currIndex > 0 && (
-              <Link href={articleList[currIndex - 1].link}>
-                <span>
-                  <Icon icon="angle-left" />
-                  上一页
-                </span>
-                <span>{articleList[currIndex - 1].text}</span>
-              </Link>
-            )}
+        {articleList[currIndex - 1] && (
+          <div className={styles["content-footer"]}>
+            <div className={styles["content-footer-pre"]}>
+              {currIndex > 0 && (
+                <Link href={articleList[currIndex - 1].link}>
+                  <span>
+                    <Icon icon="angle-left" />
+                    上一页
+                  </span>
+                  <span>{articleList[currIndex - 1].text}</span>
+                </Link>
+              )}
+            </div>
+            <div className={styles["content-footer-next"]}>
+              {currIndex < articleList.length - 1 && (
+                <Link href={articleList[currIndex + 1].link}>
+                  <span>
+                    下一页
+                    <Icon icon="angle-right" />
+                  </span>
+                  <span>{articleList[currIndex + 1].text}</span>
+                </Link>
+              )}
+            </div>
           </div>
-          <div className={styles["content-footer-next"]}>
-            {currIndex < articleList.length - 1 && (
-              <Link href={articleList[currIndex + 1].link}>
-                <span>
-                  下一页
-                  <Icon icon="angle-right" />
-                </span>
-                <span>{articleList[currIndex + 1].text}</span>
-              </Link>
-            )}
-          </div>
-        </div>
+        )}
+
         <Footer />
       </div>
       <Aside asideData={toc} pagePath={pagePath} />

@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
-import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import { scrollManager, ScrollCallback } from "fispo-core/helper";
 import Icon from "shared/components/Icon";
 import { navMenuItem } from "shared/types/default-theme";
 import { Link } from "shared/components";

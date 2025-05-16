@@ -10,7 +10,7 @@ import {
 } from "react";
 import Icon from "shared/components/Icon";
 import { Toc } from "shared/types";
-import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import { scrollManager, ScrollCallback } from "fispo-core/helper";
 import classNames from "classnames";
 import { Link } from "shared/components";
 
@@ -174,7 +174,7 @@ const TocCard = (props: TocCardProps) => {
                     e.preventDefault();
                     const target = document.getElementById(id);
                     if (target) {
-                      scrollManager.scrollToTarget(target, true);
+                      scrollManager.scrollToTarget(target);
                     }
                     tocActive(index, false);
                   }}

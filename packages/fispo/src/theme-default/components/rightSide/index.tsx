@@ -1,11 +1,16 @@
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import Icon from "shared/components/Icon";
 import styles from "./index.module.scss";
-import scrollManager, { ScrollCallback } from "../../helper/scroll";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  scrollManager,
+  ScrollCallback,
+  localGetData,
+  localSaveData,
+  debounce,
+} from "fispo-core/helper";
+import { memo, useCallback, useEffect, useMemo, useState, useRef } from "react";
 import classNames from "classnames";
 import { PageData } from "shared/types";
-import { localGetData, localSaveData } from "../../helper/storage";
 
 interface RightSideProps {
   children?: React.ReactNode;
@@ -22,10 +27,11 @@ interface rightSideItem {
 
 const THEME = "THEME";
 
-export default function RightSide(props: RightSideProps) {
+const RightSide = (props: RightSideProps) => {
   const { setSideBarHide } = props;
   const [isTop, setIsTop] = useState(true);
   const [settingsIsHide, setSettingsIsHide] = useState(true);
+  const currentTheme = useRef(localGetData(THEME)); // 跟踪当前主题值
 
   const rightSideSettings: rightSideItem[] = useMemo(
     () => [
@@ -34,13 +40,9 @@ export default function RightSide(props: RightSideProps) {
         text: "深色和浅色模式切换",
         click: () => {
           const classList = document.documentElement.classList;
-          if (classList.contains("dark")) {
-            // 本地状态存储
-            localSaveData(THEME, "light");
-          } else {
-            // 本地状态存储
-            localSaveData(THEME, "dark");
-          }
+          const newTheme = classList.contains("dark") ? "light" : "dark";
+          currentTheme.current = newTheme; // 更新当前主题引用
+          localSaveData(THEME, newTheme);
           classList.toggle("dark");
         },
       },
@@ -69,7 +71,7 @@ export default function RightSide(props: RightSideProps) {
         icon: "arrow-up",
         text: "回到顶部",
         click: () => {
-          scrollManager.scrollToTarget(document.body, true);
+          scrollManager.scrollToTarget(document.body);
         },
       },
     ],
@@ -87,7 +89,11 @@ export default function RightSide(props: RightSideProps) {
 
   const updateTheme = useCallback(() => {
     const theme = localGetData(THEME);
-    setClassList(theme === "dark");
+    // 只有当主题真的发生变化时才更新DOM
+    if (theme !== currentTheme.current) {
+      currentTheme.current = theme;
+      setClassList(theme === "dark");
+    }
   }, []);
 
   useEffect(() => {
@@ -97,10 +103,14 @@ export default function RightSide(props: RightSideProps) {
     scrollManager.add(showRightSide);
 
     updateTheme();
-    window.addEventListener("storage", updateTheme);
+
+    // 【warning】 必须使用防抖处理storage事件，否则同时打开多个页面会导致浏览器卡顿
+    const debouncedUpdateTheme = debounce(updateTheme, 300);
+    window.addEventListener("storage", debouncedUpdateTheme);
+
     return () => {
       scrollManager.remove(showRightSide);
-      window.removeEventListener("storage", updateTheme);
+      window.removeEventListener("storage", debouncedUpdateTheme);
     };
   }, []);
 
@@ -138,4 +148,6 @@ export default function RightSide(props: RightSideProps) {
       {rightSideOptions.map(rightSideItemRender)}
     </div>
   );
-}
+};
+
+export default memo(RightSide);

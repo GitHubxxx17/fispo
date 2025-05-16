@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import classNames from "classnames";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "fispo-core/theme";
-import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import { scrollManager, ScrollCallback } from "fispo-core/helper";
 
 export interface AsideProps {
   asideData: Toc[];
@@ -18,6 +18,7 @@ const Aside = (props: AsideProps) => {
 
   const tocActive = useCallback(
     (index: number, isScrollIntoView: boolean = true) => {
+      console.log(index, isScrollIntoView);
       setActiveIndex(index);
       const targetItem = tocList.current[index];
       if (
@@ -41,7 +42,7 @@ const Aside = (props: AsideProps) => {
         });
       }
     },
-    []
+    [tocList.current, tocScroller.current]
   );
 
   useLayoutEffect(() => {
@@ -88,9 +89,10 @@ const Aside = (props: AsideProps) => {
     scrollManager.add(scrollToToc);
 
     return () => {
+      console.log("销毁成功");
       scrollManager.remove(scrollToToc);
     };
-  }, []);
+  }, [tocActive]);
 
   return (
     <div className={styles.aside}>

@@ -18,6 +18,7 @@ import { withBase } from "shared/utils";
 import { renderResultOptions } from "@runtime/ssr-entry";
 import { EXTERNAL_URL_RE } from "shared/constants";
 
+let isTagsExtracted = false;
 let extractedTags: HtmlTagDescriptor[] = [];
 
 // 触发 transformIndexHtml 并提取 tags
@@ -99,8 +100,9 @@ export async function bundle(root: string, config: SiteConfig) {
           {
             name: "extract-tags-plugin",
             buildStart() {
-              if (isServer) {
+              if (isServer && !isTagsExtracted) {
                 extractTagsDuringBuild(config);
+                isTagsExtracted = true;
               }
             },
           },

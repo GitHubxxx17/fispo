@@ -1,10 +1,15 @@
 import classNames from "classnames";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./index.module.scss";
-import scrollManager, { ScrollCallback } from "../../helper/scroll";
+import {
+  scrollManager,
+  ScrollCallback,
+  localGetData,
+  localSaveData,
+  debounce,
+} from "fispo-core/helper";
 import { navMenuItem } from "types";
 import { Icon, Image, Link } from "fispo-core/theme";
-import { localGetData, localSaveData } from "../../helper/storage";
 
 interface NavProps {
   title?: string;
@@ -57,14 +62,15 @@ function Nav(props: NavProps) {
     scrollManager.add(scroll);
 
     updateTheme();
-    window.addEventListener("storage", updateTheme);
+    const debouncedUpdateTheme = debounce(updateTheme, 300);
+    window.addEventListener("storage", debouncedUpdateTheme);
     // 媒体查询
     const mediaQuery = window.matchMedia("(max-width: 750px)");
     mediaQuery.addEventListener("change", resetMenus);
     return () => {
       scrollManager.remove(scroll);
       mediaQuery.removeEventListener("change", resetMenus);
-      window.removeEventListener("storage", updateTheme);
+      window.removeEventListener("storage", debouncedUpdateTheme);
     };
   }, []);
 

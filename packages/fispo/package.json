@@ -1,6 +1,6 @@
 {
   "name": "fispo-core",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -17,6 +17,10 @@
     "./types": {
       "types": "./types.d.ts",
       "default": "./src/shared/types/index.ts"
+    },
+    "./helper": {
+      "types": "./helper.d.ts",
+      "default": "./src/shared/helper/index.ts"
     },
     "./theme": {
       "types": "./theme.d.ts",

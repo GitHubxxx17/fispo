@@ -10,10 +10,9 @@ import Sidebar from "../components/Sidebar";
 import { ArticleLayout } from "./ArticleLayout";
 import { CustomLayout } from "./CustomLayout";
 import classNames from "classnames";
-import scrollManager from "../helper/scroll";
+import { scrollManager, localGetData, localSaveData } from "fispo-core/helper";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import RightSide from "../components/rightSide";
-import { localGetData, localSaveData } from "../helper/storage";
 import { Helmet } from "react-helmet-async";
 import NotFoundLayout from "./NotFoundLayout";
 import { LayoutRoutes, PageData } from "shared/types";
@@ -80,7 +79,7 @@ export default function Layout(props: LayoutProps) {
       setSideBarHide(hide);
     }
     return () => {
-      scrollManager.destory();
+      scrollManager.destroy();
     };
   }, []);
 

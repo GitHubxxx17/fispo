@@ -6,7 +6,7 @@ import "../style/vars.css";
 import "../style/docs.css";
 import { HomeLayout } from "./HomeLayout";
 import { useEffect, useMemo } from "react";
-import scrollManager from "../helper/scroll";
+import { scrollManager } from "fispo-core/helper";
 import { Helmet } from "react-helmet-async";
 import DocLayout from "./DocLayout";
 import { MarketLayout } from "./MarketLayout";
@@ -52,8 +52,9 @@ const Layout = (props: LayoutProps) => {
 
   useEffect(() => {
     scrollManager.init();
+    scrollManager.setNavIsScrollHidden(false);
     return () => {
-      scrollManager.destory();
+      scrollManager.destroy();
     };
   }, []);
 
