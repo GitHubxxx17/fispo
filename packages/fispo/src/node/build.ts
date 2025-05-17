@@ -17,6 +17,7 @@ import { getTagsAndCategoriesRoutes } from "shared/utils/handleRoutes";
 import { withBase } from "shared/utils";
 import { renderResultOptions } from "@runtime/ssr-entry";
 import { EXTERNAL_URL_RE } from "shared/constants";
+import { terser } from "rollup-plugin-terser";
 
 let isTagsExtracted = false;
 let extractedTags: HtmlTagDescriptor[] = [];
@@ -83,7 +84,13 @@ export async function bundle(root: string, config: SiteConfig) {
     root: join(process.cwd(), root),
     plugins: await createVitePlugins(config, undefined, isServer),
     ssr: {
-      noExternal: ["react-router-dom", "react-helmet-async"],
+      noExternal: [
+        "react-router-dom",
+        "react-helmet-async",
+        "@fortawesome/react-fontawesome",
+        "@fortawesome/free-solid-svg-icons",
+        "@fortawesome/free-brands-svg-icons",
+      ],
     },
     build: {
       minify: false,
@@ -106,7 +113,22 @@ export async function bundle(root: string, config: SiteConfig) {
               }
             },
           },
+          terser({
+            compress: {
+              dead_code: true, // 移除未使用代码
+              unused: true, // 移除未使用变量
+              reduce_vars: true, // 减少变量声明
+            },
+            mangle: {
+              properties: false, // 保留属性名（按需配置）
+            },
+          }),
         ],
+        treeshake: {
+          moduleSideEffects: "no-external", // 关键配置：仅保留有副作用的模块
+          propertyReadSideEffects: false, // 允许对属性访问进行tree-shaking
+          tryCatchDeoptimization: false, // 优化try-catch块的tree-shaking
+        },
       },
     },
   });

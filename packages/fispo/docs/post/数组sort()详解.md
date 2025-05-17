@@ -9,6 +9,10 @@ cover: /cover/b.jpg
 
 # 数组sort()
 
+{% note info simple %}
+info 提示块标签
+{% endnote %}
+
 > 语法：arr.sort([compareFunction])
 
 compareFunction这个参数是可填可不填的

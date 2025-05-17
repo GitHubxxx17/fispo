@@ -1,0 +1,8 @@
+import{u as i,j as s}from"../client-entry.js";const a={title:"资源处理"},p="资源处理根目录根目录是存放所有资源的地方，包括文章、图片、js和css等文件资源，默认存放在 docs 文件夹下，如果需要修改存放的位置可在 fispo.config.ts 文件配置中修改 root 配置项。public目录图片和字体等静态资源可以放置在根目录下的 public 目录中。例如，如果项",r=[{id:"资源处理",text:"资源处理",depth:1},{id:"根目录",text:"根目录",depth:2},{id:"public目录",text:"public目录",depth:2},{id:"post目录",text:"post目录",depth:2}];function e(n){const c={a:"a",br:"br",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...i(),...n.components};return s.jsxs(s.Fragment,{children:[s.jsxs(c.h1,{id:"资源处理",children:[s.jsx(c.a,{className:"header-anchor",href:"#资源处理",children:s.jsx(c.span,{className:"icon icon-link"})}),"资源处理"]}),`
+`,s.jsxs(c.h2,{id:"根目录",children:[s.jsx(c.a,{className:"header-anchor",href:"#根目录",children:s.jsx(c.span,{className:"icon icon-link"})}),"根目录"]}),`
+`,s.jsxs(c.p,{children:["根目录是存放所有资源的地方，包括文章、图片、js和css等文件资源，默认存放在 docs 文件夹下，如果需要修改存放的位置可在 ",s.jsx(c.code,{children:"fispo.config.ts"})," 文件配置中修改 root 配置项。"]}),`
+`,s.jsxs(c.h2,{id:"public目录",children:[s.jsx(c.a,{className:"header-anchor",href:"#public目录",children:s.jsx(c.span,{className:"icon icon-link"})}),"public目录"]}),`
+`,s.jsxs(c.p,{children:["图片和字体等静态资源可以放置在根目录下的 public 目录中。例如，如果项目根目录是 ./docs，并且使用默认源目录位置，那么 public 目录将是 ./docs/public。",s.jsx(c.br,{}),`
+放置在 public 中的资源将按原样复制到输出目录的根目录中。例如 public/icon.png 在源代码中使用 /icon.png 引用。`]}),`
+`,s.jsxs(c.h2,{id:"post目录",children:[s.jsx(c.a,{className:"header-anchor",href:"#post目录",children:s.jsx(c.span,{className:"icon icon-link"})}),"post目录"]}),`
+`,s.jsx(c.p,{children:"文章资源的存放目录默认为根目录下的 post 目录中。"})]})}function t(n={}){const{wrapper:c}={...i(),...n.components};return c?s.jsx(c,{...n,children:s.jsx(e,{...n})}):e(n)}export{t as default,a as frontmatter,p as mdInfo,r as toc};
