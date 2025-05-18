@@ -138,7 +138,7 @@ export function App({
     <>
       {siteData.preloader && <Preloader finishLoading={finishLoading} />}
       <ThemeLayout pageData={pageData} />
-      {!ssr && <GlobalComponents />}
+      {import.meta.env.DEV && <GlobalComponents />}
     </>
   );
 }

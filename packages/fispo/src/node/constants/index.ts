@@ -24,3 +24,10 @@ export const configFiles = [
 ];
 
 export const EXTENDED_TAGS = ["tip", "note"];
+
+export const EXTERNALS = [
+  "react",
+  "react-dom",
+  "react-dom/client",
+  "react/jsx-runtime",
+];

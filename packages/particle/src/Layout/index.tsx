@@ -4,7 +4,7 @@ import "../style/docs.css";
 import styles from "./index.module.scss";
 import Nav from "../components/Nav";
 import { HomeLayout } from "./HomeLayout";
-import scrollManager from "../helper/scroll";
+import { scrollManager } from "fispo-core/helper";
 import { useEffect, useMemo } from "react";
 import Footer from "../components/Footer";
 import ArticleLayout from "./ArticleLayout";
@@ -51,7 +51,7 @@ const Layout = (props: LayoutProps) => {
   useEffect(() => {
     scrollManager.init();
     return () => {
-      scrollManager.destory();
+      scrollManager.destroy();
     };
   }, []);
 

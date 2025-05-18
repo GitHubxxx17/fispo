@@ -5,7 +5,12 @@ import {
   IndexHtmlTransformHook,
   HtmlTagDescriptor,
 } from "vite";
-import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from "./constants";
+import {
+  CLIENT_ENTRY_PATH,
+  EXTERNALS,
+  PACKAGE_ROOT,
+  SERVER_ENTRY_PATH,
+} from "./constants";
 import type { RollupOutput } from "rollup";
 import { dirname, join } from "path";
 import fs from "fs-extra";
@@ -87,13 +92,13 @@ export async function bundle(root: string, config: SiteConfig) {
       noExternal: [
         "react-router-dom",
         "react-helmet-async",
-        "@fortawesome/react-fontawesome",
-        "@fortawesome/free-solid-svg-icons",
-        "@fortawesome/free-brands-svg-icons",
+        // "@fortawesome/react-fontawesome",
+        // "@fortawesome/free-solid-svg-icons",
+        // "@fortawesome/free-brands-svg-icons",
       ],
     },
     build: {
-      minify: false,
+      minify: true,
       ssr: isServer,
       outDir: isServer ? join(root, ".temp") : join(root, "build"),
       emptyOutDir: true,
@@ -103,6 +108,7 @@ export async function bundle(root: string, config: SiteConfig) {
           entryFileNames: isServer ? "[name].mjs" : undefined,
           format: "es",
         },
+        external: EXTERNALS,
         plugins: [
           {
             name: "extract-tags-plugin",
@@ -145,8 +151,9 @@ export async function bundle(root: string, config: SiteConfig) {
     // 复制图片到打包目录
     const publicDir = join(root, config.public);
     if (fs.pathExistsSync(publicDir)) {
-      await fs.copy(publicDir, join(root, "build"));
+      await fs.copy(publicDir, join(root, config.build));
     }
+    await fs.copy(join(PACKAGE_ROOT, "vendors"), join(root, config.build));
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
   } catch (e) {
     console.log(e);
@@ -234,6 +241,9 @@ export async function renderPage(
         (chunk) => chunk.type === "asset" && chunk.fileName.endsWith(".css")
       );
 
+      const normalizeVendorFilename = (fileName: string) =>
+        fileName.replace(/\//g, "_") + ".js";
+
       const html = `
 <!DOCTYPE html>
 <html>
@@ -252,12 +262,25 @@ export async function renderPage(
         (item) => `<link rel="stylesheet" href="${withBaseUrl(item.fileName)}">`
       )
       .join("\n")}
+
+      <script type="importmap">
+      {
+        "imports": {
+          ${EXTERNALS.map(
+            (name) =>
+              `"${name}": "${withBaseUrl(normalizeVendorFilename(name))}"`
+          ).join(",")}
+        } 
+      }  
+    </script>
+
     ${headTagsHtml}
   </head>
   <body>
   ${bodyPrependTagsHtml}
     <div id="root">${appHtml}</div>
       ${globalComponentsHtml}
+      
     <script type="module" src="${withBaseUrl(clientChunk?.fileName)}"></script>
   ${bodyTagsHtml}
   </body>

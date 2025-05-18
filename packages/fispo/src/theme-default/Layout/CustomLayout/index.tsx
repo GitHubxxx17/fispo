@@ -51,7 +51,7 @@ export function CustomLayout(props: CustomLayoutProps) {
         )}
         {type !== "tag" && type !== "category" && (
           <div className={styles["custom-layout"]}>
-            <Content />
+            <Content path={pagePath} />
           </div>
         )}
       </>

@@ -1,7 +1,7 @@
 import { join, relative } from "path";
 import { mergeConfig, Plugin, UserConfig } from "vite";
 import { SiteConfig } from "shared/types/index";
-import { configFiles, PACKAGE_ROOT } from "../constants";
+import { configFiles, PACKAGE_ROOT, SHARED_PATH } from "../constants";
 import fs from "fs-extra";
 import sirv from "sirv";
 
@@ -60,6 +60,11 @@ export function pluginConfig(
       return mergeConfig(
         {
           root: PACKAGE_ROOT,
+          server: {
+            fs: {
+              allow: [SHARED_PATH, process.cwd()],
+            },
+          },
           optimizeDeps: {
             include: [
               "react",
@@ -86,7 +91,7 @@ export function pluginConfig(
           resolve: {
             alias: {
               "@runtime": join(PACKAGE_ROOT, "src", "runtime"),
-              shared: join(PACKAGE_ROOT, "src", "shared"),
+              shared: SHARED_PATH,
               ...pluginAlias,
             },
           },

@@ -36,7 +36,8 @@
   },
   "scripts": {
     "start": "tsup --watch --format=cjs,esm",
-    "build": "cross-env NODE_ENV=production tsup --format=cjs,esm",
+    "build": "cross-env NODE_ENV=production tsup --format=cjs,esm && pnpm build:deps",
+    "build:deps": "tsx ./scripts/prebundle.ts",
     "prepare:e2e": "tsx scripts/prepare-e2e.ts",
     "test:e2e": "playwright test",
     "test:init": "vitest run",
@@ -67,6 +68,7 @@
     "chalk": "^5.4.1",
     "classnames": "^2.5.1",
     "compression": "^1.8.0",
+    "esbuild": "^0.25.4",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
     "gh-pages": "^6.3.0",
@@ -93,6 +95,7 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.1",
     "remark-stringify": "^11.0.0",
+    "resolve": "^1.22.10",
     "rollup": "^4.34.8",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.85.1",
@@ -109,6 +112,7 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
+    "@types/resolve": "^1.20.6",
     "cross-env": "^7.0.3",
     "unist-util-visit": "^5.0.0"
   },

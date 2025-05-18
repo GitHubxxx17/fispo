@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { App, AppRouter, initPageData } from "./app";
 import { BrowserRouter } from "react-router-dom";
 import { DataProvider } from "./hooks";
@@ -13,25 +13,48 @@ async function renderInBrowser() {
     throw new Error("#root element not found");
   }
 
-  lifecycleList.configBeforeResolved.map((fn) => executeFunctionFromString(fn));
-  // 初始化 PageData
-  const pageData = await initPageData(location.pathname);
+  const enhancedApp = async () => {
+    lifecycleList.configBeforeResolved.map((fn) =>
+      executeFunctionFromString(fn)
+    );
+    // 初始化 PageData
+    const pageData = await initPageData(location.pathname);
 
-  lifecycleList.configResolved.map((fn) =>
-    executeFunctionFromString(fn, pageData)
-  );
+    lifecycleList.configResolved.map((fn) =>
+      executeFunctionFromString(fn, pageData)
+    );
 
-  createRoot(containerEl).render(
-    <HelmetProvider>
-      <DataProvider value={pageData}>
-        <BrowserRouter>
-          <AppRouter>
-            <App lifecycleList={lifecycleList} />
-          </AppRouter>
-        </BrowserRouter>
-      </DataProvider>
-    </HelmetProvider>
-  );
+    return function RootApp() {
+      return (
+        <HelmetProvider>
+          <DataProvider value={pageData}>
+            <BrowserRouter>
+              <AppRouter>
+                <App lifecycleList={lifecycleList} />
+              </AppRouter>
+            </BrowserRouter>
+          </DataProvider>
+        </HelmetProvider>
+      );
+    };
+  };
+
+  if (import.meta.env.DEV) {
+    lifecycleList.configBeforeResolved.map((fn) =>
+      executeFunctionFromString(fn)
+    );
+    // 初始化 PageData
+    const pageData = await initPageData(location.pathname);
+
+    lifecycleList.configResolved.map((fn) =>
+      executeFunctionFromString(fn, pageData)
+    );
+    const RootApp = await enhancedApp();
+    createRoot(containerEl).render(<RootApp />);
+  } else {
+    const RootApp = await enhancedApp();
+    hydrateRoot(containerEl, <RootApp />);
+  }
 }
 
 renderInBrowser();

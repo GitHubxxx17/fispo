@@ -4,14 +4,7 @@ import {
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import /*#__PURE__*/ * as solidIcons from "@fortawesome/free-solid-svg-icons";
-import /*#__PURE__*/ * as brandsIcons from "@fortawesome/free-brands-svg-icons";
-
-// 图标库映射表
-const iconLibraries = {
-  ...solidIcons,
-  ...brandsIcons,
-};
+import { useEffect, useState } from "react";
 
 interface IconProps extends FontAwesomeIconProps {
   icon: IconName;
@@ -35,16 +28,38 @@ function toCamelCase(str: string) {
 const Icon = (props: IconProps) => {
   const { icon: customIcon, isSpin, shake, className, ...rest } = props;
   const iconName = toCamelCase(customIcon || "spinner");
+  const [icon, setIcon] = useState(null);
+
+  useEffect(() => {
+    try {
+      import(
+        /* @vite-ignore */
+        "@fortawesome/free-solid-svg-icons"
+      ).then((module) => {
+        if (module[iconName]) setIcon(module[iconName]);
+      });
+      import(
+        /* @vite-ignore */
+        "@fortawesome/free-brands-svg-icons"
+      ).then((module) => {
+        if (module[iconName]) setIcon(module[iconName]);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }, [iconName]);
 
   return (
-    <FontAwesomeIcon
-      icon={iconLibraries[iconName]}
-      className={classNames(className, {
-        ["fa-solid fa-spinner fa-spin"]: isSpin,
-        ["fa-shake"]: shake,
-      })}
-      {...rest}
-    />
+    icon && (
+      <FontAwesomeIcon
+        icon={icon}
+        className={classNames(className, {
+          ["fa-solid fa-spinner fa-spin"]: isSpin,
+          ["fa-shake"]: shake,
+        })}
+        {...rest}
+      />
+    )
   );
 };
 
