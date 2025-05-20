@@ -10,34 +10,35 @@ export default defineConfig({
       {
         title: "首页",
         path: "/",
-        icon: "home",
+        icon: {
+          prefix: "fas",
+          iconName: "home",
+        },
       },
       {
         title: "标签",
         path: "/tag",
-        icon: "tag",
+        icon: {
+          prefix: "fas",
+          iconName: "tag",
+        },
       },
       {
         title: "分类",
         path: "/category",
-        icon: "folder-open",
+        icon: {
+          prefix: "fas",
+          iconName: "folder-open",
+        },
       },
       {
         title: "关于",
-        path: "/about",
-        icon: "heart",
-      },
-    ],
-    sidebar: {
-      card_author: {
-        button: {
-          link: "https://github.com/GitHubxxx17/fispo",
+        path: "/about/",
+        icon: {
+          prefix: "fas",
+          iconName: "heart",
         },
       },
-      card_announcement: {
-        enable: true,
-        content: "网站正在更新中······",
-      },
-    },
+    ],
   },
 });

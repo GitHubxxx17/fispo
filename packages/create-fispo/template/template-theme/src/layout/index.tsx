@@ -1,11 +1,12 @@
-import { PageData } from "fispo-core/types";
-import styles from "./index.module.scss";
+import { LayoutRoutes, PageData } from "fispo-core/types";
 import "../style/base.css";
-import "../style/vars.css";
 import "../style/docs.css";
-import { Helmet } from "react-helmet-async";
+import styles from "./index.module.scss";
 import { HomeLayout } from "./HomeLayout";
-import DocLayout from "./DocLayout";
+import { scrollManager } from "fispo-core/helper";
+import { useEffect, useMemo } from "react";
+import { GetLayoutRoutes } from "fispo-core/theme";
+import "../helper/icon";
 
 interface LayoutProps {
   pageData: PageData;
@@ -13,30 +14,30 @@ interface LayoutProps {
 
 const Layout = (props: LayoutProps) => {
   const { pageData } = props;
-  const { pageType, siteData, title } = pageData;
-  const isHomePage = pageType === "home";
-  const isArticlePage = pageType === "article";
 
-  // 根据 pageType 分发不同的页面内容
-  const getCurrentLayout = () => {
-    if (isHomePage) {
-      return <HomeLayout pageData={pageData} />;
-    } else if (isArticlePage) {
-      return <DocLayout pageData={pageData} />;
-    } else if (pageType === "custom") {
-      return <DocLayout pageData={pageData} />;
-    } else {
-      return <div>404</div>;
-    }
-  };
+  const routes: LayoutRoutes = useMemo(() => {
+    return [
+      {
+        path: "/",
+        element: <HomeLayout pageData={pageData}></HomeLayout>,
+      },
+      {
+        path: "*",
+        element: <>404</>,
+      },
+    ];
+  }, [pageData]);
+
+  useEffect(() => {
+    scrollManager.init();
+    return () => {
+      scrollManager.destroy();
+    };
+  }, []);
 
   return (
     <div className={styles.layout}>
-      {/* 浏览器标签页标题 */}
-      <Helmet>
-        <title>{isHomePage ? title : `${title} | ${siteData.title}`}</title>
-      </Helmet>
-      {getCurrentLayout()}
+      <GetLayoutRoutes routes={routes} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 {
   "name": "fispo-core",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "The framework of building blog based on SSG",
   "main": "dist/index.cjs",
   "module": "dist/index.js",

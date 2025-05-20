@@ -65,22 +65,34 @@ export default defineConfig<ThemeConfig>({
       {
         title: "首页",
         path: "/",
-        icon: "home",
+        icon: {
+          prefix: "fas",
+          iconName: "home",
+        },
       },
       {
         title: "标签",
         path: "/tag",
-        icon: "tag",
+        icon: {
+          prefix: "fas",
+          iconName: "tag",
+        },
       },
       {
         title: "分类",
         path: "/category",
-        icon: "folder-open",
+        icon: {
+          prefix: "fas",
+          iconName: "folder-open",
+        },
       },
       {
         title: "关于",
-        path: "/about",
-        icon: "heart",
+        path: "/about/",
+        icon: {
+          prefix: "fas",
+          iconName: "heart",
+        },
       },
     ],
   },
@@ -89,10 +101,34 @@ export default defineConfig<ThemeConfig>({
 
 **主题描述对象结构**：
 ```ts
-interface Theme<ThemeConfig = unknown> {
+/**
+ * 主题配置接口
+ * @template ThemeConfig 特定主题的配置类型，默认为 unknown
+ */
+export interface Theme<ThemeConfig = unknown> {
+  /**
+   * 主题名称，需全局唯一
+   * 示例："fispo-theme-default"
+   */
   name: string;
+
+  /**
+   * 主题布局文件的路径
+   * 可以是绝对路径或相对于项目根目录的路径
+   * 示例：join(__dirname, "..", "src", "index.ts")
+   */
   layoutPath: string;
+
+  /**
+   * 主题的配置选项
+   * 不同主题可能有不同的配置结构
+   */
   config: ThemeConfig;
+
+  /**
+   * 主题内置的插件列表
+   * 这些插件会在主题加载时自动注册
+   */
   plugins?: FispoPlugin[];
 }
 ```
@@ -108,23 +144,40 @@ interface Theme<ThemeConfig = unknown> {
   ```ts
   themeConfig: {
     navMenus: [
-     {
+      {
         title: "首页",
         path: "/",
-        icon: "home",
+        icon: {
+          prefix: "fas",
+          iconName: "home",
+        },
       },
       {
         title: "标签",
         path: "/tag",
-        icon: "tag",
+        icon: {
+          prefix: "fas",
+          iconName: "tag",
+        },
       },
       {
         title: "分类",
         path: "/category",
-        icon: "folder-open",
+        icon: {
+          prefix: "fas",
+          iconName: "folder-open",
+        },
+      },
+      {
+        title: "关于",
+        path: "/about/",
+        icon: {
+          prefix: "fas",
+          iconName: "heart",
+        },
       },
     ],
-  }
+  },
   ```
 
 ---
@@ -287,7 +340,7 @@ plugins: [
 
 ### deploy
 **类型**：`object`  
-**默认值**：`{ branch: gh-pages, repo: }`  
+**默认值**：`{ branch: gh-pages, repo: '' }`  
 **详情**：  
 部署配置对象。  
 **可用选项**：
@@ -401,18 +454,33 @@ highlighter: {
 **详情**：
 配置导航栏菜单项及其层级结构
 ```ts
-interface navMenuItem {
-  /** 导航栏显示文字（必填） */
+/**
+ * 导航栏菜单项的接口定义
+ * 用于描述导航栏中每个菜单项的结构和属性
+ */
+export interface NavMenuItem {
+  /**
+   * 菜单项的显示名称
+   */
   title: string;
-  /** 路由路径（必填） */
+  /**
+   * 菜单项对应的路径，点击菜单项时会导航到该路径
+   */
   path: string;
-  /** 图标名称 */
-  icon?: IconName;
-  /** 子菜单项 */
-  children?: navMenuItem[];
+  /**
+   * 菜单项的图标
+   * 使用 Font Awesome 的 IconLookup 类型，可通过 `faHome` 等形式引用
+   * 示例: { prefix: 'fas', iconName: 'home' }
+   */
+  icon?: IconLookup;
+  /**
+   * 子菜单项数组，可选属性
+   * 若该菜单项有子菜单，可通过此属性定义子菜单项
+   */
+  children?: NavMenuItem[];
 }
 ```
-`IconName`类型为 fontawesome 图标库中的图标类型。
+`IconLookup`类型为 fontawesome 图标库中的图标类型。
 
 >Fispo集成了 [fontawesome](https://fontawesome.com.cn/v5) 图标库，您可以在该图标库的网站查找需要的图标。
 

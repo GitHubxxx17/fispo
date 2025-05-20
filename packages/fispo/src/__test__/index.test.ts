@@ -12,22 +12,34 @@ describe("test", () => {
         {
           title: "首页",
           path: "/",
-          icon: "home",
+          icon: {
+            prefix: "fas",
+            iconName: "home",
+          },
         },
         {
           title: "标签",
           path: "/tag",
-          icon: "tag",
+          icon: {
+            prefix: "fas",
+            iconName: "tag",
+          },
         },
         {
           title: "分类",
           path: "/category",
-          icon: "folder-open",
+          icon: {
+            prefix: "fas",
+            iconName: "folder-open",
+          },
         },
         {
           title: "关于",
-          path: "/about",
-          icon: "heart",
+          path: "/about/",
+          icon: {
+            prefix: "fas",
+            iconName: "heart",
+          },
         },
       ],
       sidebar: {
@@ -51,23 +63,35 @@ describe("test", () => {
         },
         "navMenus": [
           {
-            "icon": "home",
+            "icon": {
+              "iconName": "home",
+              "prefix": "fas",
+            },
             "path": "/",
             "title": "首页",
           },
           {
-            "icon": "tag",
+            "icon": {
+              "iconName": "tag",
+              "prefix": "fas",
+            },
             "path": "/tag",
             "title": "标签",
           },
           {
-            "icon": "folder-open",
+            "icon": {
+              "iconName": "folder-open",
+              "prefix": "fas",
+            },
             "path": "/category",
             "title": "分类",
           },
           {
-            "icon": "heart",
-            "path": "/about",
+            "icon": {
+              "iconName": "heart",
+              "prefix": "fas",
+            },
+            "path": "/about/",
             "title": "关于",
           },
         ],
@@ -79,7 +103,10 @@ describe("test", () => {
           "card_author": {
             "button": {
               "enable": true,
-              "icon": "github",
+              "icon": {
+                "iconName": "github",
+                "prefix": "fab",
+              },
               "link": "",
               "text": "Follow me",
             },

@@ -8,9 +8,10 @@ interface DocLayoutProps {
 
 const DocLayout = (props: DocLayoutProps) => {
   console.log(props);
+  const { pagePath } = props.pageData;
   return (
     <div className={styles.docLayout}>
-      <Content />
+      <Content path={pagePath} />
     </div>
   );
 };

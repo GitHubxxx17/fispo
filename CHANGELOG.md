@@ -1,3 +1,18 @@
+## [0.4.4](https://github.com/GitHubxxx17/fispo/compare/v0.4.3...v0.4.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* 修复部分bug ([5baa33e](https://github.com/GitHubxxx17/fispo/commit/5baa33e4ecfb2d777e022f3887eacb8a5216abb3))
+* 修复链接无法跳转到外部 ([5ce35ea](https://github.com/GitHubxxx17/fispo/commit/5ce35eacb601e744ff4b494c99be8d9c699f4d66))
+
+
+### Features
+
+* import map和预打包优化 ([65542ef](https://github.com/GitHubxxx17/fispo/commit/65542eff2c0ffdbd675f7672c88b148ee433c746))
+
+
+
 ## [0.4.3](https://github.com/GitHubxxx17/fispo/compare/v0.4.2...v0.4.3) (2025-05-16)
 
 
