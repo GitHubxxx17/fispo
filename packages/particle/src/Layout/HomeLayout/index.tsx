@@ -2,7 +2,8 @@ import { PageData } from "fispo-core/types";
 import styles from "./index.module.scss";
 import { ThemeConfig } from "types";
 import Post from "../../components/Post";
-import { Icon, IconName, Image, Link } from "fispo-core/theme";
+import { Icon, Image, Link } from "fispo-core/theme";
+import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 
 interface HomeLayoutProps {
   pageData: PageData;
@@ -12,7 +13,11 @@ export function HomeLayout(props: HomeLayoutProps) {
   const { siteData, title, articlesList } = props.pageData;
   const { themeConfig, author, avatar, description } = siteData;
   const { banner } = themeConfig as ThemeConfig;
-  const iconList: IconName[] = ["github", "qq", "envelope"];
+  const iconList: [IconPrefix, IconName][] = [
+    ["fab", "github"],
+    ["fab", "qq"],
+    ["fas", "envelope"],
+  ];
 
   return (
     <div className={styles.homeLayout}>

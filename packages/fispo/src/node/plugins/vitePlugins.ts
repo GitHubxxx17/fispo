@@ -8,6 +8,7 @@ import shiki from "shiki";
 import { createPluginMdx } from "./plugin-mdx";
 import { pluginTheme } from "./theme";
 import { createFispoPlugins } from "./pulgin-fispo";
+import { IconInjectorplugin } from "./plugin-icon/icon-injector";
 
 type enforceType = "pre" | "post";
 
@@ -40,6 +41,7 @@ export async function createVitePlugins(
       jsxRuntime: "automatic",
       include: /\.(mdx|js|jsx|ts|tsx)$/,
     }),
+    IconInjectorplugin(config),
     pluginRoutes({
       prefix: config.base || "/",
       root: config.root,

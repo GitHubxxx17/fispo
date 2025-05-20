@@ -5,6 +5,8 @@ import type { PluggableList } from "unified";
 import { FispoPlugin } from "./plugin";
 import { HighlighterOptions } from "shiki";
 import { RouteObject } from "react-router-dom";
+import { NavMenuItem } from "./default-theme";
+import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 
 /**
  * 定义 Markdown 配置选项的接口
@@ -120,6 +122,27 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
    * markdown 代码高亮配置
    */
   highlighter?: HighlighterOptions;
+  /**
+   * 自定义图标配置，用于标签外挂中的图标显示
+   * 可通过标签外挂的 `icon-<name>` 语法引用此处定义的图标
+   *
+   * 示例配置：
+   * ```typescript
+   * icons: [{ prefix: 'fas', iconName: 'star' }]
+   * ```
+   *
+   * 对应的标签外挂用法：
+   * ```md
+   * {% note primary icon-star %}
+   * 这是一个带有星星图标的提示
+   * {% endnote %}
+   * ```
+   *
+   * 注意：
+   * 1. 使用外挂标签的自定义图标功能需先在此处注册才能在标签外挂中使用
+   * 2. 标签外挂中使用时需添加前缀 icon-（如 star → icon-star）
+   */
+  icons?: IconLookup[];
 }
 
 /**
@@ -357,6 +380,11 @@ export interface Route {
  * 页面数据的接口定义，继承自 PageDataContext 接口
  * 该接口除了包含 PageDataContext 接口的所有属性外，
  * 还允许添加任意额外的键值对，键为字符串类型，值为未知类型。
+ *
+ * 主要用于：
+ * 1. 在构建过程中存储页面的元数据
+ * 2. 传递自定义的页面属性到主题模板
+ * 3. 通过 frontmatter 或插件动态扩展页面数据
  */
 export interface PageData extends PageDataContext {
   /**
@@ -365,14 +393,67 @@ export interface PageData extends PageDataContext {
   [key: string]: unknown;
 }
 
+/**
+ * 主题配置接口
+ * @template ThemeConfig 特定主题的配置类型，默认为 unknown
+ */
 export interface Theme<ThemeConfig = unknown> {
+  /**
+   * 主题名称，需全局唯一
+   * 示例："fispo-theme-default"
+   */
   name: string;
+
+  /**
+   * 主题布局文件的路径
+   * 可以是绝对路径或相对于项目根目录的路径
+   * 示例：join(__dirname, "..", "src", "index.ts")
+   */
   layoutPath: string;
+
+  /**
+   * 主题的配置选项
+   * 不同主题可能有不同的配置结构
+   */
   config: ThemeConfig;
+
+  /**
+   * 主题内置的插件列表
+   * 这些插件会在主题加载时自动注册
+   */
   plugins?: FispoPlugin[];
 }
 
 /**
- * 布局组件路由
+ * 布局组件路由配置
+ * 基于 React Router 的 RouteObject 扩展
+ * 用于定义页面与布局组件之间的映射关系
+ *
+ * 示例：
+ * [
+ *   {
+ *     path: "/",
+ *     element: <HomeLayout />,
+ *     children: [...]
+ *   },
+ *   {
+ *     path: "/posts/:id",
+ *     element: <PostLayout />
+ *   }
+ * ]
  */
 export type LayoutRoutes = RouteObject[];
+
+/**
+ * 基础主题配置接口
+ * 定义了所有主题都可以使用的通用配置选项
+ */
+export interface BaseThemeConfig {
+  /**
+   * 导航菜单配置
+   * 定义网站顶部或侧边导航栏的菜单项
+   */
+  navMenus?: NavMenuItem[];
+}
+
+export { NavMenuItem };

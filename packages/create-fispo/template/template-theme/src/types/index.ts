@@ -1,13 +1,12 @@
-import { IconName } from "fispo-core/theme";
+import { BaseThemeConfig } from "fispo-core/types";
+export { NavMenuItem } from "fispo-core/types";
 
-// 导航栏菜单项
-export interface navMenuItem {
-  title: string;
-  path: string;
-  icon?: IconName;
-  children?: navMenuItem[];
+export interface Banner {
+  img?: string;
+  title?: string;
+  subTitle?: string;
 }
 
-export interface ThemeConfig {
-  navMenus?: navMenuItem[];
+export interface ThemeConfig extends BaseThemeConfig {
+  banner?: Banner;
 }

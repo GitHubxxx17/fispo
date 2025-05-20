@@ -18,6 +18,7 @@ import NotFoundLayout from "./NotFoundLayout";
 import { LayoutRoutes, PageData } from "shared/types";
 import { baseUrl } from "@runtime/util";
 import { GetLayoutRoutes } from "shared/components";
+import "../helper/icon";
 
 interface LayoutProps {
   pageData: PageData;

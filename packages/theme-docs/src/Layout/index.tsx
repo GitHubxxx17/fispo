@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 import DocLayout from "./DocLayout";
 import { MarketLayout } from "./MarketLayout";
 import { GetLayoutRoutes } from "fispo-core/theme";
+import "../helper/icon";
 
 interface LayoutProps {
   pageData: PageData;

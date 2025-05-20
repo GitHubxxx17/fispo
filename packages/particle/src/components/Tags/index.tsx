@@ -1,9 +1,10 @@
 import styles from "./index.module.scss";
 import { getRandomColor } from "../../helper/tag";
 import { ArticleData, Tags as TagsType } from "fispo-core/types";
-import { Icon, IconName, Link } from "fispo-core/theme";
+import { Icon, Link } from "fispo-core/theme";
 import ArticleCard from "../ArticleCard";
 import { useMemo } from "react";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 interface TagsProps {
   type: "tag" | "category";

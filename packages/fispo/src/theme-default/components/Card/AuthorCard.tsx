@@ -1,4 +1,4 @@
-import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import styles from "./index.module.scss";
 import { memo } from "react";
 import Icon from "shared/components/Icon";
@@ -13,7 +13,7 @@ export interface AuthorCardProps {
   categorizeNums?: number;
   button?: {
     enable?: boolean;
-    icon?: IconName;
+    icon?: IconLookup;
     text?: string;
     link?: string;
   };

@@ -89,6 +89,7 @@ export async function resolveSiteData(
     deploy: userConfig.deploy || { branch: "gh-pages", repo: "" },
     htmlTags: userConfig.htmlTags || [],
     highlighter: userConfig.highlighter || { theme: "nord" },
+    icons: userConfig.icons || [],
   };
 }
 

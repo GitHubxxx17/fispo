@@ -2,12 +2,12 @@ import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { scrollManager, ScrollCallback } from "fispo-core/helper";
-import { navMenuItem } from "types";
+import { NavMenuItem } from "types";
 import { Icon, Link } from "fispo-core/theme";
 
 interface NavProps {
   title?: string;
-  menus?: navMenuItem[];
+  menus?: NavMenuItem[];
   navBlue?: boolean;
 }
 

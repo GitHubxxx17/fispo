@@ -1,10 +1,10 @@
-import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 
 /**
  * 导航栏菜单项的接口定义
  * 用于描述导航栏中每个菜单项的结构和属性
  */
-export interface navMenuItem {
+export interface NavMenuItem {
   /**
    * 菜单项的显示名称
    */
@@ -14,15 +14,16 @@ export interface navMenuItem {
    */
   path: string;
   /**
-   * 菜单项的图标名称，可选属性
-   * 图标名称类型为 IconName，具体类型需根据项目中 IconName 的定义确定
+   * 菜单项的图标
+   * 使用 Font Awesome 的 IconLookup 类型，可通过 `faHome` 等形式引用
+   * 示例: { prefix: 'fas', iconName: 'home' }
    */
-  icon?: IconName;
+  icon?: IconLookup;
   /**
    * 子菜单项数组，可选属性
    * 若该菜单项有子菜单，可通过此属性定义子菜单项
    */
-  children?: navMenuItem[];
+  children?: NavMenuItem[];
 }
 
 /**
@@ -83,10 +84,11 @@ export interface Sidebar {
        */
       enable?: boolean;
       /**
-       * 按钮的图标名称，可选属性
-       * 图标名称类型为 IconName，具体类型需根据项目中 IconName 的定义确定
+       * 按钮的图标
+       * 使用 Font Awesome 的 IconLookup 类型，可通过 `faHome` 等形式引用
+       * 示例: { prefix: 'fas', iconName: 'home' }
        */
-      icon?: IconName;
+      icon?: IconLookup;
       /**
        * 按钮显示的文本内容，可选属性
        */
@@ -209,7 +211,7 @@ export interface DefaultThemeConfig {
    * 导航栏菜单项数组，可选属性
    * 用于配置导航栏显示的菜单项
    */
-  navMenus?: navMenuItem[];
+  navMenus?: NavMenuItem[];
   /**
    * 首页横幅数据，可选属性
    * 用于配置首页横幅的显示内容

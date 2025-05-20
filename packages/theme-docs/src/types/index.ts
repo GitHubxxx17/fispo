@@ -1,13 +1,6 @@
-import { IconName } from "fispo-core/theme";
 import { FrontMatter } from "fispo-core/types";
-
-// 导航栏菜单项
-export interface navMenuItem {
-  title: string;
-  path: string;
-  icon?: IconName;
-  children?: navMenuItem[];
-}
+import { BaseThemeConfig } from "fispo-core/types";
+export { NavMenuItem } from "fispo-core/types";
 
 export interface Sidebar {
   [path: string]: SidebarGroup[];
@@ -22,8 +15,7 @@ export type SidebarItem =
   | { text: string; link: string }
   | { text: string; link?: string; items: SidebarItem[] };
 
-export interface ThemeConfig {
-  navMenus?: navMenuItem[];
+export interface ThemeConfig extends BaseThemeConfig {
   sidebar?: Sidebar;
 }
 

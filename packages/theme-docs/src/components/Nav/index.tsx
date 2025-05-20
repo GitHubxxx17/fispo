@@ -8,12 +8,12 @@ import {
   localSaveData,
   debounce,
 } from "fispo-core/helper";
-import { navMenuItem } from "types";
+import { NavMenuItem } from "types";
 import { Icon, Image, Link } from "fispo-core/theme";
 
 interface NavProps {
   title?: string;
-  menus?: navMenuItem[];
+  menus?: NavMenuItem[];
   navBlue?: boolean;
   logo?: string;
   curPath?: string;
@@ -105,7 +105,7 @@ function Nav(props: NavProps) {
         <div className={styles["nav-tools-item"]}>
           <span title="github">
             <Link href="https://github.com/GitHubxxx17/fispo">
-              <Icon icon={"github"} />
+              <Icon icon={["fab", "github"]} />
             </Link>
           </span>
         </div>

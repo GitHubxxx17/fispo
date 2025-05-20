@@ -23,6 +23,7 @@ import { withBase } from "shared/utils";
 import { renderResultOptions } from "@runtime/ssr-entry";
 import { EXTERNAL_URL_RE } from "shared/constants";
 import { terser } from "rollup-plugin-terser";
+import os from "os";
 
 let isTagsExtracted = false;
 let extractedTags: HtmlTagDescriptor[] = [];
@@ -82,6 +83,9 @@ function extractTagsDuringBuild(config: SiteConfig) {
 
 export async function bundle(root: string, config: SiteConfig) {
   root = join(process.cwd(), root);
+
+  // 获取CPU核心数（减去1保留一个核心给系统）
+  const cpuCount = Math.max(1, os.cpus().length - 1);
   const resolveViteConfig = async (
     isServer: boolean
   ): Promise<InlineConfig> => ({
@@ -92,9 +96,9 @@ export async function bundle(root: string, config: SiteConfig) {
       noExternal: [
         "react-router-dom",
         "react-helmet-async",
-        // "@fortawesome/react-fontawesome",
-        // "@fortawesome/free-solid-svg-icons",
-        // "@fortawesome/free-brands-svg-icons",
+        "@fortawesome/react-fontawesome",
+        "@fortawesome/free-solid-svg-icons",
+        "@fortawesome/free-brands-svg-icons",
       ],
     },
     build: {
@@ -109,6 +113,7 @@ export async function bundle(root: string, config: SiteConfig) {
           format: "es",
         },
         external: EXTERNALS,
+        maxParallelFileOps: cpuCount * 16,
         plugins: [
           {
             name: "extract-tags-plugin",
@@ -295,6 +300,9 @@ export async function renderPage(
 }
 
 export async function build(root: string, config: SiteConfig) {
+  // 记录开始时间
+  const start = performance.now();
+
   const [clientBundle] = await bundle(root, config);
   const serverEntryPath = join(root, ".temp", "ssr-entry.mjs");
   const { render, routes } = await import(
@@ -321,4 +329,16 @@ export async function build(root: string, config: SiteConfig) {
   } finally {
     fs.remove(join(root, ".temp"));
   }
+
+  // 计算总耗时
+  const totalTime = performance.now() - start;
+
+  // 输出时间统计（带颜色区分）
+  console.log(
+    "\n------------------------ Build Time Statistics ------------------------"
+  );
+  console.log(`Total: ${totalTime.toFixed(2)}ms`);
+  console.log(
+    "------------------------------------------------------------------------\n"
+  );
 }

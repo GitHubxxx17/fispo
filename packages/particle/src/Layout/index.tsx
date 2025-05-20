@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import ArticleLayout from "./ArticleLayout";
 import CustomLayout from "./CustomLayout";
 import { GetLayoutRoutes } from "fispo-core/theme";
+import "../helper/icon";
 
 interface LayoutProps {
   pageData: PageData;

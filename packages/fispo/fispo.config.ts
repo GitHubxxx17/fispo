@@ -1,6 +1,6 @@
 import { defineConfig } from "fispo-core";
 // import { preloaderPlugin } from "./../plugin-preloader/src/index";
-import { aplayerPlugin } from "./../plugin-aplayer/src/index";
+// import { aplayerPlugin } from "./../plugin-aplayer/src/index";
 // import theme from "./../particle/dist/config.js";
 
 export default defineConfig({
@@ -15,33 +15,45 @@ export default defineConfig({
       {
         title: "首页",
         path: "/",
-        icon: "home",
+        icon: {
+          prefix: "fas",
+          iconName: "home",
+        },
       },
       {
         title: "标签",
         path: "/tag",
-        icon: "tag",
+        icon: {
+          prefix: "fas",
+          iconName: "tag",
+        },
       },
       {
         title: "分类",
         path: "/category",
-        icon: "folder-open",
+        icon: {
+          prefix: "fas",
+          iconName: "folder-open",
+        },
       },
       {
         title: "关于",
         path: "/about/",
-        icon: "heart",
+        icon: {
+          prefix: "fas",
+          iconName: "heart",
+        },
       },
     ],
   },
   preloader: true,
   plugins: [
-    aplayerPlugin({
-      server: "netease",
-      id: "2540031947",
-      type: "playlist",
-      mini: true,
-    }),
+    // aplayerPlugin({
+    //   server: "netease",
+    //   id: "2540031947",
+    //   type: "playlist",
+    //   mini: true,
+    // }),
   ],
   deploy: {
     repo: "https://github.com/GitHubxxx17/testblog.git",

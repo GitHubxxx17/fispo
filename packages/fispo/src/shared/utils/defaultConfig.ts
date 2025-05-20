@@ -15,7 +15,10 @@ export const defaultConfig: Required<DefaultThemeConfig> = {
       description: "",
       button: {
         enable: true,
-        icon: "github",
+        icon: {
+          prefix: "fab",
+          iconName: "github",
+        },
         text: "Follow me",
         link: "",
       },

@@ -88,4 +88,30 @@ export default defineConfig<ThemeConfig>({
   highlighter: {
     theme: "min-light",
   },
+  icons: [
+    {
+      prefix: "fas",
+      iconName: "palette",
+    },
+    {
+      prefix: "fas",
+      iconName: "pen-fancy",
+    },
+    {
+      prefix: "fas",
+      iconName: "coffee",
+    },
+    {
+      prefix: "fas",
+      iconName: "times",
+    },
+    {
+      prefix: "fas",
+      iconName: "atom",
+    },
+    {
+      prefix: "fas",
+      iconName: "eye",
+    },
+  ],
 });

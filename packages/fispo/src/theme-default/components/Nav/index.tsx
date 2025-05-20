@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { scrollManager, ScrollCallback } from "fispo-core/helper";
 import Icon from "shared/components/Icon";
-import { navMenuItem } from "shared/types/default-theme";
+import { NavMenuItem } from "shared/types/default-theme";
 import { Link } from "shared/components";
 
 interface NavProps {
   title?: string;
-  menus?: navMenuItem[];
+  menus?: NavMenuItem[];
   children?: React.ReactNode;
 }
 

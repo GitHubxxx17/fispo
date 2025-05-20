@@ -133,10 +133,12 @@ export const rehypePluginTags: Plugin<[Options], Root> = () => {
         }
       }
 
+      // 清除空标签
       if (node.tagName === "p" && node.children.length === 0) {
         parent.children.splice(index, 1);
       }
 
+      // docs主题扩展语法 - 需转移到相关主题上
       if (
         node.tagName == "li" &&
         node.properties?.className?.toString().endsWith("-list-item")

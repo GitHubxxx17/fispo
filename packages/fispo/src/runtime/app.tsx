@@ -15,6 +15,7 @@ import {
 } from "./util";
 import { GlobalComponents } from "shared/components";
 import { LifecycleList } from "shared/types/plugin";
+import "fispo:fa-icons";
 
 export async function initPageData(routePath: string): Promise<PageData> {
   routePath = removeBase(routePath);

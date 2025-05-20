@@ -33,3 +33,8 @@ declare module "fispo:lifecycle" {
   import type { LifecycleList } from "shared/types/plugin";
   export const lifecycleList: LifecycleList;
 }
+
+declare module "fispo:fa-icons" {
+  import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+  export const iconList: IconDefinition[];
+}
