@@ -157,7 +157,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
       </img>
 
       {/* 加载中占位符 */}
-      {!isLoaded && placeholder}
+      {lazy && !isLoaded && placeholder}
 
       {/* 加载失败回退内容 */}
       {isLoaded && hasError && fallback}
