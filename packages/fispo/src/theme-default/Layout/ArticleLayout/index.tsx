@@ -1,9 +1,8 @@
 import { Content } from "@runtime/index";
 import styles from "./index.module.scss";
 import { PageData } from "shared/types";
-import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
-import mediumZoom from "medium-zoom";
 import { Image, Link } from "shared/components";
 
 interface ArticleLayoutProps {
@@ -66,12 +65,6 @@ export function ArticleLayout(props: ArticleLayoutProps) {
     );
   }, [articlesList]);
 
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      mediumZoom(".article-img");
-    }, 500);
-  }, []);
-
   return (
     <div className={styles["article-layout"]}>
       <div className={styles["article-content"]}>
@@ -110,7 +103,13 @@ export function ArticleLayout(props: ArticleLayoutProps) {
               )}
             >
               <Link href={articlesList[currIndex - 1].path}>
-                <Image src={articlesList[currIndex - 1].cover} alt="" />
+                <Image
+                  src={articlesList[currIndex - 1].cover}
+                  alt=""
+                  wapperStyle={{
+                    position: "absolute",
+                  }}
+                />
                 <div className={styles["pagination-info"]}>
                   <span>上一篇</span>
                   <span>{articlesList[currIndex - 1].title}</span>
@@ -126,7 +125,13 @@ export function ArticleLayout(props: ArticleLayoutProps) {
               )}
             >
               <Link href={articlesList[currIndex + 1].path}>
-                <Image src={articlesList[currIndex + 1].cover} alt="" />
+                <Image
+                  src={articlesList[currIndex + 1].cover}
+                  alt=""
+                  wapperStyle={{
+                    position: "absolute",
+                  }}
+                />
                 <div className={styles["pagination-info"]}>
                   <span>下一篇</span>
                   <span>{articlesList[currIndex + 1].title}</span>

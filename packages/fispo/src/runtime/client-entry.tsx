@@ -40,15 +40,6 @@ async function renderInBrowser() {
   };
 
   if (import.meta.env.DEV) {
-    lifecycleList.configBeforeResolved.map((fn) =>
-      executeFunctionFromString(fn)
-    );
-    // 初始化 PageData
-    const pageData = await initPageData(location.pathname);
-
-    lifecycleList.configResolved.map((fn) =>
-      executeFunctionFromString(fn, pageData)
-    );
     const RootApp = await enhancedApp();
     createRoot(containerEl).render(<RootApp />);
   } else {

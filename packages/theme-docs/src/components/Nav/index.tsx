@@ -123,7 +123,16 @@ function Nav(props: NavProps) {
         <div className={styles["nav-left"]}>
           <div className={styles["blog-name"]}>
             <Link href="/">
-              {logo && <Image src={logo}></Image>}
+              {logo && (
+                <Image
+                  src={logo}
+                  lazy={false}
+                  wapperStyle={{
+                    width: "28px",
+                    marginRight: "10px",
+                  }}
+                />
+              )}
               {title}
             </Link>
           </div>

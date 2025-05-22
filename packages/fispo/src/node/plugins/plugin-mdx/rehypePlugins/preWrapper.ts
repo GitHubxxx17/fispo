@@ -72,11 +72,5 @@ export const rehypePluginPreWrapper: Plugin<[], Root> = () => {
         ];
       }
     });
-
-    visit(tree, "element", (node) => {
-      if (node.tagName == "img") {
-        node.properties.class = "article-img";
-      }
-    });
   };
 };

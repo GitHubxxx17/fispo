@@ -147,7 +147,6 @@ export default function Layout(props: LayoutProps) {
           }}
         />
       )}
-
       <Footer footerImg={banner.img}></Footer>
     </div>
   );

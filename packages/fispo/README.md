@@ -1,10 +1,3 @@
-<p align="center">
-  <a href="https://github.com/GitHubxxx17/fispo" target="_blank" rel="noopener noreferrer">
-    <img width="180" src="/docs/public/logo.png" alt="fispo logo">
-  </a>
-</p>
-<br/>
-
 # Fispo - 基于 React 的现代化 SSG 框架
 
 [![npm version](https://img.shields.io/npm/v/fispo-core?style=flat-square)](https://www.npmjs.com/package/fispo-core)

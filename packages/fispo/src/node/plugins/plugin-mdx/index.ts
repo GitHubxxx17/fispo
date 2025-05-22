@@ -15,6 +15,7 @@ import { rehypePluginLink } from "./rehypePlugins/link";
 import rehypeRaw from "rehype-raw";
 import { remarkPluginTags } from "./remarkPlugins/tags";
 import { rehypePluginTags } from "./rehypePlugins/tags";
+import { rehypePluginImg } from "./rehypePlugins/img";
 
 export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
   const plugins = config.siteData.plugins || [];
@@ -57,6 +58,7 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
       rehypePluginPreWrapper,
       [rehypePluginShiki, { highlighter }],
       rehypePluginTags,
+      rehypePluginImg,
       ...(config.siteData.markdown.rehypePlugins ?? []),
       ...plugins.map((plugin) => plugin.markdown?.rehypePlugins || []).flat(),
     ] as PluggableList,

@@ -23,11 +23,15 @@ export interface TocCardProps {
 const TocCard = (props: TocCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const tocList = useRef<HTMLAnchorElement[]>([]);
+  const tocList = useRef<Set<HTMLAnchorElement>>(new Set());
   const tocScroller = useRef<HTMLDivElement>(null);
+  let scrollToToc: ScrollCallback;
 
   // 处理toc目录序号
   const newTocData = useMemo(() => {
+    // 在重新生成目录数据前清除目录的dom列表
+    tocList.current.clear();
+
     const serialNumberArr = [];
     return props.data.map((item) => {
       if (item.depth > serialNumberArr.length) {
@@ -45,12 +49,13 @@ const TocCard = (props: TocCardProps) => {
 
       return { ...item, serialNumber: serialNumberArr.join(".") };
     });
-  }, [props]);
+  }, [props.data]);
 
   const tocActive = useCallback(
     (index: number, isScrollIntoView: boolean = true) => {
       setActiveIndex(index);
-      const targetItem = tocList.current[index];
+      const tocL = Array.from(tocList.current);
+      const targetItem = tocL[index];
       if (
         !isScrollIntoView &&
         !targetItem &&
@@ -72,17 +77,18 @@ const TocCard = (props: TocCardProps) => {
         });
       }
     },
-    []
+    [props.data]
   );
 
   useLayoutEffect(() => {
+    scrollManager.remove(scrollToToc);
     let headers = [];
     const NAV_HEIGHT = 60;
     const isBottom =
       document.documentElement.scrollTop + window.innerHeight >=
       document.documentElement.scrollHeight;
     let articleTop = 0;
-    const scrollToToc: ScrollCallback = (direction) => {
+    scrollToToc = (direction) => {
       if (headers.length == 0) {
         headers = Array.from(document.getElementsByClassName("header-anchor"));
         articleTop = headers[0].parentElement.offsetTop;
@@ -139,7 +145,7 @@ const TocCard = (props: TocCardProps) => {
     return () => {
       scrollManager.remove(scrollToToc);
     };
-  }, []);
+  }, [props.data]);
 
   return (
     <div className={styles["card-toc"]}>
@@ -166,7 +172,7 @@ const TocCard = (props: TocCardProps) => {
                 <Link
                   ref={(el) => {
                     if (el) {
-                      tocList.current.push(el);
+                      tocList.current.add(el);
                     }
                   }}
                   href={`#${id}`}

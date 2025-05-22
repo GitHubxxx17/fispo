@@ -31,7 +31,7 @@ export function HomeLayout(props: HomeLayoutProps) {
         </div>
         <div className={styles["home-hero-right"]}>
           <div className={styles["home-hero-right-img-bg"]}></div>
-          <Image src={logo}></Image>
+          <Image src={logo} lazy={false} />
         </div>
       </div>
       <div className={styles["home-feature"]}>

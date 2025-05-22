@@ -22,7 +22,12 @@ export function HomeLayout(props: HomeLayoutProps) {
   return (
     <div className={styles.homeLayout}>
       <header>
-        <Image src={banner.img} alt="" />
+        <Image
+          src={banner.img}
+          alt=""
+          lazy={false}
+          wapperStyle={{ position: "absolute" }}
+        />
         <div className={styles["home-info"]}>
           {Array.from({ length: 4 }).map((_, i) => {
             return <span key={i} className={styles.loop}></span>;

@@ -87,6 +87,9 @@ importers:
       lint-staged:
         specifier: ^15.4.3
         version: 15.4.3
+      medium-zoom:
+        specifier: ^1.1.0
+        version: 1.1.0
       minimist:
         specifier: ^1.2.8
         version: 1.2.8

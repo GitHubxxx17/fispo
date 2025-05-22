@@ -5,3 +5,4 @@ export {
   type ScrollCallback,
 } from "./scroll";
 export * from "./storage";
+export * from "./intersectionObserver";

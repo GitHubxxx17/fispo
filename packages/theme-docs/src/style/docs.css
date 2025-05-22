@@ -472,6 +472,10 @@ div[class*="language-"]:hover #copy-button {
   perspective: 1000px;
 }
 
+.marketList .theme-list-item .theme-list-item-img a > span {
+  position: static;
+}
+
 .marketList .theme-list-item .theme-list-item-img-text {
   position: absolute;
   top: 50%;
