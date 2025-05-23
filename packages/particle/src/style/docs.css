@@ -401,6 +401,12 @@ div[class*="language-"] {
 .timeline .timeline-item {
   margin: 0 0 15px;
 }
+
+.timeline .timeline-item.headline .timeline-item-title {
+  font-weight: 700;
+  font-size: larger;
+}
+
 .timeline .timeline-item .timeline-item-title {
   position: relative;
 }

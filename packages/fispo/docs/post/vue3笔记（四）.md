@@ -10,7 +10,8 @@ cover: /cover/f.jpg
 
 # Vue3简介
 
-vue3简介
+
+{% timeline vue3简介 %}
 
 <!-- timeline 性能的提升 -->
 
@@ -51,6 +52,8 @@ Vue3可以更好的支持`TypeScript`
 
 
 <!-- endtimeline -->
+
+{% endtimeline %}
 
 
 # 创建Vue3.0工程

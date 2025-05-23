@@ -1,7 +1,7 @@
 import { defineConfig } from "fispo-core";
 // import { preloaderPlugin } from "./../plugin-preloader/src/index";
 // import { aplayerPlugin } from "./../plugin-aplayer/src/index";
-import theme from "./../particle/dist/config.js";
+// import theme from "./../particle/dist/config.js";
 
 export default defineConfig({
   base: "/fispo",
@@ -9,7 +9,7 @@ export default defineConfig({
   author: "XXX17",
   description: "学无止境",
   notFoundImg: "/404.png",
-  theme: theme,
+  // theme: theme,
   themeConfig: {
     navMenus: [
       {
@@ -67,6 +67,32 @@ export default defineConfig({
         href: "/.fispo/custom.css",
       },
       injectTo: "head",
+    },
+  ],
+  icons: [
+    {
+      prefix: "fas",
+      iconName: "palette",
+    },
+    {
+      prefix: "fas",
+      iconName: "pen-fancy",
+    },
+    {
+      prefix: "fas",
+      iconName: "coffee",
+    },
+    {
+      prefix: "fas",
+      iconName: "times",
+    },
+    {
+      prefix: "fas",
+      iconName: "atom",
+    },
+    {
+      prefix: "fas",
+      iconName: "eye",
     },
   ],
 });
