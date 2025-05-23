@@ -60,6 +60,12 @@ export async function resolveSiteData(
     deConfig = userConfig.theme.config;
   }
 
+  const plugins = userConfig?.plugins ?? [];
+
+  if (userConfig?.theme?.plugins) {
+    plugins.push(...userConfig.theme.plugins);
+  }
+
   return {
     base: userConfig.base || "/",
     title: userConfig.title || "fispo",
@@ -84,7 +90,7 @@ export async function resolveSiteData(
     notFoundImg: userConfig.notFoundImg || "/404.png",
     logo: userConfig.logo || "/logo.png",
     markdown: userConfig.markdown || {},
-    plugins: userConfig.plugins || [],
+    plugins: plugins || [],
     preloader: userConfig.preloader || false,
     deploy: userConfig.deploy || { branch: "gh-pages", repo: "" },
     htmlTags: userConfig.htmlTags || [],

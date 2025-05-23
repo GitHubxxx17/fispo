@@ -8,7 +8,7 @@ interface GetLayoutRoutesProps {
   routes: LayoutRoutes;
 }
 
-const GetLayoutRoutes = (props: GetLayoutRoutesProps) => {
+const GetLayoutRoutes: React.FC<GetLayoutRoutesProps> = (props) => {
   const { routes } = props;
   const handleRoutes = useMemo(() => {
     return routes.map((route) => {

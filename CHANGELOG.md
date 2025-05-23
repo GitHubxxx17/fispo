@@ -1,3 +1,17 @@
+## [0.4.5](https://github.com/GitHubxxx17/fispo/compare/v0.4.4...v0.4.5) (2025-05-23)
+
+
+### Bug Fixes
+
+* 懒加载占位符bug ([e722faf](https://github.com/GitHubxxx17/fispo/commit/e722faff0bbe35febaa067d863ef521e5d7e5b4c))
+
+
+### Features
+
+* 重构图片组件增加懒加载等功能 ([f5dc593](https://github.com/GitHubxxx17/fispo/commit/f5dc593f62b1dbb694be501714f86e2a1bb756a6))
+
+
+
 ## [0.4.4](https://github.com/GitHubxxx17/fispo/compare/v0.4.3...v0.4.4) (2025-05-20)
 
 

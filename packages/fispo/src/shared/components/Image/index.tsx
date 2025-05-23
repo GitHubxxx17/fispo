@@ -142,7 +142,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
       {/* 实际图片元素 */}
       <img
         ref={ref || imgRef}
-        src={isLoaded ? withBaseUrl : ""} // 图片加载完成后才设置src属性
+        src={lazy && !isLoaded ? "" : withBaseUrl} // 图片加载完成后才设置src属性
         alt={rest.alt || ""}
         className={classNames(className, {
           "preview-img": isPreview, // 预览样式类

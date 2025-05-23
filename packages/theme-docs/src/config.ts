@@ -1,5 +1,6 @@
 import { Theme } from "fispo-core/types";
 import { join } from "path";
+import { themeDocsPlugin } from "./plugin";
 import { ThemeConfig } from "types";
 
 const theme: Theme<ThemeConfig> = {
@@ -9,7 +10,7 @@ const theme: Theme<ThemeConfig> = {
     navMenus: [],
     sidebar: {},
   },
-  plugins: [],
+  plugins: [themeDocsPlugin()],
 };
 
 export default theme;

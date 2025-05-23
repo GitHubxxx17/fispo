@@ -1,6 +1,6 @@
 import { defineConfig } from "fispo-core";
 import { ThemeConfig } from "./packages/theme-docs/src/types/index";
-import theme from "./packages/theme-docs/src/config";
+import theme from "./packages/theme-docs/dist/config";
 
 export default defineConfig<ThemeConfig>({
   base: "/fispo",
