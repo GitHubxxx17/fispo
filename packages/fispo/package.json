@@ -126,6 +126,7 @@
     "runtime.d.ts",
     "theme.d.ts",
     "plugin.d.ts",
-    "types.d.ts"
+    "types.d.ts",
+    "helper.d.ts"
   ]
 }

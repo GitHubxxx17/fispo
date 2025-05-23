@@ -256,7 +256,7 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
           const match = node.value.match(timelineRegex);
           if (!match) return;
 
-          const [, tagName, content] = match; // 解构优化
+          const [, tagName, content] = match;
           const isEndTag = tagName.startsWith("end");
           const matchStart = match.index;
 

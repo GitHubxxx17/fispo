@@ -17,6 +17,16 @@ interface ChildNode {
   children?: ChildNode[];
 }
 
+/**
+ * 过滤 HTML 标签，保留标签内文本
+ * @param html 包含 HTML 标签的字符串
+ * @returns 过滤后的文本
+ */
+export function filterHtml(html: string): string {
+  // 匹配完整标签（开始+结束 或 自闭合）并保留内部文本
+  return html.replace(/<[^>]*>(.*?)<\/[^>]*>|<[^>]*\/>/g, "$1");
+}
+
 export const remarkPluginToc: Plugin<[], Root> = () => {
   return (tree) => {
     const slugger = new Slugger();
@@ -60,10 +70,11 @@ export const remarkPluginToc: Plugin<[], Root> = () => {
             }
           })
           .join("");
-        const id = slugger.slug(originText);
+        const filterText = filterHtml(originText);
+        const id = slugger.slug(filterText);
         toc.push({
           id,
-          text: originText,
+          text: filterText,
           depth: node.depth,
         });
       }

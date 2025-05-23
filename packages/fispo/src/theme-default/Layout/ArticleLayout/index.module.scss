@@ -155,6 +155,7 @@
         color: rgb(153, 169, 191);
         text-decoration: underline;
         transition: all 0.3s;
+        word-break: break-all;
 
         &:hover {
           color: var(--fispo-c-blue);
