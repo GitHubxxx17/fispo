@@ -49,13 +49,16 @@ function ArticleList(props: ArticleListProps) {
     return articleList.slice((currentPage - 1) * step, currentPage * step);
   }, [currentPage, articleList]);
 
-  const paginationOptions: PaginationProps = {
-    pageCount: Math.ceil(articleList.length / step),
-    currentPage,
-    onChange: (page) => {
-      setCurrentPage(page);
-    },
-  };
+  const paginationOptions: PaginationProps = useMemo(
+    () => ({
+      pageCount: Math.ceil(articleList.length / step),
+      currentPage,
+      onChange: (page) => {
+        setCurrentPage(page);
+      },
+    }),
+    [articleList, step, currentPage]
+  );
 
   return (
     <>

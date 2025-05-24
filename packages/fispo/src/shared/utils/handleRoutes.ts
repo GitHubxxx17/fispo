@@ -55,12 +55,12 @@ export async function getTagsAndCategoriesRoutes(
   const { tags, categories } = await handleRoutes(routes, postDir);
   const tagsRoutes = Object.keys(tags).map((tag) => {
     return {
-      path: `tag/${tag}`,
+      path: `/tag/${tag}`,
     };
   });
   const categoriesRoutes = Object.keys(categories).map((category) => {
     return {
-      path: `category/${category}`,
+      path: `/category/${category}`,
     };
   });
 

@@ -1,7 +1,7 @@
 import { Content } from "@runtime/index";
 import styles from "./index.module.scss";
 import { PageData } from "shared/types";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 import { Image, Link } from "shared/components";
 
@@ -14,20 +14,37 @@ export function ArticleLayout(props: ArticleLayoutProps) {
     props.pageData;
   const { title, author } = siteData;
   const [currIndex, setCurrIndex] = useState(0);
+  const isClient = useRef(false);
+
+  const getLocationData = useCallback(() => {
+    if (typeof window === "undefined") {
+      return { href: "", origin: "" };
+    }
+    return { href: window.location.href, origin: window.location.origin };
+  }, []);
+
+  // 在客户端挂载后设置标志
+  useEffect(() => {
+    isClient.current = true;
+  }, []);
 
   const copyrightText = useMemo(() => {
-    const locationObj =
-      typeof location === "undefined"
-        ? {
-            href: "",
-            origin: "",
-          }
-        : location;
+    if (!isClient.current) {
+      // 服务端渲染时返回占位内容
+      return [
+        { meta: "文章作者：", value: <span>{author}</span> },
+        { meta: "文章链接：", value: <span>加载中...</span> },
+        { meta: "版权声明：", value: <span>加载中...</span> },
+      ];
+    }
+
+    // 客户端渲染时使用真实location数据
+    const { href } = getLocationData();
     return [
       { meta: "文章作者：", value: <Link href="">{author}</Link> },
       {
         meta: "文章链接：",
-        value: <Link href={locationObj.href}>{locationObj.href}</Link>,
+        value: <Link href={href}>{href}</Link>,
       },
       {
         meta: "版权声明：",
@@ -38,12 +55,15 @@ export function ArticleLayout(props: ArticleLayoutProps) {
               CC BY-NC-SA 4.0
             </Link>
             许可协议。转载请注明来自
-            <Link href={locationObj.origin}>{title}</Link>！
+            <Link href={"/"} target="_blank">
+              {title}
+            </Link>
+            ！
           </>
         ),
       },
     ];
-  }, []);
+  }, [title, author, isClient.current, getLocationData]);
 
   // 推荐列表
   const recmmendList = useMemo(() => {

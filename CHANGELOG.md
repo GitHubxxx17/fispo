@@ -1,3 +1,23 @@
+## [0.4.6](https://github.com/GitHubxxx17/fispo/compare/v0.4.5...v0.4.6) (2025-05-24)
+
+
+### Bug Fixes
+
+* 过滤目录text中的html标签 ([2864f39](https://github.com/GitHubxxx17/fispo/commit/2864f393761ae0246415effc4d31a4b635d5a2cf))
+* 修复标签外挂-时间轴标签错乱 ([7423ec0](https://github.com/GitHubxxx17/fispo/commit/7423ec0230401a6a6d938e4a92c8cf3d4df0b152))
+
+
+
+## [0.4.6](https://github.com/GitHubxxx17/fispo/compare/v0.4.5...v0.4.6) (2025-05-24)
+
+
+### Bug Fixes
+
+* 过滤目录text中的html标签 ([2864f39](https://github.com/GitHubxxx17/fispo/commit/2864f393761ae0246415effc4d31a4b635d5a2cf))
+* 修复标签外挂-时间轴标签错乱 ([7423ec0](https://github.com/GitHubxxx17/fispo/commit/7423ec0230401a6a6d938e4a92c8cf3d4df0b152))
+
+
+
 ## [0.4.5](https://github.com/GitHubxxx17/fispo/compare/v0.4.4...v0.4.5) (2025-05-23)
 
 

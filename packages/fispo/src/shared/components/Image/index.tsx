@@ -65,7 +65,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
       rootMargin: "100px",
     },
     placeholder = <span className={styles["wave-image"]}></span>,
-    fallback = <span>加载失败</span>,
+    fallback = <span className={styles["wave-image"]}></span>,
     isPreview = false,
     className = "",
     wapperClassName = "",
