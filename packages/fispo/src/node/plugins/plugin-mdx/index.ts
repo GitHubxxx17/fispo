@@ -3,9 +3,7 @@ import rehypePluginAutolinkHeadings from "rehype-autolink-headings";
 import rehypePluginSlug from "rehype-slug";
 import remarkPluginMDXFrontMatter from "remark-mdx-frontmatter";
 import remarkPluginFrontmatter from "remark-frontmatter";
-import { rehypePluginPreWrapper } from "./rehypePlugins/preWrapper";
-import { rehypePluginShiki } from "./rehypePlugins/shiki";
-import type { Highlighter } from "shiki";
+import { rehypePluginHighlight } from "./rehypePlugins/highlight";
 import { remarkPluginToc } from "./remarkPlugins/toc";
 import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
@@ -17,7 +15,7 @@ import { remarkPluginTags } from "./remarkPlugins/tags";
 import { rehypePluginTags } from "./rehypePlugins/tags";
 import { rehypePluginImg } from "./rehypePlugins/img";
 
-export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
+export function createPluginMdx(config: SiteConfig) {
   const plugins = config.siteData.plugins || [];
 
   return {
@@ -55,8 +53,7 @@ export function createPluginMdx(config: SiteConfig, highlighter: Highlighter) {
         },
       ],
       [rehypePluginLink, { base: config.base, root: config.root }],
-      rehypePluginPreWrapper,
-      [rehypePluginShiki, { highlighter }],
+      rehypePluginHighlight,
       rehypePluginTags,
       rehypePluginImg,
       ...(config.siteData.markdown.rehypePlugins ?? []),

@@ -94,7 +94,10 @@ export async function resolveSiteData(
     preloader: userConfig.preloader || false,
     deploy: userConfig.deploy || { branch: "gh-pages", repo: "" },
     htmlTags: userConfig.htmlTags || [],
-    highlighter: userConfig.highlighter || { theme: "nord" },
+    codeHighlight: userConfig.codeHighlight || {
+      dark: "github-dark",
+      light: "github",
+    },
     icons: userConfig.icons || [],
   };
 }

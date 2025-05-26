@@ -407,42 +407,66 @@ htmlTags: [
 ---
 
 ### highlighter
-**类型**：`HighlighterOptions`  
-**默认值**：`{}`  
+**类型**：`object`  
+**默认值**：`{
+  dark: "github-dark", // 深色主题（默认值）
+  light: "github" // 浅色主题（默认值）
+}`  
 **详情**：  
-代码高亮配置项。  
+Markdown 代码高亮配置（基于 highlight.js 实现）
+主题名称需与 highlight.js 官方主题库一致（见：https://highlightjs.org/demo ）。
 
 **可用选项**：
 ```ts
-interface HighlighterOptions {
-    /**
-     * 预先加载的主题。
-     *
-     * 默认值: nord
-     */
-    theme?: IThemeRegistration;
-    /**
-     * 预先加载的主题列表。
-     */
-    themes?: IThemeRegistration[];
-    /**
-     * 预先加载的语言列表。
-     *
-     * 默认值为所有内置语言。
-     */
-    langs?: (Lang | ILanguageRegistration)[];
-    /**
-     * 用于加载主题和语言的路径。相对于包的根目录。
-     */
-    paths?: IHighlighterPaths;
+codeHighlight?: {
+    /** 深色模式下的代码高亮主题 */
+    dark?: HighlightJsTheme;
+    /** 浅色模式下的代码高亮主题 */
+    light?: HighlightJsTheme;
+};
+```
+
+**示例**：
+``` ts
+codeHighlight: {
+  dark: "tomorrow-night-bright",
+  light: "tokyo-night-dark",
+},
+```
+
+---
+
+### icons
+**类型**：`IconLookup[]`  
+**默认值**：`[]`  
+**详情**：  
+自定义图标配置，用于标签外挂中的图标显示
+可通过[标签外挂](/guide/writing/markdown#标签外挂)的 `icon-<name>` 语法引用此处定义的图标
+  1. 使用外挂标签的自定义图标功能需先在此处注册才能在标签外挂中使用
+  2. 标签外挂中使用时需添加前缀 icon-（如 star → icon-star）
+
+**可用选项**：
+```ts
+interface IconLookup {
+  // 图标库前缀（用于区分不同图标集）
+  prefix: IconPrefix;
+  // 图标名称（需与前缀对应的图标库中的名称一致）
+  iconName: IconName;
 }
 ```
 
 **示例**：
 ``` ts
-highlighter: {
-  theme: github-light,
-}
+icons: [
+  {
+    prefix: "fas",
+    iconName: "palette",
+  },
+  {
+    prefix: "fas",
+    iconName: "pen-fancy",
+  }
+],
 ```
 
 

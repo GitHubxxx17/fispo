@@ -6,3 +6,4 @@ export {
 } from "./scroll";
 export * from "./storage";
 export * from "./intersectionObserver";
+export * from "./useTheme";

@@ -1,7 +1,7 @@
 import { routes } from "virtual:routes";
 import { memo } from "react";
 import { MDXProvider } from "@mdx-js/react";
-import CopyButton from "shared/components/CopyButton";
+import CodeBlock from "shared/components/CodeBlock";
 import Icon from "shared/components/Icon";
 import Image from "shared/components/Image";
 import Link from "shared/components/Link";
@@ -20,7 +20,7 @@ const Content = (props: ContentProps) => {
     return removeTrailingSlash(r.path) === path;
   })?.element;
   return (
-    <MDXProvider components={{ CopyButton, Icon, Image, Link, ...components }}>
+    <MDXProvider components={{ Icon, Image, Link, CodeBlock, ...components }}>
       {routeElement}
     </MDXProvider>
   );

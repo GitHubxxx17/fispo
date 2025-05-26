@@ -1,4 +1,4 @@
-div[class*="language-"] {
+div[class*="language-"].hljs {
   margin: 8px 0;
   position: relative;
   width: 100%;
@@ -7,78 +7,60 @@ div[class*="language-"] {
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
 }
 
-div[class*="language-"] code {
-  font-weight: 400;
-  background-color: transparent;
-}
-
 @media (min-width: 640px) {
-  div[class*="language-"] {
+  div[class*="language-"].hljs {
     border-radius: 8px;
     margin: 16px 0;
   }
 }
 
 @media (max-width: 639px) {
-  li div[class*="language-"] {
+  li div[class*="language-"].hljs {
     border-radius: 8px 0 0 8px;
   }
 }
 
-div[class*="language-"] + div[class*="language-"] > div[class*="language-"] {
+div[class*="language-"].hljs
+  + div[class*="language-"].hljs
+  > div[class*="language-"].hljs {
   margin-top: -8px;
 }
 
-[class*="language-"] pre,
-[class*="language-"] code {
+div[class*="language-"].hljs pre,
+div[class*="language-"] code {
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
   tab-size: 4;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
   hyphens: none;
 }
 
-[class*="language-"] pre {
+div[class*="language-"].hljs pre {
   position: relative;
   z-index: 1;
   margin: 0;
-  padding-bottom: 16px;
   background-color: var(--fispo-code-bg) !important;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-color: #353535 transparent;
 }
 
-[class*="language-"] code {
-  display: block;
-  padding: 0 24px !important;
+div[class*="language-"].hljs code {
+  padding: 0 24px 10px !important;
   width: fit-content;
   min-width: 100%;
   line-height: var(--fispo-code-line-height);
   font-size: var(--fispo-code-font-size);
-  color: var(--fispo-code-block-color);
-  transition: color 0.5s;
+  transition: color 0.3s;
 }
 
-[class*="language-"] code .highlighted {
-  background-color: var(--fispo-code-line-highlight-color);
-  transition: background-color 0.5s;
-  margin: 0 -24px;
-  padding: 0 24px;
-  width: calc(100% + 2 * 24px);
-  display: inline-block;
-}
-
-[class*="language-"] > .highlight-tools {
+div[class*="language-"].hljs > .highlight-tools {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
   min-height: 24px;
   width: 100%;
   z-index: 2;
@@ -91,7 +73,7 @@ div[class*="language-"] + div[class*="language-"] > div[class*="language-"] {
     opacity 0.4s;
 }
 
-[class*="language-"] > .highlight-tools::after {
+div[class*="language-"].hljs > .highlight-tools::after {
   position: absolute;
   left: 14px;
   width: 12px;
@@ -107,7 +89,7 @@ div[class*="language-"] + div[class*="language-"] > div[class*="language-"] {
   content: " ";
 }
 
-[class*="language-"] > .highlight-tools .lang {
+div[class*="language-"].hljs > .highlight-tools .lang {
   margin-left: 75px;
 }
 

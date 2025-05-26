@@ -1,3 +1,7 @@
+## [0.4.7](https://github.com/GitHubxxx17/fispo/compare/v0.4.6...v0.4.7) (2025-05-26)
+
+
+
 ## [0.4.6](https://github.com/GitHubxxx17/fispo/compare/v0.4.5...v0.4.6) (2025-05-24)
 
 

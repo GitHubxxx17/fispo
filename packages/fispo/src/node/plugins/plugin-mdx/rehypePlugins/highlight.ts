@@ -1,18 +1,10 @@
 import { visit } from "unist-util-visit";
 import type { Plugin } from "unified";
 import type { Text, Root } from "hast";
-import { fromHtml } from "hast-util-from-html";
-import type { Highlighter } from "shiki";
-import { isLang } from "./lang";
 
-interface Options {
-  highlighter: Highlighter;
-}
-
-export const rehypePluginShiki: Plugin<[Options], Root> = ({ highlighter }) => {
+export const rehypePluginHighlight: Plugin<[], Root> = () => {
   return (tree) => {
     visit(tree, "element", (node, index, parent) => {
-      // <pre><code>...</code></pre>
       if (
         node.tagName === "pre" &&
         node.children[0]?.type === "element" &&
@@ -27,11 +19,15 @@ export const rehypePluginShiki: Plugin<[Options], Root> = ({ highlighter }) => {
         if (!lang) {
           return;
         }
-        const highlightedCode = highlighter.codeToHtml(codeContent, {
-          lang: isLang(lang) ? lang : "js",
+        parent.children.splice(index, 1, {
+          type: "element",
+          tagName: "CodeBlock",
+          properties: {
+            code: codeContent,
+            language: lang,
+          },
+          children: [],
         });
-        const fragmentAst = fromHtml(highlightedCode, { fragment: true });
-        parent.children.splice(index, 1, ...fragmentAst.children);
       }
     });
   };

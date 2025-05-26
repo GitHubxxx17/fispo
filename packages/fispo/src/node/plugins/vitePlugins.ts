@@ -4,7 +4,6 @@ import { pluginConfig } from "./config";
 import { pluginRoutes } from "./plugin-routes";
 import { SiteConfig } from "shared/types";
 import pluginMdx from "@mdx-js/rollup";
-import shiki from "shiki";
 import { createPluginMdx } from "./plugin-mdx";
 import { pluginTheme } from "./theme";
 import { createFispoPlugins } from "./pulgin-fispo";
@@ -17,8 +16,7 @@ export async function createVitePlugins(
   restartServer?: () => Promise<void>,
   isSSR = false
 ) {
-  const highlighter = await shiki.getHighlighter(config.siteData.highlighter);
-  const { rehypePlugins, remarkPlugins } = createPluginMdx(config, highlighter);
+  const { rehypePlugins, remarkPlugins } = createPluginMdx(config);
 
   const pluginsFromIslandPlugins = config.siteData.plugins
     ?.map((item) => item.vite)

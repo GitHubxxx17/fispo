@@ -111,6 +111,17 @@ export async function bundle(root: string, config: SiteConfig) {
         output: {
           entryFileNames: isServer ? "[name].mjs" : undefined,
           format: "es",
+          manualChunks: (id) => {
+            if (id.includes("node_modules")) {
+              if (id.includes("@fortawesome")) {
+                return "vendor-fontawesome";
+              }
+              if (id.includes("highlight")) {
+                return "vendor-highlight";
+              }
+              return "vendor"; // 其他依赖
+            }
+          },
         },
         external: EXTERNALS,
         maxParallelFileOps: cpuCount * 16,
@@ -333,7 +344,7 @@ export async function build(root: string, config: SiteConfig) {
   // 计算总耗时
   const totalTime = performance.now() - start;
 
-  // 输出时间统计（带颜色区分）
+  // 输出时间统计
   console.log(
     "\n------------------------ Build Time Statistics ------------------------"
   );

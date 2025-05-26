@@ -45,7 +45,10 @@ const DocLayout = (props: DocLayoutProps) => {
 
   return (
     <div className={styles.docLayout}>
-      <SideBar sidebarData={matchedSidebar} pathname={pagePath} />
+      {matchedSidebar.length !== 0 && (
+        <SideBar sidebarData={matchedSidebar} pathname={pagePath} />
+      )}
+
       <div
         className={classNames(styles.content, {
           [styles.noSidebar]: matchedSidebar.length === 0,

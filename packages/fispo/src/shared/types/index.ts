@@ -3,10 +3,10 @@ import { ComponentType } from "react";
 import { DefaultThemeConfig } from "./default-theme";
 import type { PluggableList } from "unified";
 import { FispoPlugin } from "./plugin";
-import { HighlighterOptions } from "shiki";
 import { RouteObject } from "react-router-dom";
 import { NavMenuItem } from "./default-theme";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
+import { HighlightJsTheme } from "./highlight";
 
 /**
  * 定义 Markdown 配置选项的接口
@@ -119,9 +119,29 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
    */
   htmlTags?: HtmlTagDescriptor[];
   /**
-   * markdown 代码高亮配置
+   * Markdown 代码高亮配置（基于 highlight.js 实现）
+   *
+   * @description
+   * 用于配置代码块在 **深色模式** 和 **浅色模式** 下的语法高亮主题。
+   *
+   * @example
+   * ```typescript
+   * codeHighlight: {
+   *   dark: "github-dark", // 深色主题（默认值）
+   *   light: "github" // 浅色主题（默认值）
+   * }
+   * ```
+   *
+   * @remarks
+   * - 若未配置 `dark` 或 `light`，将分别使用默认值 `github-dark` 和 `github`。
+   * - 主题名称需与 highlight.js 官方主题库一致（见：https://highlightjs.org/static/demo/）。
    */
-  highlighter?: HighlighterOptions;
+  codeHighlight?: {
+    /** 深色模式下的代码高亮主题 */
+    dark?: HighlightJsTheme;
+    /** 浅色模式下的代码高亮主题 */
+    light?: HighlightJsTheme;
+  };
   /**
    * 自定义图标配置，用于标签外挂中的图标显示
    * 可通过标签外挂的 `icon-<name>` 语法引用此处定义的图标
@@ -324,6 +344,10 @@ export interface PageDataContext {
    * 分类信息
    */
   categories?: Categories;
+  /**
+   * 当前代码高亮主题
+   */
+  curCodeTheme?: HighlightJsTheme;
 }
 
 /**

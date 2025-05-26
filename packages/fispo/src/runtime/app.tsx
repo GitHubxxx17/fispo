@@ -133,7 +133,7 @@ export function App({
         executeFunctionFromString(fn, pageData)
       );
     };
-  }, [pageData]);
+  }, [pageData.pagePath]);
 
   return (
     <>

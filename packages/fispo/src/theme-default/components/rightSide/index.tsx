@@ -1,14 +1,8 @@
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import Icon from "shared/components/Icon";
 import styles from "./index.module.scss";
-import {
-  scrollManager,
-  ScrollCallback,
-  localGetData,
-  localSaveData,
-  debounce,
-} from "fispo-core/helper";
-import { memo, useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { scrollManager, ScrollCallback, useTheme } from "fispo-core/helper";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import { PageData } from "shared/types";
 
@@ -25,26 +19,19 @@ interface rightSideItem {
   click?: () => void;
 }
 
-const THEME = "THEME";
-
 const RightSide = (props: RightSideProps) => {
   const { setSideBarHide } = props;
   const [isTop, setIsTop] = useState(true);
   const [settingsIsHide, setSettingsIsHide] = useState(true);
-  const currentTheme = useRef(localGetData(THEME)); // 跟踪当前主题值
+
+  const { toggleTheme } = useTheme();
 
   const rightSideSettings: rightSideItem[] = useMemo(
     () => [
       {
         icon: "adjust",
         text: "深色和浅色模式切换",
-        click: () => {
-          const classList = document.documentElement.classList;
-          const newTheme = classList.contains("dark") ? "light" : "dark";
-          currentTheme.current = newTheme; // 更新当前主题引用
-          localSaveData(THEME, newTheme);
-          classList.toggle("dark");
-        },
+        click: toggleTheme,
       },
       {
         icon: "arrows-alt-h",
@@ -54,7 +41,7 @@ const RightSide = (props: RightSideProps) => {
         },
       },
     ],
-    []
+    [toggleTheme]
   );
 
   const rightSideOptions: rightSideItem[] = useMemo(
@@ -78,39 +65,14 @@ const RightSide = (props: RightSideProps) => {
     []
   );
 
-  const setClassList = useCallback((isDark = false) => {
-    const classList = document.documentElement.classList;
-    if (isDark) {
-      classList.add("dark");
-    } else {
-      classList.remove("dark");
-    }
-  }, []);
-
-  const updateTheme = useCallback(() => {
-    const theme = localGetData(THEME);
-    // 只有当主题真的发生变化时才更新DOM
-    if (theme !== currentTheme.current) {
-      currentTheme.current = theme;
-      setClassList(theme === "dark");
-    }
-  }, []);
-
   useEffect(() => {
     const showRightSide: ScrollCallback = (_, isTop) => {
       setIsTop(isTop);
     };
     scrollManager.add(showRightSide);
 
-    updateTheme();
-
-    // 【warning】 必须使用防抖处理storage事件，否则同时打开多个页面会导致浏览器卡顿
-    const debouncedUpdateTheme = debounce(updateTheme, 300);
-    window.addEventListener("storage", debouncedUpdateTheme);
-
     return () => {
       scrollManager.remove(showRightSide);
-      window.removeEventListener("storage", debouncedUpdateTheme);
     };
   }, []);
 

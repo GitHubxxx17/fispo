@@ -1,4 +1,4 @@
-div[class*="language-"] {
+div[class*="language-"].hljs {
   box-shadow: 0 2px 12px 0 #0000001a;
   border-radius: 5px;
   margin: 15px 0;
@@ -18,24 +18,20 @@ div[class*="language-"] {
   z-index: 100;
 }
 
-div[class*="language-"]:hover #copy-button {
+div[class*="language-"].hljs #copy-button {
+  opacity: 0;
+}
+
+div[class*="language-"].hljs:hover #copy-button {
   opacity: 1;
 }
 
-.shiki {
-  position: relative;
-  padding: 15px;
-  background-color: var(--fispo-code-block-c-bg) !important;
-}
-
-[class*="language-"] .shiki code {
-  background-color: transparent;
+div[class*="language-"].hljs code {
   line-height: 1.5;
-  padding: 0;
   font-size: 14px;
 }
 
-[class*="language-"] pre {
+div[class*="language-"].hljs pre {
   position: relative;
   z-index: 1;
   margin: 0;

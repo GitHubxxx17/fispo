@@ -1,13 +1,7 @@
 import classNames from "classnames";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./index.module.scss";
-import {
-  scrollManager,
-  ScrollCallback,
-  localGetData,
-  localSaveData,
-  debounce,
-} from "fispo-core/helper";
+import { scrollManager, ScrollCallback, useTheme } from "fispo-core/helper";
 import { NavMenuItem } from "types";
 import { Icon, Image, Link } from "fispo-core/theme";
 
@@ -19,40 +13,16 @@ interface NavProps {
   curPath?: string;
 }
 
-const THEME = "THEME";
-
 function Nav(props: NavProps) {
   const { title = "", menus = [], logo = "", curPath = "/" } = props;
   const [isTop, setIsTop] = useState(true);
   const [isShowMenus, setIsShowMenus] = useState(false);
-  const [curTheme, setCurTheme] = useState("light");
+
+  const { theme, toggleTheme } = useTheme();
 
   const resetMenus = useCallback(() => {
     setIsShowMenus(false);
     document.body.classList.remove("mobile-nav");
-  }, []);
-
-  const setClassList = useCallback((isDark = false) => {
-    const classList = document.documentElement.classList;
-    if (isDark) {
-      classList.add("dark");
-    } else {
-      classList.remove("dark");
-    }
-  }, []);
-
-  const updateTheme = useCallback(() => {
-    const theme = localGetData(THEME);
-    setCurTheme(theme);
-    setClassList(theme === "dark");
-  }, []);
-
-  const clickToChangeTheme = useCallback(() => {
-    const classList = document.documentElement.classList;
-    const theme = classList.contains("dark") ? "light" : "dark";
-    localSaveData(THEME, theme);
-    classList.toggle("dark");
-    setCurTheme(theme);
   }, []);
 
   useEffect(() => {
@@ -61,16 +31,12 @@ function Nav(props: NavProps) {
     };
     scrollManager.add(scroll);
 
-    updateTheme();
-    const debouncedUpdateTheme = debounce(updateTheme, 300);
-    window.addEventListener("storage", debouncedUpdateTheme);
     // 媒体查询
     const mediaQuery = window.matchMedia("(max-width: 750px)");
     mediaQuery.addEventListener("change", resetMenus);
     return () => {
       scrollManager.remove(scroll);
       mediaQuery.removeEventListener("change", resetMenus);
-      window.removeEventListener("storage", debouncedUpdateTheme);
     };
   }, []);
 
@@ -98,8 +64,8 @@ function Nav(props: NavProps) {
     return (
       <>
         <div className={styles["nav-tools-item"]}>
-          <span title="切换黑白主题" onClick={clickToChangeTheme}>
-            <Icon icon={curTheme === "light" ? "sun" : "moon"} />
+          <span title="切换黑白主题" onClick={toggleTheme}>
+            <Icon icon={theme === "light" ? "sun" : "moon"} />
           </span>
         </div>
         <div className={styles["nav-tools-item"]}>
@@ -111,7 +77,7 @@ function Nav(props: NavProps) {
         </div>
       </>
     );
-  }, [curTheme]);
+  }, [theme, toggleTheme]);
 
   return (
     <>

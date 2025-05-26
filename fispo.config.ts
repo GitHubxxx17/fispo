@@ -85,8 +85,9 @@ export default defineConfig<ThemeConfig>({
       ],
     },
   },
-  highlighter: {
-    theme: "min-light",
+  codeHighlight: {
+    light: "base16-google-light",
+    dark: "tokyo-night-dark",
   },
   icons: [
     {

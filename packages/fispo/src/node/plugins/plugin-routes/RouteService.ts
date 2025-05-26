@@ -13,11 +13,13 @@ export class RouteService {
   #extensions: string[] = [];
 
   constructor(root: string) {
+    this.#routeData = [];
     this.#scanDir = root;
     this.#extensions = ["js", "jsx", "ts", "tsx", "md", "mdx"];
   }
 
   async init() {
+    this.#routeData = [];
     const files = fastGlob
       .sync([`**/*.{${this.#extensions.join(",")}}`], {
         cwd: this.#scanDir,

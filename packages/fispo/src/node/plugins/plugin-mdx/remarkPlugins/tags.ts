@@ -223,6 +223,7 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
 
           // 处理剩余文本并添加到段落
           if (remainingContent.trim() !== "") {
+            node.value = node.value.slice(0, matchPosition);
             const textNode = createTextNode(remainingContent);
             paragraphElement.children.unshift(textNode);
           }
