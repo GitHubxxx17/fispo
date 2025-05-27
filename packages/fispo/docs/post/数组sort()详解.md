@@ -1,7 +1,6 @@
 ---
 title: 数组sort()详解
 categories: "笔记"
-date: 2023-4-15 00:08:45
 tags:
   - 笔记
 cover: /cover/b.jpg

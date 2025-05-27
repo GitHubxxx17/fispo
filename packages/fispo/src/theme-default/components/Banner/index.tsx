@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import classNames from "classnames";
 import { FrontMatter } from "shared/types";
-import { formatDateToYYYYMMDD } from "../../../shared/utils/date";
+import { formatDateToYYYYMMDD } from "../../../shared/helper/date";
 import Icon from "shared/components/Icon";
 import { Link } from "shared/components";
 import { BannerData } from "shared/types/default-theme";
@@ -33,7 +33,7 @@ function Banner(props: BannerProps) {
         [styles["not-home-page"]]: !isHomePage,
       })}
       style={{
-        backgroundImage: `url(${baseUrl(isArticlePage ? articleData.cover : bannerData.img)})`,
+        backgroundImage: `url(${baseUrl(isArticlePage && articleData.cover ? articleData.cover : bannerData.img)})`,
       }}
     >
       <div className={styles["banner-site-info"]}>
@@ -43,6 +43,10 @@ function Banner(props: BannerProps) {
             <span>
               <Icon icon="calendar-alt" />
               发表于 {formatDateToYYYYMMDD(articleData.date)}
+            </span>
+            <span>
+              <Icon icon="history" />
+              更新于 {formatDateToYYYYMMDD(articleData.updated)}
             </span>
             {articleData.categories !== "" && (
               <span>

@@ -3,7 +3,7 @@ import { routes } from "virtual:routes";
 import { PageData, Route } from "shared/types";
 import siteData from "fispo:site-data";
 import { handleRoutes } from "../shared/utils/handleRoutes";
-import { sortByDate } from "../shared/utils/date";
+import { sortByDate } from "../shared/helper/date";
 import { usePageData } from "./hooks";
 import ThemeLayout from "fispo:theme";
 import { useEffect, useState } from "react";

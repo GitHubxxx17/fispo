@@ -1,0 +1,8 @@
+import{jsx as n,jsxs as e,Fragment as a}from"react/jsx-runtime";import{e as o}from"./vendor-CuygkBdc.js";import"react";const d={title:"资源处理",date:"2025-03-31 16:46:42",updated:"2025-04-06 19:33:37",info:"资源处理根目录根目录是存放所有资源的地方，包括文章、图片、js和css等文件资源，默认存放在 docs 文件夹下，如果需要修改存放的位置可在 fispo.config.ts 文件配置中修改 root 配置项。public目录图片和字体等静态资源可以放置在根目录下的 public 目录中。例如，如果项"},l=[{id:"资源处理",text:"资源处理",depth:1},{id:"根目录",text:"根目录",depth:2},{id:"public目录",text:"public目录",depth:2},{id:"post目录",text:"post目录",depth:2}];function s(i){const c={a:"a",br:"br",code:"code",h1:"h1",h2:"h2",p:"p",span:"span",...o(),...i.components};return e(a,{children:[e(c.h1,{id:"资源处理",children:[n(c.a,{className:"header-anchor",href:"#资源处理",children:n(c.span,{className:"icon icon-link"})}),"资源处理"]}),`
+`,e(c.h2,{id:"根目录",children:[n(c.a,{className:"header-anchor",href:"#根目录",children:n(c.span,{className:"icon icon-link"})}),"根目录"]}),`
+`,e(c.p,{children:["根目录是存放所有资源的地方，包括文章、图片、js和css等文件资源，默认存放在 docs 文件夹下，如果需要修改存放的位置可在 ",n(c.code,{children:"fispo.config.ts"})," 文件配置中修改 root 配置项。"]}),`
+`,e(c.h2,{id:"public目录",children:[n(c.a,{className:"header-anchor",href:"#public目录",children:n(c.span,{className:"icon icon-link"})}),"public目录"]}),`
+`,e(c.p,{children:["图片和字体等静态资源可以放置在根目录下的 public 目录中。例如，如果项目根目录是 ./docs，并且使用默认源目录位置，那么 public 目录将是 ./docs/public。",n(c.br,{}),`
+放置在 public 中的资源将按原样复制到输出目录的根目录中。例如 public/icon.png 在源代码中使用 /icon.png 引用。`]}),`
+`,e(c.h2,{id:"post目录",children:[n(c.a,{className:"header-anchor",href:"#post目录",children:n(c.span,{className:"icon icon-link"})}),"post目录"]}),`
+`,n(c.p,{children:"文章资源的存放目录默认为根目录下的 post 目录中。"})]})}function h(i={}){const{wrapper:c}={...o(),...i.components};return c?n(c,{...i,children:n(s,{...i})}):s(i)}export{h as default,d as frontmatter,l as toc};

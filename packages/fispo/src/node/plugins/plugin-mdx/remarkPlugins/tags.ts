@@ -9,6 +9,7 @@ import {
   RootContent,
   Text,
 } from "mdast";
+import { TAG_HTML_REGEX, TAG_REGEX } from "../../../constants";
 
 /**
  * 自定义 remark 插件选项接口
@@ -48,12 +49,8 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
   return (tree) => {
     /** 标签父节点栈（用于嵌套标签处理） */
     const tagsParentNodes: (RootContentType | Root)[] = [];
-    /** 标签语法正则表达式（支持中文和英文标签） */
-    const tagRegex = /\{%\s*([\u4e00-\u9fa5\w\s-]+)\s*%\}/s;
     /** 排除处理的节点类型列表 */
     const EXCLUDE_TAGS = ["mdxjsEsm", "yaml", "break", "code", "heading"];
-    /** 时间轴语法正则表达式（HTML 注释格式） */
-    const timelineRegex = /<!--\s*(\S+)\s*(\S[\s\S]*?)\s*-->/;
     /** 链接语法正则表达式（Markdown 链接） */
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
 
@@ -63,7 +60,7 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
      * @returns {RegExpMatchArray} - 是否匹配标签正则
      */
     const isTag = (text: string): RegExpMatchArray => {
-      return text.match(tagRegex);
+      return text.match(TAG_REGEX);
     };
 
     /**
@@ -254,7 +251,7 @@ export const remarkPluginTags: Plugin<[Options], Root> = () => {
             tagsParentNodes.push(containerNode);
           }
         } else if (node.type === "html") {
-          const match = node.value.match(timelineRegex);
+          const match = node.value.match(TAG_HTML_REGEX);
           if (!match) return;
 
           const [, tagName, content] = match;

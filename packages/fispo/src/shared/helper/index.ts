@@ -7,3 +7,4 @@ export {
 export * from "./storage";
 export * from "./intersectionObserver";
 export * from "./useTheme";
+export * from "./date";

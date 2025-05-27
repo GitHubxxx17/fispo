@@ -1,5 +1,5 @@
 import { Route } from "shared/types";
-import { formatDateToYYYYMMDD } from "./date";
+import { formatDateToYYYYMMDD } from "../helper/date";
 
 export async function handleRoutes(routes: Route[], postDir: string) {
   // 处理文章frontmatter数据
@@ -16,13 +16,11 @@ export async function handleRoutes(routes: Route[], postDir: string) {
 
     if (!route.path.startsWith(postDir)) continue;
 
-    moduleInfo.frontmatter.date =
-      moduleInfo.frontmatter.date ?? new Date().toLocaleString();
     articlesList.push({
       ...moduleInfo.frontmatter,
+      updated: formatDateToYYYYMMDD(moduleInfo.frontmatter.updated),
       date: formatDateToYYYYMMDD(moduleInfo.frontmatter.date),
       path: route.path,
-      info: moduleInfo.mdInfo,
     });
     moduleInfo.frontmatter.tags.forEach((tag) => {
       if (tags[tag]) {

@@ -1,7 +1,6 @@
 ---
 title: MYSQL
 categories: "笔记"
-date: 2022-09-22 00:00:00
 tags:
   - 笔记
 cover: /cover/d.jpg

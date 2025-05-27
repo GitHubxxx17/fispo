@@ -66,12 +66,16 @@ function ArticleList(props: ArticleListProps) {
         {currentArtcleList.map((item, index) => {
           return (
             <div className={styles.item} key={`${item.title}-${index}`}>
-              <div className={styles.left}>
+              <div
+                className={classNames(styles["post-cover"], {
+                  [styles.right]: index % 2 == 1,
+                })}
+              >
                 <Link href={item.path}>
                   <Image src={item.cover} alt="" />
                 </Link>
               </div>
-              <div className={styles.right}>
+              <div className={styles["post-info"]}>
                 <div className={styles.content}>
                   <Link href={item.path}>
                     <h2>{item.title}</h2>
@@ -82,21 +86,29 @@ function ArticleList(props: ArticleListProps) {
                       发表于 {item.date}
                     </span>
                     <span>
-                      <Icon icon="inbox" />
-                      <Link href={`/category/${item.categories}`}>
-                        {item.categories}
-                      </Link>
+                      <Icon icon="history" />
+                      更新于 {item.updated}
                     </span>
-                    <span className={styles["content-tag"]}>
-                      <Icon icon="tag" />
-                      {item.tags.map((tag, index) => {
-                        return (
-                          <Link href={`/tag/${tag}`} key={`${tag}-${index}`}>
-                            {tag}
-                          </Link>
-                        );
-                      })}
-                    </span>
+                    {item.categories && (
+                      <span>
+                        <Icon icon="inbox" />
+                        <Link href={`/category/${item.categories}`}>
+                          {item.categories}
+                        </Link>
+                      </span>
+                    )}
+                    {item.tags.length !== 0 && (
+                      <span className={styles["content-tag"]}>
+                        <Icon icon="tag" />
+                        {item.tags.map((tag, index) => {
+                          return (
+                            <Link href={`/tag/${tag}`} key={`${tag}-${index}`}>
+                              {tag}
+                            </Link>
+                          );
+                        })}
+                      </span>
+                    )}
                   </p>
                   <p
                     className={classNames(

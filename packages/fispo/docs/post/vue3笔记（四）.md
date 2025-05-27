@@ -1,7 +1,6 @@
 ---
 title: vue3笔记（四）
 categories: "笔记"
-date: 2023-2-27 00:00:00
 tags:
   - 笔记
   - vue

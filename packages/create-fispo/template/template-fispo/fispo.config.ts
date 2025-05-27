@@ -41,4 +41,8 @@ export default defineConfig({
       },
     ],
   },
+  codeHighlight: {
+    dark: "tomorrow-night-bright",
+    light: "tokyo-night-dark",
+  },
 });

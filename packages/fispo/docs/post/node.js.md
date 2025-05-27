@@ -1,7 +1,6 @@
 ---
 title: node.js
 categories: "笔记"
-date: 2022-09-25 00:00:00
 tags:
   - 笔记
 cover: /cover/e.jpg
@@ -56,7 +55,7 @@ fs.readFile(path[,options],callback)
 2. 参数2：可选参数，表示以什么编码格式来读取文件
 3. 参数3：必选参数，文件读取完成后，通过回调函数拿到读取的结果。
 
-```
+```js
 // 1.导入fs模块,来操作文件
 const fs = require('fs')
 // 2.调用fs.readFile()方法读取文件
@@ -72,7 +71,7 @@ fs.readFile('./file/1.txt', 'utf8', function (err, dataStr) {
 
 ### 判断文件是否读取成功
 
-```
+```js
 // 1.导入fs模块,来操作文件
 const fs = require('fs')
 // 2.调用fs.readFile()方法读取文件
@@ -99,7 +98,7 @@ fs.writeFile(file, data[, options], callback)
 4. 参数4：必选参数，文件写入完成后的回调函数。
 
 ### 判断文件是否读取成功
-```
+```js
 // 1.导入fs模块,来操作文件
 const fs = require('fs')
 // 2.调用fs.readFile()方法读取文件
@@ -117,7 +116,7 @@ fs.writeFile('./file/1.txt', 'utf8', function (err, dataStr) {
 ## 案例：考试成绩整理
 ![](http://GitHubxxx17.github.io/img/node.js/3.jpg)
 
-```
+```js
 // 导入fs模块
 const fs = require('fs')
 // 2.调用fs.readFile()方法读取文件
@@ -155,7 +154,7 @@ fs.readFile('./file/2.txt', 'utf8', function (err, dataStr) {
 
 
 # path路径模块
-```
+```js
 const path=require('path')
 ```
 
@@ -164,14 +163,14 @@ const path=require('path')
 
 ## path.join()语法格式
 使用path.join方法，可以把多个路径片段拼接为较为完整的路径字符串
-```
+```js
 path.join([...paths])
 path.join(__dirname,[...paths])
 ```
 
 ## path.basename()
 使用该方法可以获取路径中的最后一部分，经常通过这个方法获取路径中的文件名，语法格式如下
-```
+```js
 path.basename(path[,ext])
 ```
 参数：path:必选参数，表示一个路径的字符串
@@ -179,13 +178,13 @@ path.basename(path[,ext])
 返回：表示路径中的最后一部分
 ## path.extname()
 使用该方法可以获取路径中的拓展名部分，语法格式如下
-```
+```js
 path.extname(path)
 ```
 
 
 ## 案例：模块化html
-```
+```js
 const fs = require('fs');
 
 const path = require('path');
@@ -254,7 +253,7 @@ function resolveHTML(htmlStr){
 在网络节点中，负责消费资源的电脑，叫做客户端。
 负责对外提供网络资源的电脑，叫做服务器。
 Http模块是Node.js官方提供的，用来创建web服务器的模块。通过http模块提供的Http.createServer()方法，就能方便的把一台普通电脑，变成一台web服务器，从而对外提供Web资源服务。
-```
+```js
 const http=require('http')
 ```
 
@@ -266,7 +265,7 @@ const http=require('http')
 
 ## 创建最基本的web服务器
 
-```
+```js
 const http = require('http');
 const server = http.createServer();
 
@@ -421,7 +420,7 @@ tabs 加载机制
 Express是基于Node.js平台，快速，开放，极简的Web开发框架
 使用Express,我们可以方便、快速地创建web网站的服务器和api接口的服务器
 ## express的使用
-```
+```js
 //1.导入express
 const express = require('express')
 const res = require('express/lib/response')
@@ -467,7 +466,7 @@ app.listen(80, () => {
 在Express中，路由指的是客户端请求与服务器处理函数之间的映射关系
 Express中的路由分三部分组成，分别是请求的类型，请求的URL地址，处理函数。
 ### express中路由的例子
-```
+```js
 //匹配GET请求，且请求URL为/
 app.get('/',function(req,res){
 res.send('Hello World!')

@@ -263,6 +263,10 @@ export interface FrontMatter {
    */
   date?: string;
   /**
+   * 文章的更新日期
+   */
+  updated?: string;
+  /**
    * 文章的标签列表
    */
   tags?: string[];
@@ -270,6 +274,10 @@ export interface FrontMatter {
    * 文章的封面图片地址
    */
   cover?: string;
+  /**
+   * 文章的信息
+   */
+  info?: string;
 }
 
 /**
@@ -297,10 +305,6 @@ export interface ArticleData extends FrontMatter {
    * 文章的路径
    */
   path: string;
-  /**
-   * 文章的信息
-   */
-  info: string;
 }
 
 /**

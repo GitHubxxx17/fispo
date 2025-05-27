@@ -7,7 +7,7 @@ import { rehypePluginHighlight } from "./rehypePlugins/highlight";
 import { remarkPluginToc } from "./remarkPlugins/toc";
 import { PluggableList } from "unified";
 import remarkBreaks from "remark-breaks";
-import { remarkPluginInfo } from "./remarkPlugins/info";
+import { remarkPluginFispoFrontMatter } from "./remarkPlugins/frontMatter";
 import { SiteConfig } from "shared/types";
 import { rehypePluginLink } from "./rehypePlugins/link";
 import rehypeRaw from "rehype-raw";
@@ -21,7 +21,7 @@ export function createPluginMdx(config: SiteConfig) {
   return {
     remarkPlugins: [
       remarkPluginGFM,
-      remarkPluginInfo,
+      remarkPluginFispoFrontMatter,
       remarkBreaks,
       remarkPluginTags,
       remarkPluginFrontmatter,

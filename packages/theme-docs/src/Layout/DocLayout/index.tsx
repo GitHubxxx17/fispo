@@ -8,13 +8,14 @@ import Footer from "../../components/Footer";
 import { Icon, Link } from "fispo-core/theme";
 import { useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
+import { formatDateToYYYYMMDD } from "fispo-core/helper";
 
 interface DocLayoutProps {
   pageData: PageData;
 }
 
 const DocLayout = (props: DocLayoutProps) => {
-  const { siteData, pagePath, toc } = props.pageData;
+  const { siteData, pagePath, toc, frontmatter } = props.pageData;
   const themeConfig = siteData.themeConfig as ThemeConfig;
   const [currIndex, setCurrIndex] = useState(0);
 
@@ -66,6 +67,9 @@ const DocLayout = (props: DocLayoutProps) => {
                 <span>{articleList[currIndex - 1].text}</span>
               </Link>
             )}
+          </div>
+          <div className={styles.updatedTime}>
+            上次更新：{formatDateToYYYYMMDD(frontmatter.updated)}
           </div>
           <div className={styles["content-footer-next"]}>
             {articleList[currIndex + 1] &&

@@ -22,6 +22,13 @@
       display: flex;
       justify-content: space-between;
 
+      .updatedTime {
+        font-size: 0.8rem;
+        color: #8a9099;
+        white-space: nowrap;
+        line-height: 40px;
+      }
+
       .content-footer-pre,
       .content-footer-next {
         width: 45%;
