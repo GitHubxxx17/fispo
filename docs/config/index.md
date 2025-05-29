@@ -469,6 +469,15 @@ icons: [
 ],
 ```
 
+---
+### publish_date
+**类型**：`string`  
+**默认值**：`""`  
+**详情**：  
+- 网站开始运行时间
+- 示例：2025-01-01 00:00:00
+---
+
 
 ## 默认主题配置
 
@@ -608,6 +617,9 @@ card_webinfo?: {
   post_count?: boolean;      // 显示文章总数
   last_push_date?: boolean;  // 最后更新时间
   run_time?: boolean;        // 站点运行时间
+  site_uv?: boolean;        // 显示站点总访客数
+  site_pv?: boolean;       // 显示站点总访问量
+
 };
 ```
 
@@ -626,3 +638,11 @@ interface FooterData {
   copyright?: string;   // 版权声明
 }
 ```
+
+
+### page_pv
+**类型**：`boolean`
+**默认值**：`true`
+**详情**：
+显示单页文章的访问量
+

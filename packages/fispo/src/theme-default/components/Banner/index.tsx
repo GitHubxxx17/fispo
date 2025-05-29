@@ -1,30 +1,23 @@
 import React from "react";
 import styles from "./index.module.scss";
 import classNames from "classnames";
-import { FrontMatter } from "shared/types";
+import { PageData } from "shared/types";
 import { formatDateToYYYYMMDD } from "../../../shared/helper/date";
 import Icon from "shared/components/Icon";
 import { Link } from "shared/components";
-import { BannerData } from "shared/types/default-theme";
 import { baseUrl } from "@runtime/util";
 interface BannerProps {
   isHomePage?: boolean;
   isArticlePage?: boolean;
-  bannerData?: BannerData;
-  title?: string;
   children?: React.ReactNode;
-  articleData?: FrontMatter;
+  pageData?: PageData;
 }
 
 function Banner(props: BannerProps) {
-  const {
-    children,
-    isHomePage,
-    isArticlePage,
-    title,
-    bannerData = { img: "" },
-    articleData,
-  } = props;
+  const { children, isHomePage, isArticlePage } = props;
+
+  const { frontmatter: articleData, title, siteData } = props.pageData;
+  const { banner, page_pv } = siteData.themeConfig;
 
   if (children) return children;
   return (
@@ -33,7 +26,7 @@ function Banner(props: BannerProps) {
         [styles["not-home-page"]]: !isHomePage,
       })}
       style={{
-        backgroundImage: `url(${baseUrl(isArticlePage && articleData.cover ? articleData.cover : bannerData.img)})`,
+        backgroundImage: `url(${baseUrl(isArticlePage && articleData.cover ? articleData.cover : banner.img)})`,
       }}
     >
       <div className={styles["banner-site-info"]}>
@@ -66,6 +59,12 @@ function Banner(props: BannerProps) {
                     </Link>
                   );
                 })}
+              </span>
+            )}
+            {page_pv && (
+              <span>
+                <Icon icon="eye" />
+                阅读量：<span id="busuanzi_value_page_pv"></span>
               </span>
             )}
           </div>

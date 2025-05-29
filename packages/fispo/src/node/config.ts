@@ -1,9 +1,9 @@
 import { loadConfigFromFile, mergeConfig } from "vite";
 import fs from "fs-extra";
 import { SiteConfig, UserConfig } from "shared/types";
-import { defaultConfig } from "shared/utils/defaultConfig";
-import { configFiles, DEFAULT_THEME_PATH } from "./constants";
+import { configFiles } from "./constants";
 import { DefaultThemeConfig } from "shared/types/default-theme";
+import theme from "theme-default/config";
 
 type RawConfig<ThemeConfig = unknown> =
   | UserConfig<ThemeConfig>
@@ -55,9 +55,8 @@ export async function resolveSiteData(
   userConfig: UserConfig
 ): Promise<UserConfig> {
   const targetConfig = userConfig.themeConfig;
-  let deConfig: typeof targetConfig = defaultConfig;
-  if (userConfig.theme) {
-    deConfig = userConfig.theme.config;
+  if (!userConfig.theme) {
+    userConfig.theme = theme;
   }
 
   const plugins = userConfig?.plugins ?? [];
@@ -70,12 +69,8 @@ export async function resolveSiteData(
     base: userConfig.base || "/",
     title: userConfig.title || "fispo",
     description: userConfig.description || "fispo",
-    theme: userConfig.theme || {
-      name: "fish in the pool",
-      layoutPath: DEFAULT_THEME_PATH,
-      config: defaultConfig,
-    },
-    themeConfig: mergeConfig(deConfig, targetConfig),
+    theme: userConfig.theme,
+    themeConfig: mergeConfig(userConfig.theme.config, targetConfig),
     vite: {
       ...userConfig.vite,
       base: userConfig.base ?? "/",
@@ -99,6 +94,7 @@ export async function resolveSiteData(
       light: "github",
     },
     icons: userConfig.icons || [],
+    publish_date: userConfig.publish_date || "",
   };
 }
 

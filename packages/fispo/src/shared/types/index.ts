@@ -163,6 +163,11 @@ export interface UserConfig<ThemeConfig = DefaultThemeConfig> {
    * 2. 标签外挂中使用时需添加前缀 icon-（如 star → icon-star）
    */
   icons?: IconLookup[];
+  /**
+   * 网站开始运行时间
+   * 示例：2025-01-01 00:00:00
+   */
+  publish_date?: string;
 }
 
 /**

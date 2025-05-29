@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import Card from "../Card";
 import { PageData } from "shared/types";
-import { scrollManager, ScrollCallback } from "fispo-core/helper";
+import {
+  scrollManager,
+  ScrollCallback,
+  getDateDiff,
+  getExtremeDate,
+  formatDateToYYYYMMDD,
+} from "fispo-core/helper";
 
 type SidebarProps = {
   children?: React.ReactNode;
@@ -25,6 +31,11 @@ function Sidebar(props: SidebarProps) {
 
   if (children) return children;
   const [isUp, setIsUp] = useState(false);
+  const [runtimeDay, setRuntimeDay] = useState(1);
+
+  useEffect(() => {
+    setRuntimeDay(getDateDiff(new Date(), siteData.publish_date || new Date()));
+  }, [siteData]);
 
   useEffect(() => {
     const scroll: ScrollCallback = (direction) => {
@@ -70,7 +81,11 @@ function Sidebar(props: SidebarProps) {
           type="list"
           listData={{
             title: "分类",
-            data: pageData.categories,
+            data: Object.entries(pageData.categories).map((v) => ({
+              name: v[0],
+              value: v[1],
+              show: true,
+            })),
             limit: card_categories.limit,
             hover: true,
           }}
@@ -110,17 +125,41 @@ function Sidebar(props: SidebarProps) {
           ></Card>
         )}
 
-        {!isArticlePage && card_webinfo.enable && (
+        {card_webinfo.enable && (
           <Card
             type="list"
             listData={{
               title: "网站资讯",
               icon: "chart-line",
-              data: {
-                "文章数目：": pageData.articlesList.length,
-                "已运行时间 :": `1 天`,
-                "最后更新时间 :": `2025-03-${new Date().getDay()}`,
-              },
+              data: [
+                {
+                  name: "文章数目：",
+                  value: pageData.articlesList.length,
+                  show: card_webinfo.post_count,
+                },
+                {
+                  name: "已运行时间 :",
+                  value: `${runtimeDay}天`,
+                  show: card_webinfo.run_time,
+                },
+                {
+                  name: "最后更新时间 :",
+                  value: `${formatDateToYYYYMMDD(getExtremeDate(pageData.articlesList.map((v) => v.updated)).toDateString())}`,
+                  show: card_webinfo.last_push_date,
+                },
+                {
+                  name: "本站访客数：",
+                  value: 0,
+                  show: card_webinfo.site_uv,
+                  busuanziId: "busuanzi_value_site_uv",
+                },
+                {
+                  name: "本站总访问数：",
+                  value: 0,
+                  show: card_webinfo.site_pv,
+                  busuanziId: "busuanzi_value_site_pv",
+                },
+              ],
             }}
           ></Card>
         )}

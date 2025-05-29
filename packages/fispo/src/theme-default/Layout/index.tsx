@@ -19,6 +19,7 @@ import { LayoutRoutes, PageData } from "shared/types";
 import { baseUrl } from "@runtime/util";
 import { GetLayoutRoutes } from "shared/components";
 import "../helper/icon";
+import { reloadBusuanzi } from "../helper/busuanzi";
 
 interface LayoutProps {
   pageData: PageData;
@@ -27,7 +28,7 @@ interface LayoutProps {
 export default function Layout(props: LayoutProps) {
   const { pageData } = props;
   // 获取 pageType
-  const { pageType, title, siteData, frontmatter } = pageData;
+  const { pageType, title, siteData } = pageData;
   const { title: siteTitle, themeConfig } = siteData;
   const { sidebar, navMenus, banner } = themeConfig;
   const isHomePage = useMemo(() => pageType === "home", [pageType]);
@@ -84,6 +85,11 @@ export default function Layout(props: LayoutProps) {
     };
   }, []);
 
+  useEffect(() => {
+    // 路由变化时执行
+    reloadBusuanzi();
+  }, [pageData.pagePath]);
+
   return (
     <div
       className={styles.layout}
@@ -103,9 +109,7 @@ export default function Layout(props: LayoutProps) {
         <Banner
           isHomePage={isHomePage}
           isArticlePage={isArticlePage}
-          title={title}
-          bannerData={banner}
-          articleData={frontmatter}
+          pageData={pageData}
         ></Banner>
       </header>
       <main className={styles.main}>

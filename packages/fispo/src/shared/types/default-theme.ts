@@ -184,6 +184,16 @@ export interface Sidebar {
      * 设置为 true 时显示网站运行时间，设置为 false 时不显示
      */
     run_time?: boolean;
+    /**
+     * 是否显示站点总访客数（UV），可选属性
+     * 设置为 true 时显示唯一访客数，设置为 false 时不显示
+     */
+    site_uv?: boolean;
+    /**
+     * 是否显示站点总访问量（PV），可选属性
+     * 设置为 true 时显示页面总浏览量，设置为 false 时不显示
+     */
+    site_pv?: boolean;
   };
 }
 
@@ -227,4 +237,9 @@ export interface DefaultThemeConfig {
    * 用于配置页面底部显示的内容
    */
   footer?: FooterData;
+  /**
+   * 是否显示单页访问量（PV），可选属性
+   * 设置为 true 时在文章页显示当前页面浏览量，设置为 false 时不显示
+   */
+  page_pv?: boolean;
 }
