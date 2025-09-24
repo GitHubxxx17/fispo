@@ -114,5 +114,106 @@ export default defineConfig<ThemeConfig>({
       prefix: "fas",
       iconName: "eye",
     },
+    {
+      prefix: "fas",
+      iconName: "cog",
+    },
+    {
+      prefix: "fas",
+      iconName: "puzzle-piece",
+    },
+    {
+      prefix: "fas",
+      iconName: "image",
+    },
+    {
+      prefix: "fas",
+      iconName: "link",
+    },
+    {
+      prefix: "fas",
+      iconName: "camera",
+    },
+    {
+      prefix: "fas",
+      iconName: "route",
+    },
+    {
+      prefix: "fas",
+      iconName: "database",
+    },
+    {
+      prefix: "fas",
+      iconName: "arrows-alt-v",
+    },
+    {
+      prefix: "fas",
+      iconName: "lightbulb",
+    },
+    {
+      prefix: "fas",
+      iconName: "clock",
+    },
+    {
+      prefix: "fas",
+      iconName: "calendar-alt",
+    },
+    {
+      prefix: "fas",
+      iconName: "tools",
+    },
+    // 插件相关图标
+    {
+      prefix: "fas",
+      iconName: "plug",
+    },
+    {
+      prefix: "fas",
+      iconName: "cogs",
+    },
+    {
+      prefix: "fas",
+      iconName: "file-alt",
+    },
+    {
+      prefix: "fas",
+      iconName: "sync",
+    },
+    {
+      prefix: "fas",
+      iconName: "hourglass-half",
+    },
+    {
+      prefix: "fas",
+      iconName: "play-circle",
+    },
+    {
+      prefix: "fas",
+      iconName: "check-circle",
+    },
+    {
+      prefix: "fas",
+      iconName: "pencil-alt",
+    },
+    {
+      prefix: "fas",
+      iconName: "flag",
+    },
+    {
+      prefix: "fas",
+      iconName: "power-off",
+    },
+    {
+      prefix: "fas",
+      iconName: "spinner",
+    },
+    {
+      prefix: "fas",
+      iconName: "th-large",
+    },
+    {
+      prefix: "fas",
+      iconName: "star",
+    },
   ],
 });
